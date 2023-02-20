@@ -15,7 +15,7 @@ const Avatar = ({
   ...props
 }: AvatarProps) => {
   return (
-    <div className={avatar({ size: size, shape })}>
+    <div className={avatar({ size, shape })}>
       <ImageComponent
         defaultImage={defaultProfileImage}
         src={src}
