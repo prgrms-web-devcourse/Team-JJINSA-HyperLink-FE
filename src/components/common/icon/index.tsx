@@ -1,24 +1,36 @@
 import { CSSProperties } from 'react';
 
 type IconProps = {
-  type: string;
-  name: string;
-  size: number;
+  type?: string;
+  name?: string;
+  size?: number;
+  color?: string;
   style?: CSSProperties;
 };
+
+/**
+ * Font-awesome Icon Component
+ * @param {string} type - Icon type(default: solid)
+ * @param {string} name - Icon name(default: xmark)
+ * @param {number} size - Icon size(default: 1.0)
+ * @param {string} color - Icon color(default: #9a9a9a)
+ * @returns {Icon} Font-awesome icon
+ */
 
 const Icon = ({
   type = 'solid',
   name = 'xmark',
-  size,
+  size = 1.0,
+  color = '#9a9a9a',
   ...props
 }: IconProps) => {
-  let classname = `fa-${type} fa-${name} ${name}`;
-  if (size) {
-    classname += ` fa-${size}x`;
-  }
-
-  return <i className={classname} style={{ ...props.style }} {...props}></i>;
+  return (
+    <i
+      className={`fa-${type} fa-${name} ${name}`}
+      style={{ fontSize: `${size}rem`, color, ...props.style }}
+      {...props}
+    ></i>
+  );
 };
 
 export default Icon;
