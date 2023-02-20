@@ -1,4 +1,5 @@
 import { Icon } from '@/components/common';
+import { CSSProperties } from 'react';
 
 export default {
   title: 'Components/Icon',
@@ -30,6 +31,14 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = (
+  args: JSX.IntrinsicAttributes & {
+    type?: 'light' | 'regular' | 'solid' | 'thin';
+    name?: string;
+    size?: number;
+    color?: string;
+    style?: CSSProperties;
+  }
+) => {
   return <Icon {...args} />;
 };

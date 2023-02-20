@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 
 type IconProps = {
-  type?: string;
+  type?: 'light' | 'regular' | 'solid' | 'thin';
   name?: string;
   size?: number;
   color?: string;
@@ -10,7 +10,7 @@ type IconProps = {
 
 /**
  * Font-awesome Icon Component
- * @param {string} type - Icon type(default: solid)
+ * @param {'light' | 'regular' | 'solid' | 'thin'} type - Icon type(default: solid)
  * @param {string} name - Icon name(default: xmark)
  * @param {number} size - Icon size(default: 1.0)
  * @param {string} color - Icon color(default: #9a9a9a)
