@@ -5,7 +5,7 @@ export const avatar = recipe({
     display: 'inline-block',
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: 999,
+    borderRadius: '50%',
   },
 
   variants: {
@@ -16,7 +16,7 @@ export const avatar = recipe({
       xLarge: { width: '15rem', height: '15rem' },
     },
     shape: {
-      circle: { borderRadius: 9999 },
+      circle: { borderRadius: '50%' },
       round: { borderRadius: '1rem' },
       square: { borderRadius: 0 },
     },

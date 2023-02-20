@@ -18,7 +18,7 @@ export default {
     size: {
       defaultValue: 'medium',
       control: 'inline-radio',
-      options: ['small', 'medium', 'large'],
+      options: ['small', 'medium', 'large', 'xLarge'],
     },
   },
 };

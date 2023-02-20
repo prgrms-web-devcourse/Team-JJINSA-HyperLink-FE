@@ -31,7 +31,7 @@ export default {
     },
     objectFit: {
       defaultValue: 'cover',
-      options: ['contain', 'cover', 'fill', 'none'],
+      options: ['contain', 'cover', 'fill', 'none', 'scale-down'],
       control: { type: 'inline-radio' },
     },
   },
