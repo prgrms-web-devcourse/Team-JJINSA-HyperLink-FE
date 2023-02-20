@@ -10,9 +10,10 @@ export const avatar = recipe({
 
   variants: {
     size: {
-      small: { width: '3rem', height: '3rem' },
-      medium: { width: '7rem', height: '7rem' },
-      large: { width: '20rem', height: '20rem' },
+      small: { width: '3.2rem', height: '3.2rem' },
+      medium: { width: '4.8rem', height: '4.8rem' },
+      large: { width: '7.5rem', height: '7.5rem' },
+      xLarge: { width: '15rem', height: '15rem' },
     },
     shape: {
       circle: { borderRadius: 9999 },
