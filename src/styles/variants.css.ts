@@ -17,9 +17,11 @@ export const vars = createGlobalTheme(':root', {
     },
   },
   fontSize: {
-    small: '1.2rem',
-    medium: '1.4rem',
+    xSmall: '1.2rem',
+    small: '1.4rem',
+    medium: '1.6rem',
     large: '1.8rem',
+    xLarge: '2.3rem',
   },
   space: {
     xSmall: '1rem',
