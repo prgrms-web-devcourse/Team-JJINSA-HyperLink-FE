@@ -4,8 +4,9 @@ import * as style from './style.css';
 export type IconProps = {
   type?: 'light' | 'regular' | 'solid' | 'thin';
   name?: string;
-  size?: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+  size?: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge' | 'huge';
   color?: string;
+  className?: string;
   style?: CSSProperties;
 };
 
@@ -13,8 +14,9 @@ export type IconProps = {
  * Font-awesome Icon Component
  * @param {'light' | 'regular' | 'solid' | 'thin'} type - Icon type(default: solid)
  * @param {string} name - Icon name(default: xmark)
- * @param {string} size - Icon size(default: medium(1.4rem)) expected to be one of ['xSmall', 'small', 'medium', 'large', 'xLarge']
+ * @param {string} size - Icon size(default: medium(1.4rem)) expected to be one of ['xSmall', 'small', 'medium', 'large', 'xLarge', 'huge']
  * @param {string} color - Icon color(default: #9a9a9a)
+ * @param {string} className - Icon className
  * @returns {Icon} Font-awesome icon
  */
 
@@ -23,11 +25,14 @@ const Icon = ({
   name = 'xmark',
   size = 'medium',
   color = '#9a9a9a',
+  className = '',
   ...props
 }: IconProps) => {
   return (
     <i
-      className={`fa-${type} fa-${name} ${name} ${style.icon({ size })}`}
+      className={`${className} fa-${type} fa-${name} ${name} ${style.icon({
+        size,
+      })}`}
       style={{ color, ...props.style }}
       {...props}
     ></i>

@@ -21,6 +21,7 @@ export const vars = createGlobalTheme(':root', {
     medium: '1.6rem',
     large: '1.8rem',
     xLarge: '2.3rem',
+    huge: '6rem',
   },
   space: {
     xSmall: '1rem',
