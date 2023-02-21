@@ -2,7 +2,7 @@ import { Avatar } from '@/components/common';
 import { AvatarProps } from '@/components/common/avatar';
 
 export default {
-  title: 'Component/Avatar',
+  title: 'Components/Avatar',
   component: Avatar,
   argTypes: {
     src: {

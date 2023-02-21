@@ -1,5 +1,5 @@
-import ImageComponent from '../Image';
-import { avatar } from './style.css';
+import ImageComponent from '@/components/common/Image';
+import * as style from './style.css';
 import defaultProfileImage from '@/assets/defaultProfileImage.png';
 
 export type AvatarProps = {
@@ -15,7 +15,7 @@ const Avatar = ({
   ...props
 }: AvatarProps) => {
   return (
-    <div className={avatar({ size, shape })}>
+    <div className={style.avatar({ size, shape })}>
       <ImageComponent
         defaultImage={defaultProfileImage}
         src={src}
