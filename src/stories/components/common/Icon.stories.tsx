@@ -1,5 +1,5 @@
 import { Icon } from '@/components/common';
-import { CSSProperties } from 'react';
+import { IconProps } from '@/components/common/icon';
 
 export default {
   title: 'Components/Icon',
@@ -17,9 +17,9 @@ export default {
       description: 'icon name',
     },
     size: {
-      defaultValue: 1.0,
-      control: { type: 'number', min: 0.4, max: 30.0, step: 0.1 },
-      type: 'number',
+      defaultValue: 'medium',
+      control: 'inline-radio',
+      options: ['xSmall', 'small', 'medium', 'large', 'xLarge'],
       description: 'icon size',
     },
     color: {
@@ -31,14 +31,6 @@ export default {
   },
 };
 
-export const Default = (
-  args: JSX.IntrinsicAttributes & {
-    type?: 'light' | 'regular' | 'solid' | 'thin';
-    name?: string;
-    size?: number;
-    color?: string;
-    style?: CSSProperties;
-  }
-) => {
+export const Default = (args: IconProps) => {
   return <Icon {...args} />;
 };

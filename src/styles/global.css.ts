@@ -4,7 +4,6 @@ import { globalStyle } from '@vanilla-extract/css';
 globalStyle('*, *:after, *:before', {
   boxSizing: 'border-box',
   fontSize: '100%',
-  font: 'inherit',
 });
 
 globalStyle('html', {
@@ -22,7 +21,7 @@ globalStyle('body', {
 });
 
 globalStyle(
-  'html, body, div, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, em, img, ins, kbd, q, s, samp, small, strike, strong, article, footer, header, main, nav, section',
+  'html, body, div, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, em, img, ins, kbd, q, s, samp, small, span, strike, strong, article, footer, header, main, nav, section',
   {
     margin: 0,
     padding: 0,
