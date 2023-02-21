@@ -22,7 +22,7 @@ export default {
     weight: {
       defaultValue: 400,
       control: 'inline-radio',
-      options: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      options: [300, 400, 500, 600, 700, 800],
       description: 'text weight',
     },
     color: {

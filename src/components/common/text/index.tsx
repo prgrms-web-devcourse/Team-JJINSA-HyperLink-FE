@@ -6,7 +6,7 @@ export type TextProps = {
   block?: boolean;
   paragraph?: boolean;
   size?: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
-  weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+  weight?: 300 | 400 | 500 | 600 | 700 | 800;
   underline?: boolean;
   color?: string;
   style?: CSSProperties;
