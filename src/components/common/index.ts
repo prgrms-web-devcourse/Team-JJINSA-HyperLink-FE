@@ -4,7 +4,7 @@ export { default as Button } from '@/components/common/button';
 export { default as Card } from '@/components/common/card';
 export { default as Divider } from '@/components/common/divider';
 export { default as Dropdown } from '@/components/common/dropdown';
-export { default as Header } from '@/components/common/header';
+export { default as Heading } from '@/components/common/heading';
 export { default as Icon } from '@/components/common/icon';
 export { default as Input } from '@/components/common/input';
 export { default as Modal } from '@/components/common/modal';
