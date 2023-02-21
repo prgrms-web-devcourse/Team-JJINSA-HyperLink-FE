@@ -1,4 +1,5 @@
 import { Icon } from '@/components/common';
+import * as variants from '@/styles/variants.css';
 import { CSSProperties } from 'react';
 
 export type SpinnerProps = {
@@ -10,17 +11,17 @@ export type SpinnerProps = {
 
 const Spinner = ({
   size = 'medium',
-  color = '#9a9a9a',
+  color = variants.vars.color.bg.select,
   loading = true,
   ...props
 }: SpinnerProps) => {
   return loading ? (
     <Icon
       className="fas fa-spin"
-      name="spinner"
+      name="circle-notch"
       size={size}
       color={color}
-      style={{ ...props.style }}
+      style={{ color, ...props.style }}
       {...props}
     />
   ) : null;

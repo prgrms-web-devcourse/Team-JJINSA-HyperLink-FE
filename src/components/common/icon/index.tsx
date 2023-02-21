@@ -1,3 +1,4 @@
+import * as variants from '@/styles/variants.css';
 import { CSSProperties } from 'react';
 import * as style from './style.css';
 
@@ -24,7 +25,7 @@ const Icon = ({
   type = 'solid',
   name = 'xmark',
   size = 'medium',
-  color = '#9a9a9a',
+  color = variants.vars.color.icon,
   className = '',
   ...props
 }: IconProps) => {
