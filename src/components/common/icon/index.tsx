@@ -1,9 +1,10 @@
 import { CSSProperties } from 'react';
+import * as style from './style.css';
 
-type IconProps = {
+export type IconProps = {
   type?: 'light' | 'regular' | 'solid' | 'thin';
   name?: string;
-  size?: number;
+  size?: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
   color?: string;
   style?: CSSProperties;
 };
@@ -12,7 +13,7 @@ type IconProps = {
  * Font-awesome Icon Component
  * @param {'light' | 'regular' | 'solid' | 'thin'} type - Icon type(default: solid)
  * @param {string} name - Icon name(default: xmark)
- * @param {number} size - Icon size(default: 1.0)
+ * @param {string} size - Icon size(default: medium(1.4rem)) expected to be one of ['xSmall', 'small', 'medium', 'large', 'xLarge']
  * @param {string} color - Icon color(default: #9a9a9a)
  * @returns {Icon} Font-awesome icon
  */
@@ -20,14 +21,14 @@ type IconProps = {
 const Icon = ({
   type = 'solid',
   name = 'xmark',
-  size = 1.0,
+  size = 'medium',
   color = '#9a9a9a',
   ...props
 }: IconProps) => {
   return (
     <i
-      className={`fa-${type} fa-${name} ${name}`}
-      style={{ fontSize: `${size}rem`, color, ...props.style }}
+      className={`fa-${type} fa-${name} ${name} ${style.icon({ size })}`}
+      style={{ color, ...props.style }}
       {...props}
     ></i>
   );
