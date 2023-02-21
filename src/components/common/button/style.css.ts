@@ -11,6 +11,23 @@ export const button = recipe({
     borderRadius,
   ],
   variants: {
+    version: {
+      blue: {
+        color: '#fff',
+        backgroundColor: vars.color.primary,
+        border: `0.2rem solid ${vars.color.primary}`,
+      },
+      blueInverted: {
+        color: vars.color.primary,
+        backgroundColor: vars.color.white,
+        border: `0.2rem solid ${vars.color.primary}`,
+      },
+      grayInverted: {
+        color: vars.color.border,
+        backgroundColor: vars.color.white,
+        border: `0.2rem solid ${vars.color.border}`,
+      },
+    },
     fontSize: {
       small: { fontSize: vars.fontSize.small },
       medium: { fontSize: vars.fontSize.medium },
@@ -19,7 +36,7 @@ export const button = recipe({
     paddingSize: {
       small: { padding: '1rem 1.6rem' },
       medium: { padding: '1.2rem 3.8rem' },
-      full: { padding: '1.2rem 0', width: '100%', flex: '1' },
+      full: { padding: '1.2rem 0', width: '100%' },
     },
   },
 });

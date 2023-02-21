@@ -5,6 +5,7 @@ export const vars = createGlobalTheme(':root', {
     primary: '#3772ff',
     primaryDimmed: '#3772ff30',
     secondary: '#3a86ff',
+    white: '#fff',
     bg: {
       tab: '#eff0f2',
       select: '#dddddd',

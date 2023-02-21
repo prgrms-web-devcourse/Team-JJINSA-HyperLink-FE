@@ -5,8 +5,13 @@ export default {
   title: 'Components/Button',
   component: Button,
   argTypes: {
+    version: {
+      defaultValue: 'blue',
+      control: 'inline-radio',
+      options: ['blue', 'blueInverted', 'grayInverted'],
+    },
     fontSize: {
-      default: 'small',
+      defaultValue: 'small',
       control: 'inline-radio',
       options: ['small', 'medium', 'large'],
     },
@@ -14,28 +19,8 @@ export default {
       defaultValue: false,
       type: 'boolean',
     },
-    textColor: {
-      defaultValue: '#fff',
-      control: 'color',
-    },
-    backgroundColor: {
-      defaultValue: '#3772FF',
-      control: 'color',
-    },
-    border: {
-      defaultValue: false,
-      control: 'boolean',
-    },
-    borderColor: {
-      defaultValue: '#3772FF',
-      control: 'color',
-    },
-    borderWidth: {
-      defaultValue: 1.5,
-      control: 'number',
-    },
     paddingSize: {
-      default: 'small',
+      defaultValue: 'small',
       control: 'inline-radio',
       options: ['small', 'medium', 'full'],
     },
