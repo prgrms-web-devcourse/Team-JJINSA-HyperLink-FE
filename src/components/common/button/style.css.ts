@@ -16,7 +16,7 @@ export const button = recipe({
         border: `0.2rem solid ${vars.color.primary}`,
         ':hover': {
           backgroundColor: vars.color.secondary,
-          border: `0.2rem solid ${vars.color.primary}`,
+          border: `0.2rem solid ${vars.color.secondary}`,
         },
       },
       gray: {
