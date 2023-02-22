@@ -40,6 +40,7 @@ const Input = ({
     onEnterPress();
     onChange && onChange('');
   };
+  console.log(placeholder);
 
   return (
     <div className={style.inputContainer({ version, readOnly })}>
@@ -49,7 +50,9 @@ const Input = ({
       <input
         className={style.input}
         type={type}
-        placeholder={placeholder}
+        placeholder={
+          version === 'normal' ? placeholder : '키워드를 검색하세요.'
+        }
         readOnly={readOnly}
         value={value}
         maxLength={max}
