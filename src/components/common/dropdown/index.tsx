@@ -1,4 +1,4 @@
-import { Icon, Text } from '@/components/common';
+import { Icon } from '@/components/common';
 import useDropdown from '@/hooks/useDropdown';
 import * as variants from '@/styles/variants.css';
 import { useState } from 'react';
