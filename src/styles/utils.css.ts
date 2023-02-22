@@ -90,7 +90,7 @@ export const borderNone = style({
 });
 
 export const borderRadius = style({
-  borderRadius: '1rem',
+  borderRadius: '0.8rem',
 });
 
 export const borderRadiusRound = style({

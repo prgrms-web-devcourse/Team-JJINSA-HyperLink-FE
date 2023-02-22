@@ -4,10 +4,11 @@ export const vars = createGlobalTheme(':root', {
   color: {
     primary: '#3772ff',
     primaryDimmed: '#3772ff30',
-    secondary: '#3a86ff',
+    secondary: '#004BFF',
+    white: '#fff',
     bg: {
       tab: '#eff0f2',
-      select: '#dddddd',
+      select: '#dddddd80',
     },
     border: '#c2c6cc',
     font: {
