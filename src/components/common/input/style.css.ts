@@ -8,8 +8,8 @@ export const inputContainer = recipe({
     utils.flexAlignCenter,
     utils.borderRadius,
     {
-      boxShadow: '0px 3px 6px rgba(18, 18, 18, 0.03)',
-      border: `1px solid ${variants.vars.color.disabled.bg}`,
+      boxShadow: '0 0.3rem 1rem #18181810',
+      border: `0.1rem solid ${variants.vars.color.disabled.bg}`,
       padding: '1.2rem 1.6rem',
       width: '100%',
       fontSize: variants.vars.fontSize.medium,
