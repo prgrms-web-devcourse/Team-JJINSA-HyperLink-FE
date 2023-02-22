@@ -18,6 +18,7 @@ export const dropdown = recipe({
       border: `0.1rem solid ${variants.vars.color.disabled.bg}`,
       padding: '1.2rem 1.6rem',
       fontSize: variants.vars.fontSize.medium,
+      color: variants.vars.color.disabled.font,
     },
   ],
   variants: {
