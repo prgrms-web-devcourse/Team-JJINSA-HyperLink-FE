@@ -1,32 +1,51 @@
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@/styles/variants.css';
-import { borderRadius } from '@/styles/utils.css';
+import * as utils from '@/styles/utils.css';
 
 export const button = recipe({
-  base: [
-    {
-      display: 'inline-block',
-      textAlign: 'center',
-    },
-    borderRadius,
-  ],
+  base: {
+    display: 'inline-block',
+    textAlign: 'center',
+    transition: 'all 130ms ease-in-out',
+  },
   variants: {
     version: {
       blue: {
-        color: '#fff',
+        color: vars.color.white,
         backgroundColor: vars.color.primary,
         border: `0.2rem solid ${vars.color.primary}`,
+        ':hover': {
+          backgroundColor: vars.color.secondary,
+          border: `0.2rem solid ${vars.color.primary}`,
+        },
       },
-      blueInverted: {
-        color: vars.color.primary,
-        backgroundColor: vars.color.white,
-        border: `0.2rem solid ${vars.color.primary}`,
+      gray: {
+        color: vars.color.font.primary,
+        backgroundColor: vars.color.bg.select,
+        border: `0.2rem solid ${vars.color.bg.select}`,
       },
       grayInverted: {
         color: vars.color.border,
         backgroundColor: vars.color.white,
         border: `0.2rem solid ${vars.color.border}`,
+        ':hover': {
+          color: vars.color.primary,
+          border: `0.2rem solid ${vars.color.primary}`,
+        },
       },
+      white: {
+        color: vars.color.font.primary,
+        backgroundColor: vars.color.white,
+        border: `0.2rem solid ${vars.color.white}`,
+        ':hover': {
+          backgroundColor: vars.color.bg.select,
+          border: `0.2rem solid ${vars.color.bg.select}`,
+        },
+      },
+    },
+    shape: {
+      round: [utils.borderRadius],
+      circle: { borderRadius: '5rem' },
     },
     fontSize: {
       small: { fontSize: vars.fontSize.small },
