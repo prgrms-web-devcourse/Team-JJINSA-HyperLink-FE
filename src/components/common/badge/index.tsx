@@ -1,16 +1,16 @@
 import * as style from './style.css';
 
 export type BadgeProps = {
-  isText: boolean;
+  hasText: boolean;
 };
 
 // header AlramIcon badge, 알람 모달 badge / 데일리 브리핑 new badge
-const Badge = ({ isText }: BadgeProps) => {
+const Badge = ({ hasText }: BadgeProps) => {
   return (
     <div className={style.badgeContainer}>
       <div
         className={style.badge(
-          isText
+          hasText
             ? {
                 size: 'text',
                 borderRadius: 'text',
@@ -22,7 +22,7 @@ const Badge = ({ isText }: BadgeProps) => {
               }
         )}
       >
-        {isText && 'new'}
+        {hasText && 'new'}
       </div>
     </div>
   );

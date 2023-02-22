@@ -5,7 +5,7 @@ export default {
   title: 'Components/Badge',
   component: Badge,
   argTypes: {
-    isText: {
+    hasText: {
       defaultValue: true,
       control: 'inline-radio',
       options: [true, false],
