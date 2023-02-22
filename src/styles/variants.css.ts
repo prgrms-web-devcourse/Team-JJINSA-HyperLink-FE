@@ -16,6 +16,10 @@ export const vars = createGlobalTheme(':root', {
       secondary: '#787878',
     },
     icon: '#9a9a9a',
+    disabled: {
+      font: '#7D8398',
+      bg: '#7D839830',
+    },
   },
   fontSize: {
     xSmall: '1.2rem',
