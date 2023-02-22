@@ -1,4 +1,4 @@
-import { Icon } from '@/components/common';
+import { Icon, Text } from '@/components/common';
 import useDropdown from '@/hooks/useDropdown';
 import * as variants from '@/styles/variants.css';
 import { useState } from 'react';
@@ -35,12 +35,12 @@ const Dropdown = ({
       >
         {value ? (
           <>
-            {value}
+            <span className={style.text}>{value}</span>
             <Icon name="check" color={variants.vars.color.primary} />
           </>
         ) : (
           <>
-            {placeholder}
+            <span className={style.text}>{placeholder}</span>
             <Icon name="chevron-down" />
           </>
         )}
@@ -56,7 +56,7 @@ const Dropdown = ({
                 })}
                 onClick={() => handleItemClick(item)}
               >
-                {item}
+                <span className={style.text}>{item}</span>
                 {chosenItem === item && (
                   <Icon name="check" color={variants.vars.color.font.primary} />
                 )}

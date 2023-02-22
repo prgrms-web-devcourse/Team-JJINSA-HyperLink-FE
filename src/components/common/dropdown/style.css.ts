@@ -19,6 +19,7 @@ export const dropdown = recipe({
       padding: '1.2rem 1.6rem',
       fontSize: variants.vars.fontSize.medium,
       color: variants.vars.color.disabled.font,
+      gap: '0.4rem',
     },
   ],
   variants: {
@@ -79,6 +80,7 @@ export const dropdownItem = recipe({
       height: '4rem',
       padding: '0 1.6rem',
       fontSize: variants.vars.fontSize.small,
+      gap: '0.4rem',
 
       ':hover': {
         backgroundColor: variants.vars.color.bg.select,
@@ -94,3 +96,5 @@ export const dropdownItem = recipe({
     },
   },
 });
+
+export const text = style([utils.textOverflowEllipsis]);
