@@ -1,5 +1,5 @@
-import { ChangeEvent, KeyboardEvent } from 'react';
 import { Icon } from '@/components/common';
+import { ChangeEvent, CSSProperties, KeyboardEvent } from 'react';
 import * as style from './style.css';
 
 export type InputProps = {
@@ -11,6 +11,7 @@ export type InputProps = {
   max?: number;
   onChange?: (value: string) => void;
   onEnterPress?: () => void;
+  style?: CSSProperties;
 };
 
 const Input = ({
@@ -58,6 +59,7 @@ const Input = ({
         maxLength={max}
         onChange={handleChange}
         onKeyPress={handleEnterPress}
+        style={{ ...props.style }}
         {...props}
       />
     </div>
