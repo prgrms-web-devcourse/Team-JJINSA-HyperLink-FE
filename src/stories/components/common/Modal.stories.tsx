@@ -16,6 +16,7 @@ export const Default = () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        width: '500px',
       }}
     >
       <button
@@ -24,7 +25,7 @@ export const Default = () => {
       >
         Open
       </button>
-      <Modal isOpen={isOpen} type="login" onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} type="center" onClose={() => setIsOpen(false)}>
         <ImageComponent
           defaultImage="https://via.placeholder.com/200"
           src="https://avatars.githubusercontent.com/u/60571418?v=4"
@@ -53,13 +54,14 @@ export const IconModal = () => {
           display: 'flex',
           justifyContent: 'center',
           position: 'relative',
+          width: '50rem',
         }}
       >
         <Modal
           isOpen={isOpen}
           type="icon"
           onClose={() => setIsOpen(false)}
-          style={{ top: '3rem', right: '45rem' }}
+          style={{ top: '2.5rem', right: 0 }}
         >
           <ImageComponent
             defaultImage="https://via.placeholder.com/200"

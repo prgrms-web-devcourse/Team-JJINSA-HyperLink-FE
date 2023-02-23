@@ -21,14 +21,13 @@ export const modalContainer = recipe({
       padding: '1rem',
       backgroundColor: vars.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
-      boxSizing: 'border-box',
     },
     utils.borderRadius,
   ],
 
   variants: {
     type: {
-      login: [
+      center: [
         utils.positionFixed,
         {
           top: '50%',
