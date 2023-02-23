@@ -41,7 +41,6 @@ const Input = ({
     onEnterPress();
     onChange && onChange('');
   };
-  console.log(placeholder);
 
   return (
     <div className={style.inputContainer({ version, readOnly })}>
