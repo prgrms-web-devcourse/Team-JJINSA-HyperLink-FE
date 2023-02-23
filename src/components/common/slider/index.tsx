@@ -8,18 +8,6 @@ export type SliderProps = {
 const Slider = ({ children, ...props }: SliderProps) => {
   const sliderTargetRef = useRef<HTMLDivElement>(null);
 
-  const items = React.Children.toArray(children)
-    .filter((element) => {
-      if (React.isValidElement(element)) return true;
-      return false;
-    })
-    .map((item) => {
-      if (React.isValidElement(item)) {
-        return React.cloneElement(item, { ...item.props });
-      }
-      return item;
-    });
-
   let isMouseDown = false;
   let startX = 0;
   let scrollLeft = 0;
@@ -67,7 +55,7 @@ const Slider = ({ children, ...props }: SliderProps) => {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
       >
-        {items}
+        {children}
       </div>
     </div>
   );
