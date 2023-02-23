@@ -8,30 +8,39 @@ export const badgeContainer = style({
   display: 'inline-block',
 });
 
-export const badge = recipe({
+export const Super = recipe({
   base: [
-    { backgroundColor: variants.vars.color.primary },
-    { color: 'white' },
     utils.positionAbsolute,
     utils.overflowHidden,
+    utils.top0,
+    utils.right0,
+    {
+      display: 'inline-flex',
+      height: '20px',
+      padding: '0 8px',
+      color: variants.vars.color.white,
+      backgroundColor: variants.vars.color.primary,
+      transform: 'translate(50%, -50%)',
+    },
   ],
   variants: {
-    size: {
-      circle: { width: '0.75rem', height: '0.75rem' },
-      text: {
-        height: '2rem',
-        padding: '0 0.8rem',
-        textAlign: 'center',
-        fontSize: variants.vars.fontSize.small,
-        fontWeight: 600,
+    type: {
+      text: [
+        utils.textAlignCenter,
+        {
+          borderRadius: '2rem',
+          right: '-2rem',
+          fontSize: variants.vars.fontSize.xSmall,
+          fontWeight: 600,
+        },
+      ],
+      dot: {
+        padding: 0,
+        width: '0.75rem',
+        height: '0.75rem',
+        borderRadius: '50%',
+        overflow: 'hidden',
       },
-    },
-    borderRadius: {
-      circle: utils.borderRadiusRound,
-      text: utils.borderRadius,
-    },
-    display: {
-      flex: utils.inlineFlex,
     },
   },
 });
