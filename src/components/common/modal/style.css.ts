@@ -18,7 +18,6 @@ export const backgroundDimmed = style([
 export const modalContainer = recipe({
   base: [
     {
-      padding: '1rem',
       backgroundColor: vars.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
     },
