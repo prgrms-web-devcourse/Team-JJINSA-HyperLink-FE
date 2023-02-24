@@ -3,30 +3,32 @@ import * as style from './style.css';
 
 export type ButtonProps = {
   type?: 'button' | 'submit';
-  version: 'blue' | 'blueInverted' | 'grayInverted';
+  version?: 'blue' | 'gray' | 'grayInverted' | 'white';
+  shape?: 'round' | 'circle';
   fontSize?: 'small' | 'medium' | 'large';
-  fontWeight?: boolean;
   paddingSize?: 'small' | 'medium' | 'full';
   text?: string;
+  isBold?: boolean;
   style?: CSSProperties;
 };
 
 const Button = ({
   type = 'button',
   version = 'blue',
+  shape = 'round',
   fontSize = 'small',
-  fontWeight = false,
   paddingSize = 'small',
+  isBold = false,
   text = 'button',
   ...props
 }: ButtonProps) => {
   const buttonStyle = {
-    fontWeight: fontWeight ? '700' : '400',
+    fontWeight: isBold ? '700' : '400',
   };
 
   return (
     <button
-      className={style.button({ version, fontSize, paddingSize })}
+      className={style.button({ version, shape, fontSize, paddingSize })}
       type={type}
       style={{ ...buttonStyle, ...props.style }}
     >

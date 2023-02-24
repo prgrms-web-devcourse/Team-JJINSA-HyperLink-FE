@@ -8,21 +8,26 @@ export default {
     version: {
       defaultValue: 'blue',
       control: 'inline-radio',
-      options: ['blue', 'blueInverted', 'grayInverted'],
+      options: ['blue', 'gray', 'grayInverted', 'white'],
+    },
+    shape: {
+      defaultValue: 'round',
+      control: 'inline-radio',
+      options: ['round', 'circle'],
     },
     fontSize: {
       defaultValue: 'small',
       control: 'inline-radio',
       options: ['small', 'medium', 'large'],
     },
-    fontWeight: {
-      defaultValue: false,
-      type: 'boolean',
-    },
     paddingSize: {
       defaultValue: 'small',
       control: 'inline-radio',
       options: ['small', 'medium', 'full'],
+    },
+    isBold: {
+      defaultValue: false,
+      type: 'boolean',
     },
     text: {
       defaultValue: 'button',
