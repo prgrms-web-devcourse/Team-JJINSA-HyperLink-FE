@@ -7,10 +7,11 @@ export const slider = style([
   utils.positionRelative,
   utils.fullWidth,
   {
-    padding: '2.6rem 2.4rem 1.6rem 2.4rem',
+    padding: '2.6rem 2.4rem 1.6rem',
     background:
       'linear-gradient(116.5deg, rgba(75, 128, 255, 0.95) 14.56%, rgba(13, 153, 255, 0.5) 88.34%)',
     borderRadius: '1.2rem',
+    boxShadow: '0px 8px 16px rgba(17, 17, 17, 0.2)',
   },
 ]);
 
