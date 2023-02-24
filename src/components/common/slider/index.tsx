@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, WheelEvent, MouseEvent } from 'react';
 import * as style from './style.css';
 
 export type SliderProps = {
@@ -12,12 +12,12 @@ const Slider = ({ children, ...props }: SliderProps) => {
   let startX = 0;
   let scrollLeft = 0;
 
-  const handleWheel = (e: React.WheelEvent) => {
+  const handleWheel = (e: WheelEvent) => {
     if (!sliderTargetRef.current) return;
     sliderTargetRef.current.scrollLeft += e.deltaY;
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = (e: MouseEvent) => {
     if (!sliderTargetRef.current) return;
 
     isMouseDown = true;
@@ -33,14 +33,14 @@ const Slider = ({ children, ...props }: SliderProps) => {
     sliderTargetRef.current.style.cursor = 'grab';
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     e.preventDefault();
 
     if (!isMouseDown) return;
     if (!sliderTargetRef.current) return;
 
-    const currentLoc = e.clientX - sliderTargetRef.current.offsetLeft;
-    const diff = (currentLoc - startX) * 2;
+    const curLocation = e.clientX - sliderTargetRef.current.offsetLeft;
+    const diff = (curLocation - startX) * 2;
     sliderTargetRef.current.scrollLeft = scrollLeft - diff;
   };
 
