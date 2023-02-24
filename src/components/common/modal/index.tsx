@@ -1,17 +1,17 @@
-import { CSSProperties, ReactNode, useMemo, useState } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import * as style from './style.css';
 import useClickAway from '@/hooks/useClickAway';
 import ModalPortal from './ModalPortal';
 
 export type ModalProps = {
   children: ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
   type: 'center' | 'icon';
+  isOpen: boolean;
   style?: CSSProperties;
+  onClose: () => void;
 };
 
-// 로그인 모달, 아이콘 모달
+// 센터 모달, header 아이콘 모달
 const Modal = ({
   children,
   isOpen = false,

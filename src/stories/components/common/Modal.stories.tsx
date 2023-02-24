@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal } from '@/components/common';
+import { Icon, Modal } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 
 export default {
@@ -36,7 +36,7 @@ export const Default = () => {
           objectFit="cover"
         />
         <button onClick={() => setIsOpen(false)} style={{ fontSize: '24px' }}>
-          X
+          <Icon />
         </button>
       </Modal>
       <div>
