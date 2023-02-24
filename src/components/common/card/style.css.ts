@@ -12,14 +12,10 @@ export const CardWrapper = recipe({
   variants: {
     type: {
       creater: {
-        display: 'flex',
-        flexDirection: 'column',
         width: '28rem',
         height: '14.6rem',
       },
       article: {
-        display: 'flex',
-        flexDirection: 'column',
         width: '28.8rem',
         height: '41rem',
         position: 'relative',
