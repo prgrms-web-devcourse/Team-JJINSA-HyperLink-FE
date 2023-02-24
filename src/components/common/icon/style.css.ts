@@ -9,6 +9,7 @@ export const icon = recipe({
       medium: { fontSize: vars.fontSize.medium },
       large: { fontSize: vars.fontSize.large },
       xLarge: { fontSize: vars.fontSize.xLarge },
+      huge: { fontSize: vars.fontSize.huge },
     },
   },
 });

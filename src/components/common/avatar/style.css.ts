@@ -1,12 +1,13 @@
+import * as utils from '@/styles/utils.css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const avatar = recipe({
-  base: {
-    display: 'inline-block',
-    position: 'relative',
-    overflow: 'hidden',
-    borderRadius: '50%',
-  },
+  base: [
+    { display: 'inline-block' },
+    utils.positionRelative,
+    utils.overflowHidden,
+    utils.borderRadiusRound,
+  ],
 
   variants: {
     size: {
@@ -16,9 +17,9 @@ export const avatar = recipe({
       xLarge: { width: '15rem', height: '15rem' },
     },
     shape: {
-      circle: { borderRadius: '50%' },
-      round: { borderRadius: '1rem' },
-      square: { borderRadius: 0 },
+      circle: [utils.borderRadiusRound],
+      round: [utils.borderRadius],
+      square: [utils.borderNone],
     },
   },
 });

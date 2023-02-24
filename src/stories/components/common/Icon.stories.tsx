@@ -1,5 +1,6 @@
 import { Icon } from '@/components/common';
 import { IconProps } from '@/components/common/icon';
+import * as variants from '@/styles/variants.css';
 
 export default {
   title: 'Components/Icon',
@@ -23,7 +24,7 @@ export default {
       description: 'icon size',
     },
     color: {
-      defaultValue: '#9a9a9a',
+      defaultValue: variants.vars.color.icon,
       control: 'color',
       type: 'string',
       description: 'icon color',
