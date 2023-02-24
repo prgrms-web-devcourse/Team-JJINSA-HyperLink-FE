@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal } from '@/components/common';
+import { Icon, Modal } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 
 export default {
@@ -36,31 +36,46 @@ export const Default = () => {
           objectFit="cover"
         />
         <button onClick={() => setIsOpen(false)} style={{ fontSize: '24px' }}>
-          X
+          <Icon />
         </button>
       </Modal>
+      <div>
+        <button
+          onClick={() => console.log('click')}
+          style={{ border: '1px solid black', padding: '4px 8px' }}
+        >
+          button
+        </button>
+      </div>
     </div>
   );
 };
 
 // header icon modal, card modal - 클릭한 아이콘, 버튼의 좌측 하단에 표시
 export const IconModal = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen1, setIsOpen1] = useState<boolean>(false);
+  const [isOpen2, setIsOpen2] = useState<boolean>(false);
 
   return (
     <>
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'space-evenly',
           position: 'relative',
           width: '50rem',
         }}
       >
+        <button
+          onClick={() => setIsOpen1(true)}
+          style={{ border: '1px solid black', padding: '4px 8px' }}
+        >
+          Open1
+        </button>
         <Modal
-          isOpen={isOpen}
+          isOpen={isOpen1}
           type="icon"
-          onClose={() => setIsOpen(false)}
+          onClose={() => setIsOpen1(false)}
           style={{ top: '2.5rem', right: 0 }}
         >
           <ImageComponent
@@ -75,11 +90,19 @@ export const IconModal = () => {
         </Modal>
         <button
           id="button-modal"
-          onClick={() => setIsOpen(true)}
+          onClick={() => setIsOpen2(true)}
           style={{ border: '1px solid black', padding: '4px 8px' }}
         >
-          Open
+          Open2
         </button>
+        <Modal
+          isOpen={isOpen2}
+          type="icon"
+          onClose={() => setIsOpen2(false)}
+          style={{ top: '2.5rem', right: 0 }}
+        >
+          modal2
+        </Modal>
       </div>
       <div>
         구분선 넣어보기 구분선 넣어보기구분선 넣어보기구분선 넣어보기구분선

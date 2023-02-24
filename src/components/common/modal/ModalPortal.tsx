@@ -9,7 +9,7 @@ type ModalProps = {
 const ModalPortal = ({ children, onClose }: ModalProps) => {
   const el = useMemo(() => document.createElement('div'), []);
 
-  const handleESCKey = useCallback(
+  const handleESCPress = useCallback(
     (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
       onClose();
@@ -19,11 +19,11 @@ const ModalPortal = ({ children, onClose }: ModalProps) => {
 
   useEffect(() => {
     document.body.appendChild(el);
-    document.addEventListener('keyup', handleESCKey, false);
+    document.addEventListener('keyup', handleESCPress, false);
 
     return () => {
       document.body.removeChild(el);
-      document.removeEventListener('keyup', handleESCKey, false);
+      document.removeEventListener('keyup', handleESCPress, false);
     };
   });
 

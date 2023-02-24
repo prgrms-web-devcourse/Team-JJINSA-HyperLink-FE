@@ -1,6 +1,6 @@
 import { useEffect, useRef, MutableRefObject } from 'react';
 
-const events: Array<string> = ['mouseup', 'touchstart'];
+const EVENTS: Array<string> = ['mouseup', 'touchstart'];
 
 const useClickAway = <T extends HTMLElement>(
   handler: (event: Event) => void
@@ -19,14 +19,14 @@ const useClickAway = <T extends HTMLElement>(
       !element.contains(e.target as Node) && savedHandler.current(e);
     };
 
-    for (const eventName of events) {
-      document.addEventListener(eventName, handleEvent);
-    }
+    EVENTS.forEach((event) => {
+      document.addEventListener(event, handleEvent);
+    });
 
     return () => {
-      for (const eventName of events) {
-        document.removeEventListener(eventName, handleEvent);
-      }
+      EVENTS.forEach((event) => {
+        document.removeEventListener(event, handleEvent);
+      });
     };
   }, [ref]);
 
