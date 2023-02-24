@@ -7,7 +7,7 @@ export type ModalProps = {
   children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  type: 'login' | 'icon';
+  type: 'center' | 'icon';
   style?: CSSProperties;
 };
 
@@ -28,15 +28,13 @@ const Modal = ({
   return (
     <ModalPortal onClose={onClose}>
       <div
-        className={type === 'login' ? style.backgroundDimmed : undefined}
+        className={type === 'center' ? style.backgroundDimmed : undefined}
         style={{ display: isOpen ? 'block' : 'none' }}
       >
         <div
           ref={ref}
           className={style.modalContainer({ type })}
-          style={{
-            ...props.style,
-          }}
+          style={{ ...props.style }}
           {...props}
         >
           {children}
