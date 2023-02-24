@@ -17,7 +17,7 @@ const Dropdown = ({
   items,
   onItemClick,
 }: DropdownProps) => {
-  const { visible, ref, handleVisibility } = useDropdown();
+  const { isVisible, ref, handleVisibility } = useDropdown();
   const [chosenItem, setChosenItem] = useState('');
 
   const handleItemClick = (item: string) => {
@@ -45,7 +45,7 @@ const Dropdown = ({
           </>
         )}
       </div>
-      <article className={style.dropdownWrapper({ visible })}>
+      <article className={style.dropdownWrapper({ isVisible })}>
         <ul className={style.dropdownList}>
           {items.map((item) => {
             return (

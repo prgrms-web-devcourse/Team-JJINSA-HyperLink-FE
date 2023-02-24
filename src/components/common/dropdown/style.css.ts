@@ -54,7 +54,7 @@ export const dropdownWrapper = recipe({
     },
   ],
   variants: {
-    visible: {
+    isVisible: {
       true: {
         opacity: 1,
         visibility: 'visible',
