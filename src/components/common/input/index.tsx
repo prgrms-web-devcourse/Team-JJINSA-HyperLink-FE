@@ -1,5 +1,5 @@
-import { Icon } from '@/components/common';
 import { ChangeEvent, CSSProperties, KeyboardEvent } from 'react';
+import { Icon } from '@/components/common';
 import * as style from './style.css';
 
 export type InputProps = {
@@ -43,7 +43,10 @@ const Input = ({
   };
 
   return (
-    <div className={style.inputContainer({ version, readOnly })}>
+    <div
+      className={style.inputContainer({ version, readOnly })}
+      style={{ ...props.style }}
+    >
       {version !== 'normal' && (
         <Icon name="search" size={version === 'banner' ? 'xLarge' : 'medium'} />
       )}
@@ -58,7 +61,6 @@ const Input = ({
         maxLength={max}
         onChange={handleChange}
         onKeyPress={handleEnterPress}
-        style={{ ...props.style }}
         {...props}
       />
     </div>
