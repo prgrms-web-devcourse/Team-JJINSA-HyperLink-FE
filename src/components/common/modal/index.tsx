@@ -25,7 +25,7 @@ const Modal = ({
     }
   });
 
-  return (
+  return type === 'center' ? (
     <ModalPortal onClose={onClose}>
       <div
         className={type === 'center' ? style.backgroundDimmed : undefined}
@@ -41,6 +41,17 @@ const Modal = ({
         </div>
       </div>
     </ModalPortal>
+  ) : (
+    <div style={{ display: isOpen ? 'block' : 'none' }}>
+      <div
+        ref={ref}
+        className={style.modalContainer({ type })}
+        style={{ ...props.style }}
+        {...props}
+      >
+        {children}
+      </div>
+    </div>
   );
 };
 
