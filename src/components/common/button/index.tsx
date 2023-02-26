@@ -28,16 +28,12 @@ const Button = ({
     fontWeight: isBold ? '700' : '400',
   };
 
-  const handleClick = () => {
-    onClick && onClick();
-  };
-
   return (
     <button
       className={style.button({ version, shape, fontSize, paddingSize })}
       type={type}
       style={{ ...buttonStyle, ...props.style }}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {text}
     </button>
