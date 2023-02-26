@@ -1,7 +1,7 @@
 import ImageComponent, { ImageProps } from '@/components/common/Image';
 
 export default {
-  title: 'Components/Image',
+  title: 'Components/Common/Image',
   component: ImageComponent,
   argTypes: {
     block: {

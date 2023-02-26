@@ -3,7 +3,7 @@ import { InputProps } from '@/components/common/input';
 import useInput from '@/hooks/useInput';
 
 export default {
-  title: 'Components/Input',
+  title: 'Components/Common/Input',
   component: Input,
   argTypes: {
     version: {

@@ -3,7 +3,7 @@ import { DropdownProps } from '@/components/common/dropdown';
 import { useState } from 'react';
 
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/Common/Dropdown',
   component: Dropdown,
   argTypes: {
     placeholder: {

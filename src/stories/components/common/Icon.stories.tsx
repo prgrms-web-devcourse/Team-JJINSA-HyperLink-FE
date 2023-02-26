@@ -3,7 +3,7 @@ import { IconProps } from '@/components/common/icon';
 import * as variants from '@/styles/variants.css';
 
 export default {
-  title: 'Components/Icon',
+  title: 'Components/Common/Icon',
   component: Icon,
   argTypes: {
     type: {

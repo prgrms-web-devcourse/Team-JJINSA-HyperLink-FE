@@ -2,7 +2,7 @@ import { Text } from '@/components/common';
 import { TextProps } from '@/components/common/text';
 
 export default {
-  title: 'Components/Text',
+  title: 'Components/Common/Text',
   component: Text,
   argTypes: {
     block: {

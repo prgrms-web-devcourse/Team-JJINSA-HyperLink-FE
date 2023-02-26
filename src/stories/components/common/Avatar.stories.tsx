@@ -2,7 +2,7 @@ import { Avatar } from '@/components/common';
 import { AvatarProps } from '@/components/common/avatar';
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Components/Common/Avatar',
   component: Avatar,
   argTypes: {
     src: {
@@ -18,7 +18,7 @@ export default {
     size: {
       defaultValue: 'medium',
       control: 'inline-radio',
-      options: ['small', 'medium', 'large', 'xLarge'],
+      options: ['xSmall', 'small', 'medium', 'large', 'xLarge'],
     },
   },
 };

@@ -2,7 +2,7 @@ import { Button } from '@/components/common';
 import { ButtonProps } from '@/components/common/button';
 
 export default {
-  title: 'Components/Button',
+  title: 'Components/Common/Button',
   component: Button,
   argTypes: {
     version: {

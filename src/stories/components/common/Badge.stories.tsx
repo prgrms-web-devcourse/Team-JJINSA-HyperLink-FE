@@ -2,7 +2,7 @@ import { Badge } from '@/components/common';
 import { BadgeProps } from '@/components/common/badge';
 
 export default {
-  title: 'Components/Badge',
+  title: 'Components/Common/Badge',
   component: Badge,
   argTypes: {
     hasText: {
