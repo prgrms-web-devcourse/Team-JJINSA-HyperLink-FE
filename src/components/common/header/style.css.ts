@@ -3,15 +3,30 @@ import * as utils from '@/styles/utils.css';
 
 export const header = style([
   utils.fullWidth,
-  utils.flexAlignCenter,
-  utils.flexJustifySpaceBetween,
+  utils.flexColumn,
   {
     padding: '1.2rem 10rem',
   },
 ]);
 
+export const top = style([
+  utils.fullWidth,
+  utils.grid,
+  {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+]);
+
+export const logo = style({ justifySelf: 'start' });
+
 export const input = style({
   margin: '0 1rem',
+});
+
+export const userNav = style({
+  justifySelf: 'end',
 });
 
 export const iconGroup = style([
@@ -21,6 +36,6 @@ export const iconGroup = style([
   },
 ]);
 
-export const user = style({
+export const userIcon = style({
   cursor: 'pointer',
 });

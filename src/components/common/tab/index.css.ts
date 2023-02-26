@@ -23,6 +23,7 @@ export const tabItem = recipe({
       color: variants.vars.color.font.primary,
       padding: '0 1rem',
       margin: '0 0.5rem',
+      whiteSpace: 'nowrap',
     },
   ],
   variants: {

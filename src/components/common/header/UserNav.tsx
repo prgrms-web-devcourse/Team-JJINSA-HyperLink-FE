@@ -15,7 +15,7 @@ const UserNav = () => {
     2. 로그인 상태에 따라 헤더 UI 변경
    */
   return (
-    <>
+    <div className={style.userNav}>
       {!isLoggedIn ? (
         <Button
           isBold={true}
@@ -28,7 +28,7 @@ const UserNav = () => {
           <Icon type="regular" name="bell" size="xLarge" />
           <button type="button">
             <img
-              className={style.user}
+              className={style.userIcon}
               src={user}
               alt="user image"
               onClick={() => setIsLoggedIn((prevState) => !prevState)}
@@ -36,7 +36,7 @@ const UserNav = () => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
