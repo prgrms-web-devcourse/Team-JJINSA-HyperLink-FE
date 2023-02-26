@@ -7,13 +7,13 @@ import SearchBar from './SearchBar';
 
 const Header = () => {
   return (
-    <div className={style.header}>
+    <header className={style.header}>
       <Link to="/">
         <img src={logo} alt="hyperlink logo" />
       </Link>
       <SearchBar />
       <UserNav />
-    </div>
+    </header>
   );
 };
 
