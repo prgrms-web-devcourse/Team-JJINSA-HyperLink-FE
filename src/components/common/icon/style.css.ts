@@ -2,6 +2,9 @@ import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@/styles/variants.css';
 
 export const icon = recipe({
+  base: {
+    cursor: 'pointer',
+  },
   variants: {
     size: {
       xSmall: { fontSize: vars.fontSize.xSmall },
