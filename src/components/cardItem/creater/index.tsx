@@ -34,20 +34,20 @@ const CreaterCard = ({
   return (
     <Card type="creater">
       <Link to="/creater">
-        <div className={style.CreaterCardContainer}>
-          <div className={style.CreaterCardTop}>
+        <div className={style.createrCardContainer}>
+          <div className={style.createrCardTop}>
             <Avatar src={src} shape="circle" size="medium" />
-            <div className={style.TopInfo}>
-              <div className={style.InfoCreater}>{creater}</div>
+            <div className={style.topInfo}>
+              <div className={style.infoCreater}>{creater}</div>
               <div
-                className={style.InfoSubscriber}
+                className={style.infoSubscriber}
               >{`구독자 ${subscriber}명`}</div>
             </div>
             {isSubscribed ? (
               <button
                 type="button"
                 onClick={handleSubscribeClick}
-                className={style.TopButton({ type: isSubscribed })}
+                className={style.topButton({ type: isSubscribed })}
               >
                 구독중
               </button>
@@ -55,13 +55,13 @@ const CreaterCard = ({
               <button
                 type="button"
                 onClick={handleSubscribeClick}
-                className={style.TopButton({})}
+                className={style.topButton({})}
               >
                 구독
               </button>
             )}
           </div>
-          <div className={style.CreaterCardBottom}>{description}</div>
+          <div className={style.createrCardBottom}>{description}</div>
         </div>
       </Link>
     </Card>

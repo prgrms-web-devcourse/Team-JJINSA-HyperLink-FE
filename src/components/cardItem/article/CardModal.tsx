@@ -26,7 +26,7 @@ const CardModal = ({
     <div style={{ display: isOpen ? 'block' : 'none' }}>
       <div
         ref={ref}
-        className={style.CardModalContainer}
+        className={style.cardModalContainer}
         style={{
           ...props.style,
         }}

@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
 import { vars } from '@/styles/variants.css';
 
-export const CardBackgroundDim = style([
+export const cardBackgroundDim = style([
   utils.positionAbsolute,
   utils.borderRadius,
   utils.fullSize,
@@ -16,23 +16,23 @@ export const CardBackgroundDim = style([
   },
 ]);
 
-export const CardBottom = style([
+export const cardBottom = style([
   utils.flexColumn,
+  utils.fullHeight,
   {
     padding: '1.6rem',
-    height: '100%',
   },
 ]);
 
-export const BottomContent = style({
+export const bottomContent = style({
   flexGrow: 1,
 });
 
-export const BottomInfo = style([
+export const bottomInfo = style([
   utils.positionRelative,
   utils.flexAlignCenter,
   {
-    fontSize: '1.4rem',
+    fontSize: vars.fontSize.small,
     justifyContent: 'space-between',
     padding: 0,
     gap: '0.8rem',
@@ -41,33 +41,33 @@ export const BottomInfo = style([
     fontWeight: 700,
   },
 ]);
-export const BottomInfoCreater = style({
+export const bottomInfoCreater = style({
   ':hover': {
     cursor: 'pointer',
     color: 'black',
     textDecoration: 'underline',
   },
 });
-export const BottomEllipsis = style({
+export const bottomEllipsis = style({
   padding: '0.2rem',
   ':hover': {
     cursor: 'pointer',
     color: 'black',
   },
 });
-export const NotRecommanded = style([
+export const notRecommended = style([
   utils.flex,
   utils.textAlignCenter,
+  utils.cursorPointer,
   {
-    cursor: 'pointer',
-    padding: '2px 4px',
-    borderRadius: '5px',
+    padding: '0.2rem 0.4rem',
+    borderRadius: '0.5rem',
     ':hover': {
       backgroundColor: 'lightgray',
     },
   },
 ]);
-export const BottomTitle = style([
+export const bottomTitle = style([
   utils.textOverflowEllipsis,
   utils.overflowHidden,
   {
@@ -86,22 +86,22 @@ export const BottomTitle = style([
   },
 ]);
 
-export const BottomCompany = style([
+export const companyBanner = style([
   utils.flex,
   {
     padding: '1.2rem 1.6rem',
     gap: '1.6rem',
     height: '6rem',
     background: 'rgba(55,114,255,0.2)',
-    border: '2px solid rgba(55,114,255,0.12)',
+    border: '0.2rem solid rgba(55,114,255,0.12)',
     borderRadius: '1.2rem',
   },
 ]);
-export const CompanyName = style({
+export const companyName = style({
   fontWeight: 600,
   fontSize: vars.fontSize.small,
 });
-export const CompanyText = style({
+export const companyText = style({
   fontWeight: 600,
   fontSize: vars.fontSize.xSmall,
   color: 'rgba(42,40,47,0.8)',

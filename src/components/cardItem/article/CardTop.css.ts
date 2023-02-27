@@ -1,31 +1,36 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import * as utils from '@/styles/utils.css';
+import { vars } from '@/styles/variants.css';
 
-export const CardTop = style({
-  position: 'relative',
-  height: '21rem',
-});
+export const cardTop = style([
+  utils.positionRelative,
+  {
+    height: '21rem',
+  },
+]);
 
-export const BookmarkWrapper = style({
-  position: 'absolute',
-  top: '1.6rem',
-  right: '1.6rem',
-  color: 'lightgray',
+export const bookmarkWrapper = style([
+  utils.positionAbsolute,
+  {
+    top: '1.6rem',
+    right: '1.6rem',
+    color: 'lightgray',
+    ':hover': {
+      cursor: 'pointer',
+      color: 'white',
+    },
+  },
+]);
+
+export const bookmarkIcon = style({
   ':hover': {
     cursor: 'pointer',
     color: 'white',
   },
 });
 
-export const BookmarkIcon = style({
-  ':hover': {
-    cursor: 'pointer',
-    color: 'white',
-  },
-});
-
-export const NumberIconWrapper = style([
+export const numberIconWrapper = style([
   utils.flex,
   utils.positionAbsolute,
   {
@@ -35,19 +40,19 @@ export const NumberIconWrapper = style([
   },
 ]);
 
-export const IconWrapper = recipe({
+export const iconWrapper = recipe({
   base: [
     utils.flexCenter,
     {
       backgroundColor: 'rgba(0,0,0,0.5)',
       borderRadius: '0.4rem',
-      padding: '4px 8px',
+      padding: '0.4rem 0.8rem',
+      gap: '0.5rem',
     },
   ],
   variants: {
     bookmark: {
       true: {
-        padding: 0,
         background: 'none',
       },
     },
@@ -55,7 +60,7 @@ export const IconWrapper = recipe({
       true: {
         cursor: 'pointer',
         ':hover': {
-          color: 'white',
+          color: vars.color.white,
         },
       },
     },

@@ -3,48 +3,47 @@ import { useState } from 'react';
 import { Avatar, Divider, Icon } from '@/components/common';
 import CardModal from '@/components/cardItem/article/CardModal';
 import { Link } from 'react-router-dom';
+import { companyProps } from '.';
 
 type CardBottomProps = {
-  linkUrl: string;
+  link: string;
   creater: string;
-  date: string;
+  createdAt: string;
   title: string;
-  companyAvatar: string;
-  companyName: string;
+  recommendationCompanies: companyProps[];
 };
 
 const CardBottom = ({
-  linkUrl,
+  link,
   creater,
-  date,
+  createdAt,
   title,
-  companyAvatar,
-  companyName,
+  recommendationCompanies,
 }: CardBottomProps) => {
-  const [isModalShow, setIsModalShow] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const handleDotIconClick = () => {
     console.log('크리에이터 추천 안하는 api 호출');
   };
-
+  console.log(recommendationCompanies);
   return (
-    <div className={style.CardBottom}>
-      {isModalShow && <div className={style.CardBackgroundDim} />}
-      <div className={style.BottomContent}>
-        <div className={style.BottomInfo}>
-          <div style={{ display: 'flex' }}>
+    <div className={style.cardBottom}>
+      {isModalVisible && <div className={style.cardBackgroundDim} />}
+      <div className={style.bottomContent}>
+        <div className={style.bottomInfo}>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
             <Link to="/creater">
-              <span className={style.BottomInfoCreater}>{creater}</span>
+              <span className={style.bottomInfoCreater}>{creater}</span>
             </Link>
             <Divider type="vertical" />
-            <span>{date}</span>
+            <span>{createdAt}</span>
           </div>
           <CardModal
-            isOpen={isModalShow}
-            onClose={() => setIsModalShow(false)}
+            isOpen={isModalVisible}
+            onClose={() => setIsModalVisible(false)}
             style={{ top: '2.2rem', right: '1rem', zIndex: 2000 }}
           >
-            <div className={style.NotRecommanded} onClick={handleDotIconClick}>
+            <div className={style.notRecommended} onClick={handleDotIconClick}>
               <Icon
                 type="regular"
                 name="face-tired"
@@ -56,23 +55,27 @@ const CardBottom = ({
             </div>
           </CardModal>
           <div
-            onClick={() => setIsModalShow(true)}
-            className={style.BottomEllipsis}
+            onClick={() => setIsModalVisible(true)}
+            className={style.bottomEllipsis}
           >
             <Icon type="solid" name="ellipsis-vertical" />
           </div>
         </div>
-        <a href={linkUrl} target="_blank" rel="noreferrer">
-          <div className={style.BottomTitle}>{title}</div>
+        <a href={link} target="_blank" rel="noreferrer">
+          <div className={style.bottomTitle}>{title}</div>
         </a>
       </div>
-      <footer className={style.BottomCompany}>
+      <footer className={style.companyBanner}>
         <div>
-          <Avatar src={companyAvatar} shape="circle" size="small" />
+          <Avatar
+            src="https://avatars.githubusercontent.com/u/60571418?v=4"
+            shape="circle"
+            size="small"
+          />
         </div>
         <div>
-          <div className={style.CompanyName}>{companyName}</div>
-          <div className={style.CompanyText}>사람들도 관심있게 보고있어요</div>
+          <div className={style.companyName}>카카오</div>
+          <div className={style.companyText}>사람들도 관심있게 보고있어요</div>
         </div>
       </footer>
     </div>

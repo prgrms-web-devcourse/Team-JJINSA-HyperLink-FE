@@ -4,31 +4,31 @@ import { Icon } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 
 type CardTopProps = {
-  linkUrl: string;
-  imgSrc: string;
-  isBookmark: boolean;
-  isHeart: boolean;
-  likes: number;
-  views: number;
+  link: string;
+  contentImgUrl: string;
+  isBookmarked: boolean;
+  isLiked: boolean;
+  likeCount: number;
+  viewCount: number;
 };
 
 const CardTop = ({
-  linkUrl,
-  imgSrc,
-  isBookmark,
-  isHeart,
-  likes,
-  views,
+  link,
+  contentImgUrl,
+  isBookmarked,
+  isLiked,
+  likeCount,
+  viewCount,
 }: CardTopProps) => {
-  const [hasBookMark, setHasBookMark] = useState<boolean>(isBookmark);
-  const [hasHeart, setHasHeart] = useState<boolean>(isHeart);
+  const [userBookmarked, setUserBookmarked] = useState<boolean>(isBookmarked);
+  const [userLiked, setUserLiked] = useState<boolean>(isLiked);
 
   return (
-    <section className={style.CardTop}>
-      <a href={linkUrl} target="_blank" rel="noreferrer">
+    <section className={style.cardTop}>
+      <a href={link} target="_blank" rel="noreferrer">
         <ImageComponent
           defaultImage="https://via.placeholder.com/200"
-          src={imgSrc}
+          src={contentImgUrl}
           alt="카드 썸네일 이미지"
           block={true}
           width="28.8rem"
@@ -37,11 +37,11 @@ const CardTop = ({
         />
       </a>
       <div
-        className={style.BookmarkWrapper}
-        onClick={() => setHasBookMark(!hasBookMark)}
+        className={style.bookmarkWrapper}
+        onClick={() => setUserBookmarked(!userBookmarked)}
       >
-        {hasBookMark ? (
-          <div className={style.IconWrapper({ bookmark: true })}>
+        {userBookmarked ? (
+          <div className={style.iconWrapper({ bookmark: true })}>
             <Icon
               name="bookmark"
               type="solid"
@@ -50,34 +50,34 @@ const CardTop = ({
             />
           </div>
         ) : (
-          <div className={style.IconWrapper({ bookmark: true })}>
+          <div className={style.iconWrapper({ bookmark: true })}>
             <Icon name="bookmark" type="regular" size="large" color="white" />
           </div>
         )}
       </div>
       <div
-        className={style.NumberIconWrapper}
-        onClick={() => setHasHeart(!hasHeart)}
+        className={style.numberIconWrapper}
+        onClick={() => setUserLiked(!userLiked)}
       >
-        {hasHeart ? (
-          <div className={style.IconWrapper({ heart: true })}>
+        {userLiked ? (
+          <div className={style.iconWrapper({ heart: true })}>
             <Icon
               name="heart"
               type="solid"
               size="medium"
               style={{ color: 'white' }}
             />
-            <span style={{ color: 'white' }}> {likes}</span>
+            <div style={{ color: 'white' }}>{likeCount}</div>
           </div>
         ) : (
-          <div className={style.IconWrapper({ heart: true })}>
+          <div className={style.iconWrapper({ heart: true })}>
             <Icon name="heart" type="regular" size="medium" />
-            <span> {likes}</span>
+            <div>{likeCount}</div>
           </div>
         )}
-        <div className={style.IconWrapper({ eyes: true })}>
+        <div className={style.iconWrapper({ eyes: true })}>
           <Icon name="eye" type="regular" size="medium" />
-          <span> {views}</span>
+          <div>{viewCount}</div>
         </div>
       </div>
     </section>
