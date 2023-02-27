@@ -22,7 +22,7 @@ export const stepNumber = recipe({
       border: `0.2rem solid ${variants.vars.color.primary}`,
       width: '2.8rem',
       height: '2.8rem',
-      fontSize: '1.6rem',
+      fontSize: variants.vars.fontSize.medium,
       color: variants.vars.color.primary,
       backgroundColor: variants.vars.color.white,
     },
@@ -39,7 +39,7 @@ export const stepNumber = recipe({
 });
 
 export const stepInfo = recipe({
-  base: [{ color: variants.vars.color.font.secondary }],
+  base: { color: variants.vars.color.font.secondary },
   variants: {
     type: {
       current: {
