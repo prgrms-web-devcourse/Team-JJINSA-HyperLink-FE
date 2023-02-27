@@ -8,6 +8,7 @@ export const button = recipe({
     textAlign: 'center',
     transition: 'all 130ms ease-in-out',
     whiteSpace: 'nowrap',
+    ':disabled': { cursor: 'not-allowed' },
   },
   variants: {
     version: {
@@ -18,6 +19,19 @@ export const button = recipe({
         ':hover': {
           backgroundColor: vars.color.secondary,
           border: `0.2rem solid ${vars.color.secondary}`,
+        },
+        ':disabled': {
+          backgroundColor: vars.color.primaryDimmed,
+          borderColor: vars.color.primaryDimmed,
+        },
+      },
+      blueInverted: {
+        color: vars.color.primary,
+        backgroundColor: vars.color.white,
+        border: `0.2rem solid ${vars.color.primary}`,
+        ':hover': {
+          color: vars.color.white,
+          backgroundColor: vars.color.primary,
         },
       },
       gray: {

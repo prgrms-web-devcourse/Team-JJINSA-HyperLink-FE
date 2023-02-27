@@ -3,12 +3,13 @@ import * as style from './style.css';
 
 export type ButtonProps = {
   type?: 'button' | 'submit';
-  version?: 'blue' | 'gray' | 'grayInverted' | 'white';
+  version?: 'blue' | 'blueInverted' | 'gray' | 'grayInverted' | 'white';
   shape?: 'round' | 'circle';
   fontSize?: 'small' | 'medium' | 'large';
   paddingSize?: 'small' | 'medium' | 'full';
   text?: string;
   isBold?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
   style?: CSSProperties;
 };
@@ -21,6 +22,7 @@ const Button = ({
   paddingSize = 'small',
   isBold = false,
   text = 'button',
+  disabled = false,
   onClick,
   ...props
 }: ButtonProps) => {
@@ -30,10 +32,16 @@ const Button = ({
 
   return (
     <button
-      className={style.button({ version, shape, fontSize, paddingSize })}
+      className={style.button({
+        version,
+        shape,
+        fontSize,
+        paddingSize,
+      })}
       type={type}
       style={{ ...buttonStyle, ...props.style }}
-      onClick={onClick}
+      disabled={disabled}
+      onClick={() => onClick?.()}
     >
       {text}
     </button>

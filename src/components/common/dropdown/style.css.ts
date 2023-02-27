@@ -1,9 +1,18 @@
-import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
-import { recipe } from '@vanilla-extract/recipes';
 import * as variants from '@/styles/variants.css';
+import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
-export const dropdownContainer = style([utils.positionRelative]);
+export const dropdownContainer = recipe({
+  base: [utils.positionRelative],
+  variants: {
+    hasLabel: {
+      true: {
+        marginTop: '3rem',
+      },
+    },
+  },
+});
 
 export const dropdown = recipe({
   base: [
@@ -98,3 +107,12 @@ export const dropdownItem = recipe({
 });
 
 export const text = style([utils.textOverflowEllipsis]);
+
+export const label = style([
+  utils.positionAbsolute,
+  {
+    fontSize: variants.vars.fontSize.medium,
+    top: '-2.4rem',
+    left: '0.4rem',
+  },
+]);

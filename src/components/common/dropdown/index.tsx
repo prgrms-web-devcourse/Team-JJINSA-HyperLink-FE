@@ -1,4 +1,4 @@
-import { Icon } from '@/components/common';
+import { Icon, Text } from '@/components/common';
 import useDropdown from '@/hooks/useDropdown';
 import * as variants from '@/styles/variants.css';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ export type DropdownProps = {
   placeholder: string;
   value: string;
   items: string[];
+  label?: string;
   onItemClick: (item: string) => void;
 };
 
@@ -15,6 +16,7 @@ const Dropdown = ({
   placeholder,
   value,
   items,
+  label,
   onItemClick,
 }: DropdownProps) => {
   const { isVisible, ref, handleVisibility } = useDropdown();
@@ -27,7 +29,10 @@ const Dropdown = ({
   };
 
   return (
-    <div className={style.dropdownContainer}>
+    <div
+      className={style.dropdownContainer({ hasLabel: label ? true : false })}
+    >
+      {label && <Text className={style.label}>{label}</Text>}
       <div
         className={style.dropdown({ isChosen: value !== '' })}
         onClick={handleVisibility}

@@ -2,13 +2,13 @@ import { Button } from '@/components/common';
 import { ButtonProps } from '@/components/common/button';
 
 export default {
-  title: 'Components/Button',
+  title: 'Components/Common/Button',
   component: Button,
   argTypes: {
     version: {
       defaultValue: 'blue',
       control: 'inline-radio',
-      options: ['blue', 'gray', 'grayInverted', 'white'],
+      options: ['blue', 'blueInverted', 'gray', 'grayInverted', 'white'],
     },
     shape: {
       defaultValue: 'round',
@@ -32,6 +32,10 @@ export default {
     text: {
       defaultValue: 'button',
       control: 'text',
+    },
+    disabled: {
+      defaultValue: false,
+      type: 'boolean',
     },
   },
 };

@@ -3,7 +3,7 @@ import { Icon, Modal } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 
 export default {
-  title: 'Components/Modal',
+  title: 'Components/Common/Modal',
   component: Modal,
 };
 

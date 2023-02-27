@@ -2,7 +2,7 @@ import { Slider } from '@/components/common';
 import { SliderProps } from '@/components/common/slider';
 
 export default {
-  title: 'Components/Slider',
+  title: 'Components/Common/Slider',
   component: Slider,
 };
 

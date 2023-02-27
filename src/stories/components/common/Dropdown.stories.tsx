@@ -3,11 +3,15 @@ import { DropdownProps } from '@/components/common/dropdown';
 import { useState } from 'react';
 
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/Common/Dropdown',
   component: Dropdown,
   argTypes: {
     placeholder: {
       defaultValue: '값을 선택하세요.',
+      type: 'string',
+    },
+    label: {
+      defaultValue: '',
       type: 'string',
     },
   },

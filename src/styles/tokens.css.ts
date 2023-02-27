@@ -18,6 +18,7 @@ const heading3 = style({
 const heading4 = style({
   fontSize: '2.8rem',
   fontWeight: 600,
+  lineHeight: '150%',
 });
 
 const heading5 = style({

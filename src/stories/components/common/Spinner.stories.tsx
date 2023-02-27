@@ -3,7 +3,7 @@ import { SpinnerProps } from '@/components/common/spinner';
 import * as variants from '@/styles/variants.css';
 
 export default {
-  title: 'Components/Spinner',
+  title: 'Components/Common/Spinner',
   component: Spinner,
   argTypes: {
     size: {

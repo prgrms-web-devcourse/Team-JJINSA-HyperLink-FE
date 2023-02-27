@@ -2,7 +2,7 @@ import { Tab } from '@/components/common';
 import { TabProps } from '@/components/common/tab';
 
 export default {
-  title: 'Components/Tab',
+  title: 'Components/Common/Tab',
   component: Tab,
   argTypes: {
     type: {

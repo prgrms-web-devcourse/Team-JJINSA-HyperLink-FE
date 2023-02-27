@@ -3,7 +3,7 @@ import { HeadingProps } from '@/components/common/heading';
 import * as variants from '@/styles/variants.css';
 
 export default {
-  title: 'Components/Heading',
+  title: 'Components/Common/Heading',
   component: Heading,
   argTypes: {
     level: {
