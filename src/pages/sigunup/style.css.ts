@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
-import { recipe } from '@vanilla-extract/recipes';
 import * as variants from '@/styles/variants.css';
+import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 export const wrapper = style([utils.flexCenter, { paddingTop: '11rem' }]);
 

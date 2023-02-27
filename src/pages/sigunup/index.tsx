@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { Text } from '@/components/common';
 import { BasicInfo, CategoryInfo, WorkInfo } from '@/components/signup';
 import useInput from '@/hooks/useInput';
+
 import * as variants from '@/styles/variants.css';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import * as style from './style.css';
 
 const STEPS = ['기본 정보', '직군 / 경력', '관심 카테고리'];
