@@ -1,12 +1,22 @@
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
 import HomePage from '@/pages/home';
-import { Route, Routes } from 'react-router-dom';
+import Layout from '@/components/layout/index';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<HomePage />} />
+    </Route>
+  )
+);
 
 const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-    </Routes>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

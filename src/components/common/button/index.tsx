@@ -9,6 +9,7 @@ export type ButtonProps = {
   paddingSize?: 'small' | 'medium' | 'full';
   text?: string;
   isBold?: boolean;
+  onClick?: () => void;
   style?: CSSProperties;
 };
 
@@ -20,6 +21,7 @@ const Button = ({
   paddingSize = 'small',
   isBold = false,
   text = 'button',
+  onClick,
   ...props
 }: ButtonProps) => {
   const buttonStyle = {
@@ -31,6 +33,7 @@ const Button = ({
       className={style.button({ version, shape, fontSize, paddingSize })}
       type={type}
       style={{ ...buttonStyle, ...props.style }}
+      onClick={onClick}
     >
       {text}
     </button>
