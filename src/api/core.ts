@@ -1,32 +1,43 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.NODE_ENV;
+const { VITE_API_END_POINT, VITE_TOKEN } = import.meta.env;
+const API_BASE_URL =
+  import.meta.env.MODE === 'development' ? VITE_API_END_POINT : '/api';
 
-const baseRequest = axios.create({
-  baseURL: BASE_URL,
-});
+const axiosApi = (url: string, options = {}) => {
+  const instance = axios.create({ baseURL: url, ...options });
 
-const authRequest = axios.create({
-  baseURL: BASE_URL,
-});
+  instance.defaults.timeout = 2500;
 
-baseRequest.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  instance.interceptors.response.use(
+    (response) => {
+      return response.data;
+    },
+    (error) => {
+      console.error(error);
+      return Promise.reject(error);
+    }
+  );
 
-authRequest.interceptors.request.use(
-  (config) => {
-    config.headers.authorization = 'Bearer ' + 'token';
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  instance.interceptors.request.use(
+    (config) => {
+      const token = '';
+      if (config.headers) {
+        if (token) {
+          config.headers['Authorization'] = `bearer ${token}`;
+        } else {
+          config.headers['Authorization'] = VITE_TOKEN;
+        }
+      }
+      return config;
+    },
+    (error) => {
+      console.error(error);
+      return Promise.reject(error);
+    }
+  );
 
-export { baseRequest, authRequest };
+  return instance;
+};
+
+export const axiosInstance = axiosApi(API_BASE_URL);
