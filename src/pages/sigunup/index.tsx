@@ -15,6 +15,9 @@ const SignupPage = () => {
     state: { email },
   } = useLocation();
   const [step, setStep] = useState(1);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>(
+    'right'
+  );
 
   const { value: nickname, onChange: setNickname } = useInput();
   const [birthYear, setBirthYear] = useState('');
@@ -34,6 +37,7 @@ const SignupPage = () => {
   };
 
   const handlePrevClick = () => {
+    setSlideDirection('left');
     setStep(step - 1);
   };
 
@@ -41,6 +45,7 @@ const SignupPage = () => {
     if (step === STEPS.length) {
       handleSubmit();
     } else {
+      setSlideDirection('right');
       setStep(step + 1);
     }
   };
@@ -90,6 +95,7 @@ const SignupPage = () => {
               setBirthYear,
               setGender,
             }}
+            slideDirection={slideDirection}
             onNextClick={handleNextClick}
           />
         )}
@@ -102,6 +108,7 @@ const SignupPage = () => {
               setJob,
               setCareer,
             }}
+            slideDirection={slideDirection}
             onPrevClick={handlePrevClick}
             onNextClick={handleNextClick}
           />
@@ -110,6 +117,7 @@ const SignupPage = () => {
           <CategoryInfo
             selectedCategories={categories}
             onCategoryClick={handleCategoryClick}
+            slideDirection={slideDirection}
             onPrevClick={handlePrevClick}
             onNextClick={handleNextClick}
           />

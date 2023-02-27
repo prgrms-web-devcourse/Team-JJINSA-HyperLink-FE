@@ -10,6 +10,7 @@ export type WorkInfoProps = {
     setJob: (item: string) => void;
     setCareer: (item: string) => void;
   };
+  slideDirection: 'left' | 'right';
   onPrevClick: () => void;
   onNextClick: () => void;
 };
@@ -33,6 +34,7 @@ const CAREERS = [
 const WorkInfo = ({
   nickname,
   inputs,
+  slideDirection,
   onPrevClick,
   onNextClick,
 }: WorkInfoProps) => {
@@ -44,7 +46,7 @@ const WorkInfo = ({
   }, [job, career]);
 
   return (
-    <div className={style.wrapper}>
+    <div className={style.wrapper({ slideDirection })}>
       <Heading level={4}>
         {nickname}님은
         <p />
