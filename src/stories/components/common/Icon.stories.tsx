@@ -24,7 +24,7 @@ export default {
       description: 'icon size',
     },
     color: {
-      defaultValue: variants.vars.color.icon,
+      defaultValue: variants.color.icon,
       control: 'color',
       type: 'string',
       description: 'icon color',

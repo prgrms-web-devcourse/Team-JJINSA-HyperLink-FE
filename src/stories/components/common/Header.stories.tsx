@@ -13,7 +13,7 @@ export default {
       description: 'heading level',
     },
     color: {
-      defaultValue: variants.vars.color.font.primary,
+      defaultValue: variants.color.font.primary,
       control: 'color',
       type: 'string',
       description: 'heading color',

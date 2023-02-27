@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 import * as utils from '@/styles/utils.css';
 
 export const slider = style([
@@ -19,7 +19,7 @@ export const title = style({
   fontSize: '2.4rem',
   fontWeight: '700',
   marginBottom: '1rem',
-  color: vars.color.white,
+  color: variants.color.white,
 });
 
 export const sliderTarget = style([

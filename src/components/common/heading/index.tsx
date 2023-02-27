@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 import * as style from './style.css';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 
 export type HeadingProps = {
   children: ReactNode;
@@ -12,7 +12,7 @@ export type HeadingProps = {
 const Heading = ({
   children,
   level = 1,
-  color = vars.color.font.primary,
+  color = variants.color.font.primary,
   ...props
 }: HeadingProps) => {
   const Tag = `h${level}` as const;

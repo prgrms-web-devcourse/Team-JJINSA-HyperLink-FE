@@ -1,14 +1,14 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 
 export const text = recipe({
   variants: {
     size: {
-      xSmall: { fontSize: vars.fontSize.xSmall },
-      small: { fontSize: vars.fontSize.small },
-      medium: { fontSize: vars.fontSize.medium },
-      large: { fontSize: vars.fontSize.large },
-      xLarge: { fontSize: vars.fontSize.xLarge },
+      xSmall: { fontSize: variants.fontSize.xSmall },
+      small: { fontSize: variants.fontSize.small },
+      medium: { fontSize: variants.fontSize.medium },
+      large: { fontSize: variants.fontSize.large },
+      xLarge: { fontSize: variants.fontSize.xLarge },
     },
     weight: {
       300: { fontWeight: 300 },

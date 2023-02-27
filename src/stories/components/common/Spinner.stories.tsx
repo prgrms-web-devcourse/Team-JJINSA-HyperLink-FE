@@ -13,7 +13,7 @@ export default {
       description: 'spinner icon size',
     },
     color: {
-      defaultValue: variants.vars.color.bg.select,
+      defaultValue: variants.color.bg.select,
       control: 'color',
       type: 'string',
       description: 'spinner icon color',

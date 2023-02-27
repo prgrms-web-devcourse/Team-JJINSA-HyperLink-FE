@@ -25,7 +25,7 @@ const Icon = ({
   type = 'solid',
   name = 'xmark',
   size = 'medium',
-  color = variants.vars.color.icon,
+  color = variants.color.icon,
   className = '',
   ...props
 }: IconProps) => {

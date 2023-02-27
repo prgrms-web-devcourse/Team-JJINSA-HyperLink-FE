@@ -1,5 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 import * as utils from '@/styles/utils.css';
 
 export const button = recipe({
@@ -13,48 +13,48 @@ export const button = recipe({
   variants: {
     version: {
       blue: {
-        color: vars.color.white,
-        backgroundColor: vars.color.primary,
-        border: `0.2rem solid ${vars.color.primary}`,
+        color: variants.color.white,
+        backgroundColor: variants.color.primary,
+        border: `0.2rem solid ${variants.color.primary}`,
         ':hover': {
-          backgroundColor: vars.color.secondary,
-          border: `0.2rem solid ${vars.color.secondary}`,
+          backgroundColor: variants.color.secondary,
+          border: `0.2rem solid ${variants.color.secondary}`,
         },
         ':disabled': {
-          backgroundColor: vars.color.primaryDimmed,
-          borderColor: vars.color.primaryDimmed,
+          backgroundColor: variants.color.primaryDimmed,
+          borderColor: variants.color.primaryDimmed,
         },
       },
       blueInverted: {
-        color: vars.color.primary,
-        backgroundColor: vars.color.white,
-        border: `0.2rem solid ${vars.color.primary}`,
+        color: variants.color.primary,
+        backgroundColor: variants.color.white,
+        border: `0.2rem solid ${variants.color.primary}`,
         ':hover': {
-          color: vars.color.white,
-          backgroundColor: vars.color.primary,
+          color: variants.color.white,
+          backgroundColor: variants.color.primary,
         },
       },
       gray: {
-        color: vars.color.font.primary,
-        backgroundColor: vars.color.bg.select,
-        border: `0.2rem solid ${vars.color.bg.select}`,
+        color: variants.color.font.primary,
+        backgroundColor: variants.color.bg.select,
+        border: `0.2rem solid ${variants.color.bg.select}`,
       },
       grayInverted: {
-        color: vars.color.border,
-        backgroundColor: vars.color.white,
-        border: `0.2rem solid ${vars.color.border}`,
+        color: variants.color.border,
+        backgroundColor: variants.color.white,
+        border: `0.2rem solid ${variants.color.border}`,
         ':hover': {
-          color: vars.color.primary,
-          border: `0.2rem solid ${vars.color.primary}`,
+          color: variants.color.primary,
+          border: `0.2rem solid ${variants.color.primary}`,
         },
       },
       white: {
-        color: vars.color.font.primary,
-        backgroundColor: vars.color.white,
-        border: `0.2rem solid ${vars.color.white}`,
+        color: variants.color.font.primary,
+        backgroundColor: variants.color.white,
+        border: `0.2rem solid ${variants.color.white}`,
         ':hover': {
-          backgroundColor: vars.color.bg.select,
-          border: `0.2rem solid ${vars.color.bg.select}`,
+          backgroundColor: variants.color.bg.select,
+          border: `0.2rem solid ${variants.color.bg.select}`,
         },
       },
     },
@@ -63,9 +63,9 @@ export const button = recipe({
       circle: { borderRadius: '5rem' },
     },
     fontSize: {
-      small: { fontSize: vars.fontSize.small },
-      medium: { fontSize: vars.fontSize.medium },
-      large: { fontSize: vars.fontSize.large },
+      small: { fontSize: variants.fontSize.small },
+      medium: { fontSize: variants.fontSize.medium },
+      large: { fontSize: variants.fontSize.large },
     },
     paddingSize: {
       small: { padding: '1rem 1.6rem' },

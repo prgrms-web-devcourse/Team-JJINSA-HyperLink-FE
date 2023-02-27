@@ -8,8 +8,8 @@ export const badge = recipe({
     utils.overflowHidden,
     {
       display: 'inline-flex',
-      color: variants.vars.color.white,
-      backgroundColor: variants.vars.color.primary,
+      color: variants.color.white,
+      backgroundColor: variants.color.primary,
       transform: 'translate(50%, -50%)',
     },
   ],

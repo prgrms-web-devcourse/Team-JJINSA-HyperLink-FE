@@ -11,10 +11,10 @@ export const inputContainer = recipe({
     utils.fullWidth,
     {
       boxShadow: '0 0.3rem 1rem #18181810',
-      border: `0.1rem solid ${variants.vars.color.disabled.bg}`,
+      border: `0.1rem solid ${variants.color.disabled.bg}`,
       padding: '1.2rem 1.6rem',
-      fontSize: variants.vars.fontSize.medium,
-      background: variants.vars.color.white,
+      fontSize: variants.fontSize.medium,
+      background: variants.color.white,
     },
   ],
   variants: {
@@ -31,13 +31,13 @@ export const inputContainer = recipe({
         width: '80rem',
         borderRadius: '3.5rem',
         padding: '1.2rem 2.4rem',
-        fontSize: variants.vars.fontSize.xLarge,
+        fontSize: variants.fontSize.xLarge,
         gap: '2rem',
       },
     },
     readOnly: {
       true: {
-        backgroundColor: variants.vars.color.disabled.bg,
+        backgroundColor: variants.color.disabled.bg,
         border: 'none',
       },
     },
@@ -52,14 +52,14 @@ export const inputContainer = recipe({
 export const input = style([
   utils.fullWidth,
   {
-    color: variants.vars.color.font.primary,
+    color: variants.color.font.primary,
 
     ':read-only': {
-      color: variants.vars.color.disabled.font,
+      color: variants.color.disabled.font,
     },
 
     '::placeholder': {
-      color: variants.vars.color.icon,
+      color: variants.color.icon,
     },
   },
 ]);

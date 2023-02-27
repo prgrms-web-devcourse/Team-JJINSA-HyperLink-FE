@@ -19,32 +19,32 @@ export const stepNumber = recipe({
     utils.borderRadiusRound,
     utils.flexCenter,
     {
-      border: `0.2rem solid ${variants.vars.color.primary}`,
+      border: `0.2rem solid ${variants.color.primary}`,
       width: '2.8rem',
       height: '2.8rem',
-      fontSize: variants.vars.fontSize.medium,
-      color: variants.vars.color.primary,
-      backgroundColor: variants.vars.color.white,
+      fontSize: variants.fontSize.medium,
+      color: variants.color.primary,
+      backgroundColor: variants.color.white,
     },
   ],
   variants: {
     type: {
       current: {
         fontWeight: '500',
-        color: variants.vars.color.white,
-        backgroundColor: variants.vars.color.primary,
+        color: variants.color.white,
+        backgroundColor: variants.color.primary,
       },
     },
   },
 });
 
 export const stepInfo = recipe({
-  base: { color: variants.vars.color.font.secondary },
+  base: { color: variants.color.font.secondary },
   variants: {
     type: {
       current: {
         fontWeight: '700',
-        color: variants.vars.color.font.primary,
+        color: variants.color.font.primary,
       },
     },
   },

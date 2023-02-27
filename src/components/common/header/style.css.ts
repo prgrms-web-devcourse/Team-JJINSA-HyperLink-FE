@@ -54,9 +54,9 @@ export const dailyBriefing = style([
   utils.flex,
   utils.spaceNoWrap,
   {
-    fontSize: variants.vars.fontSize.small,
+    fontSize: variants.fontSize.small,
     ':hover': {
-      color: variants.vars.color.primary,
+      color: variants.color.primary,
     },
   },
 ]);

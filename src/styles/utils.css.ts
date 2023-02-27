@@ -1,4 +1,4 @@
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
 
 export const positionAbsolute = style({
@@ -78,11 +78,11 @@ export const cursorNotAllowed = style({
 });
 
 export const borderPrimary = style({
-  border: `1px solid ${vars.color.primary}`,
+  border: `1px solid ${variants.color.primary}`,
 });
 
 export const borderGray = style({
-  border: `1px solid ${vars.color.border}`,
+  border: `1px solid ${variants.color.border}`,
 });
 
 export const borderNone = style({
