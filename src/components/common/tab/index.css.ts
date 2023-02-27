@@ -1,6 +1,6 @@
+import { recipe } from '@vanilla-extract/recipes';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
-import { recipe } from '@vanilla-extract/recipes';
 
 export const tabList = recipe({
   base: [utils.flexAlignCenter],
@@ -29,7 +29,7 @@ export const tabItem = recipe({
   variants: {
     type: {
       header: {
-        fontSize: variants.vars.fontSize.medium,
+        fontSize: variants.vars.fontSize.small,
         height: '6rem',
         lineHeight: '6rem',
 
