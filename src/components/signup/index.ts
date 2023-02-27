@@ -1,3 +1,3 @@
-export { default as BasicInfo } from './basicInfo';
-export { default as CategoryInfo } from './categoryInfo';
-export { default as WorkInfo } from './workInfo';
+export { default as BasicInfo } from './BasicInfo';
+export { default as CategoryInfo } from './CategoryInfo';
+export { default as WorkInfo } from './WorkInfo';
