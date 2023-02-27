@@ -1,5 +1,5 @@
 import { CSSProperties, useState } from 'react';
-import * as style from './index.css';
+import * as style from './style.css';
 
 export type TabProps = {
   items: string[];
