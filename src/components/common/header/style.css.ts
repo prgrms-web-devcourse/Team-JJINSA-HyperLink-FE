@@ -1,11 +1,13 @@
 import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
+import * as variants from '@/styles/variants.css';
 
 export const header = style([
   utils.fullWidth,
   utils.flexColumn,
   {
     padding: '1.2rem 10rem',
+    borderBottom: '1px solid rgba(0,0,0, 0.3)',
   },
 ]);
 
@@ -38,4 +40,38 @@ export const iconGroup = style([
 
 export const userIcon = style({
   cursor: 'pointer',
+});
+
+export const bottom = style([
+  utils.flexJustifySpaceBetween,
+  utils.flexAlignCenter,
+  utils.positionRelative,
+  {
+    bottom: '-1.3rem',
+    paddingTop: '1rem',
+  },
+]);
+
+export const dailyBriefing = style([
+  utils.flex,
+  {
+    fontSize: variants.vars.fontSize.small,
+    whiteSpace: 'nowrap',
+    ':hover': {
+      color: variants.vars.color.primary,
+    },
+  },
+]);
+
+export const title = style([
+  utils.positionRelative,
+  {
+    position: 'relative',
+    marginRight: '2rem',
+  },
+]);
+
+export const countDown = style({
+  minWidth: '6.5rem',
+  fontWeight: '700',
 });
