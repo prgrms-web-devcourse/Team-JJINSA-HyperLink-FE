@@ -38,9 +38,7 @@ export const iconGroup = style([
   },
 ]);
 
-export const userIcon = style({
-  cursor: 'pointer',
-});
+export const userIcon = style([utils.cursorPointer]);
 
 export const bottom = style([
   utils.flexJustifySpaceBetween,
@@ -54,9 +52,9 @@ export const bottom = style([
 
 export const dailyBriefing = style([
   utils.flex,
+  utils.spaceNoWrap,
   {
     fontSize: variants.vars.fontSize.small,
-    whiteSpace: 'nowrap',
     ':hover': {
       color: variants.vars.color.primary,
     },
@@ -66,7 +64,6 @@ export const dailyBriefing = style([
 export const title = style([
   utils.positionRelative,
   {
-    position: 'relative',
     marginRight: '2rem',
   },
 ]);

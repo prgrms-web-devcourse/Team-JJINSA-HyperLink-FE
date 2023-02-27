@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Badge, Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './UserNav';
-import Tab from '../tab';
-import Badge from '../badge';
 
 import * as style from './style.css';
 import logo from '@/assets/logo.svg';
+
+const TAB_LIST = [
+  '실시간 최신 트렌드',
+  '실시간 인기 트렌드',
+  '구독 피드',
+  '크리에이터',
+];
 
 const calculateCountDown = () => {
   const today = new Date();
@@ -68,19 +74,14 @@ const Header = () => {
       </div>
       <div className={style.bottom}>
         <Tab
-          items={[
-            '실시간 최신 트렌드',
-            '실시간 인기 트렌드',
-            '구독 피드',
-            '크리에이터',
-          ]}
+          items={TAB_LIST}
           onClick={() => {
             console.log('탭 선택');
           }}
         />
         <Link to="/" className={style.dailyBriefing}>
           <div className={style.title}>
-            오늘의 hypelink
+            <Text size="small">오늘의 hypelink</Text>
             <Badge top={-10} right={10} />
           </div>
           <div className={style.countDown}>
