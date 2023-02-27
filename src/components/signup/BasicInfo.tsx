@@ -30,7 +30,7 @@ const BasicInfo = ({ email, inputs, onNextClick }: BasicInfoProps) => {
   }, [nickname, birthYear, gender]);
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <Heading level={4}>
         HyperLink에서 회원님을
         <p />

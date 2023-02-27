@@ -1,5 +1,10 @@
 import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
+import * as keyframes from '@/styles/keyframes.css';
+
+export const wrapper = style({
+  animation: `500ms ${keyframes.slideFromRightToLeft}`,
+});
 
 export const form = style([
   utils.flexColumn,

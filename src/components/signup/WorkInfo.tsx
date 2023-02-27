@@ -44,7 +44,7 @@ const WorkInfo = ({
   }, [job, career]);
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <Heading level={4}>
         {nickname}님은
         <p />

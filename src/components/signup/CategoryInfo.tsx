@@ -25,7 +25,7 @@ const CategoryInfo = ({
   }, [selectedCategories]);
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <Heading level={4}>관심 카테고리를 선택해 주세요.</Heading>
       <Text size="small" color={variants.color.font.secondary}>
         최소 1개 이상 카테고리를 선택해 주세요.
