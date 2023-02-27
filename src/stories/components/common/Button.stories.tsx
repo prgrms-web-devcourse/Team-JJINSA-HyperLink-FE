@@ -8,7 +8,7 @@ export default {
     version: {
       defaultValue: 'blue',
       control: 'inline-radio',
-      options: ['blue', 'gray', 'grayInverted', 'white'],
+      options: ['blue', 'blueInverted', 'gray', 'grayInverted', 'white'],
     },
     shape: {
       defaultValue: 'round',
@@ -32,6 +32,10 @@ export default {
     text: {
       defaultValue: 'button',
       control: 'text',
+    },
+    disabled: {
+      defaultValue: false,
+      type: 'boolean',
     },
   },
 };

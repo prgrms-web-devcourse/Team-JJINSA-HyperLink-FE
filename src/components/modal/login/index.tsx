@@ -3,6 +3,7 @@ import googleLogo from '@/assets/googleLogo.png';
 import { Avatar, Heading, Icon, Modal, Text } from '@/components/common';
 import * as variants from '@/styles/variants.css';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 import * as style from './style.css';
 
 export type LoginModalProps = {
@@ -11,12 +12,15 @@ export type LoginModalProps = {
 };
 
 const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
+  const navigate = useNavigate();
   const googleLogin = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      console.log(codeResponse);
+    onSuccess: async (res) => {
+      console.log(res);
       onClose();
+      navigate('/signup', { state: { email: 'example@gmail.com' } });
       // TODO: API call 후 response에 따라 navigate
     },
+    flow: 'auth-code',
   });
 
   return (

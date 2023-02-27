@@ -10,6 +10,7 @@ export type TextProps = {
   underline?: boolean;
   color?: string;
   style?: CSSProperties;
+  className?: string;
 };
 
 /**

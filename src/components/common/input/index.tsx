@@ -1,8 +1,9 @@
-import { Icon } from '@/components/common';
+import { Icon, Text } from '@/components/common';
 import { ChangeEvent, CSSProperties, KeyboardEvent } from 'react';
 import * as style from './style.css';
 
 export type InputProps = {
+  label?: string;
   version?: 'normal' | 'banner' | 'header';
   type?: 'text' | 'email';
   placeholder?: string;
@@ -15,6 +16,7 @@ export type InputProps = {
 };
 
 const Input = ({
+  label = '',
   version = 'normal',
   type = 'text',
   placeholder = '',
@@ -43,10 +45,17 @@ const Input = ({
   };
 
   return (
-    <div className={style.inputContainer({ version, readOnly })}>
+    <div
+      className={style.inputContainer({
+        version,
+        readOnly,
+        hasLabel: label ? true : false,
+      })}
+    >
       {version !== 'normal' && (
         <Icon name="search" size={version === 'banner' ? 'xLarge' : 'medium'} />
       )}
+      {label && <Text className={style.label}>{label}</Text>}
       <input
         className={style.input}
         type={type}

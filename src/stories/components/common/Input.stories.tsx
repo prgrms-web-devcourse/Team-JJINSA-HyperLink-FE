@@ -33,6 +33,11 @@ export default {
       type: 'number',
       description: "input's max length attribute",
     },
+    label: {
+      defaultValue: '',
+      type: 'string',
+      description: "input's top left label",
+    },
   },
 };
 

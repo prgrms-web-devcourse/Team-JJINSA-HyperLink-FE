@@ -10,6 +10,10 @@ export default {
       defaultValue: '값을 선택하세요.',
       type: 'string',
     },
+    label: {
+      defaultValue: '',
+      type: 'string',
+    },
   },
 };
 

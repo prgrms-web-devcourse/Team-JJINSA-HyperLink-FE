@@ -7,11 +7,12 @@ export const inputContainer = recipe({
   base: [
     utils.flexAlignCenter,
     utils.borderRadius,
+    utils.positionRelative,
+    utils.fullWidth,
     {
       boxShadow: '0 0.3rem 1rem #18181810',
       border: `0.1rem solid ${variants.vars.color.disabled.bg}`,
       padding: '1.2rem 1.6rem',
-      width: '100%',
       fontSize: variants.vars.fontSize.medium,
     },
   ],
@@ -39,18 +40,33 @@ export const inputContainer = recipe({
         border: 'none',
       },
     },
+    hasLabel: {
+      true: {
+        marginTop: '3rem',
+      },
+    },
   },
 });
 
-export const input = style({
-  color: variants.vars.color.font.primary,
-  width: '100%',
+export const input = style([
+  utils.fullWidth,
+  {
+    color: variants.vars.color.font.primary,
 
-  ':read-only': {
-    color: variants.vars.color.disabled.font,
-  },
+    ':read-only': {
+      color: variants.vars.color.disabled.font,
+    },
 
-  '::placeholder': {
-    color: variants.vars.color.icon,
+    '::placeholder': {
+      color: variants.vars.color.icon,
+    },
   },
-});
+]);
+
+export const label = style([
+  utils.positionAbsolute,
+  {
+    top: '-2.4rem',
+    left: '0.4rem',
+  },
+]);

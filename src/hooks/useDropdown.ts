@@ -1,23 +1,20 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const useDropdown = (initialState = false) => {
   const [isVisible, setIsVisible] = useState(initialState);
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleVisibility = useCallback(() => {
+  const handleVisibility = () => {
     setIsVisible(!isVisible);
-  }, [setIsVisible]);
+  };
 
-  const handleClick = useCallback(
-    (e: MouseEvent) => {
-      const target = e.target as HTMLDivElement;
-      if (ref.current && !ref.current.contains(target)) {
-        setIsVisible(!isVisible);
-      }
-    },
-    [ref.current, setIsVisible]
-  );
+  const handleClick = (e: MouseEvent) => {
+    const target = e.target as HTMLDivElement;
+    if (ref.current && !ref.current.contains(target)) {
+      setIsVisible(!isVisible);
+    }
+  };
 
   useEffect(() => {
     if (isVisible) {
