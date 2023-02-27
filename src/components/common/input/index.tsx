@@ -51,6 +51,7 @@ const Input = ({
         readOnly,
         hasLabel: label ? true : false,
       })}
+      style={{ ...props.style }}
     >
       {version !== 'normal' && (
         <Icon name="search" size={version === 'banner' ? 'xLarge' : 'medium'} />
@@ -67,7 +68,6 @@ const Input = ({
         maxLength={max}
         onChange={handleChange}
         onKeyPress={handleEnterPress}
-        style={{ ...props.style }}
         {...props}
       />
     </div>

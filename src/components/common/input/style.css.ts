@@ -14,6 +14,7 @@ export const inputContainer = recipe({
       border: `0.1rem solid ${variants.vars.color.disabled.bg}`,
       padding: '1.2rem 1.6rem',
       fontSize: variants.vars.fontSize.medium,
+      background: variants.vars.color.white,
     },
   ],
   variants: {
@@ -21,7 +22,7 @@ export const inputContainer = recipe({
       normal: { height: '4.8rem' },
       header: {
         height: '4rem',
-        width: '60rem',
+        maxWidth: '60rem',
         borderRadius: '3.5rem',
         gap: '1.2rem',
       },

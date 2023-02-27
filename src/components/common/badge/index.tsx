@@ -1,25 +1,32 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties } from 'react';
 import * as style from './style.css';
 
 export type BadgeProps = {
-  children: ReactNode;
-  hasText: boolean;
+  text?: string;
+  top?: number;
+  right?: number;
   style?: CSSProperties;
 };
 
 // header AlramIcon badge, 알람 모달 badge / 데일리 브리핑 new badge
-const Badge = ({ hasText, children, ...props }: BadgeProps) => {
-  let badge = null;
-  if (hasText) {
-    badge = <sup className={style.Super({ type: 'text' })}>new</sup>;
-  } else {
-    badge = <sup className={style.Super({ type: 'dot' })} />;
-  }
-  return (
-    <div className={style.badgeContainer} style={{ ...props.style }}>
-      {children}
-      {badge}
-    </div>
+const Badge = ({ text = 'new', top = 0, right = 0, ...props }: BadgeProps) => {
+  const position = {
+    top,
+    right,
+  };
+
+  return text ? (
+    <sup
+      className={style.badge({ type: 'text' })}
+      style={{ ...position, ...props.style }}
+    >
+      {text}
+    </sup>
+  ) : (
+    <sup
+      className={style.badge({ type: 'dot' })}
+      style={{ ...position, ...props.style }}
+    />
   );
 };
 

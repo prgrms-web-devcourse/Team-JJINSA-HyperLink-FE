@@ -7,6 +7,7 @@ export const button = recipe({
     display: 'inline-block',
     textAlign: 'center',
     transition: 'all 130ms ease-in-out',
+    whiteSpace: 'nowrap',
     ':disabled': { cursor: 'not-allowed' },
   },
   variants: {
