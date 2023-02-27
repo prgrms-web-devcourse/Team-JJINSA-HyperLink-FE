@@ -2,13 +2,15 @@ import { useState } from 'react';
 import Button from '../button';
 import Icon from '../icon';
 
-import * as style from './style.css';
 import user from '@/assets/user.svg';
+import { isLoginModalVisibleState } from '@/stores/atoms';
+import { useSetRecoilState } from 'recoil';
+import * as style from './style.css';
 
 const UserNav = () => {
   // 임시 로그인 상태
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
   /*
     TODO
     1. 로그인 버튼을 눌렀을 때, 로그인 모달 띄우기 
@@ -20,7 +22,7 @@ const UserNav = () => {
         <Button
           isBold={true}
           text="로그인"
-          onClick={() => setIsLoggedIn((prevState) => !prevState)}
+          onClick={() => setIsLoginModalVisible(true)}
         />
       ) : (
         <div className={style.iconGroup}>
