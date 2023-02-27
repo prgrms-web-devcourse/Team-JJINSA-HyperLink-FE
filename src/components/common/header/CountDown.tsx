@@ -8,7 +8,7 @@ const calculateCountDown = () => {
     today.getFullYear(),
     today.getMonth(),
     today.getDate(),
-    22,
+    23,
     59,
     59
   ).getTime();
@@ -17,17 +17,20 @@ const calculateCountDown = () => {
 };
 
 const formatHour = (time: number) => {
-  const hour = Math.ceil((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const hour = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (hour === 24) return '00';
   return hour.toString().padStart(2, '0');
 };
 
 const formatMin = (time: number) => {
-  const min = Math.ceil((time % (1000 * 60 * 60)) / (1000 * 60));
+  const min = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+  if (min === 60) return '00';
   return min.toString().padStart(2, '0');
 };
 
 const formatSec = (time: number) => {
-  const sec = Math.ceil((time % (1000 * 60)) / 1000);
+  const sec = Math.floor((time % (1000 * 60)) / 1000);
+  if (sec === 60) return '00';
   return sec.toString().padStart(2, '0');
 };
 
