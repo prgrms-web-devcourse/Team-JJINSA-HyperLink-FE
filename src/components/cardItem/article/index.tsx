@@ -3,7 +3,7 @@ import CardTop from './CardTop';
 import CardBottom from './CardBottom';
 import * as style from './style.css';
 
-export type CardProps = {
+export type ArticleCardProps = {
   linkUrl: string;
   imgSrc: string;
   isBookmark: boolean;
@@ -30,7 +30,7 @@ const ArticleCard = ({
   title,
   companyAvatar,
   companyName,
-}: CardProps) => {
+}: ArticleCardProps) => {
   /*
     TODO
     1. 아티클 카드 클릭 시 해당 링크로 이동

@@ -1,5 +1,5 @@
 import { Avatar, Card } from '@/components/common';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as style from './style.css';
 
@@ -25,7 +25,7 @@ const CreaterCard = ({
     3. CreaterCard API가 오면 props가 card data 1개로 변하니 나중에 수정할 것
    */
   const [isSubscribed, setIsSubscribed] = useState(isSubscribe);
-  const handleSubscribeClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubscribeClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     isSubscribed ? console.log('구독 취소') : console.log('구독');
     setIsSubscribed(!isSubscribed);

@@ -86,15 +86,17 @@ export const BottomTitle = style([
   },
 ]);
 
-export const BottomCompany = style({
-  display: 'flex',
-  padding: '1.2rem 1.6rem',
-  gap: '1.6rem',
-  height: '6rem',
-  background: 'rgba(55,114,255,0.2)',
-  border: '2px solid rgba(55,114,255,0.12)',
-  borderRadius: '1.2rem',
-});
+export const BottomCompany = style([
+  utils.flex,
+  {
+    padding: '1.2rem 1.6rem',
+    gap: '1.6rem',
+    height: '6rem',
+    background: 'rgba(55,114,255,0.2)',
+    border: '2px solid rgba(55,114,255,0.12)',
+    borderRadius: '1.2rem',
+  },
+]);
 export const CompanyName = style({
   fontWeight: 600,
   fontSize: vars.fontSize.small,
