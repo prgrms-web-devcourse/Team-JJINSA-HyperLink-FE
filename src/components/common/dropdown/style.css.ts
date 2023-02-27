@@ -24,18 +24,18 @@ export const dropdown = recipe({
     {
       height: '4.8rem',
       boxShadow: '0 0.3rem 1rem #18181810',
-      border: `0.1rem solid ${variants.vars.color.disabled.bg}`,
+      border: `0.1rem solid ${variants.color.disabled.bg}`,
       padding: '1.2rem 1.6rem',
-      fontSize: variants.vars.fontSize.medium,
-      color: variants.vars.color.disabled.font,
+      fontSize: variants.fontSize.medium,
+      color: variants.color.disabled.font,
       gap: '0.4rem',
     },
   ],
   variants: {
     isChosen: {
       true: {
-        borderColor: variants.vars.color.primary,
-        color: variants.vars.color.primary,
+        borderColor: variants.color.primary,
+        color: variants.color.primary,
       },
     },
   },
@@ -88,18 +88,18 @@ export const dropdownItem = recipe({
     {
       height: '4rem',
       padding: '0 1.6rem',
-      fontSize: variants.vars.fontSize.small,
+      fontSize: variants.fontSize.small,
       gap: '0.4rem',
 
       ':hover': {
-        backgroundColor: variants.vars.color.bg.select,
+        backgroundColor: variants.color.bg.select,
       },
     },
   ],
   variants: {
     isClicked: {
       true: {
-        backgroundColor: variants.vars.color.bg.select,
+        backgroundColor: variants.color.bg.select,
         fontWeight: '700',
       },
     },
@@ -111,7 +111,7 @@ export const text = style([utils.textOverflowEllipsis]);
 export const label = style([
   utils.positionAbsolute,
   {
-    fontSize: variants.vars.fontSize.medium,
+    fontSize: variants.fontSize.medium,
     top: '-2.4rem',
     left: '0.4rem',
   },

@@ -20,7 +20,7 @@ export const tabItem = recipe({
   base: [
     utils.cursorPointer,
     {
-      color: variants.vars.color.font.primary,
+      color: variants.color.font.primary,
       padding: '0 1rem',
       margin: '0 0.5rem',
       whiteSpace: 'nowrap',
@@ -29,29 +29,29 @@ export const tabItem = recipe({
   variants: {
     type: {
       header: {
-        fontSize: variants.vars.fontSize.small,
+        fontSize: variants.fontSize.small,
         height: '6rem',
         lineHeight: '6rem',
 
         ':hover': {
-          color: variants.vars.color.primary,
+          color: variants.color.primary,
         },
       },
       modal: {
-        fontSize: variants.vars.fontSize.small,
+        fontSize: variants.fontSize.small,
         height: '4rem',
         lineHeight: '4rem',
-        color: variants.vars.color.font.secondary,
+        color: variants.color.font.secondary,
 
         ':hover': {
-          color: variants.vars.color.font.primary,
+          color: variants.color.font.primary,
         },
       },
     },
     isClicked: {
       true: {
         fontWeight: '700',
-        borderBottom: `0.3rem solid ${variants.vars.color.primary}`,
+        borderBottom: `0.3rem solid ${variants.color.primary}`,
       },
     },
   },
@@ -62,7 +62,7 @@ export const tabItem = recipe({
         isClicked: true,
       },
       style: {
-        color: variants.vars.color.primary,
+        color: variants.color.primary,
       },
     },
     {
@@ -71,8 +71,8 @@ export const tabItem = recipe({
         isClicked: true,
       },
       style: {
-        color: variants.vars.color.font.primary,
-        borderColor: variants.vars.color.font.primary,
+        color: variants.color.font.primary,
+        borderColor: variants.color.font.primary,
       },
     },
   ],

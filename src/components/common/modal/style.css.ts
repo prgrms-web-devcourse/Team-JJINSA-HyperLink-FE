@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import * as utils from '@/styles/utils.css';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 
 export const backgroundDimmed = style([
   utils.positionFixed,
@@ -18,7 +18,7 @@ export const backgroundDimmed = style([
 export const modalContainer = recipe({
   base: [
     {
-      backgroundColor: vars.color.white,
+      backgroundColor: variants.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
     },
     utils.borderRadius,

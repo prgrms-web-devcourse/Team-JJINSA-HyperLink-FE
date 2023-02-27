@@ -36,7 +36,7 @@ export const button = style([
     boxShadow: '0px 0.3rem 0.6rem #18181803',
     padding: '1.2rem 0',
     gap: '1rem',
-    border: `0.2rem solid ${variants.vars.color.disabled.bg}`,
+    border: `0.2rem solid ${variants.color.disabled.bg}`,
   },
 ]);
 

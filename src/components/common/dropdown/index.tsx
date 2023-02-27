@@ -41,7 +41,7 @@ const Dropdown = ({
         {value ? (
           <>
             <span className={style.text}>{value}</span>
-            <Icon name="check" color={variants.vars.color.primary} />
+            <Icon name="check" color={variants.color.primary} />
           </>
         ) : (
           <>
@@ -63,7 +63,7 @@ const Dropdown = ({
               >
                 <span className={style.text}>{item}</span>
                 {chosenItem === item && (
-                  <Icon name="check" color={variants.vars.color.font.primary} />
+                  <Icon name="check" color={variants.color.font.primary} />
                 )}
               </li>
             );

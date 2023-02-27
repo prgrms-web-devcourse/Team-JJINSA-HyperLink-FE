@@ -29,7 +29,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         <div className={style.header}>
           <div className={style.logo}>
             <Avatar src={logo} shape="round" size="small" />
-            <Heading level={6} color={variants.vars.color.primary}>
+            <Heading level={6} color={variants.color.primary}>
               hyperlink
             </Heading>
           </div>
@@ -39,7 +39,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </div>
         <div className={style.content}>
           <Heading level={5}>로그인</Heading>
-          <Text color={variants.vars.color.font.secondary}>
+          <Text color={variants.color.font.secondary}>
             세상의 모든 정보를 한눈에!
           </Text>
           {/* TODO: 배너 이미지 추가 */}

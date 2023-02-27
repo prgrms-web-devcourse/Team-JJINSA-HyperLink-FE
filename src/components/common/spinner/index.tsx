@@ -11,7 +11,7 @@ export type SpinnerProps = {
 
 const Spinner = ({
   size = 'medium',
-  color = variants.vars.color.bg.select,
+  color = variants.color.bg.select,
   loading = true,
   ...props
 }: SpinnerProps) => {

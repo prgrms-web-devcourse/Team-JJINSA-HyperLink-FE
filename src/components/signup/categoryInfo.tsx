@@ -27,7 +27,7 @@ const CategoryInfo = ({
   return (
     <div>
       <Heading level={4}>관심 카테고리를 선택해 주세요.</Heading>
-      <Text size="small" color={variants.vars.color.font.secondary}>
+      <Text size="small" color={variants.color.font.secondary}>
         최소 1개 이상 카테고리를 선택해 주세요.
       </Text>
       <Divider />

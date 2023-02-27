@@ -1,4 +1,4 @@
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 import { globalStyle } from '@vanilla-extract/css';
 
 globalStyle('*, *:after, *:before', {
@@ -27,7 +27,7 @@ globalStyle(
     padding: 0,
     border: 0,
     verticalAlign: 'baseline',
-    fontFamily: vars.font,
+    fontFamily: variants.font.default,
   }
 );
 

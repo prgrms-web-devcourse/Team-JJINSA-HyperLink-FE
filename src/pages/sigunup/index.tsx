@@ -67,8 +67,8 @@ const SignupPage = () => {
                 <Text
                   color={
                     step === index + 1
-                      ? variants.vars.color.font.primary
-                      : variants.vars.color.font.secondary
+                      ? variants.color.font.primary
+                      : variants.color.font.secondary
                   }
                   weight={step === index + 1 ? 700 : 500}
                 >

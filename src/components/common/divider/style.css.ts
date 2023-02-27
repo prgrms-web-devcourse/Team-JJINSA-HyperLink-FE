@@ -1,9 +1,9 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 
 export const divider = recipe({
   base: {
-    borderTop: `1px solid ${vars.color.border}`,
+    borderTop: `1px solid ${variants.color.border}`,
   },
   variants: {
     type: {
