@@ -1,9 +1,15 @@
 import * as style from './CardBottom.css';
 import { useState } from 'react';
-import { Avatar, Divider, Icon } from '@/components/common';
+import { Divider, Icon } from '@/components/common';
 import CardModal from '@/components/cardItem/article/CardModal';
 import { Link } from 'react-router-dom';
-import { companyProps } from '.';
+import CompanyBanner from './BannerAvatar';
+import CompanyBannerText from './BannerText';
+
+export type companyProps = {
+  companyName: string;
+  companyLogoImgUrl: string;
+};
 
 type CardBottomProps = {
   link: string;
@@ -25,7 +31,7 @@ const CardBottom = ({
   const handleDotIconClick = () => {
     console.log('크리에이터 추천 안하는 api 호출');
   };
-  console.log(recommendationCompanies);
+
   return (
     <div className={style.cardBottom}>
       {isModalVisible && <div className={style.cardBackgroundDim} />}
@@ -66,16 +72,12 @@ const CardBottom = ({
         </a>
       </div>
       <footer className={style.companyBanner}>
+        <CompanyBanner companies={recommendationCompanies} />
         <div>
-          <Avatar
-            src="https://avatars.githubusercontent.com/u/60571418?v=4"
-            shape="circle"
-            size="small"
-          />
-        </div>
-        <div>
-          <div className={style.companyName}>카카오</div>
-          <div className={style.companyText}>사람들도 관심있게 보고있어요</div>
+          <CompanyBannerText companies={recommendationCompanies} />
+          <div className={`${style.companyText}`}>
+            사람들도 관심있게 보고있어요
+          </div>
         </div>
       </footer>
     </div>
