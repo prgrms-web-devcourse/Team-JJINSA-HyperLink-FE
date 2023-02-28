@@ -29,6 +29,7 @@ const heading5 = style({
 const heading6 = style({
   fontSize: '2rem',
   fontWeight: 600,
+  lineHeight: '150%',
 });
 
 export const typography = {
