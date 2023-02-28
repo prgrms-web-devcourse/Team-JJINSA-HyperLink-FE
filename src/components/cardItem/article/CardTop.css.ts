@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import * as utils from '@/styles/utils.css';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 
 export const cardTop = style([
   utils.positionRelative,
@@ -60,7 +60,7 @@ export const iconWrapper = recipe({
       true: {
         cursor: 'pointer',
         ':hover': {
-          color: vars.color.white,
+          color: variants.color.white,
         },
       },
     },

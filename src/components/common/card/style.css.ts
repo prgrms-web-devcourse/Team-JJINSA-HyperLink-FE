@@ -7,6 +7,7 @@ export const CardWrapper = recipe({
     utils.overflowHidden,
     {
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
+      backgroundColor: 'white',
     },
   ],
   variants: {

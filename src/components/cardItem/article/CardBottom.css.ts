@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
-import { vars } from '@/styles/variants.css';
+import * as variants from '@/styles/variants.css';
 
 export const cardBackgroundDim = style([
   utils.positionAbsolute,
@@ -32,12 +32,12 @@ export const bottomInfo = style([
   utils.positionRelative,
   utils.flexAlignCenter,
   {
-    fontSize: vars.fontSize.small,
+    fontSize: variants.fontSize.small,
     justifyContent: 'space-between',
     padding: 0,
     gap: '0.8rem',
     marginBottom: '1.2rem',
-    color: vars.color.font.secondary,
+    color: variants.color.font.secondary,
     fontWeight: 700,
   },
 ]);
@@ -99,10 +99,10 @@ export const companyBanner = style([
 ]);
 export const companyName = style({
   fontWeight: 600,
-  fontSize: vars.fontSize.small,
+  fontSize: variants.fontSize.small,
 });
 export const companyText = style({
   fontWeight: 600,
-  fontSize: vars.fontSize.xSmall,
+  fontSize: variants.fontSize.xSmall,
   color: 'rgba(42,40,47,0.8)',
 });
