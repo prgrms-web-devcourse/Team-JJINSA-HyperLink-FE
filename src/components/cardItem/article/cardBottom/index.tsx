@@ -33,7 +33,7 @@ const CardBottom = ({
       {isModalVisible && <div className={style.cardBackgroundDim} />}
       <div className={style.bottomContent}>
         <div className={style.bottomInfo}>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex' }}>
             <Link to="/creater">
               <span className={style.bottomInfoCreater}>{creater}</span>
             </Link>
@@ -69,7 +69,7 @@ const CardBottom = ({
       </div>
       <footer className={style.companyBanner}>
         <BannerAvatar companies={recommendationCompanies} />
-        <div>
+        <div style={{ flexGrow: 1 }}>
           <BannerText companies={recommendationCompanies} />
           <div className={`${style.companyText}`}>
             사람들도 관심있게 보고있어요

@@ -89,7 +89,7 @@ export const bottomTitle = style([
 export const companyBanner = style([
   utils.flex,
   {
-    padding: '1.2rem 1.6rem',
+    padding: '1.2rem',
     gap: '1.6rem',
     height: '6rem',
     background: 'rgba(55,114,255,0.2)',
@@ -97,12 +97,17 @@ export const companyBanner = style([
     borderRadius: '1.2rem',
   },
 ]);
-export const companyName = style({
-  fontWeight: 600,
-  fontSize: variants.fontSize.small,
-});
+
 export const companyText = style({
   fontWeight: 600,
   fontSize: variants.fontSize.xSmall,
   color: 'rgba(42,40,47,0.8)',
+  '@media': {
+    'screen and (min-width: 943px)': {
+      fontSize: '1rem',
+    },
+    'screen and (min-width: 1010px)': {
+      fontSize: variants.fontSize.xSmall,
+    },
+  },
 });
