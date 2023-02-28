@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { getSearchContents } from '@/api/contents';
 import { useQuery } from '@tanstack/react-query';
+import { getSearchContents } from '@/api/contents';
 import { contents } from '@/types/contents';
 import ArticleCard from '@/components/cardItem/article';
+import { Spinner } from '@/components/common';
+import * as style from './style.css';
 
 const searchResultPage = () => {
   const { keyword } = useParams() as { keyword: string };
@@ -20,12 +22,12 @@ const searchResultPage = () => {
   );
 
   if (isError) return <h3>에러 발생</h3>;
-  if (isLoading) return <h3>로딩 중...</h3>;
+  if (isLoading) return <Spinner />;
 
   const { contents } = searchResult;
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <h1>검색 결과 페이지 {keyword}</h1>
       {contents.length ? (
         <ul>
