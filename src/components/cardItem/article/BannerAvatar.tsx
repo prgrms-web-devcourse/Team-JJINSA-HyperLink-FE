@@ -3,11 +3,7 @@ import { useState, useEffect } from 'react';
 import { companyProps } from '.';
 import * as style from './BannerAvatar.css';
 
-type BannerAvatarProps = {
-  companies: companyProps[];
-};
-
-const BannerAvatar = ({ companies }: BannerAvatarProps) => {
+const BannerAvatar = ({ companies }: { companies: companyProps[] }) => {
   const [currentCompany, setCurrentCompany] = useState(0);
 
   useEffect(() => {

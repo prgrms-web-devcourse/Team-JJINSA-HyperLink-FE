@@ -31,9 +31,9 @@ export const bottomContent = style({
 export const bottomInfo = style([
   utils.positionRelative,
   utils.flexAlignCenter,
+  utils.flexJustifySpaceBetween,
   {
     fontSize: variants.fontSize.small,
-    justifyContent: 'space-between',
     padding: 0,
     gap: '0.8rem',
     marginBottom: '1.2rem',

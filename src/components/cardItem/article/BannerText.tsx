@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import * as style from './BannerText.css';
 import { companyProps } from './CardBottom';
 
-type BannerTextProps = {
-  companies: companyProps[];
-};
-
-const BannerText = ({ companies }: BannerTextProps) => {
+const BannerText = ({ companies }: { companies: companyProps[] }) => {
   const [currentCompany, setCurrentCompany] = useState(0);
 
   useEffect(() => {
