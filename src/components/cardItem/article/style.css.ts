@@ -2,9 +2,7 @@ import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
 
-export const cardItem = style({
-  position: 'relative',
-});
+export const cardItem = style([utils.positionRelative]);
 
 export const cardContainer = style([
   utils.flexColumn,

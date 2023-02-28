@@ -2,10 +2,10 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import * as utils from '@/styles/utils.css';
 
-export const flipAnimationContainer = style({
-  display: 'flex',
-  justifyContent: 'center',
-});
+export const flipAnimationContainer = style([
+  utils.flex,
+  utils.flexJustifyCenter,
+]);
 
 export const avatar = recipe({
   base: [
