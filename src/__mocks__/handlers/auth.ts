@@ -14,10 +14,8 @@ export const authHandlers = [
       ctx.json({
         accessToken:
           'AAAAOT42pxCMcDQrNBbEwEVUt-eAnKfUje51bNjQYt2meoaeJ_1T5kVNAW9WTmwP-vhwePbF5wn7Gr-HSNsRxmCa_U4',
-        joinCheck: true,
-        email: 'rlrlrl5055@gmail.com',
-        profileUrl:
-          'https://lh3.googleusercontent.com/a/AEdFTp6KQBBQ-S4iulsmKXKrkDCYJlMQATyZKXT-zg1Z\u003ds96-c',
+        joinCheck: true, // 회원가입: true, 로그인: false
+        email: 'mswtest123@gmail.com',
       })
     );
   }),
