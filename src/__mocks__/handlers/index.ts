@@ -1,0 +1,1 @@
+export { contentsHandlers } from './contents';
