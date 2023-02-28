@@ -1,6 +1,6 @@
 import { axiosInstance } from './core';
 
-type myInfo = {
+type myInfoResponse = {
   email: string;
   nickname: string;
   career: string;
@@ -10,7 +10,7 @@ type myInfo = {
 
 export const getMyInfo = async () => {
   try {
-    const response: myInfo = await axiosInstance.get('/members/mypage');
+    const response: myInfoResponse = await axiosInstance.get('/members/mypage');
 
     return response;
   } catch (error) {

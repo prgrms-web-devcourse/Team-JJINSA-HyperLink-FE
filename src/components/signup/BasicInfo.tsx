@@ -1,4 +1,5 @@
 import { Button, Divider, Dropdown, Heading, Input } from '@/components/common';
+import { BIRTH_YEARS, GENDERS } from '@/utils/constants/signup';
 import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
@@ -15,11 +16,6 @@ export type BasicInfoProps = {
   slideDirection: 'left' | 'right';
   onNextClick: () => void;
 };
-
-const BIRTH_YEARS = Array.from({ length: 100 }, (_, i) =>
-  (2023 - i).toString()
-);
-const GENDERS = { 남: 'man', 여: 'woman' };
 
 const BasicInfo = ({
   email,

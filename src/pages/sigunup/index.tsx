@@ -8,11 +8,15 @@ import { isAuthorizedState } from '@/stores/auth';
 
 import { signup } from '@/api/auth';
 import * as variants from '@/styles/variants.css';
+import {
+  CAREERS,
+  CATEGORIES,
+  GENDERS,
+  JOBS,
+  STEPS,
+} from '@/utils/constants/signup';
 import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
-
-const STEPS = ['기본 정보', '직군 / 경력', '관심 카테고리'];
-const GENDERS: { [key: string]: string } = { 남: 'man', 여: 'woman' };
 
 const SignupPage = () => {
   const {
@@ -62,9 +66,11 @@ const SignupPage = () => {
       email,
       gender: GENDERS[gender] as 'man' | 'woman',
       nickname,
-      attentionCategory: categories,
-      career: job,
-      careerYear: career,
+      attentionCategory: Object.entries(CATEGORIES)
+        .filter((entry) => categories.includes(entry[0]))
+        .map((e) => e[1]),
+      career: JOBS[job],
+      careerYear: CAREERS[career],
       birthYear,
     });
 
