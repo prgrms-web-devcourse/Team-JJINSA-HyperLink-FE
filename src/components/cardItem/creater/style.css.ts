@@ -16,7 +16,7 @@ export const topInfo = style({
 
 export const infoCreater = style([
   {
-    fontSize: variants.vars.fontSize.medium,
+    fontSize: variants.fontSize.medium,
     fontWeight: 600,
     lineHeight: '1.9rem',
     letterSpacing: '-0.04rem',
@@ -24,7 +24,7 @@ export const infoCreater = style([
 ]);
 export const infoSubscriber = style({
   fontWeight: 400,
-  fontSize: variants.vars.fontSize.xSmall,
+  fontSize: variants.fontSize.xSmall,
   color: '#A8A6AC',
 });
 
@@ -34,7 +34,7 @@ export const topButton = recipe({
     {
       border: '0.2rem solid #625F68',
       padding: '1rem 1.6rem',
-      fontSize: variants.vars.fontSize.small,
+      fontSize: variants.fontSize.small,
       fontWeight: 600,
       cursor: 'pointer',
     },
@@ -42,8 +42,8 @@ export const topButton = recipe({
   variants: {
     type: {
       true: {
-        backgroundColor: variants.vars.color.primary,
-        color: variants.vars.color.white,
+        backgroundColor: variants.color.primary,
+        color: variants.color.white,
         border: 'none',
       },
     },
@@ -52,6 +52,6 @@ export const topButton = recipe({
 
 export const createrCardBottom = style({
   fontWeight: 400,
-  fontSize: variants.vars.fontSize.small,
+  fontSize: variants.fontSize.small,
   color: '#625F68',
 });

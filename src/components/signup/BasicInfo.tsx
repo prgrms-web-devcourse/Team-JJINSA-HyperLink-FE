@@ -12,6 +12,7 @@ export type BasicInfoProps = {
     setBirthYear: (item: string) => void;
     setGender: (item: string) => void;
   };
+  slideDirection: 'left' | 'right';
   onNextClick: () => void;
 };
 
@@ -20,7 +21,12 @@ const BIRTH_YEARS = Array.from({ length: 100 }, (_, i) =>
 );
 const GENDERS = ['남', '여'];
 
-const BasicInfo = ({ email, inputs, onNextClick }: BasicInfoProps) => {
+const BasicInfo = ({
+  email,
+  inputs,
+  slideDirection,
+  onNextClick,
+}: BasicInfoProps) => {
   const { nickname, birthYear, gender, setNickname, setBirthYear, setGender } =
     inputs;
   const [ableSubmit, setAbleSubmit] = useState(false);
@@ -30,7 +36,7 @@ const BasicInfo = ({ email, inputs, onNextClick }: BasicInfoProps) => {
   }, [nickname, birthYear, gender]);
 
   return (
-    <div>
+    <div className={style.wrapper({ slideDirection })}>
       <Heading level={4}>
         HyperLink에서 회원님을
         <p />

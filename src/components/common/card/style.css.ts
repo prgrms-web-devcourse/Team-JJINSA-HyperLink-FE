@@ -1,4 +1,5 @@
 import * as utils from '@/styles/utils.css';
+import * as variants from '@/styles/variants.css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const CardWrapper = recipe({
@@ -6,6 +7,7 @@ export const CardWrapper = recipe({
     utils.borderRadius,
     utils.overflowHidden,
     {
+      backgroundColor: variants.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
     },
   ],
