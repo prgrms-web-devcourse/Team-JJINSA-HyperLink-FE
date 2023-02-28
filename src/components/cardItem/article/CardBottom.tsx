@@ -7,15 +7,15 @@ import { companyProps } from '.';
 
 type CardBottomProps = {
   link: string;
-  creater: string;
+  creator: string;
   createdAt: string;
   title: string;
-  recommendationCompanies: companyProps[];
+  recommendationCompanies?: companyProps[];
 };
 
 const CardBottom = ({
   link,
-  creater,
+  creator,
   createdAt,
   title,
   recommendationCompanies,
@@ -33,7 +33,7 @@ const CardBottom = ({
         <div className={style.bottomInfo}>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <Link to="/creater">
-              <span className={style.bottomInfoCreater}>{creater}</span>
+              <span className={style.bottomInfoCreater}>{creator}</span>
             </Link>
             <Divider type="vertical" />
             <span>{createdAt}</span>

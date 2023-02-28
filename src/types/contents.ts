@@ -1,20 +1,23 @@
-export type recommendationCompany = {
-  companyLogoImgUrl: string;
-  companyName: string;
-};
-
 export type content = {
   contentId: number;
+} & contentData;
+
+export type contentData = {
   contentImgUrl: string;
-  createdAt: Date;
-  creatorName: string;
+  createdAt: string;
+  creator: string;
   isBookmarked: boolean;
   isLiked: boolean;
   likeCount: number;
   link: string;
   title: string;
   viewCount: number;
-  recommendationCompanies?: recommendationCompany[];
+  recommendationCompanies?: company[];
+};
+
+export type company = {
+  companyLogoImgUrl: string;
+  companyName: string;
 };
 
 export type contents = {
