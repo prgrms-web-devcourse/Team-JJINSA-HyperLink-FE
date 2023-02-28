@@ -6,6 +6,7 @@ import * as style from './style.css';
 export type CategoryInfoProps = {
   selectedCategories: string[];
   onCategoryClick: (item: string) => void;
+  slideDirection: 'left' | 'right';
   onPrevClick: () => void;
   onNextClick: () => void;
 };
@@ -15,6 +16,7 @@ const CATEGORIES = ['개발', '경제, 금융', '패션, 뷰티'];
 const CategoryInfo = ({
   selectedCategories,
   onCategoryClick,
+  slideDirection,
   onPrevClick,
   onNextClick,
 }: CategoryInfoProps) => {
@@ -25,7 +27,7 @@ const CategoryInfo = ({
   }, [selectedCategories]);
 
   return (
-    <div>
+    <div className={style.wrapper({ slideDirection })}>
       <Heading level={4}>관심 카테고리를 선택해 주세요.</Heading>
       <Text size="small" color={variants.color.font.secondary}>
         최소 1개 이상 카테고리를 선택해 주세요.
