@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-const { VITE_API_END_POINT, VITE_TOKEN } = import.meta.env;
-const API_BASE_URL =
-  import.meta.env.MODE === 'development' ? VITE_API_END_POINT : '/api';
+const BASE_URL = process.env.NODE_ENV;
 
-const axiosApi = (url: string, options = {}) => {
-  const instance = axios.create({ baseURL: url, ...options });
+const axiosApi = (options = {}) => {
+  const instance = axios.create({ baseURL: BASE_URL, ...options });
 
   instance.defaults.timeout = 2500;
 
@@ -21,13 +19,9 @@ const axiosApi = (url: string, options = {}) => {
 
   instance.interceptors.request.use(
     (config) => {
-      const token = '';
-      if (config.headers) {
-        if (token) {
-          config.headers['Authorization'] = `bearer ${token}`;
-        } else {
-          config.headers['Authorization'] = VITE_TOKEN;
-        }
+      const token = 'token';
+      if (config.headers && token) {
+        config.headers['Authorization'] = `bearer ${token}`;
       }
       return config;
     },
@@ -40,4 +34,4 @@ const axiosApi = (url: string, options = {}) => {
   return instance;
 };
 
-export const axiosInstance = axiosApi(API_BASE_URL);
+export const axiosInstance = axiosApi();
