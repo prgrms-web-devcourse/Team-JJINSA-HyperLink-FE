@@ -1,18 +1,24 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../input';
 
 const SearchBar = () => {
-  const [value, setValue] = useState('');
+  const navigate = useNavigate();
+  const [keyword, setKeyword] = useState('');
   const inputStyle = {
     margin: '0 1rem',
   };
 
-  const handleValueChange = (value: string) => {
-    setValue(value);
+  const handleValueChange = (keyword: string) => {
+    setKeyword(keyword);
   };
 
-  const handleEnterPress = () => {
-    // 엔터를 눌렀을 때
+  const handleEnterPress = async () => {
+    if (!keyword.length) {
+      alert('한 글자 이상 검색해주세요!');
+      return;
+    }
+    navigate(`/search/${keyword}`);
   };
 
   return (
@@ -21,7 +27,7 @@ const SearchBar = () => {
       version="header"
       type="text"
       placeholder="키워드를 검색하세요."
-      value={value}
+      value={keyword}
       onChange={handleValueChange}
       onEnterPress={handleEnterPress}
     />
