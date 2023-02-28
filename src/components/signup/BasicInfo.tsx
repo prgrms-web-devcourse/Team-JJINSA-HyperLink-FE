@@ -19,7 +19,7 @@ export type BasicInfoProps = {
 const BIRTH_YEARS = Array.from({ length: 100 }, (_, i) =>
   (2023 - i).toString()
 );
-const GENDERS = ['남', '여'];
+const GENDERS = { 남: 'man', 여: 'woman' };
 
 const BasicInfo = ({
   email,
@@ -61,7 +61,7 @@ const BasicInfo = ({
         <Dropdown
           label="성별"
           placeholder="성별을 선택하세요."
-          items={GENDERS}
+          items={Object.keys(GENDERS)}
           value={gender}
           onItemClick={(item) => setGender(item)}
         />
