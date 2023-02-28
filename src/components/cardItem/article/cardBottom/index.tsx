@@ -1,15 +1,11 @@
-import * as style from './CardBottom.css';
+import * as style from './style.css';
 import { useState } from 'react';
 import { Divider, Icon } from '@/components/common';
-import CardModal from '@/components/cardItem/article/CardModal';
 import { Link } from 'react-router-dom';
-import CompanyBanner from './BannerAvatar';
-import CompanyBannerText from './BannerText';
-
-export type companyProps = {
-  companyName: string;
-  companyLogoImgUrl: string;
-};
+import { companyProps } from '@/components/cardItem/article';
+import CardModal from '@/components/cardItem/article/CardModal';
+import BannerAvatar from '@/components/cardItem/article/banner/BannerAvatar';
+import BannerText from '@/components/cardItem/article/banner/BannerText';
 
 type CardBottomProps = {
   link: string;
@@ -72,9 +68,9 @@ const CardBottom = ({
         </a>
       </div>
       <footer className={style.companyBanner}>
-        <CompanyBanner companies={recommendationCompanies} />
+        <BannerAvatar companies={recommendationCompanies} />
         <div>
-          <CompanyBannerText companies={recommendationCompanies} />
+          <BannerText companies={recommendationCompanies} />
           <div className={`${style.companyText}`}>
             사람들도 관심있게 보고있어요
           </div>

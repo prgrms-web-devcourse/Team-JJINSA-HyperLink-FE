@@ -1,6 +1,6 @@
 import { Card } from '@/components/common';
-import CardTop from './CardTop';
-import CardBottom from './CardBottom';
+import CardTop from './cardTop';
+import CardBottom from './cardBottom';
 import * as style from './style.css';
 
 export type companyProps = {

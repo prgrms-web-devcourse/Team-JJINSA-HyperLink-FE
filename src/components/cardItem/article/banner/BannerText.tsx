@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as style from './BannerText.css';
-import { companyProps } from './CardBottom';
+import { companyProps } from '@/components/cardItem/article';
 
 const BannerText = ({ companies }: { companies: companyProps[] }) => {
   const [currentCompany, setCurrentCompany] = useState(0);

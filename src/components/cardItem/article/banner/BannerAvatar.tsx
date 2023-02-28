@@ -1,6 +1,6 @@
 import { Avatar } from '@/components/common';
 import { useState, useEffect } from 'react';
-import { companyProps } from '.';
+import { companyProps } from '@/components/cardItem/article';
 import * as style from './BannerAvatar.css';
 
 const BannerAvatar = ({ companies }: { companies: companyProps[] }) => {

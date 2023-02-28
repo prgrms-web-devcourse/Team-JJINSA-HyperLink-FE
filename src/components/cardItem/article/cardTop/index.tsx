@@ -1,7 +1,7 @@
-import * as style from './CardTop.css';
 import { useState } from 'react';
 import { Icon } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
+import * as style from './style.css';
 
 type CardTopProps = {
   link: string;
