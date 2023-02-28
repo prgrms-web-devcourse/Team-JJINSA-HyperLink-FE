@@ -19,7 +19,7 @@ export type ArticleCardProps = {
   creater: string;
   createdAt: string;
   title: string;
-  recommendationCompanies: companyProps[];
+  recommendationCompanies?: companyProps[];
 };
 
 // props: 링크, 이미지, 북마크, 하트, 조회수, 크리에이터 이름, 날짜, 제목, 회사, 회사 아바타

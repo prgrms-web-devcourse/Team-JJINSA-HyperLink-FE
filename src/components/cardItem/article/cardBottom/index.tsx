@@ -12,7 +12,7 @@ type CardBottomProps = {
   creater: string;
   createdAt: string;
   title: string;
-  recommendationCompanies: companyProps[];
+  recommendationCompanies?: companyProps[];
 };
 
 const CardBottom = ({
@@ -71,9 +71,13 @@ const CardBottom = ({
         <BannerAvatar companies={recommendationCompanies} />
         <div style={{ flexGrow: 1 }}>
           <BannerText companies={recommendationCompanies} />
-          <div className={`${style.companyText}`}>
-            사람들도 관심있게 보고있어요
-          </div>
+          {recommendationCompanies === undefined ? (
+            <div className={`${style.companyText}`}>관심을 가지지 않았어요</div>
+          ) : (
+            <div className={`${style.companyText}`}>
+              사람들도 관심있게 보고있어요
+            </div>
+          )}
         </div>
       </footer>
     </div>
