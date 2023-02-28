@@ -9,6 +9,10 @@ const { VITE_GOOGLE_CLIENT_ID } = import.meta.env;
 
 import App from './App';
 import '@/styles/global.css';
+import { worker } from './__mocks__/worker';
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
 
 const queryClient = new QueryClient();
 
