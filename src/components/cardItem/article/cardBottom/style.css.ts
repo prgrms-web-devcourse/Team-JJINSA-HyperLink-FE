@@ -41,7 +41,7 @@ export const bottomInfo = style([
     fontWeight: 700,
   },
 ]);
-export const bottomInfoCreater = style({
+export const bottomInfoCreator = style({
   ':hover': {
     cursor: 'pointer',
     color: 'black',

@@ -36,7 +36,7 @@ const CardBottom = ({
           <div style={{ display: 'flex' }}>
             <Link to="/creator">
               {/*useNavigate로 수정하기 */}
-              <span className={style.bottomInfoCreater}>{creatorName}</span>
+              <span className={style.bottomInfoCreator}>{creatorName}</span>
             </Link>
             <Divider type="vertical" />
             <span>{createdAt}</span>
