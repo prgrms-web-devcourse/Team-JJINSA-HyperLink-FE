@@ -26,15 +26,17 @@ export const inputContainer = recipe({
         borderRadius: '3.5rem',
         gap: '1.2rem',
       },
-      banner: {
-        height: '7rem',
-        maxWidth: '80rem',
-        width: '100%',
-        borderRadius: '3.5rem',
-        padding: '1.2rem 2.4rem',
-        fontSize: variants.fontSize.xLarge,
-        gap: '2rem',
-      },
+      banner: [
+        utils.fullWidth,
+        {
+          height: '7rem',
+          maxWidth: '80rem',
+          borderRadius: '3.5rem',
+          padding: '1.2rem 2.4rem',
+          fontSize: variants.fontSize.xLarge,
+          gap: '2rem',
+        },
+      ],
     },
     readOnly: {
       true: {
