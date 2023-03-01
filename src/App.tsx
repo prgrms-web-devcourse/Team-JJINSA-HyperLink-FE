@@ -5,7 +5,12 @@ import {
   Route,
 } from 'react-router-dom';
 
-import { HomePage, SignupPage, SearchResultPage, NotFoundPage } from '@/pages/index';
+import {
+  HomePage,
+  SignupPage,
+  SearchResultPage,
+  NotFoundPage,
+} from '@/pages/index';
 import Layout from '@/components/layout/index';
 
 const router = createBrowserRouter(

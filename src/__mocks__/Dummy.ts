@@ -1,6 +1,7 @@
 export const DUMMY = [
   {
     contentId: 1,
+    creatorId: 1,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -35,6 +36,7 @@ export const DUMMY = [
   },
   {
     contentId: 2,
+    creatorId: 2,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -69,6 +71,7 @@ export const DUMMY = [
   },
   {
     contentId: 3,
+    creatorId: 3,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -103,6 +106,7 @@ export const DUMMY = [
   },
   {
     contentId: 4,
+    creatorId: 4,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -137,6 +141,7 @@ export const DUMMY = [
   },
   {
     contentId: 5,
+    creatorId: 5,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -171,6 +176,7 @@ export const DUMMY = [
   },
   {
     contentId: 6,
+    creatorId: 6,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -205,6 +211,7 @@ export const DUMMY = [
   },
   {
     contentId: 7,
+    creatorId: 7,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -239,6 +246,7 @@ export const DUMMY = [
   },
   {
     contentId: 8,
+    creatorId: 8,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -273,6 +281,7 @@ export const DUMMY = [
   },
   {
     contentId: 9,
+    creatorId: 9,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -307,6 +316,7 @@ export const DUMMY = [
   },
   {
     contentId: 10,
+    creatorId: 10,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -341,6 +351,7 @@ export const DUMMY = [
   },
   {
     contentId: 11,
+    creatorId: 11,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -375,6 +386,7 @@ export const DUMMY = [
   },
   {
     contentId: 12,
+    creatorId: 12,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -409,6 +421,7 @@ export const DUMMY = [
   },
   {
     contentId: 13,
+    creatorId: 13,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -443,6 +456,7 @@ export const DUMMY = [
   },
   {
     contentId: 14,
+    creatorId: 14,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -477,6 +491,7 @@ export const DUMMY = [
   },
   {
     contentId: 15,
+    creatorId: 15,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -511,6 +526,7 @@ export const DUMMY = [
   },
   {
     contentId: 16,
+    creatorId: 16,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -545,6 +561,7 @@ export const DUMMY = [
   },
   {
     contentId: 17,
+    creatorId: 17,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -579,6 +596,7 @@ export const DUMMY = [
   },
   {
     contentId: 18,
+    creatorId: 18,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -613,6 +631,7 @@ export const DUMMY = [
   },
   {
     contentId: 19,
+    creatorId: 19,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,
@@ -647,6 +666,7 @@ export const DUMMY = [
   },
   {
     contentId: 20,
+    creatorId: 20,
     link: 'https://google.com',
     contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
     isBookmarked: false,

@@ -1,14 +1,16 @@
 import * as style from './style.css';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Divider, Icon } from '@/components/common';
-import { Link } from 'react-router-dom';
 import CardModal from '@/components/cardItem/content/CardModal';
 import BannerAvatar from '../banner/bannerAvatar';
 import BannerText from '../banner/bannerText';
 import { company } from '@/types/contents';
+import { useQuery } from '@tanstack/react-query';
+import { getNotRecommendResponse } from '@/api/notRecommend';
 
 type CardBottomProps = {
-  link: string;
+  creatorId: number;
   creatorName: string;
   createdAt: string;
   title: string;
@@ -16,16 +18,37 @@ type CardBottomProps = {
 };
 
 const CardBottom = ({
-  link,
+  creatorId,
   creatorName,
   createdAt,
   title,
   recommendationCompanies,
 }: CardBottomProps) => {
+  const navigate = useNavigate();
+
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const handleDotIconClick = () => {
-    console.log('크리에이터 추천 안하는 api 호출');
+  const notRecommendResponse = useQuery(
+    ['creators'],
+    () => getNotRecommendResponse(creatorId),
+    {
+      enabled: false,
+    }
+  );
+  const handleCreatorClick = (e: MouseEvent) => {
+    e.preventDefault();
+    navigate(`/creator/${creatorName}`);
+  };
+
+  const handleDotIconClick = (e: MouseEvent) => {
+    e.preventDefault();
+    setIsModalVisible(true);
+    console.log('dot click');
+  };
+
+  const handleNotRecommendClick = (e: MouseEvent) => {
+    e.preventDefault();
+    notRecommendResponse.refetch();
   };
 
   return (
@@ -34,10 +57,12 @@ const CardBottom = ({
       <div className={style.bottomContent}>
         <div className={style.bottomInfo}>
           <div style={{ display: 'flex' }}>
-            <Link to="/creator">
-              {/*useNavigate로 수정하기 */}
-              <span className={style.bottomInfoCreator}>{creatorName}</span>
-            </Link>
+            <span
+              className={style.bottomInfoCreator}
+              onClick={handleCreatorClick}
+            >
+              {creatorName}
+            </span>
             <Divider type="vertical" />
             <span>{createdAt}</span>
           </div>
@@ -46,7 +71,10 @@ const CardBottom = ({
             onClose={() => setIsModalVisible(false)}
             style={{ top: '2.2rem', right: '1rem', zIndex: 2000 }}
           >
-            <div className={style.notRecommended} onClick={handleDotIconClick}>
+            <div
+              className={style.notRecommended}
+              onClick={handleNotRecommendClick}
+            >
               <Icon
                 type="regular"
                 name="face-tired"
@@ -57,16 +85,11 @@ const CardBottom = ({
               해당 크리에이터 추천 안함
             </div>
           </CardModal>
-          <div
-            onClick={() => setIsModalVisible(true)}
-            className={style.bottomEllipsis}
-          >
+          <div onClick={handleDotIconClick} className={style.bottomEllipsis}>
             <Icon type="solid" name="ellipsis-vertical" />
           </div>
         </div>
-        <a href={link} target="_blank" rel="noreferrer">
-          <div className={style.bottomTitle}>{title}</div>
-        </a>
+        <div className={style.bottomTitle}>{title}</div>
       </div>
       <footer className={style.companyBanner}>
         <BannerAvatar companies={recommendationCompanies} />

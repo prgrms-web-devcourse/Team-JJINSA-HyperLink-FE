@@ -15,7 +15,6 @@ const Home = () => {
       refetchOnWindowFocus: false,
       retry: 0,
       onSuccess: (data: content[]) => {
-        console.log(data);
         setCards(data);
       },
     }
