@@ -1,5 +1,6 @@
 import { Button, Divider, Heading, Text } from '@/components/common';
 import * as variants from '@/styles/variants.css';
+import { CATEGORIES } from '@/utils/constants/signup';
 import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
@@ -10,8 +11,6 @@ export type CategoryInfoProps = {
   onPrevClick: () => void;
   onNextClick: () => void;
 };
-
-const CATEGORIES = ['개발', '경제, 금융', '패션, 뷰티'];
 
 const CategoryInfo = ({
   selectedCategories,
@@ -35,7 +34,7 @@ const CategoryInfo = ({
       <Divider />
       <form className={style.form}>
         <div className={style.categoryContainer}>
-          {CATEGORIES.map((category) => {
+          {Object.keys(CATEGORIES).map((category) => {
             return (
               <Button
                 key={category}

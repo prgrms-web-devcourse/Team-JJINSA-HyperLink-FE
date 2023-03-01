@@ -9,7 +9,7 @@ import BannerText from '@/components/cardItem/article/banner/BannerText';
 
 type CardBottomProps = {
   link: string;
-  creater: string;
+  creatorName: string;
   createdAt: string;
   title: string;
   recommendationCompanies?: companyProps[];
@@ -17,7 +17,7 @@ type CardBottomProps = {
 
 const CardBottom = ({
   link,
-  creater,
+  creatorName,
   createdAt,
   title,
   recommendationCompanies,
@@ -35,7 +35,7 @@ const CardBottom = ({
         <div className={style.bottomInfo}>
           <div style={{ display: 'flex' }}>
             <Link to="/creater">
-              <span className={style.bottomInfoCreater}>{creater}</span>
+              <span className={style.bottomInfoCreater}>{creatorName}</span>
             </Link>
             <Divider type="vertical" />
             <span>{createdAt}</span>
@@ -71,7 +71,7 @@ const CardBottom = ({
         <BannerAvatar companies={recommendationCompanies} />
         <div style={{ flexGrow: 1 }}>
           <BannerText companies={recommendationCompanies} />
-          {recommendationCompanies === undefined ? (
+          {!recommendationCompanies ? (
             <div className={`${style.companyText}`}>관심을 가지지 않았어요</div>
           ) : (
             <div className={`${style.companyText}`}>
