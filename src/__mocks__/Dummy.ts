@@ -7,7 +7,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '요즘 IT',
+    creatorName: '요즘 IT',
     createdAt: '2023.02.17',
     title: '개발자의 삶',
     recommendationCompanies: [
@@ -41,7 +41,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '요즘 IT',
+    creatorName: '요즘 IT',
     createdAt: '2023.02.17',
     title: '2023년도 웹 개발 트렌트',
     // recommendationCompanies: [
@@ -75,7 +75,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '토스',
+    creatorName: '토스',
     createdAt: '2023.02.17',
     title: '2022년 토스 한 해의 회고록',
     recommendationCompanies: [
@@ -109,7 +109,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -143,7 +143,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -177,7 +177,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -211,7 +211,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -245,7 +245,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -279,7 +279,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -313,7 +313,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -347,7 +347,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -381,7 +381,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -415,7 +415,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -449,7 +449,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -483,7 +483,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -517,7 +517,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -551,7 +551,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -585,7 +585,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -619,7 +619,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
@@ -653,7 +653,7 @@ export const DUMMY = [
     isLiked: false,
     likeCount: 4,
     viewCount: 100,
-    creater: '벨로그',
+    creatorName: '벨로그',
     createdAt: '2023.02.17',
     title: '왜 내 테스트 코드는 느릴까',
     recommendationCompanies: [
