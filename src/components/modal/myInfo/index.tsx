@@ -6,13 +6,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getMyInfo, myInfoResponse } from '@/api/member';
 import * as style from './style.css';
 
-export type UserInfoModalProps = {
+export type MyInfoModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onLogout: () => void;
 };
 
-const UserInfoModal = ({ isOpen, onClose, onLogout }: UserInfoModalProps) => {
+const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
   const navigate = useNavigate();
 
   const { data: myInfo } = useQuery(['myInfo'], getMyInfo, {
@@ -30,9 +30,9 @@ const UserInfoModal = ({ isOpen, onClose, onLogout }: UserInfoModalProps) => {
       style={{ padding: '1.2rem', textAlign: 'start' }}
     >
       <Suspense fallback={<Spinner />}>
-        <div className={style.userInfo}>
+        <div className={style.myInfo}>
           <Avatar src={profileImage} size="medium" />
-          <div className={style.userInfoDetail}>
+          <div className={style.myInfoDetail}>
             <div className={style.nickname}>{nickname}</div>
             <div className={style.career}>
               <span>{career}</span> | <span>경력 {careerYear}년차</span>
@@ -56,4 +56,4 @@ const UserInfoModal = ({ isOpen, onClose, onLogout }: UserInfoModalProps) => {
   );
 };
 
-export default UserInfoModal;
+export default MyInfoModal;

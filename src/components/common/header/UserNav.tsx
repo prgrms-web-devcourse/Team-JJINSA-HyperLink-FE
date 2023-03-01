@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon } from '@/components/common';
-import UserInfoModal from '@/components/modal/userInfo';
+import MyInfoModal from '@/components/modal/myInfo';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isAuthorizedState } from '@/stores/auth';
 import {
   isLoginModalVisibleState,
-  isUserInfoModalVisibleState,
+  isMyInfoModalVisibleState,
 } from '@/stores/modal';
 import { logout } from '@/api/auth';
 import * as style from './style.css';
@@ -14,15 +14,15 @@ import user from '@/assets/user.svg';
 const UserNav = () => {
   const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
-  const [isUserInfoModalVisible, setIsUserInfoModalVisible] = useRecoilState(
-    isUserInfoModalVisibleState
+  const [isMyInfoModalVisible, setIsMyInfoModalVisible] = useRecoilState(
+    isMyInfoModalVisibleState
   );
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
 
   const handleLogout = async () => {
     await logout();
     setIsAuthorized(false);
-    setIsUserInfoModalVisible(false);
+    setIsMyInfoModalVisible(false);
 
     navigate('/');
   };
@@ -44,13 +44,11 @@ const UserNav = () => {
               className={style.userIcon}
               src={user}
               alt="user image"
-              onClick={() =>
-                setIsUserInfoModalVisible((isVisible) => !isVisible)
-              }
+              onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
             />
-            <UserInfoModal
-              isOpen={isUserInfoModalVisible}
-              onClose={() => setIsUserInfoModalVisible(false)}
+            <MyInfoModal
+              isOpen={isMyInfoModalVisible}
+              onClose={() => setIsMyInfoModalVisible(false)}
               onLogout={handleLogout}
             />
           </button>

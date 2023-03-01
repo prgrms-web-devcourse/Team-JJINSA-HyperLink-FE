@@ -5,7 +5,7 @@ export const isLoginModalVisibleState = atom<boolean>({
   default: false,
 });
 
-export const isUserInfoModalVisibleState = atom<boolean>({
-  key: 'isUserDropDownModalVisible',
+export const isMyInfoModalVisibleState = atom<boolean>({
+  key: 'isMyInfoModalVisible',
   default: false,
 });

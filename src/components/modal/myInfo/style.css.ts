@@ -2,14 +2,14 @@ import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
 
-export const userInfo = style([
+export const myInfo = style([
   utils.flexAlignCenter,
   {
     padding: '1rem',
   },
 ]);
 
-export const userInfoDetail = style({
+export const myInfoDetail = style({
   marginLeft: '1.5rem',
 });
 
