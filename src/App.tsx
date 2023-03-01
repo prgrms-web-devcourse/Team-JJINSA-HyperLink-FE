@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { HomePage, SignupPage } from '@/pages/index';
+import { HomePage, SignupPage, MyPage } from '@/pages/index';
 import Layout from '@/components/layout/index';
 
 const router = createBrowserRouter(
@@ -12,6 +12,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<HomePage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/mypage" element={<MyPage />} />
     </Route>
   )
 );
