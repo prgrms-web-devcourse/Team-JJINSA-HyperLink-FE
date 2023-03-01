@@ -3,18 +3,18 @@ import * as variants from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const createrCardContainer = style([
+export const creatorCardContainer = style([
   utils.flexColumn,
   { padding: '1.6rem', gap: '2.4rem' },
 ]);
 
-export const createrCardTop = style([utils.flexAlignCenter, { gap: '1rem' }]);
+export const creatorCardTop = style([utils.flexAlignCenter, { gap: '1rem' }]);
 
 export const topInfo = style({
   flexGrow: 1,
 });
 
-export const infoCreater = style([
+export const infoCreator = style([
   {
     fontSize: variants.fontSize.medium,
     fontWeight: 600,
@@ -50,7 +50,7 @@ export const topButton = recipe({
   },
 });
 
-export const createrCardBottom = style({
+export const creatorCardBottom = style({
   fontWeight: 400,
   fontSize: variants.fontSize.small,
   color: '#625F68',

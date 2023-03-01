@@ -6,6 +6,7 @@ export const CardWrapper = recipe({
   base: [
     utils.borderRadius,
     utils.overflowHidden,
+    utils.fullWidth,
     {
       backgroundColor: variants.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
@@ -13,15 +14,11 @@ export const CardWrapper = recipe({
   ],
   variants: {
     type: {
-      creater: {
+      creator: {
         width: '28rem',
         height: '14.6rem',
       },
-      article: {
-        width: '28.8rem',
-        height: '41rem',
-        position: 'relative',
-      },
+      content: [utils.positionRelative],
     },
   },
 });

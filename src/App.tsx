@@ -4,7 +4,8 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { HomePage, SignupPage, MyPage } from '@/pages/index';
+
+import { HomePage, SignupPage, SearchResultPage, NotFoundPage, MyPage } from '@/pages/index';
 import Layout from '@/components/layout/index';
 
 const router = createBrowserRouter(
@@ -13,6 +14,8 @@ const router = createBrowserRouter(
       <Route index element={<HomePage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/search/:keyword" element={<SearchResultPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
 );

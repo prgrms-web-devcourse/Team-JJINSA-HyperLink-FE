@@ -9,6 +9,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
+import { Banner } from '@/components/common';
 
 export type LoginModalProps = {
   isOpen: boolean;
@@ -54,7 +55,9 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           <Text color={variants.color.font.secondary}>
             세상의 모든 정보를 한눈에!
           </Text>
-          {/* TODO: 배너 이미지 추가 */}
+          <div className={style.bannerWrapper}>
+            <Banner size={0.55} />
+          </div>
         </div>
         <button className={style.button} onClick={() => googleLogin()}>
           <img
