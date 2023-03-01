@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import * as style from './BannerText.css';
 import { companyProps } from '@/components/cardItem/article';
 import favicon from '@/assets/facivon.ico';
+import * as style from './style.css';
 
 const BannerText = ({ companies }: { companies?: companyProps[] }) => {
   if (!companies) {

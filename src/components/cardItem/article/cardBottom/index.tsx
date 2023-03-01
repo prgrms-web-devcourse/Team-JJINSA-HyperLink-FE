@@ -4,8 +4,8 @@ import { Divider, Icon } from '@/components/common';
 import { Link } from 'react-router-dom';
 import { companyProps } from '@/components/cardItem/article';
 import CardModal from '@/components/cardItem/article/CardModal';
-import BannerAvatar from '@/components/cardItem/article/banner/BannerAvatar';
-import BannerText from '@/components/cardItem/article/banner/BannerText';
+import BannerAvatar from '../banner/bannerAvatar';
+import BannerText from '../banner/bannerText';
 
 type CardBottomProps = {
   link: string;
@@ -71,7 +71,7 @@ const CardBottom = ({
         <BannerAvatar companies={recommendationCompanies} />
         <div style={{ flexGrow: 1 }}>
           <BannerText companies={recommendationCompanies} />
-          {recommendationCompanies === undefined ? (
+          {!recommendationCompanies ? (
             <div className={`${style.companyText}`}>관심을 가지지 않았어요</div>
           ) : (
             <div className={`${style.companyText}`}>
