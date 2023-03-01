@@ -1,11 +1,12 @@
+import { Badge, Spinner, Tab, Text } from '@/components/common';
 import { Link } from 'react-router-dom';
-import { Badge, Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './UserNav';
 
-import * as style from './style.css';
 import logo from '@/assets/logo.svg';
+import { Suspense } from 'react';
 import CountDown from './CountDown';
+import * as style from './style.css';
 
 const TAB_LIST = [
   '실시간 최신 트렌드',
@@ -22,7 +23,9 @@ const Header = () => {
           <img src={logo} alt="hyperlink logo" />
         </Link>
         <SearchBar />
-        <UserNav />
+        <Suspense fallback={<Spinner />}>
+          <UserNav />
+        </Suspense>
       </div>
       <div className={style.bottom}>
         <Tab
