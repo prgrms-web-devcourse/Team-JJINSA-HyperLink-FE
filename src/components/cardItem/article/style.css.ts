@@ -8,7 +8,6 @@ export const cardContainer = style([
   utils.flexColumn,
   utils.positionRelative,
   {
-    width: '28.8rem',
     height: '41rem',
   },
 ]);
