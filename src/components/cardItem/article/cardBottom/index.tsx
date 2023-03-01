@@ -9,15 +9,15 @@ import BannerText from '@/components/cardItem/article/banner/BannerText';
 
 type CardBottomProps = {
   link: string;
-  creater: string;
+  creatorName: string;
   createdAt: string;
   title: string;
-  recommendationCompanies: companyProps[];
+  recommendationCompanies?: companyProps[];
 };
 
 const CardBottom = ({
   link,
-  creater,
+  creatorName,
   createdAt,
   title,
   recommendationCompanies,
@@ -35,7 +35,7 @@ const CardBottom = ({
         <div className={style.bottomInfo}>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <Link to="/creater">
-              <span className={style.bottomInfoCreater}>{creater}</span>
+              <span className={style.bottomInfoCreater}>{creatorName}</span>
             </Link>
             <Divider type="vertical" />
             <span>{createdAt}</span>
@@ -67,15 +67,17 @@ const CardBottom = ({
           <div className={style.bottomTitle}>{title}</div>
         </a>
       </div>
-      <footer className={style.companyBanner}>
-        <BannerAvatar companies={recommendationCompanies} />
-        <div>
-          <BannerText companies={recommendationCompanies} />
-          <div className={`${style.companyText}`}>
-            사람들도 관심있게 보고있어요
+      {recommendationCompanies?.length && (
+        <footer className={style.companyBanner}>
+          <BannerAvatar companies={recommendationCompanies} />
+          <div>
+            <BannerText companies={recommendationCompanies} />
+            <div className={`${style.companyText}`}>
+              사람들도 관심있게 보고있어요
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 };
