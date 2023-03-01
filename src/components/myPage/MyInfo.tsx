@@ -27,7 +27,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     }
   };
 
-  const submitHandler = () => {
+  const handleSubmit = () => {
     // 회원 정보 변경시 로직
   };
 
