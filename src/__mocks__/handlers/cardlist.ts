@@ -1,10 +1,9 @@
-import { DUMMY } from '@/__mocks__/Dummy';
+import { DUMMY as cards } from '@/__mocks__/Dummy';
 import { rest } from 'msw';
 
-const cards = DUMMY;
-
-export const cardlist = [
-  rest.get('/cardlist', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(cards));
+export const cardlistHandlers = [
+  rest.get('/contents', (req, res, ctx) => {
+    console.log('res', res);
+    return res(ctx.status(200), ctx.delay(1000), ctx.json(cards));
   }),
 ];

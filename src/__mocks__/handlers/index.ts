@@ -1,1 +1,1 @@
-export { cardlist } from './cardlist';
+export { cardlistHandlers } from './cardlist';

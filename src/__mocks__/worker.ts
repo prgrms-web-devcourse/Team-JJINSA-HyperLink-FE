@@ -1,4 +1,4 @@
 import { setupWorker } from 'msw';
-import { cardlist } from './handlers';
+import { cardlistHandlers } from './handlers';
 
-export const worker = setupWorker(...cardlist);
+export const worker = setupWorker(...cardlistHandlers);
