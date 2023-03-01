@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 export type CardProps = {
   children: ReactNode;
-  type: 'creator' | 'article';
+  type: 'creator' | 'content';
 };
 
 const Card = ({ children, type }: CardProps) => {

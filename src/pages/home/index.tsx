@@ -1,5 +1,5 @@
 import { getCardList } from '@/api/cardlist';
-import { ArticleCardProps } from '@/components/cardItem/article';
+import { content } from '@/types/contents';
 import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
 import Main from '@/components/main';
@@ -12,7 +12,7 @@ import * as style from './style.css';
 const Home = () => {
   const [isHomeScrolled, setIsHomeScrolled] =
     useRecoilState(isHomeScrolledState);
-  const [cards, setCards] = useState<ArticleCardProps[]>([]);
+  const [cards, setCards] = useState<content[]>([]);
   const category = 'all';
   const { data, isLoading, isError } = useQuery(
     ['cardlist', category],
@@ -20,7 +20,7 @@ const Home = () => {
     {
       refetchOnWindowFocus: false,
       retry: 0,
-      onSuccess: (data: ArticleCardProps[]) => {
+      onSuccess: (data: content[]) => {
         console.log(data);
         setCards(data);
       },

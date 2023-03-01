@@ -7,7 +7,7 @@ export default {
   argTypes: {
     type: {
       control: { type: 'inline-radio' },
-      options: ['creator', 'article'],
+      options: ['creator', 'content'],
       defaultValue: 'creator',
     },
   },
