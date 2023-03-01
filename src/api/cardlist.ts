@@ -1,9 +1,9 @@
 import { axiosInstance } from '@/api/core';
-import { ArticleCardProps } from '@/components/cardItem/article';
+import { content } from '@/types/contents';
 
 export const getCardList = async (category: string) => {
   try {
-    const response: ArticleCardProps[] = await axiosInstance.get(
+    const response: content[] = await axiosInstance.get(
       `/contents?category=${category}&creator=1&page=1&size=12`
     );
 

@@ -18,7 +18,7 @@ export const CardWrapper = recipe({
         width: '28rem',
         height: '14.6rem',
       },
-      article: {
+      content: {
         position: 'relative',
       },
     },

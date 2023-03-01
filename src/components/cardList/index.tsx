@@ -1,11 +1,12 @@
-import ArticleCard, { ArticleCardProps } from '@/components/cardItem/article';
+import ContentCard from '@/components/cardItem/content';
+import { content } from '@/types/contents';
 import * as style from './style.css';
 
-const CardList = ({ cards }: { cards: ArticleCardProps[] }) => {
+const CardList = ({ cards }: { cards: content[] }) => {
   return (
     <div className={style.listContainer}>
       {cards.map((card) => {
-        return <ArticleCard key={card.contentId} {...card} />;
+        return <ContentCard key={card.contentId} {...card} />;
       })}
     </div>
   );

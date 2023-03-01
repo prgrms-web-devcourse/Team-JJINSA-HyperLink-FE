@@ -1,12 +1,12 @@
 import { getCardList } from '@/api/cardlist';
-import { ArticleCardProps } from '@/components/cardItem/article';
 import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
+import { content } from '@/types/contents';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const Home = () => {
-  const [cards, setCards] = useState<ArticleCardProps[]>([]);
+  const [cards, setCards] = useState<content[]>([]);
   const category = 'all';
   const { data, isLoading, isError } = useQuery(
     ['cardlist', category],
@@ -14,7 +14,7 @@ const Home = () => {
     {
       refetchOnWindowFocus: false,
       retry: 0,
-      onSuccess: (data: ArticleCardProps[]) => {
+      onSuccess: (data: content[]) => {
         console.log(data);
         setCards(data);
       },
