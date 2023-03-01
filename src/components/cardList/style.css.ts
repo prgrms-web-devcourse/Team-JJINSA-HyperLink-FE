@@ -1,8 +1,9 @@
 import { style } from '@vanilla-extract/css';
+import * as utils from '@/styles/utils.css';
 
 export const listContainer = style([
+  utils.grid,
   {
-    display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(28.8rem, 1fr))',
     gridGap: '20px',
     justifyItems: 'center',
