@@ -14,7 +14,7 @@ const MyPage = () => {
   const { data, isLoading, isError } = useQuery(['myInfo'], getMyInfo);
 
   if (isError) return <h3>에러 발생</h3>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner size="huge" />;
 
   const myInfo = data as myInfo;
 
