@@ -39,6 +39,8 @@ export const iconGroup = style([
   },
 ]);
 
+export const userIconButton = style([utils.positionRelative]);
+
 export const userIcon = style([utils.cursorPointer]);
 
 export const bottom = style([
