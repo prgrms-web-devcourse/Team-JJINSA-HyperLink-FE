@@ -1,9 +1,9 @@
 import { getCardList } from '@/api/cardlist';
-import { content } from '@/types/contents';
 import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
 import Main from '@/components/main';
 import { isHomeScrolledState } from '@/stores/scroll';
+import { content } from '@/types/contents';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -63,7 +63,7 @@ const Home = () => {
 
   return (
     <div
-      className={style.wrapper({ isScrolled: isHomeScrolled })}
+      className={style.container({ isScrolled: isHomeScrolled })}
       ref={ref}
       onWheel={wheelHandler}
     >

@@ -2,7 +2,7 @@ import * as utils from '@/styles/utils.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const wrapper = recipe({
+export const container = recipe({
   base: {
     height: 'calc(100vh - 7.1rem)',
     overflowY: 'auto',

@@ -4,14 +4,15 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import Layout from '@/components/layout/index';
+
 import {
   HomePage,
-  NotFoundPage,
-  SearchResultPage,
   SignupPage,
+  SearchResultPage,
+  NotFoundPage,
   MyPage,
-} from '@/pages/index';
+} from '@/pages';
+import Layout from '@/components/layout/index';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
