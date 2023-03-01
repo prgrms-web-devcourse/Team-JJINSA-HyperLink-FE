@@ -77,7 +77,7 @@ export const DUMMY = [
     viewCount: 100,
     creatorName: '토스',
     createdAt: '2023.02.17',
-    title: '2022년 토스 한 해의 회고록',
+    title: '2022년 토스 한 해의 회고록 hello world today I learn about',
     recommendationCompanies: [
       {
         companyName: '프로그래머스',

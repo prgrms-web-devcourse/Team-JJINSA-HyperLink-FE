@@ -14,10 +14,10 @@ export const listContainer = style([
         gridTemplateColumns: 'repeat(auto-fill, minmax(28.8rem, 1fr))',
       },
       'screen and (min-width: 943px)': {
-        gridTemplateColumns: 'repeat(3, minmax(30%, auto))',
+        gridTemplateColumns: 'repeat(3, minmax(30%))',
       },
       'screen and (min-width: 1272px)': {
-        gridTemplateColumns: 'repeat(4, minmax(20%, auto))',
+        gridTemplateColumns: 'repeat(4, minmax(20%))',
       },
       'screen and (min-width: 1600px)': {
         gridTemplateColumns: 'repeat(auto-fill, minmax(28.8rem, 1fr))',

@@ -22,7 +22,7 @@ const Home = () => {
   );
 
   if (isError) return <div>Error!!!</div>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner size="huge" />;
 
   return (
     <div style={{ margin: ' 3rem 10rem', minWidth: '60.6rem' }}>
