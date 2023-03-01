@@ -30,4 +30,5 @@ export const banner = style([
 
 export const content = style({
   padding: '5rem 0',
+  minHeight: 'calc(100vh - 7.1rem)',
 });

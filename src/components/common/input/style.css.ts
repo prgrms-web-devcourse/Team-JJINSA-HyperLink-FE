@@ -28,7 +28,8 @@ export const inputContainer = recipe({
       },
       banner: {
         height: '7rem',
-        width: '80rem',
+        maxWidth: '80rem',
+        width: '100%',
         borderRadius: '3.5rem',
         padding: '1.2rem 2.4rem',
         fontSize: variants.fontSize.xLarge,

@@ -2,9 +2,10 @@ import { getCardList } from '@/api/cardlist';
 import { ArticleCardProps } from '@/components/cardItem/article';
 import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
+import Main from '@/components/main';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { useQuery } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import * as style from './style.css';
 
@@ -53,6 +54,10 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    setIsHomeScrolled(false);
+  }, []);
+
   if (isError) return <div>Error!!!</div>;
   if (isLoading) return <Spinner />;
 
@@ -62,7 +67,9 @@ const Home = () => {
       ref={ref}
       onWheel={wheelHandler}
     >
-      <div className={style.banner}>dd</div>
+      <div className={style.banner}>
+        <Main />
+      </div>
       <div className={style.content}>
         <CardList cards={cards} />
       </div>
