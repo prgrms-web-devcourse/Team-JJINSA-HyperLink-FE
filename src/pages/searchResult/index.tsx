@@ -36,7 +36,7 @@ const searchResultPage = () => {
               contentId,
               contentImgUrl,
               createdAt,
-              creator,
+              creatorName,
               isBookmarked,
               isLiked,
               likeCount,
@@ -53,7 +53,7 @@ const searchResultPage = () => {
                 likeCount={likeCount}
                 viewCount={viewCount}
                 link={link}
-                creator={creator}
+                creatorName={creatorName}
                 createdAt={createdAt}
                 title={title}
                 recommendationCompanies={recommendationCompanies}

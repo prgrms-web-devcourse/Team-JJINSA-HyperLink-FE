@@ -5,7 +5,7 @@ const SEARCH_RESULT = {
     {
       contentId: 13,
       title: '개발자의 삶',
-      creator: '슈카',
+      creatorName: '슈카',
       contentImgUrl: 'https://via.placeholder.com/200',
       link: 'https://okky.kr/articles/503803',
       likeCount: 4,
@@ -29,7 +29,7 @@ const SEARCH_RESULT = {
     {
       contentId: 14,
       title: '개발을 잘하는 방법',
-      creator: '슈카',
+      creatorName: '슈카',
       contentImgUrl: 'https://via.placeholder.com/200',
       link: 'https://okky.kr/articles/50323',
       likeCount: 4,
@@ -53,7 +53,7 @@ const SEARCH_RESULT = {
     {
       contentId: 15,
       title: '일 잘하는 개발자',
-      creator: '슈카',
+      creatorName: '슈카',
       contentImgUrl: 'https://via.placeholder.com/200',
       link: 'https://okky.kr/articles/234',
       likeCount: 4,
@@ -77,7 +77,7 @@ const SEARCH_RESULT = {
     {
       contentId: 16,
       title: '사용하기 편한 개발툴 소개',
-      creator: '슈카',
+      creatorName: '슈카',
       contentImgUrl: 'https://via.placeholder.com/200',
       link: 'https://branch/articles/453',
       likeCount: 4,

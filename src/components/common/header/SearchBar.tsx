@@ -14,7 +14,7 @@ const SearchBar = () => {
   };
 
   const handleEnterPress = async () => {
-    if (!keyword.length) {
+    if (!keyword.trim().length) {
       alert('한 글자 이상 검색해주세요!');
       return;
     }

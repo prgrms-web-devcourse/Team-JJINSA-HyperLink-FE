@@ -5,7 +5,7 @@ export type content = {
 export type contentData = {
   contentImgUrl: string;
   createdAt: string;
-  creator: string;
+  creatorName: string;
   isBookmarked: boolean;
   isLiked: boolean;
   likeCount: number;
