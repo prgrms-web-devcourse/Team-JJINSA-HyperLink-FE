@@ -17,11 +17,11 @@ export const backgroundDimmed = style([
 
 export const modalContainer = recipe({
   base: [
+    utils.borderRadius,
     {
       backgroundColor: variants.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
     },
-    utils.borderRadius,
   ],
 
   variants: {
@@ -34,7 +34,14 @@ export const modalContainer = recipe({
           transform: 'translate(50%, -50%)',
         },
       ],
-      icon: [utils.positionAbsolute],
+      icon: [
+        utils.positionAbsolute,
+        utils.right0,
+        {
+          top: '4rem',
+          zIndex: '10',
+        },
+      ],
     },
   },
 });
