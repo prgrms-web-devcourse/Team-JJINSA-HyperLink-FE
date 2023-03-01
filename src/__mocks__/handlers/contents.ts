@@ -20,7 +20,7 @@ const SEARCH_RESULT = {
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },
         {
-          companyName: '네이버',
+          companyName: '카카오',
           companyLogoImgUrl:
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },
@@ -39,7 +39,7 @@ const SEARCH_RESULT = {
       createdAt: '2023-02-17T12:30.334',
       recommendationCompanies: [
         {
-          companyName: '네이버',
+          companyName: '프로그래머스',
           companyLogoImgUrl:
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },
@@ -63,12 +63,12 @@ const SEARCH_RESULT = {
       createdAt: '2023-02-17T12:30.334',
       recommendationCompanies: [
         {
-          companyName: '네이버',
+          companyName: '구글',
           companyLogoImgUrl:
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },
         {
-          companyName: '네이버',
+          companyName: '메타',
           companyLogoImgUrl:
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },
@@ -87,12 +87,12 @@ const SEARCH_RESULT = {
       createdAt: '2023-02-17T12:30.334',
       recommendationCompanies: [
         {
-          companyName: '네이버',
+          companyName: '그렙',
           companyLogoImgUrl:
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },
         {
-          companyName: '네이버',
+          companyName: '모니토',
           companyLogoImgUrl:
             'https://avatars.githubusercontent.com/u/60571418?v=4',
         },

@@ -2,17 +2,17 @@ import * as style from './style.css';
 import { useState } from 'react';
 import { Divider, Icon } from '@/components/common';
 import { Link } from 'react-router-dom';
-import { companyProps } from '@/components/cardItem/article';
-import CardModal from '@/components/cardItem/article/CardModal';
+import CardModal from '@/components/cardItem/content/CardModal';
 import BannerAvatar from '../banner/bannerAvatar';
 import BannerText from '../banner/bannerText';
+import { company } from '@/types/contents';
 
 type CardBottomProps = {
   link: string;
   creatorName: string;
   createdAt: string;
   title: string;
-  recommendationCompanies?: companyProps[];
+  recommendationCompanies?: company[];
 };
 
 const CardBottom = ({
@@ -36,7 +36,7 @@ const CardBottom = ({
           <div style={{ display: 'flex' }}>
             <Link to="/creator">
               {/*useNavigate로 수정하기 */}
-              <span className={style.bottomInfoCreater}>{creatorName}</span>
+              <span className={style.bottomInfoCreator}>{creatorName}</span>
             </Link>
             <Divider type="vertical" />
             <span>{createdAt}</span>

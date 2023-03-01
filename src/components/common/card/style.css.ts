@@ -14,13 +14,11 @@ export const CardWrapper = recipe({
   ],
   variants: {
     type: {
-      creater: {
+      creator: {
         width: '28rem',
         height: '14.6rem',
       },
-      article: {
-        position: 'relative',
-      },
+      content: [utils.positionRelative],
     },
   },
 });

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { companyProps } from '@/components/cardItem/article';
+import { company } from '@/types/contents';
 import favicon from '@/assets/facivon.ico';
 import * as style from './style.css';
 
-const BannerText = ({ companies }: { companies?: companyProps[] }) => {
+const BannerText = ({ companies }: { companies?: company[] }) => {
   if (!companies) {
     companies = [{ companyName: '아직 사람들이', companyLogoImgUrl: favicon }];
   }
