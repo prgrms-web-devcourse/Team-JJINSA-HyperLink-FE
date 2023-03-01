@@ -1,9 +1,13 @@
+import { googleOAuth, login } from '@/api/auth';
 import logo from '@/assets/favicon.ico';
 import googleLogo from '@/assets/googleLogo.png';
 import { Avatar, Heading, Icon, Modal, Text } from '@/components/common';
+import { isAuthorizedState } from '@/stores/auth';
+
 import * as variants from '@/styles/variants.css';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 export type LoginModalProps = {
@@ -13,12 +17,20 @@ export type LoginModalProps = {
 
 const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const navigate = useNavigate();
+  const setIsAuthorized = useSetRecoilState(isAuthorizedState);
   const googleLogin = useGoogleLogin({
     onSuccess: async (res) => {
-      console.log(res);
+      const response = await googleOAuth(res.code);
       onClose();
-      navigate('/signup', { state: { email: 'example@gmail.com' } });
-      // TODO: API call 후 response에 따라 navigate
+
+      if (response?.joinCheck) {
+        navigate('/signup', { state: { email: response.email } });
+        return;
+      }
+
+      await login();
+      setIsAuthorized(true);
+      navigate('/');
     },
     flow: 'auth-code',
   });

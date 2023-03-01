@@ -1,4 +1,5 @@
 import { Button, Divider, Dropdown, Heading, Input } from '@/components/common';
+import { BIRTH_YEARS, GENDERS } from '@/utils/constants/signup';
 import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
@@ -15,11 +16,6 @@ export type BasicInfoProps = {
   slideDirection: 'left' | 'right';
   onNextClick: () => void;
 };
-
-const BIRTH_YEARS = Array.from({ length: 100 }, (_, i) =>
-  (2023 - i).toString()
-);
-const GENDERS = ['남', '여'];
 
 const BasicInfo = ({
   email,
@@ -61,7 +57,7 @@ const BasicInfo = ({
         <Dropdown
           label="성별"
           placeholder="성별을 선택하세요."
-          items={GENDERS}
+          items={Object.keys(GENDERS)}
           value={gender}
           onItemClick={(item) => setGender(item)}
         />
