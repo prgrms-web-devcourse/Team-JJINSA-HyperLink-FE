@@ -1,7 +1,10 @@
+import { Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Modal } from '@/components/common';
+import { Spinner } from '@/components/common';
+import { useQuery } from '@tanstack/react-query';
+import { getMyInfo, myInfoResponse } from '@/api/member';
 import * as style from './style.css';
-import user from '@/assets/user.svg';
 
 export type UserInfoModalProps = {
   isOpen: boolean;
@@ -12,6 +15,13 @@ export type UserInfoModalProps = {
 const UserInfoModal = ({ isOpen, onClose, onLogout }: UserInfoModalProps) => {
   const navigate = useNavigate();
 
+  const { data: myInfo } = useQuery(['myInfo'], getMyInfo, {
+    refetchOnWindowFocus: false,
+  });
+
+  const { email, nickname, career, careerYear, profileImage } =
+    myInfo as myInfoResponse;
+
   return (
     <Modal
       isOpen={isOpen}
@@ -19,27 +29,29 @@ const UserInfoModal = ({ isOpen, onClose, onLogout }: UserInfoModalProps) => {
       type="icon"
       style={{ padding: '1.2rem', textAlign: 'start' }}
     >
-      <div className={style.userInfo}>
-        <Avatar src={user} size="medium" />
-        <div className={style.userInfoDetail}>
-          <div className={style.nickname}>Mostafa Lotfy</div>
-          <div className={style.career}>
-            <span>개발</span> | <span>경력 3년차</span>
+      <Suspense fallback={<Spinner />}>
+        <div className={style.userInfo}>
+          <Avatar src={profileImage} size="medium" />
+          <div className={style.userInfoDetail}>
+            <div className={style.nickname}>{nickname}</div>
+            <div className={style.career}>
+              <span>{career}</span> | <span>경력 {careerYear}년차</span>
+            </div>
+            <div className={style.email}>{email}</div>
           </div>
-          <div className={style.email}>rldnd5555@gmail.com</div>
         </div>
-      </div>
-      <ul>
-        <li className={style.menuItem} onClick={() => navigate('/')}>
-          북마크 / 히스토리
-        </li>
-        <li className={style.menuItem} onClick={() => navigate('/mypage')}>
-          내 정보
-        </li>
-        <li className={style.menuItem} onClick={onLogout}>
-          로그아웃
-        </li>
-      </ul>
+        <ul>
+          <li className={style.menuItem} onClick={() => navigate('/')}>
+            북마크 / 히스토리
+          </li>
+          <li className={style.menuItem} onClick={() => navigate('/mypage')}>
+            내 정보
+          </li>
+          <li className={style.menuItem} onClick={onLogout}>
+            로그아웃
+          </li>
+        </ul>
+      </Suspense>
     </Modal>
   );
 };
