@@ -31,7 +31,7 @@ const CardTop = ({
           src={contentImgUrl}
           alt="카드 썸네일 이미지"
           block={true}
-          width="28.8rem"
+          width="100%"
           height="21rem"
           objectFit="cover"
         />

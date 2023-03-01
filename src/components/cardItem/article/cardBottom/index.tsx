@@ -4,20 +4,20 @@ import { Divider, Icon } from '@/components/common';
 import { Link } from 'react-router-dom';
 import { companyProps } from '@/components/cardItem/article';
 import CardModal from '@/components/cardItem/article/CardModal';
-import BannerAvatar from '@/components/cardItem/article/banner/BannerAvatar';
-import BannerText from '@/components/cardItem/article/banner/BannerText';
+import BannerAvatar from '../banner/bannerAvatar';
+import BannerText from '../banner/bannerText';
 
 type CardBottomProps = {
   link: string;
-  creater: string;
+  creatorName: string;
   createdAt: string;
   title: string;
-  recommendationCompanies: companyProps[];
+  recommendationCompanies?: companyProps[];
 };
 
 const CardBottom = ({
   link,
-  creater,
+  creatorName,
   createdAt,
   title,
   recommendationCompanies,
@@ -33,9 +33,9 @@ const CardBottom = ({
       {isModalVisible && <div className={style.cardBackgroundDim} />}
       <div className={style.bottomContent}>
         <div className={style.bottomInfo}>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex' }}>
             <Link to="/creater">
-              <span className={style.bottomInfoCreater}>{creater}</span>
+              <span className={style.bottomInfoCreater}>{creatorName}</span>
             </Link>
             <Divider type="vertical" />
             <span>{createdAt}</span>
@@ -69,11 +69,15 @@ const CardBottom = ({
       </div>
       <footer className={style.companyBanner}>
         <BannerAvatar companies={recommendationCompanies} />
-        <div>
+        <div style={{ flexGrow: 1 }}>
           <BannerText companies={recommendationCompanies} />
-          <div className={`${style.companyText}`}>
-            사람들도 관심있게 보고있어요
-          </div>
+          {!recommendationCompanies ? (
+            <div className={`${style.companyText}`}>관심을 가지지 않았어요</div>
+          ) : (
+            <div className={`${style.companyText}`}>
+              사람들도 관심있게 보고있어요
+            </div>
+          )}
         </div>
       </footer>
     </div>

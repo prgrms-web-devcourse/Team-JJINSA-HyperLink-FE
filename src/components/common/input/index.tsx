@@ -32,7 +32,7 @@ const Input = ({
       e.target.value = e.target.value.slice(0, max);
     }
 
-    onChange && onChange(e.target.value);
+    onChange?.(e.target.value);
   };
 
   const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -41,7 +41,7 @@ const Input = ({
     }
 
     onEnterPress();
-    onChange && onChange('');
+    onChange?.('');
   };
 
   return (

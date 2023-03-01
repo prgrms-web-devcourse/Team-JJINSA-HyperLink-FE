@@ -1,5 +1,34 @@
+import { getCardList } from '@/api/cardlist';
+import { ArticleCardProps } from '@/components/cardItem/article';
+import CardList from '@/components/cardList';
+import { Spinner } from '@/components/common';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
 const Home = () => {
-  return <div>Home 입니다~</div>;
+  const [cards, setCards] = useState<ArticleCardProps[]>([]);
+  const category = 'all';
+  const { data, isLoading, isError } = useQuery(
+    ['cardlist', category],
+    async () => await getCardList(category),
+    {
+      refetchOnWindowFocus: false,
+      retry: 0,
+      onSuccess: (data: ArticleCardProps[]) => {
+        console.log(data);
+        setCards(data);
+      },
+    }
+  );
+
+  if (isError) return <div>Error!!!</div>;
+  if (isLoading) return <Spinner />;
+
+  return (
+    <div style={{ margin: ' 3rem 10rem', minWidth: '60.6rem' }}>
+      <CardList cards={cards} />
+    </div>
+  );
 };
 
 export default Home;

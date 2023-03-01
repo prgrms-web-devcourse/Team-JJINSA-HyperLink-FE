@@ -9,17 +9,17 @@ export type companyProps = {
 };
 
 export type ArticleCardProps = {
-  contentId: number;
+  contentId?: number;
   link: string;
   contentImgUrl: string;
   isBookmarked: boolean;
   isLiked: boolean;
   likeCount: number;
   viewCount: number;
-  creater: string;
+  creatorName: string;
   createdAt: string;
   title: string;
-  recommendationCompanies: companyProps[];
+  recommendationCompanies?: companyProps[];
 };
 
 // props: 링크, 이미지, 북마크, 하트, 조회수, 크리에이터 이름, 날짜, 제목, 회사, 회사 아바타
@@ -30,7 +30,7 @@ const ArticleCard = ({
   isLiked,
   likeCount,
   viewCount,
-  creater,
+  creatorName,
   createdAt,
   title,
   recommendationCompanies,
@@ -55,7 +55,7 @@ const ArticleCard = ({
           />
           <CardBottom
             link={link}
-            creater={creater}
+            creatorName={creatorName}
             createdAt={createdAt}
             title={title}
             recommendationCompanies={recommendationCompanies}
