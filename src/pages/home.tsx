@@ -8,7 +8,7 @@ import { useState } from 'react';
 const Home = () => {
   const [cards, setCards] = useState<content[]>([]);
   const category = 'all';
-  const { data, isLoading, isError } = useQuery(
+  const { isLoading, isError } = useQuery(
     ['cardlist', category],
     async () => await getCardList(category),
     {

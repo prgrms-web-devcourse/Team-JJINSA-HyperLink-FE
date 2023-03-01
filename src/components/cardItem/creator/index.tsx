@@ -33,6 +33,7 @@ const CreatorCard = ({
 
   return (
     <Card type="creator">
+      {/* useNavigate로 변경 */}
       <Link to="/creator">
         <div className={style.creatorCardContainer}>
           <div className={style.creatorCardTop}>
