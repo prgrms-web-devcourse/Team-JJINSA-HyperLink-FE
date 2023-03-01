@@ -4,8 +4,8 @@ import { useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
 
-const careerItems = ['개발', '기획', '디자인'];
-const careerYearItems = ['1년 미만', '1년', '2년'];
+const CAREER_ITEMS = ['개발', '기획', '디자인'];
+const CAREER_YEAR_ITEMS = ['1년 미만', '1년', '2년'];
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const { email, nickname, profileImage, career, careerYear } = myInfo;
@@ -47,7 +47,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
           placeholder="선택해주세요"
           label="직군/경력"
           value={newCareer}
-          items={careerItems}
+          items={CAREER_ITEMS}
           onItemClick={(item: string) => {
             handleItemClick(item, 'career');
           }}
@@ -55,7 +55,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         <Dropdown
           placeholder="선택해주세요"
           value={newCareerYear}
-          items={careerYearItems}
+          items={CAREER_YEAR_ITEMS}
           onItemClick={(item: string) => {
             handleItemClick(item, 'careerYear');
           }}
