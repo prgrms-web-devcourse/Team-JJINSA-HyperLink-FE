@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react';
-import * as style from './BannerText.css';
-import { companyProps } from '@/components/cardItem/article';
+import { company } from '@/types/contents';
+import favicon from '@/assets/facivon.ico';
+import * as style from './style.css';
 
-const BannerText = ({ companies }: { companies: companyProps[] }) => {
+const BannerText = ({ companies }: { companies?: company[] }) => {
+  if (!companies) {
+    companies = [{ companyName: '아직 사람들이', companyLogoImgUrl: favicon }];
+  }
   const [currentCompany, setCurrentCompany] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentCompany((currentCompany + 1) % companies.length);
+      setCurrentCompany(
+        (currentCompany + 1) % (!companies ? 1 : companies.length)
+      );
     }, 5000);
 
     return () => clearInterval(intervalId);
