@@ -1,24 +1,29 @@
-import { useState } from 'react';
-import Button from '../button';
-import Icon from '../icon';
-
 import user from '@/assets/user.svg';
-import { isLoginModalVisibleState } from '@/stores/atoms';
-import { useSetRecoilState } from 'recoil';
+import { Button, Icon } from '@/components/common';
+
+import { logout } from '@/api/auth';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 const UserNav = () => {
-  // 임시 로그인 상태
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
   /*
     TODO
     1. 로그인 버튼을 눌렀을 때, 로그인 모달 띄우기 
     2. 로그인 상태에 따라 헤더 UI 변경
    */
+
+  const handleLogout = async () => {
+    await logout();
+    setIsAuthorized(false);
+  };
+
   return (
     <div className={style.userNav}>
-      {!isLoggedIn ? (
+      {!isAuthorized ? (
         <Button
           isBold={true}
           text="로그인"
@@ -33,7 +38,7 @@ const UserNav = () => {
               className={style.userIcon}
               src={user}
               alt="user image"
-              onClick={() => setIsLoggedIn((prevState) => !prevState)}
+              onClick={handleLogout} // TODO: 내 정보 모달 열기로 변경
             />
           </button>
         </div>

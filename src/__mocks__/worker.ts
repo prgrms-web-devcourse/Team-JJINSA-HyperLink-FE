@@ -1,4 +1,9 @@
 import { setupWorker } from 'msw';
-import { cardlistHandlers } from './handlers';
+import { authHandlers, memberHandlers, contentsHandlers, cardlistHandlers } from './handlers';
 
-export const worker = setupWorker(...cardlistHandlers);
+export const worker = setupWorker(
+  ...authHandlers,
+  ...memberHandlers,
+  ...contentsHandlers,
+  ...cardlistHandlers
+);

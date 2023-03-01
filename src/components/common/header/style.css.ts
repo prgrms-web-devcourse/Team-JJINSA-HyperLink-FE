@@ -18,6 +18,7 @@ export const top = style([
     gridTemplateColumns: 'repeat(3, 1fr)',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: '4.7rem',
   },
 ]);
 

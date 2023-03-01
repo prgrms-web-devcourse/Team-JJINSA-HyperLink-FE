@@ -14,6 +14,12 @@ if (process.env.NODE_ENV === 'development') {
   worker.start();
 }
 
+import { worker } from '@/__mocks__/worker';
+
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
+
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

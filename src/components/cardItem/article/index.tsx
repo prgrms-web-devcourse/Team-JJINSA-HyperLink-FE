@@ -9,14 +9,14 @@ export type companyProps = {
 };
 
 export type ArticleCardProps = {
-  contentId: number;
+  contentId?: number;
   link: string;
   contentImgUrl: string;
   isBookmarked: boolean;
   isLiked: boolean;
   likeCount: number;
   viewCount: number;
-  creater: string;
+  creatorName: string;
   createdAt: string;
   title: string;
   recommendationCompanies?: companyProps[];
@@ -30,7 +30,7 @@ const ArticleCard = ({
   isLiked,
   likeCount,
   viewCount,
-  creater,
+  creatorName,
   createdAt,
   title,
   recommendationCompanies,
@@ -55,7 +55,7 @@ const ArticleCard = ({
           />
           <CardBottom
             link={link}
-            creater={creater}
+            creatorName={creatorName}
             createdAt={createdAt}
             title={title}
             recommendationCompanies={recommendationCompanies}

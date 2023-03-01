@@ -1,19 +1,30 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Text } from '@/components/common';
 import { BasicInfo, CategoryInfo, WorkInfo } from '@/components/signup';
 import useInput from '@/hooks/useInput';
+import { isAuthorizedState } from '@/stores/auth';
 
+import { signup } from '@/api/auth';
 import * as variants from '@/styles/variants.css';
+import {
+  CAREERS,
+  CATEGORIES,
+  GENDERS,
+  JOBS,
+  STEPS,
+} from '@/utils/constants/signup';
+import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
-
-const STEPS = ['기본 정보', '직군 / 경력', '관심 카테고리'];
 
 const SignupPage = () => {
   const {
     state: { email },
   } = useLocation();
+  const navigagte = useNavigate();
+  const setIsAuthorized = useSetRecoilState(isAuthorizedState);
+
   const [step, setStep] = useState(1);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>(
     'right'
@@ -50,9 +61,21 @@ const SignupPage = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log('submit');
-    // TODO: signup api call
+  const handleSubmit = async () => {
+    await signup({
+      email,
+      gender: GENDERS[gender] as 'man' | 'woman',
+      nickname,
+      attentionCategory: Object.entries(CATEGORIES)
+        .filter((entry) => categories.includes(entry[0]))
+        .map((e) => e[1]),
+      career: JOBS[job],
+      careerYear: CAREERS[career],
+      birthYear,
+    });
+
+    setIsAuthorized(true);
+    navigagte('/');
   };
 
   return (

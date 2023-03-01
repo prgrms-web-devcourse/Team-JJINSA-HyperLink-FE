@@ -1,4 +1,5 @@
 import { Button, Divider, Dropdown, Heading } from '@/components/common';
+import { CAREERS, JOBS } from '@/utils/constants/signup';
 import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
@@ -14,22 +15,6 @@ export type WorkInfoProps = {
   onPrevClick: () => void;
   onNextClick: () => void;
 };
-
-const JOBS = ['개발', '경제, 금융', '패션, 뷰티', '기타'];
-const CAREERS = [
-  '1년 미만',
-  '1년',
-  '2년',
-  '3년',
-  '4년',
-  '5년',
-  '6년',
-  '7년',
-  '8년',
-  '9년',
-  '10년',
-  '10년 이상',
-];
 
 const WorkInfo = ({
   nickname,
@@ -57,14 +42,14 @@ const WorkInfo = ({
         <Dropdown
           label="직군"
           placeholder="직군을 선택하세요."
-          items={JOBS}
+          items={Object.keys(JOBS)}
           value={job}
           onItemClick={(item) => setJob(item)}
         />
         <Dropdown
           label="경력"
           placeholder="경력을 선택하세요."
-          items={CAREERS}
+          items={Object.keys(CAREERS)}
           value={career}
           onItemClick={(item) => setCareer(item)}
         />
