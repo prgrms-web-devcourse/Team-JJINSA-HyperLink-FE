@@ -4,11 +4,19 @@ import {
   memberHandlers,
   contentsHandlers,
   cardlistHandlers,
+  bookmarkHandlers,
+  likeHandlers,
+  notRecommendHandlers,
+  viewHandlers,
 } from './handlers';
 
 export const worker = setupWorker(
   ...authHandlers,
   ...memberHandlers,
   ...contentsHandlers,
-  ...cardlistHandlers
+  ...cardlistHandlers,
+  ...bookmarkHandlers,
+  ...likeHandlers,
+  ...notRecommendHandlers,
+  ...viewHandlers
 );
