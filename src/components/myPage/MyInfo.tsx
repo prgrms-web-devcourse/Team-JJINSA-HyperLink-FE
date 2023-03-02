@@ -31,10 +31,27 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     // 회원 정보 변경시 로직
   };
 
+  const [isHovering, setIsHovering] = useState(false);
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   return (
     <>
-      <div className={style.avatarWrapper}>
-        <Avatar src={newProfileImage} shape="circle" size="xLarge" />
+      <div
+        className={style.avatarWrapper}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
+        <div className={`${style.avatar}  ${isHovering && style.hoverAvatar}`}>
+          <Avatar src={newProfileImage} shape="circle" size="xLarge" />
+        </div>
+        <div className={`${style.avatarText} ${isHovering && style.hoverText}`}>
+          사진 변경하기
+        </div>
       </div>
       <Input type="email" label="이메일" value={email} readOnly />
       <Input
