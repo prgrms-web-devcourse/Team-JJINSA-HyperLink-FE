@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon } from '@/components/common';
-import MyInfoModal from '@/components/modal/myInfo';
+import { MyInfoModal } from '@/components/modal';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isAuthorizedState } from '@/stores/auth';
 import {

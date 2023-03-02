@@ -1,12 +1,12 @@
-import { getCardList } from '@/api/cardlist';
-import CardList from '@/components/cardList';
-import { Spinner } from '@/components/common';
-import Main from '@/components/main';
-import { isHomeScrolledState } from '@/stores/scroll';
-import { content } from '@/types/contents';
-import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { useQuery } from '@tanstack/react-query';
+import { Spinner } from '@/components/common';
+import Main from '@/components/main';
+import CardList from '@/components/cardList';
+import { getCardList } from '@/api/cardlist';
+import { content } from '@/types/contents';
 import * as style from './style.css';
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
     useRecoilState(isHomeScrolledState);
   const [cards, setCards] = useState<content[]>([]);
   const category = 'all';
-  const { data, isLoading, isError } = useQuery(
+  const { isLoading, isError } = useQuery(
     ['cardlist', category],
     async () => await getCardList(category),
     {
@@ -59,7 +59,7 @@ const Home = () => {
   }, []);
 
   if (isError) return <div>Error!!!</div>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner size="huge" />;
 
   return (
     <div
