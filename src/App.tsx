@@ -1,8 +1,8 @@
 import {
-  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  RouterProvider,
 } from 'react-router-dom';
 
 import {
@@ -22,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/search/:keyword" element={<SearchResultPage />} />
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/mypage" element={<MyPage />} />
     </Route>
   )
 );
