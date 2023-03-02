@@ -1,8 +1,7 @@
 import { axiosInstance } from '@/api/core';
 
 export const getBookmarkResponse = async (contentId: number, type: boolean) => {
-  let isBookmarked = 0;
-  if (!type) isBookmarked = 1;
+  const isBookmarked = type ? 0 : 1;
 
   try {
     const response = await axiosInstance.post(

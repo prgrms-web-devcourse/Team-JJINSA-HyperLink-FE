@@ -6,6 +6,8 @@ import {
   cardlistHandlers,
   bookmarkHandlers,
   likeHandlers,
+  notRecommendHandlers,
+  viewHandlers,
 } from './handlers';
 
 export const worker = setupWorker(
@@ -14,5 +16,7 @@ export const worker = setupWorker(
   ...contentsHandlers,
   ...cardlistHandlers,
   ...bookmarkHandlers,
-  ...likeHandlers
+  ...likeHandlers,
+  ...notRecommendHandlers,
+  ...viewHandlers
 );

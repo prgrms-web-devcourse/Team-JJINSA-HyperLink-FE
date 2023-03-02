@@ -37,17 +37,20 @@ const CardBottom = ({
   );
   const handleCreatorClick = (e: MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     navigate(`/creator/${creatorName}`);
   };
 
   const handleDotIconClick = (e: MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsModalVisible(true);
     console.log('dot click');
   };
 
   const handleNotRecommendClick = (e: MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     notRecommendResponse.refetch();
   };
 

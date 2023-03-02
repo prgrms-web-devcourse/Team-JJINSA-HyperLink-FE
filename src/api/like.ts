@@ -1,8 +1,7 @@
 import { axiosInstance } from '@/api/core';
 
 export const getLikeResponse = async (contentId: number, type: boolean) => {
-  let isLiked = 0;
-  if (!type) isLiked = 1;
+  const isLiked = type ? 0 : 1;
 
   try {
     const response = await axiosInstance.post(

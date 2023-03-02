@@ -44,12 +44,14 @@ const CardTop = ({
 
   const handleBookmarkClick = (e: MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setUserBookmarked(!userBookmarked);
     bookmarkResponse.refetch();
   };
 
   const handleLikeClick = (e: MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setUserLiked(!userLiked);
     likeResponse.refetch();
   };
