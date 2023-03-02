@@ -5,8 +5,14 @@ import {
   Route,
 } from 'react-router-dom';
 
-import { HomePage, SignupPage, SearchResultPage, NotFoundPage, MyPage } from '@/pages/index';
-import Layout from '@/components/layout/index';
+import {
+  HomePage,
+  SignupPage,
+  SearchResultPage,
+  NotFoundPage,
+  MyPage,
+} from '@/pages/index';
+import Layout from './components/layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +25,7 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+
 const App = () => {
   return <RouterProvider router={router} />;
 };
