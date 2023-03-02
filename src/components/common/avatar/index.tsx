@@ -6,6 +6,7 @@ export type AvatarProps = {
   src: string;
   shape: 'circle' | 'round' | 'square';
   size: 'small' | 'medium' | 'large' | 'xLarge';
+  [props: string]: {};
 };
 
 const Avatar = ({
@@ -15,7 +16,12 @@ const Avatar = ({
   ...props
 }: AvatarProps) => {
   return (
-    <div className={style.avatar({ size, shape })}>
+    <div
+      className={`${style.avatar({ size, shape })} ${props.className}`}
+      style={{
+        ...props.style,
+      }}
+    >
       <ImageComponent
         defaultImage={defaultProfileImage}
         src={src}
@@ -24,7 +30,6 @@ const Avatar = ({
         width="100%"
         height="auto"
         objectFit="cover"
-        {...props}
       />
     </div>
   );
