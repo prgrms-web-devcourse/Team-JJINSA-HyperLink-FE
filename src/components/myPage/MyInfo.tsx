@@ -30,7 +30,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
 
   const imgRef = useRef<HTMLInputElement>(null);
 
-  const clickAvatar = () => {
+  const handleAvatarClick = () => {
     if (!imgRef.current) {
       return;
     }
@@ -66,7 +66,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         className={style.avatarWrapper}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
-        onClick={clickAvatar}
+        onClick={handleAvatarClick}
       >
         <input
           className={style.input}
