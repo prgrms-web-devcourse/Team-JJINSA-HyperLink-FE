@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Icon } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 import * as style from './style.css';
+import { useQuery } from '@tanstack/react-query';
+import { getBookmarkResponse } from '@/api/bookmark';
+import { getLikeResponse } from '@/api/like';
 
 type CardTopProps = {
-  link: string;
+  contentId: number;
   contentImgUrl: string;
   isBookmarked: boolean;
   isLiked: boolean;
@@ -13,7 +16,7 @@ type CardTopProps = {
 };
 
 const CardTop = ({
-  link,
+  contentId,
   contentImgUrl,
   isBookmarked,
   isLiked,
@@ -23,23 +26,48 @@ const CardTop = ({
   const [userBookmarked, setUserBookmarked] = useState<boolean>(isBookmarked);
   const [userLiked, setUserLiked] = useState<boolean>(isLiked);
 
+  const bookmarkResponse = useQuery(
+    ['bookmark'],
+    () => getBookmarkResponse(contentId, userBookmarked),
+    {
+      enabled: false,
+    }
+  );
+
+  const likeResponse = useQuery(
+    ['like'],
+    () => getLikeResponse(contentId, userLiked),
+    {
+      enabled: false,
+    }
+  );
+
+  const handleBookmarkClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setUserBookmarked(!userBookmarked);
+    bookmarkResponse.refetch();
+  };
+
+  const handleLikeClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setUserLiked(!userLiked);
+    likeResponse.refetch();
+  };
+
   return (
     <section className={style.cardTop}>
-      <a href={link} target="_blank" rel="noreferrer">
-        <ImageComponent
-          defaultImage="https://via.placeholder.com/200"
-          src={contentImgUrl}
-          alt="카드 썸네일 이미지"
-          block={true}
-          width="100%"
-          height="21rem"
-          objectFit="cover"
-        />
-      </a>
-      <div
-        className={style.bookmarkWrapper}
-        onClick={() => setUserBookmarked(!userBookmarked)}
-      >
+      <ImageComponent
+        defaultImage="https://via.placeholder.com/200"
+        src={contentImgUrl}
+        alt="카드 썸네일 이미지"
+        block={true}
+        width="100%"
+        height="21rem"
+        objectFit="cover"
+      />
+      <div className={style.bookmarkWrapper} onClick={handleBookmarkClick}>
         {userBookmarked ? (
           <div className={style.iconWrapper({ bookmark: true })}>
             <Icon
@@ -55,12 +83,12 @@ const CardTop = ({
           </div>
         )}
       </div>
-      <div
-        className={style.numberIconWrapper}
-        onClick={() => setUserLiked(!userLiked)}
-      >
+      <div className={style.numberIconWrapper}>
         {userLiked ? (
-          <div className={style.iconWrapper({ heart: true })}>
+          <div
+            className={style.iconWrapper({ heart: true })}
+            onClick={handleLikeClick}
+          >
             <Icon
               name="heart"
               type="solid"
@@ -70,7 +98,10 @@ const CardTop = ({
             <div style={{ color: 'white' }}>{likeCount}</div>
           </div>
         ) : (
-          <div className={style.iconWrapper({ heart: true })}>
+          <div
+            className={style.iconWrapper({ heart: true })}
+            onClick={handleLikeClick}
+          >
             <Icon name="heart" type="regular" size="medium" />
             <div>{likeCount}</div>
           </div>

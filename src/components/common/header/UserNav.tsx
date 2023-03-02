@@ -1,24 +1,30 @@
-import user from '@/assets/user.svg';
+import { useNavigate } from 'react-router-dom';
 import { Button, Icon } from '@/components/common';
-
-import { logout } from '@/api/auth';
-import { isAuthorizedState } from '@/stores/auth';
-import { isLoginModalVisibleState } from '@/stores/modal';
+import { MyInfoModal } from '@/components/modal';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { isAuthorizedState } from '@/stores/auth';
+import {
+  isLoginModalVisibleState,
+  isMyInfoModalVisibleState,
+} from '@/stores/modal';
+import { logout } from '@/api/auth';
 import * as style from './style.css';
+import user from '@/assets/user.svg';
 
 const UserNav = () => {
+  const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const [isMyInfoModalVisible, setIsMyInfoModalVisible] = useRecoilState(
+    isMyInfoModalVisibleState
+  );
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
-  /*
-    TODO
-    1. 로그인 버튼을 눌렀을 때, 로그인 모달 띄우기 
-    2. 로그인 상태에 따라 헤더 UI 변경
-   */
 
   const handleLogout = async () => {
     await logout();
     setIsAuthorized(false);
+    setIsMyInfoModalVisible(false);
+
+    navigate('/');
   };
 
   return (
@@ -33,12 +39,17 @@ const UserNav = () => {
         <div className={style.iconGroup}>
           <Icon type="regular" name="pen-to-square" size="xLarge" />
           <Icon type="regular" name="bell" size="xLarge" />
-          <button type="button">
+          <button className={style.userIconButton} type="button">
             <img
               className={style.userIcon}
               src={user}
               alt="user image"
-              onClick={handleLogout} // TODO: 내 정보 모달 열기로 변경
+              onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
+            />
+            <MyInfoModal
+              isOpen={isMyInfoModalVisible}
+              onClose={() => setIsMyInfoModalVisible(false)}
+              onLogout={handleLogout}
             />
           </button>
         </div>

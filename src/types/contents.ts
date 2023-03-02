@@ -1,5 +1,6 @@
 export type content = {
   contentId: number;
+  creatorId: number;
 } & contentData;
 
 export type contentData = {

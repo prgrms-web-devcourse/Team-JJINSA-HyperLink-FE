@@ -8,7 +8,6 @@ export const posX = createVar();
 export const posY = createVar();
 export const randomPosX = createVar();
 export const randomPosY = createVar();
-export const size = createVar();
 
 const posXCalc = calc(posX).toString();
 const posYCalc = calc(posY).toString();

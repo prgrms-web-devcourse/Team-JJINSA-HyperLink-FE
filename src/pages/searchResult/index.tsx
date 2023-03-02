@@ -22,7 +22,7 @@ const searchResultPage = () => {
   );
 
   if (isError) return <h3>에러 발생</h3>;
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner size="huge" />;
 
   const { contents } = searchResult;
 

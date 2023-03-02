@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 const { VITE_BASE_URL } = import.meta.env;
+const API_BASE_URL =
+  process.env.NODE_ENV === 'development' ? '' : VITE_BASE_URL;
 
 const axiosApi = (options = {}) => {
-  const instance = axios.create({ baseURL: VITE_BASE_URL, ...options });
+  const instance = axios.create({ baseURL: API_BASE_URL, ...options });
 
   instance.defaults.timeout = 2500;
 

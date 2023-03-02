@@ -1,15 +1,24 @@
 import { style } from '@vanilla-extract/css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
+import { recipe } from '@vanilla-extract/recipes';
 
-export const header = style([
-  utils.fullWidth,
-  utils.flexColumn,
-  {
-    padding: '1.2rem 10rem',
-    borderBottom: '1px solid rgba(0,0,0, 0.3)',
+export const header = recipe({
+  base: [
+    utils.fullWidth,
+    utils.flexColumn,
+    {
+      padding: '1.2rem 10rem',
+    },
+  ],
+  variants: {
+    isScrolled: {
+      true: {
+        borderBottom: '1px solid rgba(0,0,0, 0.3)',
+      },
+    },
   },
-]);
+});
 
 export const top = style([
   utils.fullWidth,
@@ -38,6 +47,8 @@ export const iconGroup = style([
     gap: '2rem',
   },
 ]);
+
+export const userIconButton = style([utils.positionRelative]);
 
 export const userIcon = style([utils.cursorPointer]);
 
