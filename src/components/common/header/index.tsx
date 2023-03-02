@@ -27,7 +27,7 @@ const Header = () => {
           <img src={logo} alt="hyperlink logo" />
         </Link>
         {isHomeScrolled ? <SearchBar /> : <span></span>}
-        <Suspense fallback={<Spinner size="huge" />}>
+        <Suspense fallback={<Spinner />}>
           <UserNav />
         </Suspense>
       </div>
