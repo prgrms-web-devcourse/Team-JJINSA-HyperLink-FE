@@ -11,8 +11,8 @@ import {
   SearchResultPage,
   NotFoundPage,
   MyPage,
-} from '@/pages';
-import Layout from '@/components/layout/index';
+} from '@/pages/index';
+import Layout from './components/layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +25,7 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+
 const App = () => {
   return <RouterProvider router={router} />;
 };

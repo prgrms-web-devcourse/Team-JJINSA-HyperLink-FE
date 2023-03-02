@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Heading, Spinner } from '@/components/common';
+import CardList from '@/components/cardList';
 import { getSearchContents } from '@/api/contents';
 import { contents } from '@/types/contents';
-import { Spinner } from '@/components/common';
 import * as style from './style.css';
-import CardList from '@/components/cardList';
 
 const searchResultPage = () => {
   const { keyword } = useParams() as { keyword: string };
@@ -28,11 +28,20 @@ const searchResultPage = () => {
 
   return (
     <div className={style.wrapper}>
-      <h1>검색 결과 페이지 {keyword}</h1>
       {contents.length ? (
-        <CardList cards={contents} />
+        <>
+          <div className={style.searchInfo}>
+            <p className={style.resultStats}>
+              총 {contents.length}개의 검색 결과
+            </p>
+            <Heading level={5}>
+              &apos;<strong>{keyword}</strong>&apos;에 대한 검색 결과
+            </Heading>
+          </div>
+          <CardList cards={contents} />
+        </>
       ) : (
-        <p>검색 결과가 없습니다.</p>
+        <p className={style.noResult}>{keyword}에 대한 검색 결과가 없습니다.</p>
       )}
     </div>
   );
