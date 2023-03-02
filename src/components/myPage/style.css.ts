@@ -8,9 +8,14 @@ export const avatarWrapper = style([
   },
 ]);
 
+export const input = style({
+  display: 'none',
+});
+
 export const avatar = style({
   cursor: 'pointer',
   transition: 'filter 0.2s ease-in-out',
+  boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
 });
 
 export const hoverAvatar = style({
