@@ -12,24 +12,28 @@ export const input = style({
   display: 'none',
 });
 
-export const avatar = style({
-  cursor: 'pointer',
-  transition: 'filter 0.2s ease-in-out',
-  boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
-});
+export const avatar = style([
+  utils.cursorPointer,
+  {
+    transition: 'filter 0.2s ease-in-out',
+    boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
+  },
+]);
 
 export const hoverAvatar = style({
   filter: 'blur(0.5rem)',
 });
 
-export const avatarText = style({
-  cursor: 'pointer',
-  position: 'absolute',
-  transition: 'all 0.2s ease-in-out',
-  opacity: '0',
-  fontSize: '1.5rem',
-  fontWeight: '600',
-});
+export const avatarText = style([
+  utils.cursorPointer,
+  {
+    position: 'absolute',
+    transition: 'all 0.2s ease-in-out',
+    opacity: '0',
+    fontSize: '1.5rem',
+    fontWeight: '600',
+  },
+]);
 
 export const hoverText = style({
   opacity: '1',
