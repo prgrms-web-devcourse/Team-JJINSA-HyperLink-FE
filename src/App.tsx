@@ -1,8 +1,8 @@
 import {
-  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  RouterProvider,
 } from 'react-router-dom';
 
 import {
@@ -10,7 +10,8 @@ import {
   SignupPage,
   SearchResultPage,
   NotFoundPage,
-} from '@/pages/index';
+  MyPage,
+} from '@/pages';
 import Layout from '@/components/layout/index';
 
 const router = createBrowserRouter(
@@ -18,8 +19,10 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<HomePage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/mypage" element={<MyPage />} />
       <Route path="/search/:keyword" element={<SearchResultPage />} />
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/mypage" element={<MyPage />} />
     </Route>
   )
 );
