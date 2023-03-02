@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { isHomeScrolledState } from '@/stores/scroll';
-import { useQuery } from '@tanstack/react-query';
+import { getCardList } from '@/api/cardlist';
+import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
 import Main from '@/components/main';
-import CardList from '@/components/cardList';
-import { getCardList } from '@/api/cardlist';
+import { isHomeScrolledState } from '@/stores/scroll';
 import { content } from '@/types/contents';
+import { throttleWheel } from '@/utils/optimization/throttle';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import * as style from './style.css';
 
 const Home = () => {
@@ -28,10 +29,10 @@ const Home = () => {
   );
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const wheelHandler = (e: { deltaY: number }) => {
+  const handleWheel = (e: { deltaY: number }) => {
     const { deltaY } = e;
     const { scrollTop } = ref.current;
-    const pageHeight = window.innerHeight - 71;
+    const pageHeight = window.innerHeight - 78;
 
     if (deltaY > 0) {
       if (scrollTop >= 0 && scrollTop < pageHeight) {
@@ -65,7 +66,7 @@ const Home = () => {
     <div
       className={style.container({ isScrolled: isHomeScrolled })}
       ref={ref}
-      onWheel={wheelHandler}
+      onWheel={throttleWheel(handleWheel, 500)}
     >
       <div className={style.banner}>
         <Main />
