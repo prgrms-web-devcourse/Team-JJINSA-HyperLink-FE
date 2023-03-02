@@ -4,8 +4,8 @@ import defaultProfileImage from '@/assets/defaultProfileImage.png';
 
 export type AvatarProps = {
   src: string;
-  shape: 'circle' | 'round' | 'square';
-  size: 'small' | 'medium' | 'large' | 'xLarge';
+  shape?: 'circle' | 'round' | 'square';
+  size?: 'small' | 'medium' | 'large' | 'xLarge';
 };
 
 const Avatar = ({

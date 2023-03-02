@@ -1,6 +1,6 @@
 import { axiosInstance } from './core';
 
-type myInfoResponse = {
+export type myInfoResponse = {
   email: string;
   nickname: string;
   career: string;

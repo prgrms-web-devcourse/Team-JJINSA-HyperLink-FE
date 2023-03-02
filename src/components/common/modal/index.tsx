@@ -20,7 +20,7 @@ const Modal = ({
   ...props
 }: ModalProps) => {
   const ref = useClickAway((e: Event) => {
-    if (e.target instanceof HTMLElement && e.target.tagName !== 'BUTTON') {
+    if (e.target instanceof HTMLElement && !e.target.closest('button')) {
       onClose && onClose();
     }
   });
