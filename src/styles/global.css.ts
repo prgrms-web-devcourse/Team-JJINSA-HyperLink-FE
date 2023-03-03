@@ -67,6 +67,7 @@ globalStyle('button, select, input, textarea', {
   border: 0,
   outline: 0,
   backgroundColor: 'transparent',
+  fontFamily: variants.font.default,
 });
 
 globalStyle('a, button', {
