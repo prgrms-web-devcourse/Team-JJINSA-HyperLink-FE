@@ -3,13 +3,15 @@ import * as variants from '@/styles/variants.css';
 import * as utils from '@/styles/utils.css';
 
 export const button = recipe({
-  base: {
-    display: 'inline-block',
-    textAlign: 'center',
-    transition: 'all 130ms ease-in-out',
-    whiteSpace: 'nowrap',
-    ':disabled': { cursor: 'not-allowed' },
-  },
+  base: [
+    utils.textAlignCenter,
+    utils.spaceNoWrap,
+    {
+      display: 'inline-block',
+      transition: 'all 130ms ease-in-out',
+      ':disabled': { cursor: 'not-allowed' },
+    },
+  ],
   variants: {
     version: {
       blue: {
