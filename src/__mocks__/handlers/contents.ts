@@ -106,6 +106,10 @@ const SEARCH_RESULT = {
 
 export const contentsHandlers = [
   rest.get(`/contents/search`, (req, res, ctx) => {
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(400));
+    }
+
     const keyword = req.url.searchParams.get('keyword');
     const page = req.url.searchParams.get('page');
     const size = req.url.searchParams.get('page');
