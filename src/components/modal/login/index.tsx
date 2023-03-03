@@ -24,14 +24,14 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       const response = await googleOAuth(res.code);
       onClose();
 
-      if (response?.joinCheck) {
-        navigate('/signup', { state: { email: response.email } });
+      if (response?.wasSignedUp) {
+        await login();
+        setIsAuthorized(true);
+        navigate('/');
         return;
       }
 
-      await login();
-      setIsAuthorized(true);
-      navigate('/');
+      navigate('/signup', { state: { email: response?.email } });
     },
     flow: 'auth-code',
   });
