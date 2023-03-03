@@ -18,18 +18,15 @@ const CategryModal = ({
   selectedList,
   setSelectedList,
 }: CategryModalProps) => {
-  const selectedCategorySet = new Set(selectedList);
-  const [newSelectedList, setNewSelectedList] = useState(selectedList);
+  const selectedCategorySet = new Set([...selectedList]);
 
   const handleSelect = (category: string) => {
     if (selectedCategorySet.has(category)) selectedCategorySet.delete(category);
     else selectedCategorySet.add(category);
-
-    setNewSelectedList([...selectedCategorySet]);
   };
 
   const handleSubmit = () => {
-    setSelectedList(newSelectedList);
+    setSelectedList([...selectedCategorySet]);
   };
 
   return (
@@ -44,10 +41,11 @@ const CategryModal = ({
           </div>
         </div>
         <div className={style.modalSelectWrapper}>
-          {categoryList.map((category) => {
+          {categoryList.map((category, i) => {
             const isSelected = selectedCategorySet.has(category);
             return (
               <CategoryButton
+                key={i}
                 text={category}
                 clicked={isSelected ? true : false}
                 onClick={() => {
