@@ -1,6 +1,6 @@
 import ImageComponent from '@/components/common/Image';
 import * as style from './style.css';
-import defaultProfileImage from '@/assets/defaultProfileImage.png';
+import defaultProfileImage from '/assets/defaultProfileImage.png';
 
 export type AvatarProps = {
   src: string;

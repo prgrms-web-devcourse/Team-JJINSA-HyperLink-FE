@@ -1,6 +1,6 @@
 import { googleOAuth, login } from '@/api/auth';
-import logo from '@/assets/favicon.ico';
-import googleLogo from '@/assets/googleLogo.png';
+import logo from '/favicon.ico';
+import googleLogo from '/assets/googleLogo.png';
 import { Avatar, Heading, Icon, Modal, Text } from '@/components/common';
 import { isAuthorizedState } from '@/stores/auth';
 

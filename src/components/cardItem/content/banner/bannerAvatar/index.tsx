@@ -1,7 +1,7 @@
 import { Avatar } from '@/components/common';
 import { useState, useEffect } from 'react';
 import * as style from './style.css';
-import favicon from '@/assets/favicon.ico';
+import favicon from '/favicon.ico';
 import { company } from '@/types/contents';
 
 const BannerAvatar = ({ companies }: { companies?: company[] }) => {
