@@ -1,6 +1,5 @@
 import { Button, Icon, Modal, Text } from '@/components/common';
 import { useState } from 'react';
-import CategoryButton from './categoryButton';
 import * as style from './style.css';
 
 export type CategryModalProps = {
@@ -18,15 +17,20 @@ const CategryModal = ({
   selectedList,
   setSelectedList,
 }: CategryModalProps) => {
-  const selectedCategorySet = new Set([...selectedList]);
+  const [newSelectedList, setNewSelectedList] = useState(
+    new Set([...selectedList])
+  );
 
   const handleSelect = (category: string) => {
-    if (selectedCategorySet.has(category)) selectedCategorySet.delete(category);
+    const selectedCategorySet = new Set(newSelectedList);
+    if (newSelectedList.has(category)) selectedCategorySet.delete(category);
     else selectedCategorySet.add(category);
+
+    setNewSelectedList(selectedCategorySet);
   };
 
   const handleSubmit = () => {
-    setSelectedList([...selectedCategorySet]);
+    setSelectedList([...newSelectedList]);
   };
 
   return (
@@ -42,15 +46,15 @@ const CategryModal = ({
         </div>
         <div className={style.modalSelectWrapper}>
           {categoryList.map((category, i) => {
-            const isSelected = selectedCategorySet.has(category);
+            const isSelected = newSelectedList.has(category);
             return (
-              <CategoryButton
-                key={i}
+              <Button
+                key={category}
+                version={isSelected ? 'blue' : 'grayInverted'}
+                fontSize="medium"
+                paddingSize="small"
                 text={category}
-                clicked={isSelected ? true : false}
-                onClick={() => {
-                  handleSelect(category);
-                }}
+                onClick={() => handleSelect(category)}
               />
             );
           })}
