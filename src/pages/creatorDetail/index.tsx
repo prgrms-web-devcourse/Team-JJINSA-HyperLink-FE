@@ -4,7 +4,7 @@ import * as style from './style.css';
 
 const FILTER = ['최신순', '인기순'];
 
-const CreatorPage = () => {
+const CreatorDetailPage = () => {
   const [selectedFilter, setSelectedFilter] = useState(FILTER[0]);
 
   return (
@@ -49,4 +49,4 @@ const CreatorPage = () => {
   );
 };
 
-export default CreatorPage;
+export default CreatorDetailPage;
