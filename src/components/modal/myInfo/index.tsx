@@ -12,6 +12,12 @@ const CAREER: { [key: string]: string } = {
   etc: '기타',
 };
 
+const MENU_LIST = {
+  '북마크 / 히스토리': '/',
+  '내 정보': '/mypage',
+  로그아웃: 'logout',
+};
+
 export type MyInfoModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -48,15 +54,17 @@ const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
           </div>
         </div>
         <ul>
-          <li className={style.menuItem} onClick={() => navigate('/')}>
-            북마크 / 히스토리
-          </li>
-          <li className={style.menuItem} onClick={() => navigate('/mypage')}>
-            내 정보
-          </li>
-          <li className={style.menuItem} onClick={onLogout}>
-            로그아웃
-          </li>
+          {Object.entries(MENU_LIST).map(([menuName, path], idx) => {
+            return (
+              <li
+                key={idx}
+                className={style.menuItem}
+                onClick={path === 'logout' ? onLogout : () => navigate(path)}
+              >
+                {menuName}
+              </li>
+            );
+          })}
         </ul>
       </Suspense>
     </Modal>
