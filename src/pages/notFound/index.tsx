@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import alert from '@/assets/alert.svg';
+import alert from '/assets/alert.svg';
 import { Button, Heading } from '@/components/common';
 import * as style from './style.css';
 

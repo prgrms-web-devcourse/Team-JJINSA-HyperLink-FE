@@ -9,7 +9,7 @@ import {
 } from '@/stores/modal';
 import { logout } from '@/api/auth';
 import * as style from './style.css';
-import user from '@/assets/user.svg';
+import user from '/assets/user.svg';
 
 const UserNav = () => {
   const navigate = useNavigate();
