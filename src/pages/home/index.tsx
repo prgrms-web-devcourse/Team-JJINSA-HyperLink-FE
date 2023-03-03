@@ -13,20 +13,20 @@ import * as style from './style.css';
 const Home = () => {
   const [isHomeScrolled, setIsHomeScrolled] =
     useRecoilState(isHomeScrolledState);
-  const [cards, setCards] = useState<content[]>([]);
-  const category = 'all';
-  const { isLoading, isError } = useQuery(
-    ['cardlist', category],
-    async () => await getCardList(category),
-    {
-      refetchOnWindowFocus: false,
-      retry: 0,
-      onSuccess: (data: content[]) => {
-        console.log(data);
-        setCards(data);
-      },
-    }
-  );
+  // const [cards, setCards] = useState<content[]>([]);
+  // const category = 'all';
+  // const { isLoading, isError } = useQuery(
+  //   ['cardlist', category],
+  //   async () => await getCardList(category),
+  //   {
+  //     refetchOnWindowFocus: false,
+  //     retry: 0,
+  //     onSuccess: (data: content[]) => {
+  //       console.log(data);
+  //       setCards(data);
+  //     },
+  //   }
+  // );
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {
@@ -59,8 +59,8 @@ const Home = () => {
     setIsHomeScrolled(false);
   }, []);
 
-  if (isError) return <div>Error!!!</div>;
-  if (isLoading) return <Spinner size="huge" />;
+  // if (isError) return <div>Error!!!</div>;
+  // if (isLoading) return <Spinner size="huge" />;
 
   return (
     <div
@@ -71,9 +71,7 @@ const Home = () => {
       <div className={style.banner}>
         <Main />
       </div>
-      <div className={style.content}>
-        <CardList cards={cards} />
-      </div>
+      <div className={style.content}>{/* <CardList cards={cards} /> */}</div>
     </div>
   );
 };

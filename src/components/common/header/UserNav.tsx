@@ -44,13 +44,14 @@ const UserNav = () => {
               className={style.userIcon}
               src={user}
               alt="user image"
-              onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
+              // onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
+              onClick={handleLogout}
             />
-            <MyInfoModal
+            {/* <MyInfoModal
               isOpen={isMyInfoModalVisible}
               onClose={() => setIsMyInfoModalVisible(false)}
               onLogout={handleLogout}
-            />
+            /> */}
           </button>
         </div>
       )}
