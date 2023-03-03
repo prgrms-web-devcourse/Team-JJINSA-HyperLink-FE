@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { myInfo } from './member';
 
 export const authHandlers = [
-  rest.get('/members/oauth/google', (req, res, ctx) => {
+  rest.get('/members/oauth/code/google', (req, res, ctx) => {
     const code = req.url.searchParams.get('code');
 
     if (!code) {
@@ -14,7 +14,7 @@ export const authHandlers = [
       ctx.json({
         accessToken:
           'AAAAOT42pxCMcDQrNBbEwEVUt-eAnKfUje51bNjQYt2meoaeJ_1T5kVNAW9WTmwP-vhwePbF5wn7Gr-HSNsRxmCa_U4',
-        joinCheck: true, // 회원가입: true, 로그인: false
+        wasSignedUp: false, // 회원가입: false, 로그인: true
         email: 'mswtest123@gmail.com',
       })
     );
