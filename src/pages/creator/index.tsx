@@ -1,7 +1,12 @@
+import { useState } from 'react';
 import { Button, Avatar, Heading } from '@/components/common';
 import * as style from './style.css';
 
+const FILTER = ['최신순', '인기순'];
+
 const CreatorPage = () => {
+  const [selectedFilter, setSelectedFilter] = useState(FILTER[0]);
+
   return (
     <div className={style.wrapper}>
       <div className={style.creator}>
@@ -20,10 +25,24 @@ const CreatorPage = () => {
           </div>
         </div>
         <Button
+          version="blueInverted"
           paddingSize="small"
+          isBold={true}
           onClick={() => console.log('구독')}
           text="구독"
         />
+      </div>
+      <div className={style.filterButtonGroup}>
+        {FILTER.map((type, idx) => (
+          <Button
+            key={idx}
+            version={selectedFilter === type ? 'gray' : 'white'}
+            isBold={selectedFilter === type ? true : false}
+            shape="circle"
+            text={type}
+            onClick={() => setSelectedFilter(type)}
+          />
+        ))}
       </div>
       {/* 해당 크리에이터 게시글 카드 리스트 */}
     </div>

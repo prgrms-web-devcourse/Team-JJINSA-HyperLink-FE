@@ -35,3 +35,11 @@ export const description = style({
   fontSize: variants.fontSize.small,
   color: variants.color.font.primary,
 });
+
+export const filterButtonGroup = style([
+  utils.flexAlignCenter,
+  {
+    margin: '4rem 0',
+    gap: '1rem',
+  },
+]);
