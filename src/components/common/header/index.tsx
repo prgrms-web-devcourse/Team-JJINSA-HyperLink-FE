@@ -27,6 +27,7 @@ const Header = () => {
           <img src={logo} alt="hyperlink logo" />
         </Link>
         {isHomeScrolled ? <SearchBar /> : <span></span>}
+        {/* Suspense 다른 걸로 교체, 메인 페이지 배너 가운데에 생기는 버그 */}
         <Suspense fallback={<Spinner />}>
           <UserNav />
         </Suspense>

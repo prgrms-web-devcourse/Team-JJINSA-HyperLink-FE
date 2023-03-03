@@ -3,6 +3,76 @@ import { rest } from 'msw';
 const SEARCH_RESULT = {
   contents: [
     {
+      contentId: 1,
+      creatorId: 1,
+      link: 'https://google.com',
+      contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
+      isBookmarked: false,
+      isLiked: false,
+      likeCount: 4,
+      viewCount: 100,
+      creatorName: '요즘 IT',
+      createdAt: '2023.02.17',
+      title: '개발자의 삶',
+      recommendationCompanies: [
+        {
+          companyName: '카카오',
+          companyLogoImgUrl:
+            'https://avatars.githubusercontent.com/u/60571418?v=4',
+        },
+        {
+          companyName: '프로그래머스',
+          companyLogoImgUrl:
+            'https://avatars.githubusercontent.com/u/88082564?s=100&v=4',
+        },
+        {
+          companyName: '벨로퍼트',
+          companyLogoImgUrl:
+            'https://avatars.githubusercontent.com/u/17202261?s=100&v=4',
+        },
+        {
+          companyName: '원티드',
+          companyLogoImgUrl:
+            'https://avatars.githubusercontent.com/u/100328104?s=200&v=4',
+        },
+      ],
+    },
+    {
+      contentId: 2,
+      creatorId: 2,
+      link: 'https://google.com',
+      contentImgUrl: 'https://avatars.githubusercontent.com/u/60571418?v=4',
+      isBookmarked: false,
+      isLiked: false,
+      likeCount: 4,
+      viewCount: 100,
+      creatorName: '요즘 IT',
+      createdAt: '2023.02.17',
+      title: '2023년도 웹 개발 트렌트',
+      // recommendationCompanies: [
+      //   {
+      //     companyName: '원티드',
+      //     companyLogoImgUrl:
+      //       'https://avatars.githubusercontent.com/u/100328104?s=200&v=4',
+      //   },
+      //   {
+      //     companyName: '벨로퍼트',
+      //     companyLogoImgUrl:
+      //       'https://avatars.githubusercontent.com/u/17202261?s=100&v=4',
+      //   },
+      //   {
+      //     companyName: '카카오',
+      //     companyLogoImgUrl:
+      //       'https://avatars.githubusercontent.com/u/60571418?v=4',
+      //   },
+      //   {
+      //     companyName: '프로그래머스',
+      //     companyLogoImgUrl:
+      //       'https://avatars.githubusercontent.com/u/88082564?s=100&v=4',
+      //   },
+      // ],
+    },
+    {
       contentId: 13,
       title: '개발자의 삶',
       creatorName: '슈카',
@@ -104,7 +174,7 @@ const SEARCH_RESULT = {
   resultCount: 10,
 };
 
-export const contentsHandlers = [
+export const searchContentsHandlers = [
   rest.get(`/contents/search`, (req, res, ctx) => {
     const keyword = req.url.searchParams.get('keyword');
     const page = req.url.searchParams.get('page');
