@@ -15,8 +15,10 @@ const Layout = () => {
 
   useEffect(() => {
     (async () => {
-      await silentRefresh();
-      setIsAuthorized(true);
+      const response = await silentRefresh();
+      if (response) {
+        setIsAuthorized(true);
+      }
     })();
   }, []);
 
