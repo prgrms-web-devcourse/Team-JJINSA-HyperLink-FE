@@ -24,7 +24,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
-    "recoil": "^0.7.6"
+    "recoil": "^0.7.6",
+    "vercel": "^28.16.12"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
