@@ -7,12 +7,13 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     fetchNextPage: getNextPage,
     isSuccess: getContentsIsSuccess,
     hasNextPage: getNextPageIsPossible,
-    isFetching,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery(
-    ['main_contents'],
+    [category],
     ({ pageParam = 0 }) => getMainContents(pageParam, category),
     {
+      refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
         // lastPage는 콜백함수에서 리턴한 값을 의미
         // lastPage: 직전에 반환된 리턴값
@@ -28,7 +29,7 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     getNextPage,
     getContentsIsSuccess,
     getNextPageIsPossible,
-    isFetching,
     isFetchingNextPage,
+    refetch,
   };
 };

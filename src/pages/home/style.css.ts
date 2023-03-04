@@ -29,6 +29,14 @@ export const banner = style([
 ]);
 
 export const content = style({
-  padding: '5rem 0',
+  paddingBottom: '1rem',
   minHeight: 'calc(100vh - 7.1rem)',
 });
+
+export const filterButtonGroup = style([
+  utils.flexAlignCenter,
+  {
+    margin: '2rem 0',
+    gap: '1rem',
+  },
+]);

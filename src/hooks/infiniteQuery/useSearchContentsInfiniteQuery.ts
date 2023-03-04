@@ -14,6 +14,7 @@ export const useSearchContentsInfiniteQuery = (keyword: string) => {
     ['search_contents'],
     ({ pageParam = 0 }) => getSearchContents(pageParam, keyword),
     {
+      refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
         // lastPage는 콜백함수에서 리턴한 값을 의미
         // lastPage: 직전에 반환된 리턴값

@@ -4,10 +4,17 @@ import { isHomeScrolledState } from '@/stores/scroll';
 import Main from '@/components/main';
 import * as style from './style.css';
 import MainContents from '@/components/mainContents';
+import { Button } from '@/components/common';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+
+const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
 const Home = () => {
   const [isHomeScrolled, setIsHomeScrolled] =
     useRecoilState(isHomeScrolledState);
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedCategoryState
+  );
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const wheelHandler = (e: { deltaY: number }) => {
@@ -50,6 +57,18 @@ const Home = () => {
         <Main />
       </div>
       <div className={style.content}>
+        <div className={style.filterButtonGroup}>
+          {CATEGORIES.map((category, idx) => (
+            <Button
+              key={idx}
+              version={selectedCategory === category ? 'gray' : 'white'}
+              isBold={selectedCategory === category ? true : false}
+              shape="circle"
+              text={category}
+              onClick={() => setSelectedCategory(category)}
+            />
+          ))}
+        </div>
         <MainContents />
       </div>
     </div>

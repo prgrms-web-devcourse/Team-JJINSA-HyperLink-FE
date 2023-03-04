@@ -12,6 +12,7 @@ const MainContents = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedCategoryState
   );
+
   const { ref, inView } = useInView({ threshold: 0.9 });
   const {
     getContents,
@@ -19,13 +20,19 @@ const MainContents = () => {
     getContentsIsSuccess,
     getNextPageIsPossible,
     isFetchingNextPage,
+    refetch,
   } = useMainContentsInfiniteQuery(selectedCategory);
 
   useEffect(() => {
     if (inView && getNextPageIsPossible) {
       getNextPage();
     }
-  }, [inView, selectedCategory]);
+  }, [inView]);
+
+  useEffect(() => {
+    console.log(selectedCategory);
+    refetch();
+  }, [selectedCategory]);
 
   return (
     <CardList>
