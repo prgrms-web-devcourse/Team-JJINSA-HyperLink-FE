@@ -59,10 +59,8 @@ const MainContents = () => {
             })
           : null
       }
-      <div className={style.fetching}>
-        {isFetchingNextPage && (
-          <Spinner size="huge" color="" style={{ zIndex: 9000 }} />
-        )}
+      <div>
+        {isFetchingNextPage && <Spinner size="huge" style={{ zIndex: 9000 }} />}
       </div>
     </CardList>
   );

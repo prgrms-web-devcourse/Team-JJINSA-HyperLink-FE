@@ -65,7 +65,6 @@ const CreatorDetailPage = () => {
         selectedCategory={selectedFilter}
         setSelectedCategory={setSelectedFilter}
       />
-      {/* 해당 크리에이터 게시글 카드 리스트 */}
       <CardList>
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
