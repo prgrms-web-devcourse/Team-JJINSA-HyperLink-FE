@@ -12,13 +12,15 @@ import {
   CreatorDetailPage,
   MyPage,
   NotFoundPage,
-} from '@/pages/index';
+  AdminPage,
+} from '@/pages';
 import Layout from './components/layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<HomePage />} />
+      <Route path="/admin" element={<AdminPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/search/:keyword" element={<SearchResultPage />} />
