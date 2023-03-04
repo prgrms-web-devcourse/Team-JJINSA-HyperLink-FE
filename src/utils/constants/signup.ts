@@ -14,18 +14,18 @@ export const JOBS: { [key: string]: string } = {
 };
 
 export const CAREERS: { [key: string]: string } = {
-  '1년 미만': 'less1',
-  '1년': '1',
-  '2년': '2',
-  '3년': '3',
-  '4년': '4',
-  '5년': '5',
-  '6년': '6',
-  '7년': '7',
-  '8년': '8',
-  '9년': '9',
-  '10년': '10',
-  '10년 이상': 'more10',
+  '1년 미만': 'lessThanOne',
+  '1년': 'one',
+  '2년': 'two',
+  '3년': 'three',
+  '4년': 'four',
+  '5년': 'five',
+  '6년': 'six',
+  '7년': 'seven',
+  '8년': 'eight',
+  '9년': 'nine',
+  '10년': 'ten',
+  '10년 이상': 'moreThanTen',
 };
 
 export const GENDERS: { [key: string]: string } = { 남: 'man', 여: 'woman' };
