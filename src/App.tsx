@@ -9,8 +9,9 @@ import {
   HomePage,
   SignupPage,
   SearchResultPage,
-  NotFoundPage,
+  CreatorDetailPage,
   MyPage,
+  NotFoundPage,
 } from '@/pages/index';
 import Layout from './components/layout';
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/search/:keyword" element={<SearchResultPage />} />
+      <Route path="/creator/:creatorName" element={<CreatorDetailPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
