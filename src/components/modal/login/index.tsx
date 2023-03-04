@@ -1,6 +1,6 @@
 import { googleOAuth, login } from '@/api/auth';
-import logo from '@/assets/favicon.ico';
-import googleLogo from '@/assets/googleLogo.png';
+import logo from '/favicon.ico';
+import googleLogo from '/assets/googleLogo.png';
 import { Avatar, Heading, Icon, Modal, Text } from '@/components/common';
 import { isAuthorizedState } from '@/stores/auth';
 
@@ -24,14 +24,14 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       const response = await googleOAuth(res.code);
       onClose();
 
-      if (response?.joinCheck) {
-        navigate('/signup', { state: { email: response.email } });
+      if (response?.wasSignedUp) {
+        await login();
+        setIsAuthorized(true);
+        navigate('/');
         return;
       }
 
-      await login();
-      setIsAuthorized(true);
-      navigate('/');
+      navigate('/signup', { state: { email: response?.email } });
     },
     flow: 'auth-code',
   });

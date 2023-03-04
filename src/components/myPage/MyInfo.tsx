@@ -1,6 +1,6 @@
 import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import * as style from './style.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
 
@@ -11,6 +11,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const { email, nickname, profileImage, career, careerYear } = myInfo;
 
   const [newProfileImage, setNewProfileImage] = useState(profileImage);
+  const [imageFile, setImageFile] = useState<File | null>();
   const { value: newNickname, onChange: onChangeNewNickname } =
     useInput(nickname);
   const [newCareer, setNewCareer] = useState(career);
@@ -27,14 +28,62 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     }
   };
 
+  const imgRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarClick = () => {
+    if (!imgRef.current) {
+      return;
+    }
+    imgRef.current.click();
+  };
+
+  const saveImgFile = () => {
+    const file = imgRef.current?.files && imgRef.current?.files[0];
+    setImageFile(file);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file as File);
+    reader.onloadend = () => {
+      setNewProfileImage(reader.result as string);
+    };
+  };
+
   const handleSubmit = () => {
     // 회원 정보 변경시 로직
   };
 
+  const [isHovering, setIsHovering] = useState(false);
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   return (
     <>
-      <div className={style.avatarWrapper}>
-        <Avatar src={newProfileImage} shape="circle" size="xLarge" />
+      <div
+        className={style.avatarWrapper}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+        onClick={handleAvatarClick}
+      >
+        <input
+          className={style.input}
+          type="file"
+          accept="image/*"
+          ref={imgRef}
+          onChange={saveImgFile}
+        />
+        <Avatar
+          src={newProfileImage}
+          shape="circle"
+          size="xLarge"
+          className={`${style.avatar}  ${isHovering && style.hoverAvatar}`}
+        />
+        <div className={`${style.avatarText} ${isHovering && style.hoverText}`}>
+          사진 변경하기
+        </div>
       </div>
       <Input type="email" label="이메일" value={email} readOnly />
       <Input

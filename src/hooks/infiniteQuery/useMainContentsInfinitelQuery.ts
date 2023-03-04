@@ -10,7 +10,7 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery(
-    [category],
+    ['main_contents', category],
     ({ pageParam = 0 }) => getMainContents(pageParam, category),
     {
       refetchOnWindowFocus: false,

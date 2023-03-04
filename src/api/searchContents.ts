@@ -13,5 +13,6 @@ export const getSearchContents = async (pageParam: number, keyword: string) => {
     current_page: pageParam,
     // 페이지가 마지막인지 알려주는 서버에서 넘겨준 true/false 값
     isLast: !response.hasNext,
+    totalCount: response.resultCount,
   };
 };

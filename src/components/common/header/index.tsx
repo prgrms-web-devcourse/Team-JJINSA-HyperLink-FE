@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import UserNav from './UserNav';
 
-import logo from '@/assets/logo.svg';
+import logo from '/assets/logo.svg';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';

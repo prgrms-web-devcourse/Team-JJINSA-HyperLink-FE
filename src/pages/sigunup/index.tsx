@@ -71,7 +71,7 @@ const SignupPage = () => {
         .map((e) => e[1]),
       career: JOBS[job],
       careerYear: CAREERS[career],
-      birthYear,
+      birthYear: parseInt(birthYear, 10),
     });
 
     setIsAuthorized(true);

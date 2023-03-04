@@ -30,7 +30,6 @@ const MainContents = () => {
   }, [inView]);
 
   useEffect(() => {
-    console.log(selectedCategory);
     refetch();
   }, [selectedCategory]);
 

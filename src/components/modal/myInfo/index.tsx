@@ -1,8 +1,22 @@
+import { Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Modal, Spinner } from '@/components/common';
 import { useQuery } from '@tanstack/react-query';
+import { Avatar, Modal, Spinner } from '@/components/common';
 import { getMyInfo, myInfoResponse } from '@/api/member';
 import * as style from './style.css';
+
+const CAREER: { [key: string]: string } = {
+  develop: '개발',
+  beauty: '패션, 뷰티',
+  finance: '경제, 금융',
+  etc: '기타',
+};
+
+const MENU_LIST = {
+  '북마크 / 히스토리': '/',
+  '내 정보': '/mypage',
+  로그아웃: 'logout',
+};
 
 export type MyInfoModalProps = {
   isOpen: boolean;
@@ -13,11 +27,10 @@ export type MyInfoModalProps = {
 const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
   const navigate = useNavigate();
 
-  const { data: myInfo, isLoading } = useQuery(['myInfo'], getMyInfo, {
+  const { data: myInfo } = useQuery(['myInfo'], getMyInfo, {
     refetchOnWindowFocus: false,
+    suspense: true,
   });
-
-  if (isLoading) return <Spinner size="huge" />;
 
   const { email, nickname, career, careerYear, profileImage } =
     myInfo as myInfoResponse;
@@ -29,27 +42,31 @@ const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
       type="icon"
       style={{ padding: '1.2rem', textAlign: 'start' }}
     >
-      <div className={style.myInfo}>
-        <Avatar src={profileImage} size="medium" />
-        <div className={style.myInfoDetail}>
-          <div className={style.nickname}>{nickname}</div>
-          <div className={style.career}>
-            <span>{career}</span> | <span>경력 {careerYear}년차</span>
+      <Suspense fallback={<Spinner />}>
+        <div className={style.myInfo}>
+          <Avatar src={profileImage} size="medium" />
+          <div className={style.myInfoDetail}>
+            <div className={style.nickname}>{nickname}</div>
+            <div className={style.career}>
+              <span>{CAREER[career]}</span> | <span>경력 {careerYear}년차</span>
+            </div>
+            <div className={style.email}>{email}</div>
           </div>
-          <div className={style.email}>{email}</div>
         </div>
-      </div>
-      <ul>
-        <li className={style.menuItem} onClick={() => navigate('/')}>
-          북마크 / 히스토리
-        </li>
-        <li className={style.menuItem} onClick={() => navigate('/mypage')}>
-          내 정보
-        </li>
-        <li className={style.menuItem} onClick={onLogout}>
-          로그아웃
-        </li>
-      </ul>
+        <ul>
+          {Object.entries(MENU_LIST).map(([menuName, path], idx) => {
+            return (
+              <li
+                key={idx}
+                className={style.menuItem}
+                onClick={path === 'logout' ? onLogout : () => navigate(path)}
+              >
+                {menuName}
+              </li>
+            );
+          })}
+        </ul>
+      </Suspense>
     </Modal>
   );
 };

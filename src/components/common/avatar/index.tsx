@@ -1,11 +1,15 @@
 import ImageComponent from '@/components/common/Image';
+import { CSSProperties } from 'react';
 import * as style from './style.css';
-import defaultProfileImage from '@/assets/defaultProfileImage.png';
+import defaultProfileImage from '/assets/defaultProfileImage.png';
 
 export type AvatarProps = {
   src: string;
-  shape?: 'circle' | 'round' | 'square';
-  size?: 'small' | 'medium' | 'large' | 'xLarge';
+  shape: 'circle' | 'round' | 'square';
+  size: 'small' | 'medium' | 'large' | 'xLarge';
+  // [props: string]: {};
+  style?: CSSProperties;
+  className: string;
 };
 
 const Avatar = ({
@@ -15,7 +19,12 @@ const Avatar = ({
   ...props
 }: AvatarProps) => {
   return (
-    <div className={style.avatar({ size, shape })}>
+    <div
+      className={`${style.avatar({ size, shape })} ${props.className}`}
+      style={{
+        ...props.style,
+      }}
+    >
       <ImageComponent
         defaultImage={defaultProfileImage}
         src={src}
@@ -24,7 +33,6 @@ const Avatar = ({
         width="100%"
         height="auto"
         objectFit="cover"
-        {...props}
       />
     </div>
   );

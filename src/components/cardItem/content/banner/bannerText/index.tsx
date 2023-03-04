@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { company } from '@/types/contents';
-import favicon from '@/assets/favicon.ico';
+import favicon from '/favicon.ico';
 import * as style from './style.css';
 
 const BannerText = ({ companies }: { companies?: company[] }) => {

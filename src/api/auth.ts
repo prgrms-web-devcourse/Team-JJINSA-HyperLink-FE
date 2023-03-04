@@ -4,13 +4,13 @@ const ACCESS_TOKEN_EXPIRY_TIME = 60 * 60 * 1000;
 
 type googleOAuthResponse = {
   accessToken: string;
-  joinCheck: boolean;
+  wasSignedUp: boolean;
   email: string;
 };
 export const googleOAuth = async (code: string) => {
   try {
     const response: googleOAuthResponse = await axiosInstance.get(
-      `/members/oauth/google?code=${code}`
+      `/members/oauth/code/google?code=${code}`
     );
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${response.accessToken}`;
 
@@ -42,7 +42,7 @@ type signupProps = {
   attentionCategory: string[];
   career: string;
   careerYear: string;
-  birthYear: string;
+  birthYear: number;
 };
 
 export const signup = async (data: signupProps) => {

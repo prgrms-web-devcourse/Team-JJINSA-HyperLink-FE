@@ -5,7 +5,7 @@ import ContentCard from '@/components/cardItem/content';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useSearchContentsInfiniteQuery } from '@/hooks/infiniteQuery/useSearchContentsInfiniteQuery';
-import { Spinner } from '@/components/common';
+import { Heading, Spinner } from '@/components/common';
 
 const searchResultPage = () => {
   const { keyword } = useParams() as { keyword: string };
@@ -20,6 +20,7 @@ const searchResultPage = () => {
     isFetching,
     isFetchingNextPage,
   } = useSearchContentsInfiniteQuery(keyword);
+  const searchResultCount = getContents?.pages[0].totalCount;
 
   useEffect(() => {
     if (inView && getNextPageIsPossible) {
@@ -37,7 +38,14 @@ const searchResultPage = () => {
     <div>검색 결과 api 에러!!!</div>
   ) : (
     <div className={style.wrapper}>
-      <h1>검색 결과 페이지 {keyword}</h1>
+      <div className={style.searchInfo}>
+        <p className={style.resultStats}>
+          총 {searchResultCount}개의 검색 결과
+        </p>
+        <Heading level={5}>
+          &apos;<strong>{keyword}</strong>&apos;에 대한 검색 결과
+        </Heading>
+      </div>
       <CardList>
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링

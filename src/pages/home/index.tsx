@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { isHomeScrolledState } from '@/stores/scroll';
 import Main from '@/components/main';
+import { throttleWheel } from '@/utils/optimization/throttle';
 import * as style from './style.css';
 import MainContents from '@/components/mainContents';
 import { Button } from '@/components/common';
@@ -17,10 +18,10 @@ const Home = () => {
   );
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const wheelHandler = (e: { deltaY: number }) => {
+  const handleWheel = (e: { deltaY: number }) => {
     const { deltaY } = e;
     const { scrollTop } = ref.current;
-    const pageHeight = window.innerHeight - 71;
+    const pageHeight = window.innerHeight - 78;
 
     if (deltaY > 0) {
       if (scrollTop >= 0 && scrollTop < pageHeight) {
@@ -51,7 +52,7 @@ const Home = () => {
     <div
       className={style.container({ isScrolled: isHomeScrolled })}
       ref={ref}
-      onWheel={wheelHandler}
+      onWheel={throttleWheel(handleWheel, 500)}
     >
       <div className={style.banner}>
         <Main />
