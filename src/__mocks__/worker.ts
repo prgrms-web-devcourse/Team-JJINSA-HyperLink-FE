@@ -2,8 +2,8 @@ import { setupWorker } from 'msw';
 import {
   authHandlers,
   memberHandlers,
-  contentsHandlers,
-  cardlistHandlers,
+  searchContentsHandlers,
+  mainContentsHandlers,
   bookmarkHandlers,
   likeHandlers,
   notRecommendHandlers,
@@ -13,8 +13,8 @@ import {
 export const worker = setupWorker(
   ...authHandlers,
   ...memberHandlers,
-  ...contentsHandlers,
-  ...cardlistHandlers,
+  ...searchContentsHandlers,
+  ...mainContentsHandlers,
   ...bookmarkHandlers,
   ...likeHandlers,
   ...notRecommendHandlers,

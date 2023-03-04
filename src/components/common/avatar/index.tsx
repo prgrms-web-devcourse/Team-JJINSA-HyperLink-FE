@@ -1,4 +1,5 @@
 import ImageComponent from '@/components/common/Image';
+import { CSSProperties } from 'react';
 import * as style from './style.css';
 import defaultProfileImage from '/assets/defaultProfileImage.png';
 
@@ -6,7 +7,9 @@ export type AvatarProps = {
   src: string;
   shape: 'circle' | 'round' | 'square';
   size: 'small' | 'medium' | 'large' | 'xLarge';
-  [props: string]: {};
+  // [props: string]: {};
+  style?: CSSProperties;
+  className: string;
 };
 
 const Avatar = ({

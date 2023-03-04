@@ -1,5 +1,4 @@
 import * as utils from '@/styles/utils.css';
-import { color } from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
 
 export const modalContent = style([

@@ -1,32 +1,21 @@
-import { getCardList } from '@/api/cardlist';
-import CardList from '@/components/cardList';
-import { Spinner } from '@/components/common';
-import Main from '@/components/main';
-import { isHomeScrolledState } from '@/stores/scroll';
-import { content } from '@/types/contents';
-import { throttleWheel } from '@/utils/optimization/throttle';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
+import { isHomeScrolledState } from '@/stores/scroll';
+import Main from '@/components/main';
+import { throttleWheel } from '@/utils/optimization/throttle';
 import * as style from './style.css';
+import MainContents from '@/components/mainContents';
+import { Button } from '@/components/common';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+
+const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
 const Home = () => {
   const [isHomeScrolled, setIsHomeScrolled] =
     useRecoilState(isHomeScrolledState);
-  // const [cards, setCards] = useState<content[]>([]);
-  // const category = 'all';
-  // const { isLoading, isError } = useQuery(
-  //   ['cardlist', category],
-  //   async () => await getCardList(category),
-  //   {
-  //     refetchOnWindowFocus: false,
-  //     retry: 0,
-  //     onSuccess: (data: content[]) => {
-  //       console.log(data);
-  //       setCards(data);
-  //     },
-  //   }
-  // );
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedCategoryState
+  );
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {
@@ -59,9 +48,6 @@ const Home = () => {
     setIsHomeScrolled(false);
   }, []);
 
-  // if (isError) return <div>Error!!!</div>;
-  // if (isLoading) return <Spinner size="huge" />;
-
   return (
     <div
       className={style.container({ isScrolled: isHomeScrolled })}
@@ -71,7 +57,21 @@ const Home = () => {
       <div className={style.banner}>
         <Main />
       </div>
-      <div className={style.content}>{/* <CardList cards={cards} /> */}</div>
+      <div className={style.content}>
+        <div className={style.filterButtonGroup}>
+          {CATEGORIES.map((category, idx) => (
+            <Button
+              key={idx}
+              version={selectedCategory === category ? 'gray' : 'white'}
+              isBold={selectedCategory === category ? true : false}
+              shape="circle"
+              text={category}
+              onClick={() => setSelectedCategory(category)}
+            />
+          ))}
+        </div>
+        <MainContents />
+      </div>
     </div>
   );
 };
