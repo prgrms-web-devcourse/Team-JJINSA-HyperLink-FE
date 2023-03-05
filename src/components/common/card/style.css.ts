@@ -9,16 +9,24 @@ export const CardWrapper = recipe({
     utils.fullWidth,
     {
       backgroundColor: variants.color.white,
-      boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
     },
   ],
   variants: {
     type: {
+      default: {
+        padding: '2.4rem',
+      },
       creator: {
         width: '28rem',
         height: '14.6rem',
+        boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
       },
-      content: [utils.positionRelative],
+      content: [
+        utils.positionRelative,
+        {
+          boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
+        },
+      ],
     },
   },
 });
