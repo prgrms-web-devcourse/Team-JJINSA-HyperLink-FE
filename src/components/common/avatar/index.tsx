@@ -5,11 +5,10 @@ import defaultProfileImage from '/assets/defaultProfileImage.png';
 
 export type AvatarProps = {
   src: string;
-  shape: 'circle' | 'round' | 'square';
-  size: 'small' | 'medium' | 'large' | 'xLarge';
-  // [props: string]: {};
+  shape?: 'circle' | 'round' | 'square';
+  size?: 'small' | 'medium' | 'large' | 'xLarge';
   style?: CSSProperties;
-  className: string;
+  className?: string;
 };
 
 const Avatar = ({

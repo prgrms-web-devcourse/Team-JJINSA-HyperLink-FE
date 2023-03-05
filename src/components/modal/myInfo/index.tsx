@@ -44,7 +44,7 @@ const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
     >
       <Suspense fallback={<Spinner />}>
         <div className={style.myInfo}>
-          <Avatar src={profileImage} size="medium" />
+          <Avatar src={profileImage} shape="circle" size="medium" />
           <div className={style.myInfoDetail}>
             <div className={style.nickname}>{nickname}</div>
             <div className={style.career}>
