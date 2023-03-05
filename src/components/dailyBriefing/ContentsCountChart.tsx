@@ -60,11 +60,7 @@ export const data = {
 
 const ContentsCountChart = () => {
   return (
-    <Card
-      type="default"
-      color="#F7F9FB"
-      style={{ width: '100%', minWidth: '50rem' }}
-    >
+    <Card type="default" color="#F7F9FB">
       <div className={style.title}>
         <Heading level={6}>콘텐츠 수</Heading>
       </div>
