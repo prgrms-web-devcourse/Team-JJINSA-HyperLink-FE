@@ -23,9 +23,12 @@ export const googleOAuth = async (code: string) => {
 type authResponse = {
   accessToken: string;
 };
+type loginResponse = {
+  admin: boolean;
+} & authResponse;
 export const login = async () => {
   try {
-    const response: authResponse = await axiosInstance.post('/members/login');
+    const response: loginResponse = await axiosInstance.post('/members/login');
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${response.accessToken}`;
     setTimeout(silentRefresh, ACCESS_TOKEN_EXPIRY_TIME - 60000);
 
@@ -73,7 +76,7 @@ export const logout = async () => {
 
 export const silentRefresh = async () => {
   try {
-    const response: authResponse = await axiosInstance.get(
+    const response: loginResponse = await axiosInstance.get(
       '/members/access-token'
     );
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${response.accessToken}`;

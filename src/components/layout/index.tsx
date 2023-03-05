@@ -1,26 +1,13 @@
-import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { isAuthorizedState } from '@/stores/auth';
-import { isLoginModalVisibleState } from '@/stores/modal';
 import { Header } from '@/components/common';
 import { LoginModal } from '@/components/modal';
-import { silentRefresh } from '@/api/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { Outlet } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 
 const Layout = () => {
-  const setIsAuthorized = useSetRecoilState(isAuthorizedState);
   const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
     isLoginModalVisibleState
   );
-
-  useEffect(() => {
-    (async () => {
-      const response = await silentRefresh();
-      if (response) {
-        setIsAuthorized(true);
-      }
-    })();
-  }, []);
 
   return (
     <>
