@@ -49,6 +49,11 @@ const AlarmModal = ({ isOpen, onClose }: AlarmModalProps) => {
           />
         </div>
         <div className={style.cardList}>
+          {items.length === 0 && (
+            <div className={style.noticeText}>
+              <Text>알림이 존재하지 않습니다.</Text>
+            </div>
+          )}
           {items.map(
             ({
               contentId,

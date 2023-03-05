@@ -27,3 +27,7 @@ export const modalHeader = style([
 ]);
 
 export const cardList = style([utils.flexColumn]);
+
+export const noticeText = style({
+  padding: '2.5rem',
+});
