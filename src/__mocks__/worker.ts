@@ -8,6 +8,7 @@ import {
   likeHandlers,
   notRecommendHandlers,
   viewHandlers,
+  specificCreatorHandler,
 } from './handlers';
 
 export const worker = setupWorker(
@@ -18,5 +19,6 @@ export const worker = setupWorker(
   ...bookmarkHandlers,
   ...likeHandlers,
   ...notRecommendHandlers,
-  ...viewHandlers
+  ...viewHandlers,
+  ...specificCreatorHandler
 );

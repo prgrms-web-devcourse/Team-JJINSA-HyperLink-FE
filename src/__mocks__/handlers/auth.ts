@@ -67,6 +67,7 @@ export const authHandlers = [
       ctx.json({
         accessToken:
           'BBBBOT42pxCMcDQrNBbEwEVUt-eAnKfUje51bNjQYt2meoaeJ_1T5kVNAW9WTmwP-vhwePbF5wn7Gr-HSNsRxmCa_U4',
+        admin: true, // true: admin, false: 일반 user
       })
     );
   }),
@@ -85,6 +86,7 @@ export const authHandlers = [
       ctx.json({
         accessToken:
           'BBBBOT42pxCMcDQrNBbEwEVUt-eAnKfUje51bNjQYt2meoaeJ_1T5kVNAW9WTmwP-vhwePbF5wn7Gr-HSNsRxmCa_U4',
+        admin: true, // true: admin, false: 일반 user
       })
     );
   }),

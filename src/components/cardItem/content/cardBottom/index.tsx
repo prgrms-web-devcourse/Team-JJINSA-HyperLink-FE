@@ -38,7 +38,7 @@ const CardBottom = ({
   const handleCreatorClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/creator/${creatorName}`);
+    navigate(`/creator/${creatorId}`);
   };
 
   const handleDotIconClick = (e: MouseEvent) => {

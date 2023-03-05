@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Avatar, Modal, Spinner } from '@/components/common';
 import { getMyInfo, myInfoResponse } from '@/api/member';
 import * as style from './style.css';
+import { useRecoilState } from 'recoil';
+import { isAdminState } from '@/stores/auth';
 
 const CAREER: { [key: string]: string } = {
   develop: '개발',
@@ -26,6 +28,7 @@ export type MyInfoModalProps = {
 
 const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
   const navigate = useNavigate();
+  const isAdmin = useRecoilState(isAdminState);
 
   const { data: myInfo } = useQuery(['myInfo'], getMyInfo, {
     refetchOnWindowFocus: false,
@@ -44,7 +47,7 @@ const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
     >
       <Suspense fallback={<Spinner />}>
         <div className={style.myInfo}>
-          <Avatar src={profileImage} size="medium" />
+          <Avatar src={profileImage} shape="circle" size="medium" />
           <div className={style.myInfoDetail}>
             <div className={style.nickname}>{nickname}</div>
             <div className={style.career}>
@@ -65,6 +68,11 @@ const MyInfoModal = ({ isOpen, onClose, onLogout }: MyInfoModalProps) => {
               </li>
             );
           })}
+          {isAdmin && (
+            <li className={style.menuItem} onClick={() => navigate('/admin')}>
+              관리자 페이지
+            </li>
+          )}
         </ul>
       </Suspense>
     </Modal>

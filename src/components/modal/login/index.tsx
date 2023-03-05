@@ -2,7 +2,7 @@ import { googleOAuth, login } from '@/api/auth';
 import logo from '/favicon.ico';
 import googleLogo from '/assets/googleLogo.png';
 import { Avatar, Heading, Icon, Modal, Text } from '@/components/common';
-import { isAuthorizedState } from '@/stores/auth';
+import { isAdminState, isAuthorizedState } from '@/stores/auth';
 
 import * as variants from '@/styles/variants.css';
 import { useGoogleLogin } from '@react-oauth/google';
@@ -19,13 +19,19 @@ export type LoginModalProps = {
 const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const navigate = useNavigate();
   const setIsAuthorized = useSetRecoilState(isAuthorizedState);
+  const setIsAdmin = useSetRecoilState(isAdminState);
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (res) => {
-      const response = await googleOAuth(res.code);
       onClose();
+      const response = await googleOAuth(res.code);
 
       if (response?.wasSignedUp) {
-        await login();
+        const loginResponse = await login();
+
+        if (!loginResponse) return;
+
+        setIsAdmin(loginResponse.admin);
         setIsAuthorized(true);
         navigate('/');
         return;
@@ -59,7 +65,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             <Banner size={0.55} />
           </div>
         </div>
-        <button className={style.button} onClick={() => googleLogin()}>
+        <button className={style.button} onClick={googleLogin}>
           <img
             src={googleLogo}
             alt="Google logo"
