@@ -1,14 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Avatar, Modal } from '@/components/common';
 import { isAdminState } from '@/stores/auth';
 import { isMyInfoModalVisibleState } from '@/stores/modal';
-=======
-import { useRecoilState } from 'recoil';
-import { Avatar, Modal } from '@/components/common';
-import { isAdminState } from '@/stores/auth';
->>>>>>> d129bff (refactor: UserNav 컴포넌트 분리)
 import { myInfo } from '@/types/myInfo';
 import * as style from './style.css';
 
