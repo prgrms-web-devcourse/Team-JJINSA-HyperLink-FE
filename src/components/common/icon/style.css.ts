@@ -1,9 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
-import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
 
 export const icon = recipe({
-  base: [utils.cursorPointer],
   variants: {
     size: {
       xSmall: { fontSize: variants.fontSize.xSmall },
