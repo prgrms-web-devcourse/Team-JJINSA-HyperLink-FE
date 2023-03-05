@@ -7,6 +7,7 @@ export type IconProps = {
   name?: string;
   size?: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge' | 'huge';
   color?: string;
+  isPointer?: boolean;
   className?: string;
   style?: CSSProperties;
 };
@@ -26,15 +27,20 @@ const Icon = ({
   name = 'xmark',
   size = 'medium',
   color = variants.color.icon,
+  isPointer = true,
   className = '',
   ...props
 }: IconProps) => {
+  const IconStyle = {
+    cursor: isPointer ? 'pointer' : 'auto',
+  };
+
   return (
     <i
       className={`${className} fa-${type} fa-${name} ${name} ${style.icon({
         size,
       })}`}
-      style={{ color, ...props.style }}
+      style={{ color, ...IconStyle, ...props.style }}
       {...props}
     ></i>
   );
