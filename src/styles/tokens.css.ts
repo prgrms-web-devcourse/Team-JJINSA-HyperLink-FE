@@ -9,13 +9,13 @@ const heading1 = style({
 const heading2 = style({
   fontSize: '3.6rem',
   fontWeight: 800,
-  lineHeight: '150%',
+  lineHeight: '110%',
 });
 
 const heading3 = style({
   fontSize: '3.2rem',
   fontWeight: 700,
-  lineHeight: '150%',
+  lineHeight: '140%',
 });
 
 const heading4 = style({
