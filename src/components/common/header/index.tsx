@@ -40,7 +40,7 @@ const Header = () => {
               console.log('탭 선택');
             }}
           />
-          <Link to="/" className={style.dailyBriefing}>
+          <Link to="/daily-briefing" className={style.dailyBriefing}>
             <div className={style.title}>
               <Text size="small">오늘의 hypelink</Text>
               <Badge top={-10} right={10} />
