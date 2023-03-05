@@ -7,7 +7,6 @@ export type AvatarProps = {
   src: string;
   shape?: 'circle' | 'round' | 'square';
   size?: 'small' | 'medium' | 'large' | 'xLarge';
-  // [props: string]: {};
   style?: CSSProperties;
   className?: string;
 };
