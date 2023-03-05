@@ -1,10 +1,16 @@
 import { style } from '@vanilla-extract/css';
+import { large } from '@/styles/medias.css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
 
 export const title = style([
   utils.flexJustifySpaceBetween,
   utils.flexAlignCenter,
+  large({
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginBottom: '2rem',
+  }),
   {
     marginBottom: '1rem',
   },
@@ -22,7 +28,12 @@ export const standardTime = style({
   color: variants.color.border,
 });
 
-export const rankList = style([utils.flexColumn]);
+export const rankList = style([
+  utils.flexColumn,
+  large({
+    marginTop: '3rem',
+  }),
+]);
 
 export const rankItem = style([
   utils.flex,
@@ -55,6 +66,11 @@ export const count = style({
   color: variants.color.font.secondary,
 });
 
-export const chart = style({
-  margin: '2rem',
-});
+export const chart = style([
+  utils.fullHeight,
+  utils.flexJustifyCenter,
+  large({ margin: '3rem 2rem', minHeight: '40rem' }),
+  {
+    margin: '4rem',
+  },
+]);

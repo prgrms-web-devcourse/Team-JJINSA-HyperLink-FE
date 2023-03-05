@@ -52,11 +52,7 @@ export const data = {
 
 const CategoryChart = () => {
   return (
-    <Card
-      type="default"
-      color="#F7F9FB"
-      style={{ width: '100%', minWidth: '30rem' }}
-    >
+    <Card type="default" color="#F7F9FB">
       <div className={style.title}>
         <Heading level={6}>관심 카테고리별 회원 수</Heading>
         <span className={style.standardTime}>
