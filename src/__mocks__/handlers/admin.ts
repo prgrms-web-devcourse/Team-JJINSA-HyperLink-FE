@@ -38,6 +38,10 @@ const views = {
       categoryName: 'beauty',
       views: 22333,
     },
+    {
+      categoryName: 'finance',
+      views: 20323,
+    },
   ],
   createdDate: '2023-03-05T00:00:00',
 };

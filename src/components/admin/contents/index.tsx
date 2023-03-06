@@ -7,7 +7,7 @@ const COLUMNS = ['제목', '주소', '-', '-'];
 const Contents = ({ contents }: { contents: content[] }) => {
   return (
     <div className={style.container}>
-      <Heading level={3}>컨텐츠</Heading>
+      <Heading level={2}>컨텐츠</Heading>
       <Table columns={COLUMNS}>
         {contents.map((content) => (
           <tr key={content.contentId}>
