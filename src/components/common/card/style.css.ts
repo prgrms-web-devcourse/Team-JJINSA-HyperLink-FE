@@ -15,7 +15,6 @@ export const CardWrapper = recipe({
   variants: {
     type: {
       creator: {
-        width: '28rem',
         height: '14.6rem',
       },
       content: [utils.positionRelative],
