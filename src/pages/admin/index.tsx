@@ -1,7 +1,7 @@
 import {
   getAllCreators,
   getDeactivatedContents,
-  getYesterdayViews
+  getYesterdayViews,
 } from '@/api/admin';
 import { Contents, Creators, WeeklyViews } from '@/components/admin';
 import { Divider, Spinner } from '@/components/common';
