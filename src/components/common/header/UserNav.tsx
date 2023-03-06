@@ -69,7 +69,6 @@ const UserNav = () => {
           </div>
           <CategoryModal
             isOpen={isCategoryModalVisible}
-            selectedList={[]}
             onClose={() => setIsCategoryModalVisible(false)}
           />
         </>
