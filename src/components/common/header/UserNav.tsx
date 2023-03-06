@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon } from '@/components/common';
-import { MyInfoModal } from '@/components/modal';
+import { MyInfoModal, CategoryModal } from '@/components/modal';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isAuthorizedState } from '@/stores/auth';
 import {
+  isCategoryModalVisibleState,
   isLoginModalVisibleState,
   isMyInfoModalVisibleState,
 } from '@/stores/modal';
@@ -17,6 +18,10 @@ const UserNav = () => {
   const [isMyInfoModalVisible, setIsMyInfoModalVisible] = useRecoilState(
     isMyInfoModalVisibleState
   );
+  const [isCategoryModalVisible, setIsCategoryModalVisible] = useRecoilState(
+    isCategoryModalVisibleState
+  );
+
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
 
   const handleLogout = async () => {
@@ -36,23 +41,38 @@ const UserNav = () => {
           onClick={() => setIsLoginModalVisible(true)}
         />
       ) : (
-        <div className={style.iconGroup}>
-          <Icon type="regular" name="pen-to-square" size="xLarge" />
-          <Icon type="regular" name="bell" size="xLarge" />
-          <button className={style.userIconButton} type="button">
-            <img
-              className={style.userIcon}
-              src={user}
-              alt="user image"
-              onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
-            />
-            <MyInfoModal
-              isOpen={isMyInfoModalVisible}
-              onClose={() => setIsMyInfoModalVisible(false)}
-              onLogout={handleLogout}
-            />
-          </button>
-        </div>
+        <>
+          <div className={style.iconGroup}>
+            <div
+              onClick={() =>
+                setIsCategoryModalVisible((isVisible) => !isVisible)
+              }
+            >
+              <Icon type="regular" name="pen-to-square" size="xLarge" />
+            </div>
+            <Icon type="regular" name="bell" size="xLarge" />
+            <button className={style.userIconButton} type="button">
+              <img
+                className={style.userIcon}
+                src={user}
+                alt="user image"
+                onClick={() =>
+                  setIsMyInfoModalVisible((isVisible) => !isVisible)
+                }
+              />
+              <MyInfoModal
+                isOpen={isMyInfoModalVisible}
+                onClose={() => setIsMyInfoModalVisible(false)}
+                onLogout={handleLogout}
+              />
+            </button>
+          </div>
+          <CategoryModal
+            isOpen={isCategoryModalVisible}
+            selectedList={[]}
+            onClose={() => setIsCategoryModalVisible(false)}
+          />
+        </>
       )}
     </div>
   );
