@@ -1,46 +1,79 @@
-import { Dropdown } from '@/components/common';
-import useInput from '@/hooks/useInput';
+import { Heading } from '@/components/common';
 import { views } from '@/types/admin';
+import { generateRandomHex, hexToRGB } from '@/utils/color';
 import { CATEGORIES } from '@/utils/constants/signup';
+import { getKeyByValue } from '@/utils/object';
 import { getItem } from '@/utils/storage';
-import { useState } from 'react';
+import * as style from './style.css';
+
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+  },
+};
 
 const WeeklyViews = () => {
-  const category = useInput(Object.keys(CATEGORIES)[0]);
   const weeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
-  const [currentCategoryViews, setCurrentCategoryViews] = useState(
-    weeklyViews.map((dailyViews) => {
-      return {
-        ...dailyViews,
-        oneDayView: dailyViews.oneDayView.filter(
-          (viewByCategory) =>
-            viewByCategory.categoryName === CATEGORIES[category.value]
-        ),
-      };
-    })
-  );
-
-  const handleItemClick = (item: string) => {
-    category.onChange(item);
-    setCurrentCategoryViews(
-      weeklyViews.map((dailyViews) => {
-        return {
-          ...dailyViews,
-          oneDayView: dailyViews.oneDayView.filter(
-            (viewByCategory) => viewByCategory.categoryName === CATEGORIES[item]
-          ),
-        };
-      })
-    );
-  };
 
   return (
-    <div>
-      <Dropdown
-        value={category.value}
-        onItemClick={handleItemClick}
-        items={Object.keys(CATEGORIES)}
-      />
+    <div className={style.container}>
+      <Heading level={2}>카테고리별 일주일 조회수</Heading>
+      {Object.values(CATEGORIES)
+        .map((_, i) =>
+          weeklyViews
+            .map((dailyViews) => dailyViews.oneDayView)
+            .map((v) => v[i])
+        )
+        .map((v) => {
+          const borderColor = generateRandomHex();
+          const backgroundColor = hexToRGB(borderColor, 0.7);
+
+          return (
+            <Line
+              key={v[0].categoryName}
+              options={options}
+              data={{
+                labels: weeklyViews.map(
+                  (currentCategoryView) =>
+                    currentCategoryView.createdDate.split('T')[0]
+                ),
+                datasets: [
+                  {
+                    label: getKeyByValue(CATEGORIES, v[0].categoryName),
+                    data: v.map((e) => e.views),
+                    borderColor,
+                    backgroundColor,
+                  },
+                ],
+              }}
+            />
+          );
+        })}
     </div>
   );
 };

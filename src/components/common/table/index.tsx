@@ -9,20 +9,22 @@ type TableProps = {
 
 const Table = ({ columns, children }: TableProps) => {
   return (
-    <table className={style.table}>
-      <thead>
-        <tr>
-          {columns.map((column, index) => (
-            <th key={index}>
-              <Text weight={700} size="large">
-                {column}
-              </Text>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>{children}</tbody>
-    </table>
+    <div className={style.wrapper}>
+      <table className={style.table}>
+        <thead>
+          <tr>
+            {columns.map((column, index) => (
+              <th key={index}>
+                <Text weight={700} size="large">
+                  {column}
+                </Text>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>{children}</tbody>
+      </table>
+    </div>
   );
 };
 

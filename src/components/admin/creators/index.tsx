@@ -1,5 +1,7 @@
 import { Avatar, Button, Heading, Table, Text } from '@/components/common';
 import { creator } from '@/types/admin';
+import { CATEGORIES } from '@/utils/constants/signup';
+import { getKeyByValue } from '@/utils/object';
 import AddCreator from '../addCreator';
 import * as style from './style.css';
 import user from '/assets/user.svg';
@@ -21,7 +23,7 @@ const Creators = ({ creators }: { creators: creator[] }) => {
               <Text>{creator.name}</Text>
             </td>
             <td>
-              <Text>{creator.categoryName}</Text>
+              <Text>{getKeyByValue(CATEGORIES, creator.categoryName)}</Text>
             </td>
             <td>
               <Button text="삭제" version="blueInverted" />

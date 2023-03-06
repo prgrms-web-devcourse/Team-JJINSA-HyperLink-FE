@@ -1,11 +1,12 @@
 import {
   getAllCreators,
   getDeactivatedContents,
-  getYesterdayViews,
+  getYesterdayViews
 } from '@/api/admin';
 import { Contents, Creators, WeeklyViews } from '@/components/admin';
 import { Divider, Spinner } from '@/components/common';
 import { content, creator, views } from '@/types/admin';
+import { isSameDate } from '@/utils/date';
 import { getItem, setItem } from '@/utils/storage';
 import { useQuery } from '@tanstack/react-query';
 import * as style from './style.css';
@@ -39,16 +40,13 @@ const Admin = () => {
     return <Spinner size="huge" />;
   }
 
-  const isSameDate = (date1: Date, date2: Date) => {
-    return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
-    );
-  };
+  const updateWeeklyViews = () => {
+    const weeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
 
-  const weeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
-  if (weeklyViews) {
+    if (!weeklyViews.length) {
+      return;
+    }
+
     const today = new Date();
     const yesterday = new Date(today.setDate(today.getDate() - 1));
 
@@ -76,7 +74,9 @@ const Admin = () => {
         setItem('WEEKLY_VIEWS', [...weeklyViews, yesterdayViews]);
       }
     }
-  }
+  };
+
+  updateWeeklyViews();
 
   return (
     <div className={style.container}>
