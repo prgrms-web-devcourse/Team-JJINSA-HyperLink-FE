@@ -34,27 +34,29 @@ const Authorized = () => {
     <div className={style.iconGroup}>
       <Icon type="regular" name="pen-to-square" size="xLarge" />
       <Icon type="regular" name="bell" size="xLarge" />
-      {!myInfo && <Spinner />}
-      {myInfo && (
-        <button className={style.userIconButton} type="button">
-          <div
-            className={style.userIcon}
-            onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
-          >
-            <Avatar
-              src={myInfo.profileUrl.toString()}
-              shape="circle"
-              size="small"
+      <button className={style.userIconButton} type="button">
+        {!myInfo && <Spinner />}
+        {myInfo && (
+          <>
+            <div
+              className={style.userIcon}
+              onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
+            >
+              <Avatar
+                src={myInfo.profileUrl.toString()}
+                shape="circle"
+                size="small"
+              />
+            </div>
+            <MyInfoModal
+              myInfoData={myInfo}
+              isOpen={isMyInfoModalVisible}
+              onClose={() => setIsMyInfoModalVisible(false)}
+              onLogout={handleLogout}
             />
-          </div>
-          <MyInfoModal
-            myInfoData={myInfo}
-            isOpen={isMyInfoModalVisible}
-            onClose={() => setIsMyInfoModalVisible(false)}
-            onLogout={handleLogout}
-          />
-        </button>
-      )}
+          </>
+        )}
+      </button>
     </div>
   );
 };
