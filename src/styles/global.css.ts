@@ -77,3 +77,7 @@ globalStyle('a, button', {
 globalStyle('button', {
   padding: 0,
 });
+
+globalStyle('table', {
+  borderCollapse: 'collapse',
+});

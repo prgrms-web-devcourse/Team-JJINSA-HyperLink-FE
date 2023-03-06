@@ -1,3 +1,4 @@
+export { adminHandlers } from './admin';
 export { authHandlers } from './auth';
 export { memberHandlers } from './member';
 export { searchContentsHandlers } from './searchContents';
