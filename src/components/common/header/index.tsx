@@ -6,19 +6,27 @@ import UserNav from './UserNav';
 import logo from '/assets/logo.svg';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { Suspense } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import CountDown from './CountDown';
 import * as style from './style.css';
+import { mainTabState } from '@/stores/tab';
 
-const TAB_LIST = [
-  '실시간 최신 트렌드',
-  '실시간 인기 트렌드',
-  '구독 피드',
-  '크리에이터',
-];
+type tabType =
+  | 'RECENT_CONTENT'
+  | 'POPULAR_CONTENT'
+  | 'SUBSCRIPTIONS'
+  | 'CREATORS';
+
+const TAB_LIST = {
+  RECENT_CONTENT: '실시간 최신 트렌드',
+  POPULAR_CONTENT: '실시간 인기 트렌드',
+  SUBSCRIPTIONS: '구독 피드',
+  CREATORS: '크리에이터',
+};
 
 const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
+  const [tabState, setTabState] = useRecoilState(mainTabState);
 
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
@@ -35,9 +43,10 @@ const Header = () => {
       {isHomeScrolled && (
         <div className={style.bottom}>
           <Tab
-            items={TAB_LIST}
-            onClick={() => {
-              console.log('탭 선택');
+            items={Object.values(TAB_LIST)}
+            onClick={(tab) => {
+              const tabName = TAB_LIST[tab as tabType];
+              setTabState(tabName);
             }}
           />
           <Link to="/" className={style.dailyBriefing}>
