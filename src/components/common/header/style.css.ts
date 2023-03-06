@@ -72,15 +72,3 @@ export const dailyBriefing = style([
     },
   },
 ]);
-
-export const title = style([
-  utils.positionRelative,
-  {
-    marginRight: '2rem',
-  },
-]);
-
-export const countDown = style({
-  minWidth: '6.5rem',
-  fontWeight: '700',
-});

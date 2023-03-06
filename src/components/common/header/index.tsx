@@ -1,13 +1,11 @@
-import { Badge, Spinner, Tab, Text } from '@/components/common';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import UserNav from './UserNav';
-
-import logo from '/assets/logo.svg';
-import { isHomeScrolledState } from '@/stores/scroll';
 import { Suspense } from 'react';
+import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import CountDown from './CountDown';
+import { Spinner, Tab, Text } from '@/components/common';
+import SearchBar from './SearchBar';
+import UserNav from './userNav/index';
+import { isHomeScrolledState } from '@/stores/scroll';
+import logo from '/assets/logo.svg';
 import * as style from './style.css';
 
 const TAB_LIST = [
@@ -41,11 +39,9 @@ const Header = () => {
             }}
           />
           <Link to="/daily-briefing" className={style.dailyBriefing}>
-            <div className={style.title}>
-              <Text size="small">오늘의 hypelink</Text>
-              <Badge top={-10} right={10} />
-            </div>
-            <CountDown />
+            <Text size="small" weight={500}>
+              오늘의 hypelink
+            </Text>
           </Link>
         </div>
       )}
