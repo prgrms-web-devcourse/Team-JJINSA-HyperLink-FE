@@ -33,7 +33,6 @@ const Authorized = () => {
   return (
     <div className={style.iconGroup}>
       <Icon type="regular" name="pen-to-square" size="xLarge" />
-      <Icon type="regular" name="bell" size="xLarge" />
       <button className={style.userIconButton} type="button">
         {!myInfo && <Spinner />}
         {myInfo && (
