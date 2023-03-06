@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
+import * as variants from '@/styles/variants.css';
 import * as style from './style.css';
 
 export type CardProps = {
@@ -8,7 +9,12 @@ export type CardProps = {
   style?: CSSProperties;
 };
 
-const Card = ({ children, type, color = '#fff', ...props }: CardProps) => {
+const Card = ({
+  children,
+  type,
+  color = variants.color.white,
+  ...props
+}: CardProps) => {
   return (
     <div
       className={style.CardWrapper({ type })}
