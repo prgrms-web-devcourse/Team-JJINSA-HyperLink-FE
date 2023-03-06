@@ -38,7 +38,7 @@ const Header = () => {
               console.log('탭 선택');
             }}
           />
-          <Link to="/" className={style.dailyBriefing}>
+          <Link to="/daily-briefing" className={style.dailyBriefing}>
             <Text size="small" weight={500}>
               오늘의 hypelink
             </Text>

@@ -1,13 +1,10 @@
+import { content, creator, views } from '@/types/admin';
 import { axiosInstance } from './core';
 
 export const getAllCreators = async () => {
-  try {
-    const response = await axiosInstance.get('/admin/creators');
+  const response: creator[] = await axiosInstance.get('/admin/creators');
 
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+  return response;
 };
 
 type addCreatorProps = {
@@ -16,16 +13,10 @@ type addCreatorProps = {
   description: string;
   categoryName: 'develop' | 'beauty' | 'finance';
 };
-type addCreatorResponse = {
-  creatorId: number;
-} & addCreatorProps;
 
 export const addCreator = async (data: addCreatorProps) => {
   try {
-    const response: addCreatorResponse = await axiosInstance.post(
-      '/admin/creators',
-      data
-    );
+    const response = await axiosInstance.post('/admin/creators', data);
 
     return response;
   } catch (error) {
@@ -44,13 +35,9 @@ export const deleteCreator = async (creatorId: number) => {
 };
 
 export const getDeactivatedContents = async () => {
-  try {
-    const response = await axiosInstance.get('/admin/contents');
+  const response: content[] = await axiosInstance.get('/admin/contents');
 
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+  return response;
 };
 
 export const activateContent = async (contentId: number) => {
@@ -73,4 +60,12 @@ export const deleteContent = async (contentId: number) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const getYesterdayViews = async () => {
+  const response: views = await axiosInstance.get(
+    '/admin/dashboard/all-category/view'
+  );
+
+  return response;
 };

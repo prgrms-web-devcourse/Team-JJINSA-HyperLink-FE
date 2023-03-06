@@ -10,6 +10,7 @@ import {
   SignupPage,
   SearchResultPage,
   CreatorDetailPage,
+  DailyBriefingPage,
   MyPage,
   NotFoundPage,
   AdminPage,
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/search/:keyword" element={<SearchResultPage />} />
       <Route path="/creator/:creatorId" element={<CreatorDetailPage />} />
+      <Route path="/daily-briefing" element={<DailyBriefingPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
