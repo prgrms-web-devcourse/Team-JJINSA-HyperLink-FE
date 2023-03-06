@@ -1,23 +1,11 @@
 import { axiosInstance } from './core';
-
-export type myInfoResponse = {
-  email: string;
-  nickname: string;
-  career: string;
-  careerYear: string;
-  profileImage: string;
-};
+import { myInfo } from '@/types/myInfo';
 
 export type attentionCategory = string[];
 
 export const getMyInfo = async () => {
-  try {
-    const response: myInfoResponse = await axiosInstance.get('/members/mypage');
-
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+  const response: myInfo = await axiosInstance.get('/members/mypage');
+  return response;
 };
 
 export const putAttentionCategory = async (
