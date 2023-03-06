@@ -51,6 +51,7 @@ const CardBottom = ({
   const handleNotRecommendClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsModalVisible(false);
     notRecommendResponse.refetch();
   };
 
