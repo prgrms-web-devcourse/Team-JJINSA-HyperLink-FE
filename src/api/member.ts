@@ -8,25 +8,9 @@ export type myInfoResponse = {
   profileImage: string;
 };
 
-export type attentionCategory = string[];
-
 export const getMyInfo = async () => {
   try {
     const response: myInfoResponse = await axiosInstance.get('/members/mypage');
-
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const putAttentionCategory = async (
-  newAttentionCategory: attentionCategory
-) => {
-  try {
-    const response = await axiosInstance.put('/members/attention-category', {
-      attentionCategory: newAttentionCategory,
-    });
 
     return response;
   } catch (error) {
