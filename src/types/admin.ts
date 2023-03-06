@@ -11,3 +11,13 @@ export type content = {
   link: string;
   title: string;
 };
+
+type view = {
+  categoryName: 'develop' | 'beauty' | 'finance';
+  views: number;
+};
+
+export type views = {
+  oneDayView: view[];
+  createdDate: string;
+};

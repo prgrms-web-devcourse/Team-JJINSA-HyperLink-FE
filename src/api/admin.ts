@@ -1,4 +1,4 @@
-import { content, creator } from '@/types/admin';
+import { content, creator, views } from '@/types/admin';
 import { axiosInstance } from './core';
 
 export const getAllCreators = async () => {
@@ -60,4 +60,12 @@ export const deleteContent = async (contentId: number) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const getYesterdayViews = async () => {
+  const response: views = await axiosInstance.get(
+    '/admin/dashboard/all-category/view'
+  );
+
+  return response;
 };
