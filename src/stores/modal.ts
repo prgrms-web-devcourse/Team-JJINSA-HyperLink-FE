@@ -9,3 +9,8 @@ export const isMyInfoModalVisibleState = atom<boolean>({
   key: 'isMyInfoModalVisible',
   default: false,
 });
+
+export const isAlarmModalVisibleState = atom<boolean>({
+  key: 'isAlarmModalVisible',
+  default: false,
+});
