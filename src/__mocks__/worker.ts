@@ -10,6 +10,7 @@ import {
   notRecommendHandlers,
   viewHandlers,
   specificCreatorHandler,
+  creatorListHandler,
 } from './handlers';
 
 export const worker = setupWorker(
@@ -22,5 +23,6 @@ export const worker = setupWorker(
   ...likeHandlers,
   ...notRecommendHandlers,
   ...viewHandlers,
-  ...specificCreatorHandler
+  ...specificCreatorHandler,
+  ...creatorListHandler
 );

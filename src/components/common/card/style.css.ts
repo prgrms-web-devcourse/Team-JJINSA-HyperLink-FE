@@ -17,7 +17,6 @@ export const CardWrapper = recipe({
         padding: '2.4rem',
       },
       creator: {
-        width: '28rem',
         height: '14.6rem',
         boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
       },

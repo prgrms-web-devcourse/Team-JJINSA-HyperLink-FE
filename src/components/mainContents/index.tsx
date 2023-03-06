@@ -1,6 +1,5 @@
 import { useMainContentsInfiniteQuery } from '@/hooks/infiniteQuery/useMainContentsInfinitelQuery';
 import { selectedCategoryState } from '@/stores/selectedCategory';
-import * as style from './style.css';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState } from 'recoil';
@@ -29,12 +28,13 @@ const MainContents = () => {
     }
   }, [inView]);
 
-  useEffect(() => {
-    refetch();
-  }, [selectedCategory]);
+  // 캐싱 고민
+  // useEffect(() => {
+  //   refetch();
+  // }, [selectedCategory]);
 
   return (
-    <CardList>
+    <CardList type="content">
       {
         // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
         getContentsIsSuccess && getContents?.pages

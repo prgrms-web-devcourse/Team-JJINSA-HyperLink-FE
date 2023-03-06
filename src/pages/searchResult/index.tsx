@@ -46,7 +46,7 @@ const searchResultPage = () => {
           &apos;<strong>{keyword}</strong>&apos;에 대한 검색 결과
         </Heading>
       </div>
-      <CardList>
+      <CardList type="content">
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
           getContentsIsSuccess && getContents?.pages ? (

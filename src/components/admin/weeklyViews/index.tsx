@@ -14,7 +14,7 @@ import {
   LineElement,
   PointElement,
   Title,
-  Tooltip
+  Tooltip,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
