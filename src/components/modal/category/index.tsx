@@ -1,19 +1,24 @@
-import { putAttentionCategory } from '@/api/member';
-import { Button, Icon, Modal, Text } from '@/components/common';
+import { getAttentionCategory, putAttentionCategory } from '@/api/member';
+import { Button, Icon, Modal, Spinner, Text } from '@/components/common';
 import { CATEGORIES } from '@/utils/constants/signup';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
 export type CategryModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  selectedList: string[];
 };
 
-const CategryModal = ({ isOpen, onClose, selectedList }: CategryModalProps) => {
-  const [newSelectedList, setNewSelectedList] = useState(
-    new Set([...selectedList])
+const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
+  const { data: selectedList, isLoading } = useQuery(
+    ['attention-category'],
+    getAttentionCategory
   );
+
+  const [newSelectedList, setNewSelectedList] = useState(new Set());
+
+  useEffect(() => {}, [selectedList]);
 
   const handleSelect = (category: string) => {
     const selectedCategorySet = new Set(newSelectedList);
@@ -49,19 +54,25 @@ const CategryModal = ({ isOpen, onClose, selectedList }: CategryModalProps) => {
           </div>
         </div>
         <div className={style.modalSelectWrapper}>
-          {Object.keys(CATEGORIES).map((category) => {
-            const isSelected = newSelectedList.has(CATEGORIES[category]);
-            return (
-              <Button
-                key={category}
-                version={isSelected ? 'blue' : 'grayInverted'}
-                fontSize="medium"
-                paddingSize="small"
-                text={category}
-                onClick={() => handleSelect(category)}
-              />
-            );
-          })}
+          {!isLoading ? (
+            Object.keys(CATEGORIES).map((category) => {
+              const isSelected = newSelectedList.has(CATEGORIES[category]);
+              return (
+                <Button
+                  key={category}
+                  version={isSelected ? 'blue' : 'grayInverted'}
+                  fontSize="medium"
+                  paddingSize="small"
+                  text={category}
+                  onClick={() => handleSelect(category)}
+                />
+              );
+            })
+          ) : (
+            <div style={{ margin: '5rem' }}>
+              <Spinner size="huge" />
+            </div>
+          )}
         </div>
         <div className={style.buttonWrapper}>
           <Button
