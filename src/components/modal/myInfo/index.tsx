@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Avatar, Modal } from '@/components/common';
 import { isAdminState } from '@/stores/auth';
+import { isMyInfoModalVisibleState } from '@/stores/modal';
 import { myInfo } from '@/types/myInfo';
 import * as style from './style.css';
 
@@ -48,6 +49,7 @@ const MyInfoModal = ({
 }: MyInfoModalProps) => {
   const navigate = useNavigate();
   const isAdmin = useRecoilState(isAdminState);
+  const setIsMyInfoModalVisible = useSetRecoilState(isMyInfoModalVisibleState);
 
   const { email, nickname, career, careerYear, profileUrl } = myInfoData;
 
@@ -75,7 +77,14 @@ const MyInfoModal = ({
             <li
               key={idx}
               className={style.menuItem}
-              onClick={path === 'logout' ? onLogout : () => navigate(path)}
+              onClick={
+                path === 'logout'
+                  ? onLogout
+                  : () => {
+                      setIsMyInfoModalVisible(false);
+                      navigate(path);
+                    }
+              }
             >
               {menuName}
             </li>
