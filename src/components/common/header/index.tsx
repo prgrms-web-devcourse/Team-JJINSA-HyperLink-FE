@@ -7,7 +7,7 @@ import { isHomeScrolledState } from '@/stores/scroll';
 import logo from '/assets/logo.svg';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import * as style from './style.css';
-import { mainTabState } from '@/stores/tab';
+import { selectedTabState } from '@/stores/tab';
 
 type tabType =
   | 'RECENT_CONTENT'
@@ -24,7 +24,7 @@ const TAB_LIST = {
 
 const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
-  const [tabState, setTabState] = useRecoilState(mainTabState);
+  const [tabState, setTabState] = useRecoilState(selectedTabState);
 
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
