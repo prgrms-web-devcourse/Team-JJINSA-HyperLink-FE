@@ -8,3 +8,4 @@ export { notRecommendHandlers } from './notRecommend';
 export { viewHandlers } from './view';
 export { specificCreatorHandler } from './specificCreator';
 export { creatorListHandler } from './creatorList';
+export { historyHandler } from './history';
