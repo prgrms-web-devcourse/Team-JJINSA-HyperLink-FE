@@ -1,11 +1,11 @@
 import { Icon, Text } from '@/components/common';
 import useDropdown from '@/hooks/useDropdown';
 import * as variants from '@/styles/variants.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
 export type DropdownProps = {
-  placeholder: string;
+  placeholder?: string;
   value: string;
   items: string[];
   label?: string;
@@ -20,13 +20,16 @@ const Dropdown = ({
   onItemClick,
 }: DropdownProps) => {
   const { isVisible, ref, handleVisibility } = useDropdown();
-  const [chosenItem, setChosenItem] = useState('');
+  const [chosenItem, setChosenItem] = useState(value);
 
   const handleItemClick = (item: string) => {
     onItemClick(item);
-    setChosenItem(item);
     handleVisibility();
   };
+
+  useEffect(() => {
+    setChosenItem(value);
+  }, [value]);
 
   return (
     <div

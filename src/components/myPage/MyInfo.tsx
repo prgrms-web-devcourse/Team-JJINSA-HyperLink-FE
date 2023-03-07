@@ -8,7 +8,6 @@ import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES } from '@/utils/constants/signup';
 
-
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const { email, nickname, profileUrl, career, careerYear } = myInfo;
 

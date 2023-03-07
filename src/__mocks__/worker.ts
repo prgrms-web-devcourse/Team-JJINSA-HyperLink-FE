@@ -1,5 +1,6 @@
 import { setupWorker } from 'msw';
 import {
+  adminHandlers,
   authHandlers,
   bookmarkHandlers,
   creatorListHandler,
@@ -13,6 +14,7 @@ import {
 } from './handlers';
 
 export const worker = setupWorker(
+  ...adminHandlers,
   ...authHandlers,
   ...bookmarkHandlers,
   ...creatorListHandler,
