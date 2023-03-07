@@ -32,7 +32,7 @@ const ContentCard = ({
     mutationFn: async () => await patchViewResponse(contentId),
 
     onSuccess: () =>
-      queryClient.invalidateQueries(['main_contents', selectedCategory]),
+      queryClient.invalidateQueries(['mainContents', selectedCategory]),
   });
   const handleClick = () => {
     mutate();
