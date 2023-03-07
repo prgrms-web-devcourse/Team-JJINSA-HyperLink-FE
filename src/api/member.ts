@@ -1,19 +1,34 @@
 import { axiosInstance } from './core';
-import { myInfo } from '@/types/myInfo';
 
-export type attentionCategory = string[];
-
-export const getMyInfo = async () => {
-  const response: myInfo = await axiosInstance.get('/members/mypage');
-  return response;
+export type myInfoResponse = {
+  email: string;
+  nickname: string;
+  career: string;
+  careerYear: string;
+  profileImage: string;
 };
 
-export const putAttentionCategory = async (
-  newAttentionCategory: attentionCategory
-) => {
+export type myNewInfo = {
+  nickname: string;
+  career: string;
+  careerYear: string;
+};
+
+export const getMyInfo = async () => {
   try {
-    const response = await axiosInstance.put('/members/attention-category', {
-      attentionCategory: newAttentionCategory,
+    const response: myInfoResponse = await axiosInstance.get('/members/mypage');
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const updateProfileImage = async (profileImgUrl: string) => {
+  try {
+    const response = await axiosInstance.post('/members/profile-image', {
+      profileImgUrl,
     });
 
     return response;
@@ -22,11 +37,9 @@ export const putAttentionCategory = async (
   }
 };
 
-export const updateProfileImage = async (profileImgUrl: string) => {
+export const updateMyInfo = async (myNewInfo: myNewInfo) => {
   try {
-    const response = await axiosInstance.post('/members/profile-image', {
-      profileImgUrl,
-    });
+    const response = await axiosInstance.put('/members/update', myNewInfo);
 
     return response;
   } catch (error) {
