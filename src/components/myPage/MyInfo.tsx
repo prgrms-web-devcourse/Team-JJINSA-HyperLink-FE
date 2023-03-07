@@ -3,14 +3,16 @@ import * as style from './style.css';
 import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
+import { uploadFileToS3 } from '@/api/s3Image';
 import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES } from '@/utils/constants/signup';
 
-const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
-  const { email, nickname, profileImage, career, careerYear } = myInfo;
 
-  const [newProfileImage, setNewProfileImage] = useState(profileImage);
+const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
+  const { email, nickname, profileUrl, career, careerYear } = myInfo;
+
+  const [newProfileImage, setNewProfileImage] = useState(profileUrl);
   const [imageFile, setImageFile] = useState<File | null>();
   const { value: newNickname, onChange: onChangeNewNickname } =
     useInput(nickname);
@@ -51,15 +53,13 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     imgRef.current.click();
   };
 
-  const saveImgFile = () => {
+  const saveImgFile = async () => {
     const file = imgRef.current?.files && imgRef.current?.files[0];
     setImageFile(file);
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file as File);
-    reader.onloadend = () => {
-      setNewProfileImage(reader.result as string);
-    };
+    const src = await uploadFileToS3(file);
+    if (typeof src === 'string') {
+      setNewProfileImage(src);
+    }
   };
 
   const handleSubmit = async () => {
