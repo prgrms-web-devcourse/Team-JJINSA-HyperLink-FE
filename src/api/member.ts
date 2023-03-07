@@ -1,7 +1,19 @@
 import { axiosInstance } from './core';
-import { myInfo } from '@/types/myInfo';
+
+export type myInfoResponse = {
+  email: string;
+  nickname: string;
+  career: string;
+  careerYear: string;
+  profileImage: string;
+};
 
 export const getMyInfo = async () => {
-  const response: myInfo = await axiosInstance.get('/members/mypage');
-  return response;
+  try {
+    const response: myInfoResponse = await axiosInstance.get('/members/mypage');
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 };
