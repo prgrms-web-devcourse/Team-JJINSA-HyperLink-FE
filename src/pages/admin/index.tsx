@@ -6,6 +6,7 @@ import {
 import { Contents, Creators, WeeklyViews } from '@/components/admin';
 import { Divider, Spinner } from '@/components/common';
 import { content, creator, views } from '@/types/admin';
+import { WEEKLY_VIEWS } from '@/utils/constants/storage';
 import { isSameDate } from '@/utils/date';
 import { getItem, setItem } from '@/utils/storage';
 import { useQuery } from '@tanstack/react-query';
@@ -41,7 +42,7 @@ const Admin = () => {
   }
 
   const updateWeeklyViews = () => {
-    const weeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
+    const weeklyViews: views[] = getItem(WEEKLY_VIEWS, []);
 
     if (!weeklyViews.length) {
       return;
@@ -57,7 +58,7 @@ const Admin = () => {
         )
       ) {
         weeklyViews.shift();
-        setItem('WEEKLY_VIEWS', [...weeklyViews, yesterdayViews]);
+        setItem(WEEKLY_VIEWS, [...weeklyViews, yesterdayViews]);
       }
     } else if (weeklyViews.length < 7) {
       if (
@@ -71,7 +72,7 @@ const Admin = () => {
           )
         )
       ) {
-        setItem('WEEKLY_VIEWS', [...weeklyViews, yesterdayViews]);
+        setItem(WEEKLY_VIEWS, [...weeklyViews, yesterdayViews]);
       }
     }
   };

@@ -2,6 +2,7 @@ import { Heading } from '@/components/common';
 import { views } from '@/types/admin';
 import { generateRandomHex, hexToRGB } from '@/utils/color';
 import { CATEGORIES } from '@/utils/constants/signup';
+import { WEEKLY_VIEWS } from '@/utils/constants/storage';
 import { getKeyByValue } from '@/utils/object';
 import { getItem } from '@/utils/storage';
 import * as style from './style.css';
@@ -38,7 +39,7 @@ const options = {
 };
 
 const WeeklyViews = () => {
-  const weeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
+  const weeklyViews: views[] = getItem(WEEKLY_VIEWS, []);
 
   return (
     <div className={style.container}>
