@@ -3,19 +3,34 @@ import * as style from './style.css';
 import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
-
-const CAREER_ITEMS = ['개발', '기획', '디자인'];
-const CAREER_YEAR_ITEMS = ['1년 미만', '1년', '2년'];
+import { uploadFileToS3 } from '@/api/s3Image';
+import { updateMyInfo } from '@/api/member';
+import { useQuery } from '@tanstack/react-query';
+import { CAREERS, CATEGORIES } from '@/utils/constants/signup';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
-  const { email, nickname, profileImage, career, careerYear } = myInfo;
+  const { email, nickname, profileUrl, career, careerYear } = myInfo;
 
-  const [newProfileImage, setNewProfileImage] = useState(profileImage);
+  const [newProfileImage, setNewProfileImage] = useState(profileUrl);
   const [imageFile, setImageFile] = useState<File | null>();
   const { value: newNickname, onChange: onChangeNewNickname } =
     useInput(nickname);
   const [newCareer, setNewCareer] = useState(career);
   const [newCareerYear, setNewCareerYear] = useState(careerYear);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const { isLoading, status, refetch } = useQuery(
+    ['updateMyInfo'],
+    () => {
+      updateMyInfo({
+        nickname: newNickname,
+        career: newCareer,
+        careerYear: newCareerYear,
+      });
+      return null;
+    },
+    { enabled: false }
+  );
 
   const handleItemClick = (item: string, type: string) => {
     switch (type) {
@@ -37,19 +52,24 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     imgRef.current.click();
   };
 
-  const saveImgFile = () => {
+  const saveImgFile = async () => {
     const file = imgRef.current?.files && imgRef.current?.files[0];
     setImageFile(file);
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file as File);
-    reader.onloadend = () => {
-      setNewProfileImage(reader.result as string);
-    };
+    const src = await uploadFileToS3(file);
+    if (typeof src === 'string') {
+      setNewProfileImage(src);
+    }
   };
 
-  const handleSubmit = () => {
-    // 회원 정보 변경시 로직
+  const handleSubmit = async () => {
+    if (isUpdating) return;
+
+    setIsUpdating(true);
+    await refetch();
+    setIsUpdating(false);
+
+    if (status === 'success') alert('프로필이 변경되었습니다');
+    else alert('잠시 후 시도해주세요');
   };
 
   const [isHovering, setIsHovering] = useState(false);
@@ -96,7 +116,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
           placeholder="선택해주세요"
           label="직군/경력"
           value={newCareer}
-          items={CAREER_ITEMS}
+          items={Object.keys(CATEGORIES)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'career');
           }}
@@ -104,13 +124,17 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         <Dropdown
           placeholder="선택해주세요"
           value={newCareerYear}
-          items={CAREER_YEAR_ITEMS}
+          items={Object.keys(CAREERS)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'careerYear');
           }}
         />
       </div>
-      <Button text="프로필 변경 완료" />
+      <Button
+        text="프로필 변경 완료"
+        disabled={isUpdating}
+        onClick={handleSubmit}
+      />
     </>
   );
 };

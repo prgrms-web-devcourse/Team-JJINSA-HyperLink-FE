@@ -1,24 +1,28 @@
 import { setupWorker } from 'msw';
 import {
+  adminHandlers,
   authHandlers,
-  memberHandlers,
-  searchContentsHandlers,
-  mainContentsHandlers,
   bookmarkHandlers,
+  creatorListHandler,
   likeHandlers,
+  mainContentsHandlers,
+  memberHandlers,
   notRecommendHandlers,
-  viewHandlers,
+  searchContentsHandlers,
   specificCreatorHandler,
+  viewHandlers,
 } from './handlers';
 
 export const worker = setupWorker(
+  ...adminHandlers,
   ...authHandlers,
-  ...memberHandlers,
-  ...searchContentsHandlers,
-  ...mainContentsHandlers,
   ...bookmarkHandlers,
+  ...creatorListHandler,
   ...likeHandlers,
+  ...mainContentsHandlers,
+  ...memberHandlers,
   ...notRecommendHandlers,
-  ...viewHandlers,
-  ...specificCreatorHandler
+  ...searchContentsHandlers,
+  ...specificCreatorHandler,
+  ...viewHandlers
 );
