@@ -10,7 +10,7 @@ export const useCreatorListInfiniteQuery = (category: string) => {
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery(
-    ['main_contents', category],
+    ['mainContents', category],
     ({ pageParam = 0 }) => getCreatorList(pageParam, category),
     {
       refetchOnWindowFocus: false,
