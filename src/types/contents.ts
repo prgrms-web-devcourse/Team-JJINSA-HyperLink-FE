@@ -24,6 +24,10 @@ export type company = {
 export type contents = {
   contents: content[];
   hasNext: boolean;
+};
+
+export type searchContents = {
+  getContentsCommonResponse: contents;
   keyword: string;
   resultCount: number;
 };
