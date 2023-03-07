@@ -29,7 +29,7 @@ export const CAREER_YEAR: { [key: string]: string } = {
 };
 
 const MENU_LIST = {
-  '북마크 / 히스토리': '/user-story',
+  '북마크 / 히스토리': '/history',
   '내 정보': '/mypage',
   로그아웃: 'logout',
 };

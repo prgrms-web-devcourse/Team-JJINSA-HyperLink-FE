@@ -1,13 +1,13 @@
-import ButtonGroup from '@/components/buttonGroup';
 import { useRecoilState } from 'recoil';
-import { selectedFilterHistoryPageState } from '@/stores/selectedCategory';
+import ButtonGroup from '@/components/buttonGroup';
 import Bookmark from '@/components/userStory/Bookmark';
 import History from '@/components/userStory/History';
+import { selectedFilterHistoryPageState } from '@/stores/selectedCategory';
 import * as style from './style.css';
 
 const CATEGORIES = ['bookmark', 'history'];
 
-const UserStoryPage = () => {
+const HistoryPage = () => {
   const [selectedFilter, setSelectedFilter] = useRecoilState<string>(
     selectedFilterHistoryPageState
   );
@@ -24,4 +24,4 @@ const UserStoryPage = () => {
   );
 };
 
-export default UserStoryPage;
+export default HistoryPage;
