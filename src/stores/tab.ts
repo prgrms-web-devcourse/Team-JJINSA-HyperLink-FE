@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const mainTabState = atom<string>({
-  key: 'tab',
+export const selectedTabState = atom<string>({
+  key: 'selectedTab',
   default: 'RECENT_CONTENT',
 });
