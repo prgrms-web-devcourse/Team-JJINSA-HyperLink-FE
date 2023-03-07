@@ -11,6 +11,7 @@ import {
   searchContentsHandlers,
   specificCreatorHandler,
   viewHandlers,
+  attentionCategoryHandler,
 } from './handlers';
 
 export const worker = setupWorker(
@@ -24,5 +25,6 @@ export const worker = setupWorker(
   ...notRecommendHandlers,
   ...searchContentsHandlers,
   ...specificCreatorHandler,
-  ...viewHandlers
+  ...viewHandlers,
+  ...attentionCategoryHandler
 );
