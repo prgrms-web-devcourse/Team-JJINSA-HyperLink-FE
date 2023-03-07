@@ -3,7 +3,8 @@ import { contents } from '@/types/contents';
 
 export const getSearchContents = async (pageParam: number, keyword: string) => {
   const response: contents = await axiosInstance.get(
-    `/contents/search?keyword=${keyword}&page=${pageParam}&size=10`
+    // `/contents/search?keyword=${keyword}&page=${pageParam}&size=10`
+    `/contents/search?keyword="개발 성장"&page=0&size=4`
   );
 
   return {

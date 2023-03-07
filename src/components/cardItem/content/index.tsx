@@ -3,9 +3,10 @@ import CardTop from './cardTop';
 import CardBottom from './cardBottom';
 import * as style from './style.css';
 import { content } from '@/types/contents';
-import { useQuery } from '@tanstack/react-query';
-import { getViewResponse } from '@/api/view';
-import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { patchViewResponse } from '@/api/view';
+import { useRecoilState } from 'recoil';
+import { selectedCategoryState } from '@/stores/selectedCategory';
 
 // props: 링크, 이미지, 북마크, 하트, 조회수, 크리에이터 이름, 날짜, 제목, 회사, 회사 아바타
 const ContentCard = ({
@@ -20,26 +21,27 @@ const ContentCard = ({
   creatorName,
   createdAt,
   title,
-  recommendationCompanies,
+  recommendations,
 }: content) => {
-  const [isClick, setIsClick] = useState(false);
-  const { refetch } = useQuery(['views'], () => getViewResponse(contentId), {
-    enabled: isClick,
-    refetchOnWindowFocus: false,
-    retry: 0,
-    onSuccess: () => {
-      setIsClick(false);
-    },
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedCategoryState
+  );
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: async () => await patchViewResponse(contentId),
+
+    onSuccess: () =>
+      queryClient.invalidateQueries(['main_contents', selectedCategory]),
   });
-  const handleViewClick = () => {
-    setIsClick(true);
-    refetch();
-    return false;
+  const handleClick = () => {
+    mutate();
   };
+
   return (
     <Card type="content">
       <a href={link} target="_blank" rel="noreferrer">
-        <article className={style.cardItem} onClick={handleViewClick}>
+        <article className={style.cardItem} onClick={handleClick}>
           <div className={style.cardContainer}>
             <CardTop
               contentId={contentId}
@@ -54,7 +56,7 @@ const ContentCard = ({
               creatorName={creatorName}
               createdAt={createdAt}
               title={title}
-              recommendationCompanies={recommendationCompanies}
+              recommendations={recommendations}
             />
           </div>
         </article>

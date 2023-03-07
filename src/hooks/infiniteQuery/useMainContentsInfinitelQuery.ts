@@ -11,7 +11,7 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     refetch,
   } = useInfiniteQuery(
     ['main_contents', category],
-    ({ pageParam = 0 }) => getMainContents(pageParam, category),
+    async ({ pageParam = 0 }) => await getMainContents(pageParam, category),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
