@@ -21,3 +21,15 @@ export const putAttentionCategory = async (
     console.error(error);
   }
 };
+
+export const updateProfileImage = async (profileImgUrl: string) => {
+  try {
+    const response = await axiosInstance.put('/members/attention-category', {
+      profileImgUrl,
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
