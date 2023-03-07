@@ -51,13 +51,13 @@ const CardTop = ({
     mutationFn: async () => await postBookmarkResponse(contentId, isBookmarked),
 
     onSuccess: () =>
-      queryClient.invalidateQueries(['main_contents', selectedCategory]),
+      queryClient.invalidateQueries(['mainContents', selectedCategory]),
   });
   const likeMutation = useMutation({
     mutationFn: async () => await postLikeResponse(contentId, userLiked),
 
     onSuccess: () =>
-      queryClient.invalidateQueries(['main_contents', selectedCategory]),
+      queryClient.invalidateQueries(['mainContents', selectedCategory]),
   });
 
   const handleBookmarkClick = (e: MouseEvent) => {
