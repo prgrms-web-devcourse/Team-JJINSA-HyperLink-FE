@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import logo from '/assets/logo.svg';
 import { Spinner, Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
