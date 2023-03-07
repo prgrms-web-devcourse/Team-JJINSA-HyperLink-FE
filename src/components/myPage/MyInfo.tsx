@@ -3,7 +3,7 @@ import * as style from './style.css';
 import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
-import { handleFileInput } from '@/api/s3Image';
+import { uploadFileToS3 } from '@/api/s3Image';
 
 const CAREER_ITEMS = ['개발', '기획', '디자인'];
 const CAREER_YEAR_ITEMS = ['1년 미만', '1년', '2년'];
@@ -41,7 +41,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const saveImgFile = async () => {
     const file = imgRef.current?.files && imgRef.current?.files[0];
     setImageFile(file);
-    const src = await handleFileInput(file);
+    const src = await uploadFileToS3(file);
     if (typeof src === 'string') {
       setNewProfileImage(src);
     }
