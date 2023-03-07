@@ -28,6 +28,7 @@ export const top = style([
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '4.7rem',
+    minWidth: '61.5rem',
   },
 ]);
 

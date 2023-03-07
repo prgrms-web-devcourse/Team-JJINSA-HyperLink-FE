@@ -7,3 +7,4 @@ export { likeHandlers } from './like';
 export { notRecommendHandlers } from './notRecommend';
 export { viewHandlers } from './view';
 export { specificCreatorHandler } from './specificCreator';
+export { creatorListHandler } from './creatorList';
