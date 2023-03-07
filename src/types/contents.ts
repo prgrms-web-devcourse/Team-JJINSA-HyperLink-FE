@@ -13,12 +13,12 @@ export type contentData = {
   link: string;
   title: string;
   viewCount: number;
-  recommendationCompanies?: company[];
+  recommendations?: banner[];
 };
 
-export type company = {
-  companyLogoImgUrl: string;
-  companyName: string;
+export type banner = {
+  bannerLogoImgUrl: string;
+  bannerName: string;
 };
 
 export type contents = {

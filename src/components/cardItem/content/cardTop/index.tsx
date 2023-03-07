@@ -1,10 +1,14 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { Icon } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 import * as style from './style.css';
-import { useQuery } from '@tanstack/react-query';
-import { getBookmarkResponse } from '@/api/bookmark';
-import { getLikeResponse } from '@/api/like';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { postBookmarkResponse } from '@/api/bookmark';
+import { postLikeResponse } from '@/api/like';
+import { useRecoilState } from 'recoil';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
 
 type CardTopProps = {
   contentId: number;
@@ -26,36 +30,60 @@ const CardTop = ({
   const [userBookmarked, setUserBookmarked] = useState<boolean>(isBookmarked);
   const [userLiked, setUserLiked] = useState<boolean>(isLiked);
 
-  const bookmarkResponse = useQuery(
-    ['bookmark'],
-    () => getBookmarkResponse(contentId, userBookmarked),
-    {
-      enabled: false,
-    }
+  // 북마크 연동할 때, 지우겠습니다.
+  // const likeResponse = useQuery(
+  //   ['like'],
+  //   () => getLikeResponse(contentId, userLiked),
+  //   {
+  //     enabled: false,
+  //   }
+  // );
+  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedCategoryState
+  );
+  const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
+    isLoginModalVisibleState
   );
 
-  const likeResponse = useQuery(
-    ['like'],
-    () => getLikeResponse(contentId, userLiked),
-    {
-      enabled: false,
-    }
-  );
+  const queryClient = useQueryClient();
+  const bookmarkMutation = useMutation({
+    mutationFn: async () => await postBookmarkResponse(contentId, isBookmarked),
+
+    onSuccess: () =>
+      queryClient.invalidateQueries(['main_contents', selectedCategory]),
+  });
+  const likeMutation = useMutation({
+    mutationFn: async () => await postLikeResponse(contentId, userLiked),
+
+    onSuccess: () =>
+      queryClient.invalidateQueries(['main_contents', selectedCategory]),
+  });
 
   const handleBookmarkClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return false;
+    }
     setUserBookmarked(!userBookmarked);
-    bookmarkResponse.refetch();
+    bookmarkMutation.mutate();
   };
 
   const handleLikeClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return false;
+    }
     setUserLiked(!userLiked);
-    likeResponse.refetch();
+    likeMutation.mutate();
   };
-
+  useEffect(() => {
+    setUserBookmarked(isBookmarked);
+  }, [isBookmarked]);
   return (
     <section className={style.cardTop}>
       <ImageComponent
@@ -67,8 +95,11 @@ const CardTop = ({
         height="21rem"
         objectFit="cover"
       />
-      <div className={style.bookmarkWrapper} onClick={handleBookmarkClick}>
-        {userBookmarked ? (
+      <div
+        className={style.bookmarkWrapper({ bookmark: isBookmarked })}
+        onClick={handleBookmarkClick}
+      >
+        {isBookmarked ? (
           <div className={style.iconWrapper({ bookmark: true })}>
             <Icon
               name="bookmark"
@@ -93,7 +124,7 @@ const CardTop = ({
               name="heart"
               type="solid"
               size="medium"
-              style={{ color: 'white' }}
+              style={{ color: 'red' }}
             />
             <div style={{ color: 'white' }}>{likeCount}</div>
           </div>

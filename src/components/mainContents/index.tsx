@@ -1,4 +1,5 @@
 import { useMainContentsInfiniteQuery } from '@/hooks/infiniteQuery/useMainContentsInfinitelQuery';
+import { isAuthorizedState } from '@/stores/auth';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -8,6 +9,7 @@ import CardList from '../cardList';
 import { Spinner } from '../common';
 
 const MainContents = () => {
+  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedCategoryState
   );
@@ -28,10 +30,9 @@ const MainContents = () => {
     }
   }, [inView]);
 
-  // 캐싱 고민
-  // useEffect(() => {
-  //   refetch();
-  // }, [selectedCategory]);
+  useEffect(() => {
+    refetch();
+  }, [isAuthorized]);
 
   return (
     <CardList type="content">

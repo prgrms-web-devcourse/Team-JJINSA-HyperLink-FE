@@ -2,9 +2,13 @@ import { axiosInstance } from '@/api/core';
 import { contents } from '@/types/contents';
 
 export const getMainContents = async (pageParam: number, category: string) => {
-  const response: contents = await axiosInstance.get(
-    `/contents?category=${category}&creator=0&page=${pageParam}&size=10`
-  );
+  const ContentsURL =
+    category === 'all'
+      ? `/contents/all?&page=${pageParam + 1}&size=12&sort=recent`
+      : `/contents?category=${category}&creator=0&page=${
+          pageParam + 1
+        }&size=12&sort=recent`;
+  const response: contents = await axiosInstance.get(ContentsURL);
 
   return {
     // 실제 데이터
