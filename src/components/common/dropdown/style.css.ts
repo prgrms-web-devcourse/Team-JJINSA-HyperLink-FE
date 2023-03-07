@@ -58,7 +58,7 @@ export const dropdownWrapper = recipe({
 
       visibility: 'hidden',
       maxHeight: '40rem',
-      overflow: 'scroll',
+      overflowY: 'auto',
       zIndex: '10',
     },
   ],

@@ -1,13 +1,11 @@
-import { Badge, Spinner, Tab, Text } from '@/components/common';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import UserNav from './UserNav';
-
-import logo from '/assets/logo.svg';
-import { isHomeScrolledState } from '@/stores/scroll';
 import { Suspense } from 'react';
+import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { Spinner, Tab, Text } from '@/components/common';
+import SearchBar from './SearchBar';
+import UserNav from './userNav/index';
+import { isHomeScrolledState } from '@/stores/scroll';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import CountDown from './CountDown';
 import * as style from './style.css';
 import { selectedTabState } from '@/stores/tab';
 
@@ -49,12 +47,10 @@ const Header = () => {
               setTabState(tabName);
             }}
           />
-          <Link to="/" className={style.dailyBriefing}>
-            <div className={style.title}>
-              <Text size="small">오늘의 hypelink</Text>
-              <Badge top={-10} right={10} />
-            </div>
-            <CountDown />
+          <Link to="/daily-briefing" className={style.dailyBriefing}>
+            <Text size="small" weight={500}>
+              오늘의 hypelink
+            </Text>
           </Link>
         </div>
       )}
