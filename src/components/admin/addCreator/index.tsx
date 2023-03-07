@@ -24,6 +24,12 @@ const AddCreator = () => {
     name.onChange('');
     description.onChange('');
     categoryName.onChange('');
+
+    if (imgRef.current) {
+      imgRef.current.files = new DataTransfer().files;
+    }
+
+    setProfileUrl('');
   };
 
   const handleAvatarClick = () => {
@@ -58,6 +64,7 @@ const AddCreator = () => {
         | 'beauty'
         | 'finance',
     });
+    handleResetInputs();
   };
 
   useEffect(() => {
