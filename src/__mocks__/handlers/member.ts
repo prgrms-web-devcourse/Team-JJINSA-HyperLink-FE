@@ -5,7 +5,7 @@ export const myInfo = {
   nickname: '초보자',
   career: 'develop',
   careerYear: '10',
-  profileImage:
+  profileUrl:
     'https://lh3.googleusercontent.com/a/AEdFTp6KQBBQ-S4iulsmKXKrkDCYJlMQATyZKXT-zg1Z',
 };
 
