@@ -1,14 +1,21 @@
 import * as utils from '@/styles/utils.css';
+import { color } from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
 
 export const modalContent = style([
   utils.flexColumn,
   utils.flexJustifySpaceBetween,
+  utils.positionAbsolute,
+  utils.borderRadius,
   {
+    top: '2rem',
+    right: '18rem',
     gap: '4rem',
     padding: '3rem',
     width: '38rem',
     minWidth: '38rem',
+    boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
+    backgroundColor: color.white,
   },
 ]);
 
