@@ -1,7 +1,7 @@
-import { getMainContents } from '@/api/mainContents';
+import { getCreatorList } from '@/api/creatorList';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-export const useMainContentsInfiniteQuery = (category: string) => {
+export const useCreatorListInfiniteQuery = (category: string) => {
   const {
     data: getContents,
     fetchNextPage: getNextPage,
@@ -11,7 +11,7 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     refetch,
   } = useInfiniteQuery(
     ['mainContents', category],
-    async ({ pageParam = 0 }) => await getMainContents(pageParam, category),
+    ({ pageParam = 0 }) => getCreatorList(pageParam, category),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {

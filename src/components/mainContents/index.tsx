@@ -1,6 +1,6 @@
 import { useMainContentsInfiniteQuery } from '@/hooks/infiniteQuery/useMainContentsInfinitelQuery';
+import { isAuthorizedState } from '@/stores/auth';
 import { selectedCategoryState } from '@/stores/selectedCategory';
-import * as style from './style.css';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState } from 'recoil';
@@ -9,6 +9,7 @@ import CardList from '../cardList';
 import { Spinner } from '../common';
 
 const MainContents = () => {
+  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedCategoryState
   );
@@ -31,10 +32,10 @@ const MainContents = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectedCategory]);
+  }, [isAuthorized]);
 
   return (
-    <CardList>
+    <CardList type="content">
       {
         // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
         getContentsIsSuccess && getContents?.pages

@@ -5,16 +5,19 @@ import { Divider, Icon } from '@/components/common';
 import CardModal from '@/components/cardItem/content/CardModal';
 import BannerAvatar from '../banner/bannerAvatar';
 import BannerText from '../banner/bannerText';
-import { company } from '@/types/contents';
+import { banner } from '@/types/contents';
 import { useQuery } from '@tanstack/react-query';
-import { getNotRecommendResponse } from '@/api/notRecommend';
+import { postNotRecommendResponse } from '@/api/notRecommend';
+import { useRecoilState } from 'recoil';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { isAuthorizedState } from '@/stores/auth';
 
 type CardBottomProps = {
   creatorId: number;
   creatorName: string;
   createdAt: string;
   title: string;
-  recommendationCompanies?: company[];
+  recommendations?: banner[];
 };
 
 const CardBottom = ({
@@ -22,15 +25,18 @@ const CardBottom = ({
   creatorName,
   createdAt,
   title,
-  recommendationCompanies,
+  recommendations,
 }: CardBottomProps) => {
   const navigate = useNavigate();
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
+  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
+    isLoginModalVisibleState
+  );
   const notRecommendResponse = useQuery(
-    ['creators'],
-    () => getNotRecommendResponse(creatorId),
+    ['creators', creatorId],
+    () => postNotRecommendResponse(creatorId),
     {
       enabled: false,
     }
@@ -51,7 +57,16 @@ const CardBottom = ({
   const handleNotRecommendClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsModalVisible(false);
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return false;
+    }
     notRecommendResponse.refetch();
+  };
+
+  const dateFormat = (date: string) => {
+    return date.slice(0, 10);
   };
 
   return (
@@ -67,7 +82,7 @@ const CardBottom = ({
               {creatorName}
             </span>
             <Divider type="vertical" />
-            <span>{createdAt}</span>
+            <span>{dateFormat(createdAt)}</span>
           </div>
           <CardModal
             isOpen={isModalVisible}
@@ -95,10 +110,10 @@ const CardBottom = ({
         <div className={style.bottomTitle}>{title}</div>
       </div>
       <footer className={style.companyBanner}>
-        <BannerAvatar companies={recommendationCompanies} />
+        <BannerAvatar companies={recommendations} />
         <div style={{ flexGrow: 1 }}>
-          <BannerText companies={recommendationCompanies} />
-          {!recommendationCompanies ? (
+          <BannerText companies={recommendations} />
+          {recommendations?.length === 0 ? (
             <div className={`${style.companyText}`}>관심을 가지지 않았어요</div>
           ) : (
             <div className={`${style.companyText}`}>

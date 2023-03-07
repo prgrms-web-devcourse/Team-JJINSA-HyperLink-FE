@@ -1,10 +1,10 @@
 import { axiosInstance } from '@/api/core';
 
-export const getViewResponse = async (contentId: number) => {
+export const patchViewResponse = async (contentId: number) => {
   try {
     const response = await axiosInstance.patch(
-      // `/contents/${contentId}/view`
-      `/contents?id=${contentId}/view` // msw 전용
+      `/contents/${contentId}/view`
+      // `/contents?id=${contentId}/view` // msw 전용
     );
 
     return response;
