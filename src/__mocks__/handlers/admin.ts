@@ -28,6 +28,20 @@ let contents = [
   },
 ];
 
+const views = {
+  oneDayView: [
+    {
+      categoryName: 'develop',
+      views: 25632,
+    },
+    {
+      categoryName: 'beauty',
+      views: 22333,
+    },
+  ],
+  createdDate: '2023-03-06T00:00:00',
+};
+
 const categories = ['develop', 'beauty', 'finance'];
 
 export const adminHandlers = [
@@ -129,5 +143,13 @@ export const adminHandlers = [
     );
 
     return res(ctx.status(200), ctx.delay(1000), ctx.json(contents));
+  }),
+
+  rest.get('/admin/dashboard/all-category/view', (req, res, ctx) => {
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(401));
+    }
+
+    return res(ctx.status(200), ctx.delay(1000), ctx.json(views));
   }),
 ];
