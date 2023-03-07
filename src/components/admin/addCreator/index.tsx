@@ -1,11 +1,16 @@
-import { Button, Dropdown, Input } from '@/components/common';
+import { uploadFileToS3 } from '@/api/s3Image';
+import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { CATEGORIES } from '@/utils/constants/signup';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as style from './style.css';
+import user from '/assets/user.svg';
 
 const AddCreator = () => {
   const [ableSubmit, setAbleSubmit] = useState(false);
+
+  const [profileUrl, setProfileUrl] = useState<string | undefined>(undefined);
+  const imgRef = useRef<HTMLInputElement>(null);
 
   const name = useInput('');
   const description = useInput('');
@@ -17,6 +22,20 @@ const AddCreator = () => {
     categoryName.onChange('');
   };
 
+  const handleAvatarClick = () => {
+    imgRef?.current?.click();
+  };
+
+  const handleChangeImage = async () => {
+    const file = imgRef.current?.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    setProfileUrl(await uploadFileToS3(file));
+  };
+
   useEffect(() => {
     setAbleSubmit(
       name.value && description.value && categoryName.value ? true : false
@@ -25,6 +44,16 @@ const AddCreator = () => {
 
   return (
     <div className={style.container}>
+      <span className={style.avatarContainer} onClick={handleAvatarClick}>
+        <input
+          className={style.input}
+          type="file"
+          accept="image/*"
+          ref={imgRef}
+          onChange={handleChangeImage}
+        />
+        <Avatar size="xLarge" src={profileUrl || user} />
+      </span>
       <Input
         label="이름"
         placeholder="이름을 입력하세요."

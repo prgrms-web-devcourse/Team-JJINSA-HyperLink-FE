@@ -16,3 +16,10 @@ export const buttonContainer = style([
     gap: '1rem',
   },
 ]);
+
+export const avatarContainer = style([utils.cursorPointer]);
+
+export const input = style({
+  display: 'none',
+  cursor: 'pointer',
+});
