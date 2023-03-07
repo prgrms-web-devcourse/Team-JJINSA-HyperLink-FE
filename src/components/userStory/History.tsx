@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useHistoryContentsInfiniteQuery } from '@/hooks/infiniteQuery/useHistoryContentsInfiniteQuery';
+import { useHistoryInfiniteQuery } from '@/hooks/infiniteQuery/useHistoryInfiniteQuery';
 import { useInView } from 'react-intersection-observer';
 import { Spinner } from '@/components/common';
 import CardList from '@/components/cardList';
@@ -9,14 +9,14 @@ import * as style from './style.css';
 const History = () => {
   const { ref, inView } = useInView({ threshold: 0.8 });
   const {
-    getHistoryContents,
+    getContents,
     getNextPage,
     getContentsIsSuccess,
     getNextPageIsPossible,
     status,
     isFetching,
     isFetchingNextPage,
-  } = useHistoryContentsInfiniteQuery();
+  } = useHistoryInfiniteQuery('history');
 
   useEffect(() => {
     if (inView && getNextPageIsPossible) {
@@ -28,6 +28,8 @@ const History = () => {
     <Spinner size="huge" />;
   }
 
+  console.log('히스토리 페이지');
+
   return status === 'loading' ? (
     <Spinner size="huge" />
   ) : status === 'error' ? (
@@ -37,13 +39,13 @@ const History = () => {
       <CardList type="content">
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
-          getContentsIsSuccess && getHistoryContents?.pages ? (
-            getHistoryContents.pages.map((page_data, page_num) => {
+          getContentsIsSuccess && getContents?.pages ? (
+            getContents.pages.map((page_data, page_num) => {
               const board_page = page_data.content_page;
               return board_page.map((item, idx) => {
                 if (
                   // 마지막 요소에 ref 달아주기
-                  getHistoryContents.pages.length - 1 === page_num &&
+                  getContents.pages.length - 1 === page_num &&
                   board_page.length - 1 === idx
                 ) {
                   return (

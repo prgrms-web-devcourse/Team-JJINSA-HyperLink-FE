@@ -1,9 +1,14 @@
-import { getHistory } from '@/api/history';
+import { getHistoryContents, getBookmarkContents } from '@/api/history';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-export const useHistoryContentsInfiniteQuery = () => {
+const QUERY_KEY = {
+  bookmark: 'bookmarkContents',
+  history: 'historyContents',
+};
+
+export const useHistoryInfiniteQuery = (key: keyof typeof QUERY_KEY) => {
   const {
-    data: getHistoryContents,
+    data: getContents,
     fetchNextPage: getNextPage,
     isSuccess: getContentsIsSuccess,
     hasNextPage: getNextPageIsPossible,
@@ -11,8 +16,11 @@ export const useHistoryContentsInfiniteQuery = () => {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery(
-    ['historyContents'],
-    ({ pageParam = 0 }) => getHistory(pageParam),
+    [QUERY_KEY[key]],
+    ({ pageParam = 0 }) =>
+      key === 'bookmark'
+        ? getBookmarkContents(pageParam)
+        : getHistoryContents(pageParam),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
@@ -26,7 +34,7 @@ export const useHistoryContentsInfiniteQuery = () => {
   );
 
   return {
-    getHistoryContents,
+    getContents,
     getNextPage,
     getContentsIsSuccess,
     getNextPageIsPossible,
