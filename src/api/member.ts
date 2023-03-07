@@ -24,7 +24,7 @@ export const putAttentionCategory = async (
 
 export const updateProfileImage = async (profileImgUrl: string) => {
   try {
-    const response = await axiosInstance.put('/members/attention-category', {
+    const response = await axiosInstance.post('/members/profile-image', {
       profileImgUrl,
     });
 
