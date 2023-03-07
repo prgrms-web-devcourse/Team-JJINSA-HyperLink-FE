@@ -1,13 +1,11 @@
 import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import * as style from './style.css';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
 import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
-
-const CAREER_ITEMS = ['개발', '기획', '디자인'];
-const CAREER_YEAR_ITEMS = ['1년 미만', '1년', '2년'];
+import { CAREERS, CATEGORIES } from '@/utils/constants/signup';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const { email, nickname, profileImage, career, careerYear } = myInfo;
@@ -119,7 +117,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
           placeholder="선택해주세요"
           label="직군/경력"
           value={newCareer}
-          items={CAREER_ITEMS}
+          items={Object.keys(CATEGORIES)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'career');
           }}
@@ -127,7 +125,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         <Dropdown
           placeholder="선택해주세요"
           value={newCareerYear}
-          items={CAREER_YEAR_ITEMS}
+          items={Object.keys(CAREERS)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'careerYear');
           }}
@@ -135,7 +133,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
       </div>
       <Button
         text="프로필 변경 완료"
-        disabled={isUpdating || isLoading}
+        disabled={isUpdating}
         onClick={handleSubmit}
       />
     </>
