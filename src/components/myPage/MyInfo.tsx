@@ -1,8 +1,10 @@
 import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import * as style from './style.css';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
+import { updateMyInfo } from '@/api/member';
+import { useQuery } from '@tanstack/react-query';
 
 const CAREER_ITEMS = ['개발', '기획', '디자인'];
 const CAREER_YEAR_ITEMS = ['1년 미만', '1년', '2년'];
@@ -16,6 +18,20 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     useInput(nickname);
   const [newCareer, setNewCareer] = useState(career);
   const [newCareerYear, setNewCareerYear] = useState(careerYear);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const { isLoading, status, refetch } = useQuery(
+    ['updateMyInfo'],
+    () => {
+      updateMyInfo({
+        nickname: newNickname,
+        career: newCareer,
+        careerYear: newCareerYear,
+      });
+      return null;
+    },
+    { enabled: false }
+  );
 
   const handleItemClick = (item: string, type: string) => {
     switch (type) {
@@ -48,8 +64,15 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     };
   };
 
-  const handleSubmit = () => {
-    // 회원 정보 변경시 로직
+  const handleSubmit = async () => {
+    if (isUpdating) return;
+
+    setIsUpdating(true);
+    await refetch();
+    setIsUpdating(false);
+
+    if (status === 'success') alert('프로필이 변경되었습니다');
+    else alert('잠시 후 시도해주세요');
   };
 
   const [isHovering, setIsHovering] = useState(false);
@@ -110,7 +133,11 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
           }}
         />
       </div>
-      <Button text="프로필 변경 완료" />
+      <Button
+        text="프로필 변경 완료"
+        disabled={isUpdating || isLoading}
+        onClick={handleSubmit}
+      />
     </>
   );
 };
