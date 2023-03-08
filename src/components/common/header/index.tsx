@@ -1,13 +1,13 @@
+import { Tab, Text } from '@/components/common';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { selectedTabState } from '@/stores/tab';
 import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { Spinner, Tab, Text } from '@/components/common';
-import SearchBar from './SearchBar';
-import UserNav from './userNav/index';
-import { isHomeScrolledState } from '@/stores/scroll';
-import logo from '/assets/logo.svg';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import SearchBar from './SearchBar';
 import * as style from './style.css';
-import { selectedTabState } from '@/stores/tab';
+import UserNav from './userNav/index';
+import logo from '/assets/logo.svg';
 
 type tabType =
   | 'RECENT_CONTENT'
@@ -34,7 +34,7 @@ const Header = () => {
         </Link>
         {isHomeScrolled ? <SearchBar /> : <span></span>}
         {/* Suspense 다른 걸로 교체, 메인 페이지 배너 가운데에 생기는 버그 */}
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<></>}>
           <UserNav />
         </Suspense>
       </div>
