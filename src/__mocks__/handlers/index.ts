@@ -10,3 +10,4 @@ export { viewHandlers } from './view';
 export { specificCreatorHandler } from './specificCreator';
 export { creatorListHandler } from './creatorList';
 export { attentionCategoryHandler } from './attentionCategory';
+export { historyHandler } from './history';

@@ -45,3 +45,8 @@ export type creators = {
   creators: creator[];
   hasNext: boolean;
 };
+
+export type histories = {
+  contents: content[];
+  hasNext: boolean;
+};
