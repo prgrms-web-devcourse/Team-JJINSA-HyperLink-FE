@@ -12,3 +12,4 @@ export { creatorListHandler } from './creatorList';
 export { creatorInfoHandler } from './creator';
 export { attentionCategoryHandler } from './attentionCategory';
 export { historyHandler } from './history';
+export { dailyBriefingDataHandler } from './dailyBriefing';
