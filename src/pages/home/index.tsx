@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isHomeScrolledState } from '@/stores/scroll';
 import Main from '@/components/main';
 import { throttleWheel } from '@/utils/optimization/throttle';
@@ -7,6 +7,7 @@ import * as style from './style.css';
 import MainContents from '@/components/mainContents';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import ButtonGroup from '@/components/buttonGroup';
+import { selectedTabState } from '@/stores/tab';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
@@ -16,6 +17,7 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState<string>(
     selectedCategoryState
   );
+  const tabState = useRecoilValue(selectedTabState);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {
@@ -45,8 +47,17 @@ const Home = () => {
   };
 
   useEffect(() => {
+    ref.current.scrollTop = 0;
     setIsHomeScrolled(false);
   }, []);
+
+  useEffect(() => {
+    if (isHomeScrolled) {
+      const pageHeight = window.innerHeight - 78;
+      setIsHomeScrolled(true);
+      ref.current.scrollTop = pageHeight;
+    }
+  }, [tabState]);
 
   return (
     <div

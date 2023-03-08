@@ -33,7 +33,7 @@ export type searchContents = {
 };
 
 export type creator = {
-  creatorId: 1;
+  creatorId: number;
   creatorName: string;
   subscriberAmount: number;
   creatorDescription: string;
@@ -44,6 +44,12 @@ export type creator = {
 export type creators = {
   creators: creator[];
   hasNext: boolean;
+};
+
+export type recommendedCreator = Omit<creator, 'isSubscribed'>;
+
+export type recommendedCreators = {
+  creators: recommendedCreator[];
 };
 
 export type histories = {

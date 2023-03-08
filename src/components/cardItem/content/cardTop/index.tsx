@@ -2,10 +2,10 @@ import { MouseEvent, useEffect, useState } from 'react';
 import { Icon } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 import * as style from './style.css';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postBookmarkResponse } from '@/api/bookmark';
 import { postLikeResponse } from '@/api/like';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
@@ -30,18 +30,8 @@ const CardTop = ({
   const [userBookmarked, setUserBookmarked] = useState<boolean>(isBookmarked);
   const [userLiked, setUserLiked] = useState<boolean>(isLiked);
 
-  // 북마크 연동할 때, 지우겠습니다.
-  // const likeResponse = useQuery(
-  //   ['like'],
-  //   () => getLikeResponse(contentId, userLiked),
-  //   {
-  //     enabled: false,
-  //   }
-  // );
-  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
-  const [selectedCategory, setSelectedCategory] = useRecoilState(
-    selectedCategoryState
-  );
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const selectedCategory = useRecoilValue(selectedCategoryState);
   const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
     isLoginModalVisibleState
   );
