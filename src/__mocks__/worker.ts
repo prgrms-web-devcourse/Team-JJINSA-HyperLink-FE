@@ -1,5 +1,6 @@
 import { setupWorker } from 'msw';
 import {
+  adminHandlers,
   authHandlers,
   bookmarkHandlers,
   creatorListHandler,
@@ -11,9 +12,13 @@ import {
   specificCreatorHandler,
   subscriptionContentsHandlers,
   viewHandlers,
+  creatorInfoHandler,
+  attentionCategoryHandler,
+  historyHandler,
 } from './handlers';
 
 export const worker = setupWorker(
+  ...adminHandlers,
   ...authHandlers,
   ...bookmarkHandlers,
   ...creatorListHandler,
@@ -24,5 +29,8 @@ export const worker = setupWorker(
   ...searchContentsHandlers,
   ...specificCreatorHandler,
   ...subscriptionContentsHandlers,
-  ...viewHandlers
+  ...viewHandlers,
+  ...creatorInfoHandler,
+  ...attentionCategoryHandler,
+  ...historyHandler
 );

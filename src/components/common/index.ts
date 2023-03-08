@@ -13,4 +13,5 @@ export { default as Modal } from '@/components/common/modal';
 export { default as Slider } from '@/components/common/slider';
 export { default as Spinner } from '@/components/common/spinner';
 export { default as Tab } from '@/components/common/tab';
+export { default as Table } from '@/components/common/table';
 export { default as Text } from '@/components/common/text';

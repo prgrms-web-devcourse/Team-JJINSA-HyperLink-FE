@@ -1,16 +1,34 @@
-import { putAttentionCategory } from '@/api/member';
-import { Button, Icon, Modal, Text } from '@/components/common';
+import {
+  getAttentionCategory,
+  putAttentionCategory,
+} from '@/api/attentionCategory';
+import { Button, Icon, Modal, Spinner, Text } from '@/components/common';
 import { CATEGORIES } from '@/utils/constants/signup';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
 export type CategryModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  selectedList: string[];
 };
 
-const CategryModal = ({ isOpen, onClose, selectedList }: CategryModalProps) => {
+const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
+  const { data, isLoading } = useQuery(
+    ['attentionCategory'],
+    getAttentionCategory
+  );
+  const selectedList = data || [];
+
+  const { refetch, status } = useQuery(
+    ['updateAttentionCategory'],
+    () => {
+      putAttentionCategory([...newSelectedList]);
+      return null;
+    },
+    { enabled: false }
+  );
+
   const [newSelectedList, setNewSelectedList] = useState(
     new Set([...selectedList])
   );
@@ -27,8 +45,9 @@ const CategryModal = ({ isOpen, onClose, selectedList }: CategryModalProps) => {
   };
 
   const handleSubmit = async () => {
-    const response = await putAttentionCategory([...newSelectedList]);
-    if (response?.status === 200) {
+    await refetch();
+
+    if (status === 'success') {
       alert('변경되었습니다!');
       onClose();
     } else {
@@ -49,19 +68,25 @@ const CategryModal = ({ isOpen, onClose, selectedList }: CategryModalProps) => {
           </div>
         </div>
         <div className={style.modalSelectWrapper}>
-          {Object.keys(CATEGORIES).map((category) => {
-            const isSelected = newSelectedList.has(CATEGORIES[category]);
-            return (
-              <Button
-                key={category}
-                version={isSelected ? 'blue' : 'grayInverted'}
-                fontSize="medium"
-                paddingSize="small"
-                text={category}
-                onClick={() => handleSelect(category)}
-              />
-            );
-          })}
+          {!isLoading ? (
+            Object.keys(CATEGORIES).map((category) => {
+              const isSelected = newSelectedList.has(CATEGORIES[category]);
+              return (
+                <Button
+                  key={category}
+                  version={isSelected ? 'blue' : 'grayInverted'}
+                  fontSize="medium"
+                  paddingSize="small"
+                  text={category}
+                  onClick={() => handleSelect(category)}
+                />
+              );
+            })
+          ) : (
+            <div style={{ margin: '5rem' }}>
+              <Spinner size="huge" />
+            </div>
+          )}
         </div>
         <div className={style.buttonWrapper}>
           <Button

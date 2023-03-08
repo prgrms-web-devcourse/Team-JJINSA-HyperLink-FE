@@ -1,4 +1,6 @@
 import { content, creator, views } from '@/types/admin';
+import { isSameDate } from '@/utils/date';
+import { getItem } from '@/utils/storage';
 import { axiosInstance } from './core';
 
 export const getAllCreators = async () => {
@@ -63,6 +65,20 @@ export const deleteContent = async (contentId: number) => {
 };
 
 export const getYesterdayViews = async () => {
+  const storedWeeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
+  const today = new Date();
+  const yesterday = new Date(today.setDate(today.getDate() - 1));
+
+  if (storedWeeklyViews.length) {
+    const storedYesterdayViews = storedWeeklyViews.find((storedDailyViews) =>
+      isSameDate(new Date(storedDailyViews.createdDate), yesterday)
+    );
+
+    if (storedYesterdayViews) {
+      return storedYesterdayViews;
+    }
+  }
+
   const response: views = await axiosInstance.get(
     '/admin/dashboard/all-category/view'
   );
