@@ -49,10 +49,11 @@ export const bottomInfoCreator = style({
   },
 });
 export const bottomEllipsis = style({
-  padding: '0.2rem',
+  padding: '0.3rem 0.5rem',
   ':hover': {
     cursor: 'pointer',
-    color: 'black',
+    backgroundColor: 'lightgray',
+    borderRadius: '50%',
   },
 });
 export const notRecommended = style([

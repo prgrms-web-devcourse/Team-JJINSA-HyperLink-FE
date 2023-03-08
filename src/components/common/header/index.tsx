@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { MouseEvent, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Spinner, Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
@@ -26,6 +26,11 @@ const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
 
+  // dev pull 하면서 utils에서 가져다 사용하기
+  const getKeyByValue = (obj: { [x: string]: string }, value: string) => {
+    return Object.keys(obj).find((key) => obj[key] === value);
+  };
+
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
       <div className={style.top}>
@@ -42,9 +47,10 @@ const Header = () => {
         <div className={style.bottom}>
           <Tab
             items={Object.values(TAB_LIST)}
+            originalItems={TAB_LIST}
             onClick={(tab) => {
-              const tabName = TAB_LIST[tab as tabType];
-              setTabState(tabName);
+              const tabName = getKeyByValue(TAB_LIST, tab);
+              setTabState(tabName as string);
             }}
           />
           <Link to="/daily-briefing" className={style.dailyBriefing}>

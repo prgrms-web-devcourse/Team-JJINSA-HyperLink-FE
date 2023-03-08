@@ -1,6 +1,7 @@
 import { useMainContentsInfiniteQuery } from '@/hooks/infiniteQuery/useMainContentsInfinitelQuery';
 import { isAuthorizedState } from '@/stores/auth';
 import { selectedCategoryState } from '@/stores/selectedCategory';
+import { selectedTabState } from '@/stores/tab';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState } from 'recoil';
@@ -13,6 +14,7 @@ const MainContents = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedCategoryState
   );
+  const [tabState, setTabState] = useRecoilState(selectedTabState);
 
   const { ref, inView } = useInView({ threshold: 0.9 });
   const {
@@ -22,6 +24,7 @@ const MainContents = () => {
     getNextPageIsPossible,
     isFetchingNextPage,
     refetch,
+    status,
   } = useMainContentsInfiniteQuery(selectedCategory);
 
   useEffect(() => {
@@ -31,8 +34,22 @@ const MainContents = () => {
   }, [inView]);
 
   useEffect(() => {
-    refetch();
-  }, [isAuthorized]);
+    if (
+      tabState === 'RECENT_CONTENT' ||
+      tabState === 'POPULAR_CONTENT' ||
+      tabState === 'SUBSCRIPTIONS' ||
+      tabState === 'CREATORS'
+    ) {
+      setSelectedCategory('all');
+      refetch();
+    }
+  }, [isAuthorized, tabState]);
+
+  if (status === 'loading') {
+    return <Spinner size="huge" />;
+  } else if (status === 'error') {
+    return <div>검색 결과 api 에러!!!</div>;
+  }
 
   return (
     <CardList type="content">
