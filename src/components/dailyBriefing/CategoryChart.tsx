@@ -42,7 +42,11 @@ const CategoryChart = ({ standardTime, data }: categoryChartProps) => {
   };
 
   return (
-    <Card type="default" color="#F7F9FB">
+    <Card
+      type="default"
+      color="#F7F9FB"
+      style={{ width: '100%', minWidth: '30rem' }}
+    >
       <div className={style.title}>
         <Heading level={6}>관심 카테고리별 회원 수</Heading>
         <span className={style.standardTime}>{standardTime}시 기준</span>
