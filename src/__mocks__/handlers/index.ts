@@ -8,6 +8,7 @@ export { likeHandlers } from './like';
 export { notRecommendHandlers } from './notRecommend';
 export { viewHandlers } from './view';
 export { specificCreatorHandler } from './specificCreator';
+export { recommendedCreatorsHandler } from './recommendedCreators';
 export { creatorListHandler } from './creatorList';
 export { creatorInfoHandler } from './creator';
 export { attentionCategoryHandler } from './attentionCategory';

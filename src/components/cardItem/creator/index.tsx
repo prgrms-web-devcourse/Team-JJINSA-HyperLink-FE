@@ -1,5 +1,5 @@
 import { Avatar, Card } from '@/components/common';
-import { creator } from '@/types/contents';
+import { recommendedCreator } from '@/types/contents';
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as style from './style.css';
@@ -11,14 +11,16 @@ const CreatorCard = ({
   subscriberAmount,
   isSubscribed,
   creatorDescription,
-}: creator) => {
+}: recommendedCreator & { isSubscribed?: boolean }) => {
   /*
     TODO
     1. 크리에이터 클릭 시 특정 크리에이터로 이동하는 route 설정 
     2. 구독 버튼 클릭 시, 구독 여부에 따라 구독 or 구독 취소
     3. CreatorCard API가 오면 props가 card data 1개로 변하니 나중에 수정할 것
    */
-  const [isSubscribe, setIsSubscribe] = useState(isSubscribed);
+  const [isSubscribe, setIsSubscribe] = useState(
+    typeof isSubscribed !== 'undefined' ? false : isSubscribed
+  );
 
   const handleSubscribeClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -40,23 +42,13 @@ const CreatorCard = ({
                 className={style.infoSubscriber}
               >{`구독자 ${subscriberAmount}명`}</div>
             </div>
-            {isSubscribe ? (
-              <button
-                type="button"
-                onClick={handleSubscribeClick}
-                className={style.topButton({ type: isSubscribe })}
-              >
-                구독중
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleSubscribeClick}
-                className={style.topButton({})}
-              >
-                구독
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={handleSubscribeClick}
+              className={style.topButton({ type: isSubscribe })}
+            >
+              {isSubscribe ? '구독중' : '구독'}
+            </button>
           </div>
           <div className={style.creatorCardBottom}>{creatorDescription}</div>
         </div>
