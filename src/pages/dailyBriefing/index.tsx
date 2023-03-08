@@ -1,12 +1,58 @@
-import { Heading, Avatar } from '@/components/common';
+import { Suspense } from 'react';
+import { getDailyBriefingData } from '@/api/dailyBriefing';
+import { Heading, Avatar, Spinner } from '@/components/common';
 import CategoryChart from '@/components/dailyBriefing/CategoryChart';
 import ContentsCountChart from '@/components/dailyBriefing/ContentsCountChart';
 import Ranking from '@/components/dailyBriefing/Ranking';
 import Summary from '@/components/dailyBriefing/Summary';
 import * as style from './style.css';
 import logo from '/favicon.ico';
+import { useQuery } from '@tanstack/react-query';
+import { dailyBriefing } from '@/types/dailyBriefing';
 
 const DailyBriefingPage = () => {
+  const { data } = useQuery<dailyBriefing>(
+    ['dailyBriefing'],
+    getDailyBriefingData,
+    {
+      suspense: true,
+    }
+  );
+
+  const { standardTime, dailyBriefing } = data as dailyBriefing;
+  const {
+    viewIncrease,
+    memberIncrease,
+    contentIncrease,
+    viewByCategorys,
+    memberCountByAttentionCategorys,
+  } = dailyBriefing;
+
+  console.log('브리핑 페이지, useQuery', data, dailyBriefing);
+
+  const views = {
+    title: 'views',
+    increase: viewIncrease,
+    standardTime,
+    color: '#E3F5FF',
+  };
+
+  const members = {
+    title: 'members',
+    increase: memberIncrease,
+    standardTime,
+    color: '#E5ECF6',
+  };
+
+  console.log(views, members, 'jskldkfjlskjldkfjslkjlfkj');
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const data = await getDailyBriefingData();
+  //     console.log(data);
+  //   })();
+  // }, []);
+
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
@@ -24,10 +70,12 @@ const DailyBriefingPage = () => {
           <CategoryChart />
         </div>
         <div className={style.wrapColumn({ direction: 'right' })}>
-          <div className={style.summaryGroup}>
-            <Summary color="#E3F5FF" />
-            <Summary color="#E5ECF6" />
-          </div>
+          <Suspense fallback={<Spinner />}>
+            <div className={style.summaryGroup}>
+              <Summary summaryData={views} />
+              <Summary summaryData={members} />
+            </div>
+          </Suspense>
           <ContentsCountChart />
         </div>
       </div>
