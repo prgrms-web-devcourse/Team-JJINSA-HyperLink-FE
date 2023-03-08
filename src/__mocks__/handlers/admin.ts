@@ -26,12 +26,12 @@ let creators = [
 let contents = [
   {
     contentId: 1,
-    link: 'www.google.com',
+    link: 'https://www.google.com',
     title: '컨텐츠 1',
   },
   {
     contentId: 2,
-    link: 'www.google.com/very_long_url',
+    link: 'https://www.google.com/very_long_url',
     title: '컨텐츠 2',
   },
 ];

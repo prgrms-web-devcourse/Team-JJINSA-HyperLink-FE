@@ -43,11 +43,6 @@ const Admin = () => {
 
   const updateWeeklyViews = () => {
     const weeklyViews: views[] = getItem(WEEKLY_VIEWS, []);
-
-    if (!weeklyViews.length) {
-      return;
-    }
-
     const today = new Date();
     const yesterday = new Date(today.setDate(today.getDate() - 1));
 
