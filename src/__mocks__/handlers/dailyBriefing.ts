@@ -56,7 +56,7 @@ const DAILY_BRIEFING2 = {
       },
       {
         categoryName: 'beauty',
-        count: 832,
+        count: 1832,
         ranking: 1,
       },
       {

@@ -1,4 +1,4 @@
-type dataByCategorys = {
+export type dataByCategorys = {
   categoryName: 'develop' | 'beauty' | 'finance';
   count: number;
   ranking: number;

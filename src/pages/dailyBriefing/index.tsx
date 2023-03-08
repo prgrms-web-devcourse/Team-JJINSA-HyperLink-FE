@@ -11,13 +11,12 @@ import { useQuery } from '@tanstack/react-query';
 import { dailyBriefing } from '@/types/dailyBriefing';
 
 const DailyBriefingPage = () => {
-  const { data } = useQuery<dailyBriefing>(
+  const { data, isLoading } = useQuery<dailyBriefing>(
     ['dailyBriefing'],
-    getDailyBriefingData,
-    {
-      suspense: true,
-    }
+    getDailyBriefingData
   );
+
+  if (isLoading) return <Spinner />;
 
   const { standardTime, dailyBriefing } = data as dailyBriefing;
   const {
@@ -44,8 +43,6 @@ const DailyBriefingPage = () => {
     color: '#E5ECF6',
   };
 
-  console.log(views, members, 'jskldkfjlskjldkfjslkjlfkj');
-
   // useEffect(() => {
   //   (async () => {
   //     const data = await getDailyBriefingData();
@@ -66,16 +63,17 @@ const DailyBriefingPage = () => {
       </div>
       <div className={style.cardContainer}>
         <div className={style.wrapColumn({ direction: 'left' })}>
-          <Ranking />
+          <Ranking
+            standardTime={standardTime}
+            rankingList={viewByCategorys.sort((a, b) => a.ranking - b.ranking)}
+          />
           <CategoryChart />
         </div>
         <div className={style.wrapColumn({ direction: 'right' })}>
-          <Suspense fallback={<Spinner />}>
-            <div className={style.summaryGroup}>
-              <Summary summaryData={views} />
-              <Summary summaryData={members} />
-            </div>
-          </Suspense>
+          <div className={style.summaryGroup}>
+            <Summary summaryData={views} />
+            <Summary summaryData={members} />
+          </div>
           <ContentsCountChart />
         </div>
       </div>
