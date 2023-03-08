@@ -37,8 +37,7 @@ const MainContents = () => {
     if (
       tabState === 'RECENT_CONTENT' ||
       tabState === 'POPULAR_CONTENT' ||
-      tabState === 'SUBSCRIPTIONS' ||
-      tabState === 'CREATORS'
+      tabState === 'SUBSCRIPTIONS'
     ) {
       setSelectedCategory('all');
       refetch();
@@ -67,11 +66,15 @@ const MainContents = () => {
                   return (
                     // 마지막 요소에 ref 넣기 위해 div로 감싸기
                     <div ref={ref} key={idx} style={{ width: '100%' }}>
-                      <ContentCard key={item.contentId} {...item} />
+                      <ContentCard {...item} />
                     </div>
                   );
                 } else {
-                  return <ContentCard key={idx} {...item} />;
+                  return (
+                    <div key={item.contentId} style={{ width: '100%' }}>
+                      <ContentCard {...item} />;
+                    </div>
+                  );
                 }
               });
             })

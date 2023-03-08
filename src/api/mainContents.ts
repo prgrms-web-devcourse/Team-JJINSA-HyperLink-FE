@@ -23,14 +23,10 @@ export const getMainContents = async (
           ? `/subscriptions/contents/all?page=${pageParam}&size=12`
           : `/subscriptions/contents?category=${category}&page=${pageParam}&size=12`;
       break;
-    case 'CREATORS':
-      ContentsURL = `/creators?category=${category}&page=${pageParam}&size=12`;
-      break;
     default:
       break;
   }
   const response: contents = await axiosInstance.get(ContentsURL);
-
   return {
     // 실제 데이터
     content_page: response.contents,

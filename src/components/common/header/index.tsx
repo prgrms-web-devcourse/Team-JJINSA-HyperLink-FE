@@ -1,11 +1,11 @@
-import { MouseEvent, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Spinner, Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
 import { isHomeScrolledState } from '@/stores/scroll';
 import logo from '/assets/logo.svg';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as style from './style.css';
 import { selectedTabState } from '@/stores/tab';
 
@@ -23,7 +23,8 @@ const TAB_LIST = {
 };
 
 const Header = () => {
-  const isHomeScrolled = useRecoilValue(isHomeScrolledState);
+  const [isHomeScrolled, setIsHomeScrolled] =
+    useRecoilState(isHomeScrolledState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
 
   // dev pull 하면서 utils에서 가져다 사용하기
@@ -31,10 +32,14 @@ const Header = () => {
     return Object.keys(obj).find((key) => obj[key] === value);
   };
 
+  const handleLogoClick = () => {
+    setTabState('RECENT_CONTENT');
+  };
+
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
       <div className={style.top}>
-        <Link to="/" className={style.logo}>
+        <Link to="/" className={style.logo} onClick={handleLogoClick}>
           <img src={logo} alt="hyperlink logo" />
         </Link>
         {isHomeScrolled ? <SearchBar /> : <span></span>}
@@ -53,7 +58,11 @@ const Header = () => {
               setTabState(tabName as string);
             }}
           />
-          <Link to="/daily-briefing" className={style.dailyBriefing}>
+          <Link
+            to="/daily-briefing"
+            className={style.dailyBriefing}
+            onClick={() => setTabState('none')}
+          >
             <Text size="small" weight={500}>
               오늘의 hypelink
             </Text>
