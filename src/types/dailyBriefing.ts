@@ -10,7 +10,7 @@ export type dailyBriefing = {
     memberIncrease: number;
     viewIncrease: number;
     contentIncrease: number;
-    viewByCategorys: dataByCategorys[];
-    memberCountByAttentionCategorys: dataByCategorys[];
+    viewByCategories: dataByCategorys[];
+    memberCountByAttentionCategories: dataByCategorys[];
   };
 };

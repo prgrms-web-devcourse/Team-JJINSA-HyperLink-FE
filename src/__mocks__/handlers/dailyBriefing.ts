@@ -5,7 +5,7 @@ const DAILY_BRIEFING1 = {
   dailyBriefing: {
     memberIncrease: 534,
     viewIncrease: 1540,
-    viewByCategorys: [
+    viewByCategories: [
       {
         categoryName: 'develop',
         count: 283,
@@ -23,7 +23,7 @@ const DAILY_BRIEFING1 = {
       },
     ],
     contentIncrease: 45,
-    memberCountByAttentionCategorys: [
+    memberCountByAttentionCategories: [
       {
         categoryName: 'develop',
         count: 13,
@@ -44,11 +44,11 @@ const DAILY_BRIEFING1 = {
 };
 
 const DAILY_BRIEFING2 = {
-  standardTime: '2023-02-17 19',
+  standardTime: '2023-02-19 19',
   dailyBriefing: {
     memberIncrease: 840,
     viewIncrease: 1220,
-    viewByCategorys: [
+    viewByCategories: [
       {
         categoryName: 'develop',
         count: 283,
@@ -65,8 +65,8 @@ const DAILY_BRIEFING2 = {
         ranking: 2,
       },
     ],
-    contentIncrease: 45,
-    memberCountByAttentionCategorys: [
+    contentIncrease: 79,
+    memberCountByAttentionCategories: [
       {
         categoryName: 'develop',
         count: 13,

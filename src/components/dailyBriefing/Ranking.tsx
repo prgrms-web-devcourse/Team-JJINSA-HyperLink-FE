@@ -5,10 +5,10 @@ import * as style from './style.css';
 
 type rankingProps = {
   standardTime: string;
-  rankingList: dataByCategorys[];
+  data: dataByCategorys[];
 };
 
-const Ranking = ({ standardTime, rankingList }: rankingProps) => {
+const Ranking = ({ standardTime, data }: rankingProps) => {
   return (
     <Card
       type="default"
@@ -20,7 +20,7 @@ const Ranking = ({ standardTime, rankingList }: rankingProps) => {
         <span className={style.standardTime}>{standardTime}시 기준</span>
       </div>
       <ul className={style.rankList}>
-        {rankingList.map(({ ranking, categoryName, count }) => (
+        {data.map(({ ranking, categoryName, count }) => (
           <li key={ranking} className={style.rankItem}>
             <div className={style.ranking}>{ranking}</div>
             <div className={style.rankDesc}>

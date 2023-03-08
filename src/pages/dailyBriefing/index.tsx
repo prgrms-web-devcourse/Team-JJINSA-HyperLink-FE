@@ -24,8 +24,8 @@ const DailyBriefingPage = () => {
     viewIncrease,
     memberIncrease,
     contentIncrease,
-    viewByCategorys,
-    memberCountByAttentionCategorys,
+    viewByCategories,
+    memberCountByAttentionCategories,
   } = dailyBriefing;
 
   return (
@@ -43,11 +43,11 @@ const DailyBriefingPage = () => {
         <div className={style.wrapColumn({ direction: 'left' })}>
           <Ranking
             standardTime={standardTime}
-            rankingList={viewByCategorys.sort((a, b) => a.ranking - b.ranking)}
+            data={viewByCategories.sort((a, b) => a.ranking - b.ranking)}
           />
           <CategoryChart
             standardTime={standardTime}
-            data={memberCountByAttentionCategorys.sort(
+            data={memberCountByAttentionCategories.sort(
               (a, b) => a.ranking - b.ranking
             )}
           />
