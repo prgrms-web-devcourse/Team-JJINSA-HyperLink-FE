@@ -1,15 +1,19 @@
+import { addCreator } from '@/api/admin';
 import { uploadFileToS3 } from '@/api/s3Image';
 import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { CATEGORIES } from '@/utils/constants/signup';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import * as style from './style.css';
 import user from '/assets/user.svg';
 
 const AddCreator = () => {
+  const queryClient = useQueryClient();
+
   const [ableSubmit, setAbleSubmit] = useState(false);
 
-  const [profileUrl, setProfileUrl] = useState<string | undefined>(undefined);
+  const [profileUrl, setProfileUrl] = useState<string | undefined>('');
   const imgRef = useRef<HTMLInputElement>(null);
 
   const name = useInput('');
@@ -20,6 +24,12 @@ const AddCreator = () => {
     name.onChange('');
     description.onChange('');
     categoryName.onChange('');
+
+    if (imgRef.current) {
+      imgRef.current.files = new DataTransfer().files;
+    }
+
+    setProfileUrl('');
   };
 
   const handleAvatarClick = () => {
@@ -34,6 +44,27 @@ const AddCreator = () => {
     }
 
     setProfileUrl(await uploadFileToS3(file));
+  };
+
+  const addCreatorMutation = useMutation({
+    mutationFn: addCreator,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['allCreators'],
+      }),
+  });
+
+  const handleSubmit = () => {
+    addCreatorMutation.mutate({
+      name: name.value,
+      profileImgUrl: profileUrl,
+      description: description.value,
+      categoryName: CATEGORIES[categoryName.value] as
+        | 'develop'
+        | 'beauty'
+        | 'finance',
+    });
+    handleResetInputs();
   };
 
   useEffect(() => {
@@ -79,6 +110,7 @@ const AddCreator = () => {
           fontSize="medium"
           text="추가"
           disabled={!ableSubmit}
+          onClick={handleSubmit}
         />
         <Button
           paddingSize="full"
