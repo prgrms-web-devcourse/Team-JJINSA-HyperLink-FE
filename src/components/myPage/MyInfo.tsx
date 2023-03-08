@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, Input } from '@/components/common';
+import { Avatar, Button, Dropdown, Input, Text } from '@/components/common';
 import * as style from './style.css';
 import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
@@ -7,6 +7,7 @@ import { uploadFileToS3 } from '@/api/s3Image';
 import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES } from '@/utils/constants/signup';
+import CertificationModal from '../modal/certification';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const { email, nickname, profileUrl, career, careerYear } = myInfo;
@@ -18,8 +19,9 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const [newCareer, setNewCareer] = useState(career);
   const [newCareerYear, setNewCareerYear] = useState(careerYear);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
-  const { isLoading, status, refetch } = useQuery(
+  const { status, refetch } = useQuery(
     ['updateMyInfo'],
     () => {
       updateMyInfo({
@@ -27,7 +29,6 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         career: newCareer,
         careerYear: newCareerYear,
       });
-      return null;
     },
     { enabled: false }
   );
@@ -54,10 +55,13 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
 
   const saveImgFile = async () => {
     const file = imgRef.current?.files && imgRef.current?.files[0];
-    setImageFile(file);
-    const src = await uploadFileToS3(file);
-    if (typeof src === 'string') {
-      setNewProfileImage(src);
+
+    if (file) {
+      setImageFile(file);
+      const src = await uploadFileToS3(file, 'profile');
+      if (typeof src === 'string') {
+        setNewProfileImage(src);
+      }
     }
   };
 
@@ -106,6 +110,29 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         </div>
       </div>
       <Input type="email" label="이메일" value={email} readOnly />
+      <Input
+        type="email"
+        label="소속 회사"
+        placeholder="아직 인증된 회사가 없습니다."
+        value={''}
+        readOnly
+      />
+      <div
+        className={style.companyText}
+        onClick={() => {
+          setIsVisibleModal(true);
+        }}
+      >
+        <Text>소속 회사 인증하기</Text>
+        {isVisibleModal && (
+          <CertificationModal
+            isOpen={isVisibleModal}
+            onClose={() => {
+              setIsVisibleModal(false);
+            }}
+          />
+        )}
+      </div>
       <Input
         label="닉네임"
         value={newNickname}
