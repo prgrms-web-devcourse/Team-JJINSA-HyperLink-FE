@@ -3,6 +3,7 @@ import * as variants from '@/styles/variants.css';
 
 export const divider = recipe({
   base: {
+    border: 'none',
     borderTop: `1px solid ${variants.color.border}`,
   },
   variants: {
@@ -11,7 +12,7 @@ export const divider = recipe({
       vertical: {
         display: 'inline-block',
         width: '1.2rem',
-        margin: '0.8rem 0',
+        margin: '0.8rem 0 1rem 0',
         transform: 'rotate(90deg)',
       },
     },
