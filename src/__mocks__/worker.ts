@@ -28,7 +28,7 @@ export const worker = setupWorker(
   ...searchContentsHandlers,
   ...specificCreatorHandler,
   ...viewHandlers,
-  ...creatorInfoHandler
-  ...attentionCategoryHandler
+  ...creatorInfoHandler,
+  ...attentionCategoryHandler,
   ...historyHandler
 );
