@@ -1,25 +1,30 @@
-import { activateContent, deleteContent } from '@/api/admin';
+import {
+  activateContent,
+  deleteContent,
+  getDeactivatedContents,
+} from '@/api/admin';
 import Pagination from '@/components/admin/pagination';
-import { Button, Heading, Table, Text } from '@/components/common';
+import { Button, Heading, Spinner, Table, Text } from '@/components/common';
 import { contents } from '@/types/admin';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
 const COLUMNS = ['제목', '주소', '-', '-'];
+const TABLE_SIZE = 10;
 
-type ContentsProps = contents & {
-  onPrevClick: () => void;
-  onNextClick: () => void;
-};
-
-const Contents = ({
-  contents,
-  currentPage,
-  totalPage,
-  onPrevClick,
-  onNextClick,
-}: ContentsProps) => {
+const Contents = () => {
   const queryClient = useQueryClient();
+  const [page, setPage] = useState(0);
+
+  const { data, isPreviousData: isPrevContents } = useQuery<contents>(
+    ['deactivatedContents', page, TABLE_SIZE],
+    () => getDeactivatedContents(page, TABLE_SIZE),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const invalidateContents = () => {
     queryClient.invalidateQueries({
@@ -43,6 +48,7 @@ const Contents = ({
     }
     activateContentMutation.mutate(contentId);
   };
+
   const handleDeleteContentClick = (contentId: number) => {
     if (!confirm('삭제 하시겠습니까?')) {
       return;
@@ -50,17 +56,26 @@ const Contents = ({
     deleteContentMutation.mutate(contentId);
   };
 
-  console.log(contents);
+  useEffect(() => {
+    if (!isPrevContents && data)
+      queryClient.prefetchQuery(['deactivatedContents', page, TABLE_SIZE], () =>
+        getDeactivatedContents(page, TABLE_SIZE)
+      );
+  }, [data, isPrevContents]);
 
   return (
     <div className={style.container}>
       <Heading level={2}>컨텐츠</Heading>
-      {!contents.length ? (
+      {!data ? (
+        <div className={style.spinnerWrapper}>
+          <Spinner size="huge" />
+        </div>
+      ) : !data.contents.length ? (
         <Heading level={5}>비활성화된 컨텐츠가 없습니다.</Heading>
       ) : (
         <>
           <Table columns={COLUMNS}>
-            {contents.map(({ contentId, title, link }) => (
+            {data.contents.map(({ contentId, title, link }) => (
               <tr key={contentId}>
                 <td className={style.ellipsis}>
                   <Text>{title}</Text>
@@ -92,10 +107,10 @@ const Contents = ({
             ))}
           </Table>
           <Pagination
-            currentPage={currentPage}
-            totalPage={totalPage}
-            onPrevClick={onPrevClick}
-            onNextClick={onNextClick}
+            currentPage={data.currentPage}
+            totalPage={data.totalPage}
+            onPrevClick={() => setPage(page - 1)}
+            onNextClick={() => setPage(page + 1)}
           />
         </>
       )}
