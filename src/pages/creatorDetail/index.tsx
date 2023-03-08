@@ -7,53 +7,82 @@ import CardList from '@/components/cardList';
 import ContentCard from '@/components/cardItem/content';
 import { useSpecificCreatorInfiniteQuery } from '@/hooks/infiniteQuery/useSpecificCreatorInfiniteQuery';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { creator } from '@/types/contents';
+import { getCreatorInfo } from '@/api/creator';
 
 const FILTER = ['recent', 'popular'];
 
 const CreatorDetailPage = () => {
-  const { creatorId } = useParams() as { creatorId: string };
+  const { creatorId: id } = useParams() as { creatorId: string };
   const [selectedFilter, setSelectedFilter] = useState(FILTER[0]);
 
-  const { ref, inView } = useInView({ threshold: 0.9 });
   const {
-    getContents,
-    getNextPage,
-    getContentsIsSuccess,
-    getNextPageIsPossible,
-    isFetchingNextPage,
-    refetch,
-    isFetching,
-  } = useSpecificCreatorInfiniteQuery(creatorId, selectedFilter);
-
-  useEffect(() => {
-    if (inView && getNextPageIsPossible) {
-      getNextPage();
+    data: creatorInfo,
+    isLoading,
+    isError,
+  } = useQuery<creator>(
+    ['creatorInfo', id],
+    async () => await getCreatorInfo(+id),
+    {
+      refetchOnWindowFocus: false,
     }
-  }, [inView]);
+  );
 
-  useEffect(() => {
-    refetch();
-  }, [selectedFilter]);
+  if (isLoading) return <div>로딩</div>;
+  if (isError) return <div>에러</div>;
+
+  const {
+    creatorId,
+    creatorName,
+    subscriberAmount,
+    creatorDescription,
+    isSubscribed,
+    profileImgUrl,
+  } = creatorInfo;
+
+  // console.log(creatorId, creatorInfo);
+
+  // const { ref, inView } = useInView({ threshold: 0.9 });
+  // const {
+  //   getContents,
+  //   getNextPage,
+  //   getContentsIsSuccess,
+  //   getNextPageIsPossible,
+  //   isFetchingNextPage,
+  //   refetch,
+  //   isFetching,
+  // } = useSpecificCreatorInfiniteQuery(creatorId, selectedFilter);
+
+  // useEffect(() => {
+  //   if (inView && getNextPageIsPossible) {
+  //     getNextPage();
+  //   }
+  // }, [inView]);
+
+  // useEffect(() => {
+  //   refetch();
+  // }, [selectedFilter]);
 
   return (
     <div className={style.wrapper}>
       <div className={style.creator}>
         <div className={style.info}>
-          <Avatar src="https://play-lh.googleusercontent.com/Yoaqip2U7E9EKghfvnZW1OeanfbjaL3Qqn5TGVDYAqkbXsL3TDNyEp_oBPH5vAPro38" />
+          <Avatar src={profileImgUrl} />
           <div className={style.detail}>
             <div className={style.header}>
               <Heading level={4} style={{ marginRight: '4rem' }}>
-                <strong>토스 테크</strong>
+                <strong>{creatorName}</strong>
               </Heading>
-              <span className={style.subscriber}>구독자 92명</span>
+              <span className={style.subscriber}>
+                구독자 {subscriberAmount}명
+              </span>
             </div>
-            <div className={style.description}>
-              매일 업데이트되는 요즘 사람들의 IT 이야기
-            </div>
+            <div className={style.description}>{creatorDescription}</div>
           </div>
         </div>
         <Button
-          version="blueInverted"
+          version={isSubscribed ? 'blue' : 'blueInverted'}
           paddingSize="small"
           isBold={true}
           onClick={() => console.log('구독')}
@@ -65,7 +94,7 @@ const CreatorDetailPage = () => {
         selectedCategory={selectedFilter}
         setSelectedCategory={setSelectedFilter}
       />
-      <CardList type="content">
+      {/* <CardList type="content">
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
           getContentsIsSuccess && getContents?.pages ? (
@@ -97,7 +126,7 @@ const CreatorDetailPage = () => {
             <Spinner size="huge" style={{ zIndex: 9000 }} />
           )}
         </div>
-      </CardList>
+      </CardList> */}
     </div>
   );
 };

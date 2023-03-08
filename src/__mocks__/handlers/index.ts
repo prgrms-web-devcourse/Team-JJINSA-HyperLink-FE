@@ -9,5 +9,6 @@ export { notRecommendHandlers } from './notRecommend';
 export { viewHandlers } from './view';
 export { specificCreatorHandler } from './specificCreator';
 export { creatorListHandler } from './creatorList';
+export { creatorInfoHandler } from './creator';
 export { attentionCategoryHandler } from './attentionCategory';
 export { historyHandler } from './history';
