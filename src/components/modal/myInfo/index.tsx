@@ -29,7 +29,7 @@ export const CAREER_YEAR: { [key: string]: string } = {
 };
 
 const MENU_LIST = {
-  '북마크 / 히스토리': '/',
+  '북마크 / 히스토리': '/history',
   '내 정보': '/mypage',
   로그아웃: 'logout',
 };
@@ -52,6 +52,15 @@ const MyInfoModal = ({
   const setIsMyInfoModalVisible = useSetRecoilState(isMyInfoModalVisibleState);
 
   const { email, nickname, career, careerYear, profileUrl } = myInfoData;
+
+  const handleMenuClick = (path: string) => {
+    if (path === 'logout') {
+      onLogout();
+    } else {
+      setIsMyInfoModalVisible(false);
+      navigate(path);
+    }
+  };
 
   return (
     <Modal
@@ -77,14 +86,7 @@ const MyInfoModal = ({
             <li
               key={idx}
               className={style.menuItem}
-              onClick={
-                path === 'logout'
-                  ? onLogout
-                  : () => {
-                      setIsMyInfoModalVisible(false);
-                      navigate(path);
-                    }
-              }
+              onClick={() => handleMenuClick(path)}
             >
               {menuName}
             </li>

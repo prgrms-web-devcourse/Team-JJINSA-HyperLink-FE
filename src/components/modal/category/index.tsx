@@ -14,12 +14,24 @@ export type CategryModalProps = {
 };
 
 const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
-  const { data: selectedList, isLoading } = useQuery(
-    ['attention-category'],
+  const { data, isLoading } = useQuery(
+    ['attentionCategory'],
     getAttentionCategory
   );
+  const selectedList = data || [];
 
-  const [newSelectedList, setNewSelectedList] = useState(new Set());
+  const { refetch, status } = useQuery(
+    ['updateAttentionCategory'],
+    () => {
+      putAttentionCategory([...newSelectedList]);
+      return null;
+    },
+    { enabled: false }
+  );
+
+  const [newSelectedList, setNewSelectedList] = useState(
+    new Set([...selectedList])
+  );
 
   const handleSelect = (category: string) => {
     const selectedCategorySet = new Set(newSelectedList);
@@ -33,17 +45,14 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
   };
 
   const handleSubmit = async () => {
-    if (Array.isArray(newSelectedList)) {
-      const response = await putAttentionCategory([...newSelectedList]);
-      if (response?.status === 200) {
-        alert('변경되었습니다!');
-        onClose();
-      } else {
-        alert('잠시후 다시 시도해주세요');
-        if (Array.isArray(selectedList)) {
-          setNewSelectedList(new Set([...selectedList]));
-        }
-      }
+    await refetch();
+
+    if (status === 'success') {
+      alert('변경되었습니다!');
+      onClose();
+    } else {
+      alert('잠시후 다시 시도해주세요');
+      setNewSelectedList(new Set([...selectedList]));
     }
   };
 

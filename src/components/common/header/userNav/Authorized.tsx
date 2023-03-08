@@ -2,9 +2,12 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { isAuthorizedState } from '@/stores/auth';
-import { isMyInfoModalVisibleState } from '@/stores/modal';
+import {
+  isCategoryModalVisibleState,
+  isMyInfoModalVisibleState,
+} from '@/stores/modal';
 import { Avatar, Icon, Spinner } from '@/components/common';
-import { MyInfoModal } from '@/components/modal';
+import { CategoryModal, MyInfoModal } from '@/components/modal';
 import { myInfo } from '@/types/myInfo';
 import { getMyInfo } from '@/api/member';
 import { logout } from '@/api/auth';
@@ -15,6 +18,9 @@ const Authorized = () => {
   const setIsAuthorized = useSetRecoilState(isAuthorizedState);
   const [isMyInfoModalVisible, setIsMyInfoModalVisible] = useRecoilState(
     isMyInfoModalVisibleState
+  );
+  const [isCategoryModalVisible, setIsCategoryModalVisible] = useRecoilState(
+    isCategoryModalVisibleState
   );
 
   const { data: myInfo } = useQuery<myInfo>(['myInfo'], getMyInfo, {
@@ -31,32 +37,44 @@ const Authorized = () => {
   };
 
   return (
-    <div className={style.iconGroup}>
-      <Icon type="regular" name="pen-to-square" size="xLarge" />
-      <button className={style.userIconButton} type="button">
-        {!myInfo && <Spinner />}
-        {myInfo && (
-          <>
-            <div
-              className={style.userIcon}
-              onClick={() => setIsMyInfoModalVisible((isVisible) => !isVisible)}
-            >
-              <Avatar
-                src={myInfo.profileUrl.toString()}
-                shape="circle"
-                size="small"
+    <>
+      <div className={style.iconGroup}>
+        <div
+          onClick={() => setIsCategoryModalVisible((isVisible) => !isVisible)}
+        >
+          <Icon type="regular" name="pen-to-square" size="xLarge" />
+        </div>
+        <button className={style.userIconButton} type="button">
+          {!myInfo && <Spinner />}
+          {myInfo && (
+            <>
+              <div
+                className={style.userIcon}
+                onClick={() =>
+                  setIsMyInfoModalVisible((isVisible) => !isVisible)
+                }
+              >
+                <Avatar
+                  src={myInfo.profileUrl.toString()}
+                  shape="circle"
+                  size="small"
+                />
+              </div>
+              <MyInfoModal
+                myInfoData={myInfo}
+                isOpen={isMyInfoModalVisible}
+                onClose={() => setIsMyInfoModalVisible(false)}
+                onLogout={handleLogout}
               />
-            </div>
-            <MyInfoModal
-              myInfoData={myInfo}
-              isOpen={isMyInfoModalVisible}
-              onClose={() => setIsMyInfoModalVisible(false)}
-              onLogout={handleLogout}
-            />
-          </>
-        )}
-      </button>
-    </div>
+            </>
+          )}
+        </button>
+      </div>
+      <CategoryModal
+        isOpen={isCategoryModalVisible}
+        onClose={() => setIsCategoryModalVisible(false)}
+      />
+    </>
   );
 };
 

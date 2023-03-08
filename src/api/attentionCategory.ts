@@ -18,7 +18,7 @@ export const putAttentionCategory = async (
   newAttentionCategory: attentionCategory
 ) => {
   try {
-    const response = await axiosInstance.put('/attention-category', {
+    const response = await axiosInstance.put('/attention-category/update', {
       attentionCategory: newAttentionCategory,
     });
 
