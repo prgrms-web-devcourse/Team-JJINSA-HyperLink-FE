@@ -15,7 +15,7 @@ export const getMainContents = async (
       ContentsURL =
         category === 'all'
           ? `/contents/all?&page=${pageParam}&size=12&sort=${sortType}`
-          : `/contents?category=${category}&creator=0&page=${pageParam}&size=12&sort=${sortType}`;
+          : `/contents?category=${category}&page=${pageParam}&size=12&sort=${sortType}`;
       break;
     case 'SUBSCRIPTIONS':
       ContentsURL =
