@@ -9,7 +9,7 @@ export const modalContent = style([
   utils.borderRadius,
   {
     top: '2rem',
-    right: '18rem',
+    right: '16rem',
     gap: '4rem',
     padding: '3rem',
     width: '38rem',
