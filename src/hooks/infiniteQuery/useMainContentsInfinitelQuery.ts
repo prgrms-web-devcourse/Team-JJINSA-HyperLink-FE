@@ -1,7 +1,11 @@
 import { getMainContents } from '@/api/mainContents';
+import { selectedTabState } from '@/stores/tab';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
 
 export const useMainContentsInfiniteQuery = (category: string) => {
+  const tabState = useRecoilValue(selectedTabState);
+
   const {
     data: getContents,
     fetchNextPage: getNextPage,
@@ -9,9 +13,11 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     hasNextPage: getNextPageIsPossible,
     isFetchingNextPage,
     refetch,
+    status,
   } = useInfiniteQuery(
     ['mainContents', category],
-    async ({ pageParam = 0 }) => await getMainContents(pageParam, category),
+    async ({ pageParam = 0 }) =>
+      await getMainContents(pageParam, category, tabState),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
@@ -31,5 +37,6 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     getNextPageIsPossible,
     isFetchingNextPage,
     refetch,
+    status,
   };
 };

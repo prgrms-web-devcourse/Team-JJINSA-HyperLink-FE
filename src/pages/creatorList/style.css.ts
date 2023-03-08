@@ -2,6 +2,6 @@ import { style } from '@vanilla-extract/css';
 
 export const wrapper = style([
   {
-    padding: '2rem 10rem 0 10rem',
+    padding: '0.7rem 10rem',
   },
 ]);

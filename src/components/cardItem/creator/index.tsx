@@ -1,7 +1,9 @@
 import { Avatar, Card } from '@/components/common';
+import { isHomeScrolledState } from '@/stores/scroll';
 import { recommendedCreator } from '@/types/contents';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 const CreatorCard = ({
@@ -21,6 +23,7 @@ const CreatorCard = ({
   const [isSubscribe, setIsSubscribe] = useState(
     typeof isSubscribed !== 'undefined' ? false : isSubscribed
   );
+  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
   const handleSubscribeClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -30,12 +33,21 @@ const CreatorCard = ({
     setIsSubscribe(!isSubscribe);
   };
 
+  useEffect(() => {
+    setIsHomeScrolled(true);
+  });
+
   return (
     <Card type="creator">
       <Link to={`/creator/${creatorId}`}>
         <div className={style.creatorCardContainer}>
           <div className={style.creatorCardTop}>
-            <Avatar src={profileImgUrl} shape="circle" size="medium" />
+            <Avatar
+              src={profileImgUrl}
+              shape="circle"
+              size="medium"
+              style={{ flexShrink: 0 }}
+            />
             <div className={style.topInfo}>
               <div className={style.infoCreator}>{creatorName}</div>
               <div
