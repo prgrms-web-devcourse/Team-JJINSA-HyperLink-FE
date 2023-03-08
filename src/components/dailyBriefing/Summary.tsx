@@ -1,4 +1,4 @@
-import { Card, Heading, Icon } from '../common';
+import { Card, Heading, Icon } from '@/components/common';
 import { getItem, setItem } from '@/utils/storage';
 import { SUMMARY_BY_CATEGORIES } from '@/utils/constants/storage';
 import * as style from './style.css';
@@ -15,9 +15,7 @@ type SummaryProps = {
   color: string;
 };
 
-const Summary = ({ summaryData }: { summaryData: SummaryProps }) => {
-  const { title, increase, standardTime, color } = summaryData;
-
+const Summary = ({ title, increase, standardTime, color }: SummaryProps) => {
   const totalData = getItem(SUMMARY_BY_CATEGORIES, {
     [title]: {
       standardTime: '',
@@ -46,7 +44,7 @@ const Summary = ({ summaryData }: { summaryData: SummaryProps }) => {
       <div className={style.detail}>
         <Heading level={2}>{totalData[title].total.toLocaleString()}</Heading>
         <div>
-          <span className={style.count}>{increase}</span>
+          <span className={style.count}>{increase.toLocaleString()}</span>
           <Icon
             name="arrow-trend-up"
             size="small"

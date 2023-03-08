@@ -1,7 +1,7 @@
-import { Card, Heading, Text } from '../common';
+import { Card, Heading, Text } from '@/components/common';
 import { dataByCategorys } from '@/types/dailyBriefing';
-import * as style from './style.css';
 import { CATEGORIES } from '@/utils/constants/categories';
+import * as style from './style.css';
 
 type rankingProps = {
   standardTime: string;

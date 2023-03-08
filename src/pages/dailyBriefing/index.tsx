@@ -1,14 +1,15 @@
-import { Suspense } from 'react';
-import { getDailyBriefingData } from '@/api/dailyBriefing';
+import { useQuery } from '@tanstack/react-query';
 import { Heading, Avatar, Spinner } from '@/components/common';
-import CategoryChart from '@/components/dailyBriefing/CategoryChart';
-import ContentsCountChart from '@/components/dailyBriefing/ContentsCountChart';
-import Ranking from '@/components/dailyBriefing/Ranking';
-import Summary from '@/components/dailyBriefing/Summary';
+import {
+  Ranking,
+  Summary,
+  CategoryChart,
+  ContentsCountChart,
+} from '@/components/dailyBriefing';
+import { getDailyBriefingData } from '@/api/dailyBriefing';
+import { dailyBriefing } from '@/types/dailyBriefing';
 import * as style from './style.css';
 import logo from '/favicon.ico';
-import { useQuery } from '@tanstack/react-query';
-import { dailyBriefing } from '@/types/dailyBriefing';
 
 const DailyBriefingPage = () => {
   const { data, isLoading } = useQuery<dailyBriefing>(
@@ -16,7 +17,7 @@ const DailyBriefingPage = () => {
     getDailyBriefingData
   );
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner size="huge" />;
 
   const { standardTime, dailyBriefing } = data as dailyBriefing;
   const {
@@ -26,29 +27,6 @@ const DailyBriefingPage = () => {
     viewByCategorys,
     memberCountByAttentionCategorys,
   } = dailyBriefing;
-
-  console.log('브리핑 페이지, useQuery', data, dailyBriefing);
-
-  const views = {
-    title: 'views',
-    increase: viewIncrease,
-    standardTime,
-    color: '#E3F5FF',
-  };
-
-  const members = {
-    title: 'members',
-    increase: memberIncrease,
-    standardTime,
-    color: '#E5ECF6',
-  };
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const data = await getDailyBriefingData();
-  //     console.log(data);
-  //   })();
-  // }, []);
 
   return (
     <div className={style.wrapper}>
@@ -67,14 +45,32 @@ const DailyBriefingPage = () => {
             standardTime={standardTime}
             rankingList={viewByCategorys.sort((a, b) => a.ranking - b.ranking)}
           />
-          <CategoryChart />
+          <CategoryChart
+            standardTime={standardTime}
+            data={memberCountByAttentionCategorys.sort(
+              (a, b) => a.ranking - b.ranking
+            )}
+          />
         </div>
         <div className={style.wrapColumn({ direction: 'right' })}>
           <div className={style.summaryGroup}>
-            <Summary summaryData={views} />
-            <Summary summaryData={members} />
+            <Summary
+              title="views"
+              increase={viewIncrease}
+              standardTime={standardTime}
+              color="#E3F5FF"
+            />
+            <Summary
+              title="members"
+              increase={memberIncrease}
+              standardTime={standardTime}
+              color="#E5ECF6"
+            />
           </div>
-          <ContentsCountChart />
+          <ContentsCountChart
+            standardDate={standardTime.split(' ')[0]}
+            count={contentIncrease}
+          />
         </div>
       </div>
     </div>
