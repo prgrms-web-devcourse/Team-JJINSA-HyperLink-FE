@@ -35,16 +35,6 @@ export const options = {
   },
 };
 
-const labels = [
-  '23/03/06',
-  '23/03/07',
-  '23/03/08',
-  '23/03/09',
-  '23/03/10',
-  '23/03/11',
-  '23/03/12',
-];
-
 type contentsCountChartProps = {
   standardDate: string;
   count: number;
@@ -78,16 +68,12 @@ const ContentsCountChart = ({
   }
 
   const chartData = {
-    labels: countData
-      ? countData.slice(-7).map(({ standardDate }) => standardDate)
-      : labels,
+    labels: countData.slice(-7).map(({ standardDate }) => standardDate),
     datasets: [
       {
         fill: true,
         label: '누적 콘텐츠 수',
-        data: countData
-          ? countData.slice(-7).map(({ count }) => count)
-          : [10, 12, 34, 54, 56, 75, 84],
+        data: countData.slice(-7).map(({ count }) => count),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
         tension: 0.5,
