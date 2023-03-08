@@ -1,3 +1,8 @@
+export type pagination = {
+  currentPage: number;
+  totalPage: number;
+};
+
 export type creator = {
   creatorId: number;
   name: string;
@@ -6,11 +11,19 @@ export type creator = {
   categoryName: 'develop' | 'beauty' | 'finance';
 };
 
+export type creators = {
+  creators: creator[];
+} & pagination;
+
 export type content = {
   contentId: number;
   link: string;
   title: string;
 };
+
+export type contents = {
+  contents: content[];
+} & pagination;
 
 type view = {
   categoryName: 'develop' | 'beauty' | 'finance';

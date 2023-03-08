@@ -5,26 +5,35 @@ import {
 } from '@/api/admin';
 import { Contents, Creators, WeeklyViews } from '@/components/admin';
 import { Divider, Spinner } from '@/components/common';
-import { content, creator, views } from '@/types/admin';
+import { contents, creators, views } from '@/types/admin';
 import { WEEKLY_VIEWS } from '@/utils/constants/storage';
 import { isSameDate } from '@/utils/date';
 import { getItem, setItem } from '@/utils/storage';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import * as style from './style.css';
 
+const TABLE_SIZE = 10;
+
 const Admin = () => {
-  const { data: contents } = useQuery<content[]>(
-    ['deactivatedContents'],
-    getDeactivatedContents,
+  const queryClient = useQueryClient();
+  const [creatorsPage, setCreatorsPage] = useState(0);
+  const [contentsPage, setContentsPage] = useState(0);
+
+  const { data: contents, isPreviousData: isPrevContents } = useQuery<contents>(
+    ['deactivatedContents', contentsPage, TABLE_SIZE],
+    () => getDeactivatedContents(contentsPage, TABLE_SIZE),
     {
+      keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
 
-  const { data: creators } = useQuery<creator[]>(
-    ['allCreators'],
-    getAllCreators,
+  const { data: creators, isPreviousData: isPrevCreators } = useQuery<creators>(
+    ['allCreators', creatorsPage, TABLE_SIZE],
+    () => getAllCreators(creatorsPage, TABLE_SIZE),
     {
+      keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
@@ -36,6 +45,21 @@ const Admin = () => {
       refetchOnWindowFocus: false,
     }
   );
+
+  useEffect(() => {
+    if (!isPrevContents && contents)
+      queryClient.prefetchQuery(
+        ['deactivatedContents', contentsPage, TABLE_SIZE],
+        () => getDeactivatedContents(contentsPage, TABLE_SIZE)
+      );
+  }, [contents, isPrevContents]);
+
+  useEffect(() => {
+    if (!isPrevCreators && creators)
+      queryClient.prefetchQuery(['allCreators', creatorsPage, TABLE_SIZE], () =>
+        getAllCreators(creatorsPage, TABLE_SIZE)
+      );
+  }, [creators, isPrevCreators]);
 
   if (!contents || !creators || !yesterdayViews) {
     return <Spinner size="huge" />;
@@ -76,9 +100,17 @@ const Admin = () => {
 
   return (
     <div className={style.container}>
-      <Contents contents={contents} />
+      <Contents
+        {...contents}
+        onPrevClick={() => setContentsPage(contentsPage - 1)}
+        onNextClick={() => setContentsPage(contentsPage + 1)}
+      />
       <Divider />
-      <Creators creators={creators} />
+      <Creators
+        {...creators}
+        onPrevClick={() => setCreatorsPage(creatorsPage - 1)}
+        onNextClick={() => setCreatorsPage(creatorsPage + 1)}
+      />
       <Divider />
       <WeeklyViews />
     </div>
