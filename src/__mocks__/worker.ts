@@ -15,11 +15,13 @@ import {
   creatorInfoHandler,
   attentionCategoryHandler,
   historyHandler,
+  recommendedCreatorsHandler,
 } from './handlers';
 
 export const worker = setupWorker(
   ...adminHandlers,
   ...authHandlers,
+  ...recommendedCreatorsHandler,
   ...bookmarkHandlers,
   ...creatorListHandler,
   ...likeHandlers,

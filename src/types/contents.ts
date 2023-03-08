@@ -56,3 +56,9 @@ export type histories = {
   contents: content[];
   hasNext: boolean;
 };
+
+export type recommendedCreator = Omit<creator, 'isSubscribed'>;
+
+export type recommendedCreators = {
+  creators: recommendedCreator[];
+};
