@@ -24,6 +24,10 @@ export type banner = {
 export type contents = {
   contents: content[];
   hasNext: boolean;
+};
+
+export type searchContents = {
+  getContentsCommonResponse: contents;
   keyword: string;
   resultCount: number;
 };
@@ -46,4 +50,9 @@ export type recommendedCreator = Omit<creator, 'isSubscribed'>;
 
 export type recommendedCreators = {
   creators: recommendedCreator[];
+};
+
+export type histories = {
+  contents: content[];
+  hasNext: boolean;
 };

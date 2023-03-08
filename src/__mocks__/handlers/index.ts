@@ -1,3 +1,4 @@
+export { adminHandlers } from './admin';
 export { authHandlers } from './auth';
 export { bookmarkHandlers } from './bookmark';
 export { creatorListHandler } from './creatorList';
@@ -9,3 +10,6 @@ export { searchContentsHandlers } from './searchContents';
 export { specificCreatorHandler } from './specificCreator';
 export { subscriptionContentsHandlers } from './subscriptions';
 export { viewHandlers } from './view';
+export { creatorInfoHandler } from './creator';
+export { attentionCategoryHandler } from './attentionCategory';
+export { historyHandler } from './history';

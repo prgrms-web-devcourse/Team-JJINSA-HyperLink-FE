@@ -1,5 +1,7 @@
 import { rest } from 'msw';
 
+const TIME_ZONE = 9 * 60 * 60 * 1000;
+
 let creators = [
   {
     creatorId: 1,
@@ -13,20 +15,28 @@ let creators = [
     description: '크리에이터 2에 대한 설명입니다.',
     categoryName: 'beauty',
   },
+  {
+    creatorId: 3,
+    name: '크리에이터 3',
+    description: '크리에이터 3에 대한 설명입니다.',
+    categoryName: 'finance',
+  },
 ];
 
 let contents = [
   {
     contentId: 1,
-    link: 'www.google.com',
+    link: 'https://www.google.com',
     title: '컨텐츠 1',
   },
   {
     contentId: 2,
-    link: 'www.google.com',
+    link: 'https://www.google.com/very_long_url',
     title: '컨텐츠 2',
   },
 ];
+
+const today = new Date();
 
 const views = {
   oneDayView: [
@@ -38,8 +48,14 @@ const views = {
       categoryName: 'beauty',
       views: 22333,
     },
+    {
+      categoryName: 'finance',
+      views: 20323,
+    },
   ],
-  createdDate: '2023-03-06T00:00:00',
+  createdDate: new Date(today.setDate(today.getDate() - 1) + TIME_ZONE)
+    .toISOString()
+    .slice(0, -5),
 };
 
 const categories = ['develop', 'beauty', 'finance'];
