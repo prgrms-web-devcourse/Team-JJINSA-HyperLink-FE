@@ -42,7 +42,11 @@ const MainContents = () => {
       setSelectedCategory('all');
       refetch();
     }
-  }, [isAuthorized, tabState]);
+  }, [tabState]);
+
+  useEffect(() => {
+    setTabState('RECENT_CONTENT');
+  }, [isAuthorized]);
 
   if (status === 'loading') {
     return <Spinner size="huge" />;
@@ -65,7 +69,11 @@ const MainContents = () => {
                 ) {
                   return (
                     // 마지막 요소에 ref 넣기 위해 div로 감싸기
-                    <div ref={ref} key={idx} style={{ width: '100%' }}>
+                    <div
+                      ref={ref}
+                      key={item.contentId}
+                      style={{ width: '100%' }}
+                    >
                       <ContentCard {...item} />
                     </div>
                   );
