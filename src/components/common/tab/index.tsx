@@ -3,7 +3,7 @@ import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
 import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import * as style from './style.css';
 
 export type TabProps = {
@@ -22,7 +22,7 @@ const Tab = ({
   ...props
 }: TabProps) => {
   const [tabState, setTabState] = useRecoilState(selectedTabState);
-  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
   const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
     isLoginModalVisibleState
   );

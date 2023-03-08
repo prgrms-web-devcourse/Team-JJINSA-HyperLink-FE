@@ -5,15 +5,9 @@ import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
 import { isHomeScrolledState } from '@/stores/scroll';
 import logo from '/assets/logo.svg';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import * as style from './style.css';
 import { selectedTabState } from '@/stores/tab';
-
-type tabType =
-  | 'RECENT_CONTENT'
-  | 'POPULAR_CONTENT'
-  | 'SUBSCRIPTIONS'
-  | 'CREATORS';
 
 const TAB_LIST = {
   RECENT_CONTENT: '실시간 최신 트렌드',
@@ -23,8 +17,7 @@ const TAB_LIST = {
 };
 
 const Header = () => {
-  const [isHomeScrolled, setIsHomeScrolled] =
-    useRecoilState(isHomeScrolledState);
+  const isHomeScrolled = useRecoilValue(isHomeScrolledState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
 
   // dev pull 하면서 utils에서 가져다 사용하기

@@ -1,10 +1,10 @@
 import { getMainContents } from '@/api/mainContents';
 import { selectedTabState } from '@/stores/tab';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 export const useMainContentsInfiniteQuery = (category: string) => {
-  const [tabState, setTabState] = useRecoilState(selectedTabState);
+  const tabState = useRecoilValue(selectedTabState);
 
   const {
     data: getContents,

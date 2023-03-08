@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isHomeScrolledState } from '@/stores/scroll';
 import Main from '@/components/main';
 import { throttleWheel } from '@/utils/optimization/throttle';
@@ -17,7 +17,7 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState<string>(
     selectedCategoryState
   );
-  const [tabState, setTabState] = useRecoilState(selectedTabState);
+  const tabState = useRecoilValue(selectedTabState);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {

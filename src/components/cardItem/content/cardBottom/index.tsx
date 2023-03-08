@@ -8,7 +8,7 @@ import BannerText from '../banner/bannerText';
 import { banner } from '@/types/contents';
 import { useQuery } from '@tanstack/react-query';
 import { postNotRecommendResponse } from '@/api/notRecommend';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { isAuthorizedState } from '@/stores/auth';
 import NotRecommend from '../notRecommend';
@@ -32,7 +32,7 @@ const CardBottom = ({
   const [isNotRecommendComponentVisible, setIsNotRecommendComponentVisible] =
     useState(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
   const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
     isLoginModalVisibleState
   );
@@ -124,11 +124,9 @@ const CardBottom = ({
             <div style={{ flexGrow: 1 }}>
               <BannerText companies={recommendations} />
               {recommendations?.length === 0 ? (
-                <div className={`${style.companyText}`}>
-                  관심을 가지지 않았어요
-                </div>
+                <div className={style.companyText}>관심을 가지지 않았어요</div>
               ) : (
-                <div className={`${style.companyText}`}>
+                <div className={style.companyText}>
                   사람들도 관심있게 보고있어요
                 </div>
               )}

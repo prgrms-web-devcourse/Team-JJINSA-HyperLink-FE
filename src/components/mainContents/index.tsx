@@ -4,13 +4,13 @@ import { selectedCategoryState } from '@/stores/selectedCategory';
 import { selectedTabState } from '@/stores/tab';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import ContentCard from '../cardItem/content';
 import CardList from '../cardList';
 import { Spinner } from '../common';
 
 const MainContents = () => {
-  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedCategoryState
   );
