@@ -32,7 +32,7 @@ export const worker = setupWorker(
   ...searchContentsHandlers,
   ...specificCreatorHandler,
   ...viewHandlers,
-  ...companiesHandler
+  ...companiesHandler,
   ...subscriptionContentsHandlers,
   ...viewHandlers,
   ...creatorInfoHandler,
