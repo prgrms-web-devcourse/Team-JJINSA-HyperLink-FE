@@ -28,6 +28,13 @@ export const CAREERS: { [key: string]: string } = {
   '10년 이상': 'moreThanTen',
 };
 
+export const REVERSE_CAREERS: { [key: string]: string } = Object.entries(
+  CAREERS
+).reduce((acc: { [key: string]: string }, [key, value]) => {
+  acc[value] = key;
+  return acc;
+}, {});
+
 export const GENDERS: { [key: string]: string } = { 남: 'man', 여: 'woman' };
 
 export const BIRTH_YEARS = Array.from({ length: 100 }, (_, i) =>
