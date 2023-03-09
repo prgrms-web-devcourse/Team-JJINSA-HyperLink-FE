@@ -1,4 +1,4 @@
-import { Contents, Creators, WeeklyViews } from '@/components/admin';
+import { Contents, Creators, Companies, WeeklyViews } from '@/components/admin';
 import { Divider } from '@/components/common';
 import * as style from './style.css';
 
@@ -8,6 +8,8 @@ const Admin = () => {
       <Contents />
       <Divider />
       <Creators />
+      <Divider />
+      <Companies />
       <Divider />
       <WeeklyViews />
     </div>
