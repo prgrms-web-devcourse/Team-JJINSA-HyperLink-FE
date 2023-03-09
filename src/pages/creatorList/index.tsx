@@ -33,10 +33,6 @@ const CreatorListPage = () => {
 
   const HandlesubscribeButtonClick = () => {
     setSubscribeState(!subscribeState);
-    getContents?.pages.map((page_data) => {
-      const board_page = page_data.content_page;
-      return board_page.filter((item) => item.isSubscribed === true);
-    });
   };
   useEffect(() => {
     if (inView && getNextPageIsPossible) {
