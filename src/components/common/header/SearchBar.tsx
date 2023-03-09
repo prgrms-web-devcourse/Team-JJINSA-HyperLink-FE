@@ -20,12 +20,12 @@ const SearchBar = ({ version = 'header', onEnterPress }: SearchBarProps) => {
   };
 
   const handleEnterPress = async () => {
-    if (!keyword.trim().length) {
-      alert('한 글자 이상 검색해주세요!');
-      return;
-    }
     if (!isAuthorized) {
       setIsLoginModalVisible(true);
+      return;
+    }
+    if (!keyword.trim().length) {
+      alert('한 글자 이상 검색해주세요!');
       return;
     }
 
