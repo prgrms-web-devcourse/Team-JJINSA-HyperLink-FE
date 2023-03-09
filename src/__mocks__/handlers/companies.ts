@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-const companiesData = {
+const CAMPANIES = {
   companyEmail: 'rldnd2637@kakao.co.kr',
   verification: '123456',
   logoImgUrl: 'www.s3.com',
@@ -14,12 +14,12 @@ export const companiesHandler = [
       return res(ctx.status(400));
     }
 
-    companiesData.companyEmail = companyEmail;
+    CAMPANIES.companyEmail = companyEmail;
 
     return res(
       ctx.status(200),
       ctx.json({
-        verification: companiesData.verification,
+        verification: CAMPANIES.verification,
       })
     );
   }),
@@ -31,7 +31,7 @@ export const companiesHandler = [
       return res(ctx.status(400));
     }
 
-    if (verification !== companiesData.verification) {
+    if (verification !== CAMPANIES.verification) {
       return res(
         ctx.status(403),
         ctx.json({
