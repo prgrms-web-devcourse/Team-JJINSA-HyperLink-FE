@@ -1,10 +1,12 @@
-import { content, creator, views } from '@/types/admin';
+import { contents, creators, views } from '@/types/admin';
 import { isSameDate } from '@/utils/date';
 import { getItem } from '@/utils/storage';
 import { axiosInstance } from './core';
 
-export const getAllCreators = async () => {
-  const response: creator[] = await axiosInstance.get('/admin/creators');
+export const getAllCreators = async (page: number, size: number) => {
+  const response: creators = await axiosInstance.get(
+    `/admin/creators?page=${page}&size=${size}`
+  );
 
   return response;
 };
@@ -36,8 +38,10 @@ export const deleteCreator = async (creatorId: number) => {
   }
 };
 
-export const getDeactivatedContents = async () => {
-  const response: content[] = await axiosInstance.get('/admin/contents');
+export const getDeactivatedContents = async (page: number, size: number) => {
+  const response: contents = await axiosInstance.get(
+    `/admin/contents?page=${page}&size=${size}`
+  );
 
   return response;
 };

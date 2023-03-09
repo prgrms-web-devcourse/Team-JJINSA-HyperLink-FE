@@ -17,3 +17,8 @@ export const ellipsis = style([
 export const link = style({
   textDecoration: 'underline',
 });
+
+export const spinnerWrapper = style([
+  utils.positionRelative,
+  { height: '30rem' },
+]);
