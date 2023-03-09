@@ -15,7 +15,13 @@ export const topInfo = style({
 });
 
 export const infoCreator = style([
+  utils.textOverflowEllipsis,
+  utils.overflowHidden,
   {
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    whiteSpace: 'normal',
+    WebkitLineClamp: 1,
     fontSize: variants.fontSize.medium,
     fontWeight: 600,
     lineHeight: '1.9rem',
@@ -32,8 +38,9 @@ export const topButton = recipe({
   base: [
     utils.borderRadius,
     {
+      width: '7.3rem',
       border: '0.2rem solid #625F68',
-      padding: '1rem 1.6rem',
+      padding: '1rem 1.4rem',
       fontSize: variants.fontSize.small,
       fontWeight: 600,
       cursor: 'pointer',

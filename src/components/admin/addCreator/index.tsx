@@ -43,7 +43,7 @@ const AddCreator = () => {
       return;
     }
 
-    setProfileUrl(await uploadFileToS3(file));
+    setProfileUrl(await uploadFileToS3(file, 'profile'));
   };
 
   const addCreatorMutation = useMutation({

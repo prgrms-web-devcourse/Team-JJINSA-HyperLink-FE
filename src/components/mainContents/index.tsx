@@ -1,18 +1,20 @@
 import { useMainContentsInfiniteQuery } from '@/hooks/infiniteQuery/useMainContentsInfinitelQuery';
 import { isAuthorizedState } from '@/stores/auth';
 import { selectedCategoryState } from '@/stores/selectedCategory';
+import { selectedTabState } from '@/stores/tab';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import ContentCard from '../cardItem/content';
 import CardList from '../cardList';
 import { Spinner } from '../common';
 
 const MainContents = () => {
-  const [isAuthorized, setIsAuthorized] = useRecoilState(isAuthorizedState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedCategoryState
   );
+  const [tabState, setTabState] = useRecoilState(selectedTabState);
 
   const { ref, inView } = useInView({ threshold: 0.9 });
   const {
@@ -22,6 +24,7 @@ const MainContents = () => {
     getNextPageIsPossible,
     isFetchingNextPage,
     refetch,
+    status,
   } = useMainContentsInfiniteQuery(selectedCategory);
 
   useEffect(() => {
@@ -31,8 +34,25 @@ const MainContents = () => {
   }, [inView]);
 
   useEffect(() => {
-    refetch();
+    if (
+      tabState === 'RECENT_CONTENT' ||
+      tabState === 'POPULAR_CONTENT' ||
+      tabState === 'SUBSCRIPTIONS'
+    ) {
+      setSelectedCategory('all');
+      refetch();
+    }
+  }, [tabState]);
+
+  useEffect(() => {
+    setTabState('RECENT_CONTENT');
   }, [isAuthorized]);
+
+  if (status === 'loading') {
+    return <Spinner size="huge" />;
+  } else if (status === 'error') {
+    return <div>검색 결과 api 에러!!!</div>;
+  }
 
   return (
     <CardList type="content">
@@ -49,12 +69,20 @@ const MainContents = () => {
                 ) {
                   return (
                     // 마지막 요소에 ref 넣기 위해 div로 감싸기
-                    <div ref={ref} key={idx} style={{ width: '100%' }}>
-                      <ContentCard key={item.contentId} {...item} />
+                    <div
+                      ref={ref}
+                      key={item.contentId}
+                      style={{ width: '100%' }}
+                    >
+                      <ContentCard {...item} />
                     </div>
                   );
                 } else {
-                  return <ContentCard key={idx} {...item} />;
+                  return (
+                    <div key={item.contentId} style={{ width: '100%' }}>
+                      <ContentCard {...item} />;
+                    </div>
+                  );
                 }
               });
             })

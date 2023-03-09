@@ -4,9 +4,10 @@ export const myInfo = {
   email: 'rldnd5555@gmail.com',
   nickname: '초보자',
   career: 'develop',
-  careerYear: '10',
+  careerYear: 'ten',
   profileUrl:
     'https://lh3.googleusercontent.com/a/AEdFTp6KQBBQ-S4iulsmKXKrkDCYJlMQATyZKXT-zg1Z',
+  companyName: 'kakao',
 };
 
 export const memberHandlers = [

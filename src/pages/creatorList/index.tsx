@@ -3,8 +3,10 @@ import CreatorCard from '@/components/cardItem/creator';
 import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
 import { useCreatorListInfiniteQuery } from '@/hooks/infiniteQuery/useCreatorListInfiniteQuery';
+import { selectedTabState } from '@/stores/tab';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useRecoilState } from 'recoil';
 import * as style from './style.css';
 
 const CREATOR_CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
@@ -13,6 +15,7 @@ const CreatorListPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     CREATOR_CATEGORIES[0]
   );
+  const [tabState, setTabState] = useRecoilState(selectedTabState);
 
   const { ref, inView } = useInView({ threshold: 0.9 });
 
@@ -35,6 +38,10 @@ const CreatorListPage = () => {
     refetch();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    setTabState('CREATORS');
+  }, []);
+
   return (
     <div className={style.wrapper}>
       <ButtonGroup
@@ -56,12 +63,20 @@ const CreatorListPage = () => {
                   ) {
                     return (
                       // 마지막 요소에 ref 넣기 위해 div로 감싸기
-                      <div ref={ref} key={idx} style={{ width: '100%' }}>
-                        <CreatorCard key={item.creatorId} {...item} />
+                      <div
+                        ref={ref}
+                        key={item.creatorId}
+                        style={{ width: '100%' }}
+                      >
+                        <CreatorCard {...item} />
                       </div>
                     );
                   } else {
-                    return <CreatorCard key={idx} {...item} />;
+                    return (
+                      <div key={idx} style={{ width: '100%' }}>
+                        <CreatorCard {...item} />;
+                      </div>
+                    );
                   }
                 });
               })

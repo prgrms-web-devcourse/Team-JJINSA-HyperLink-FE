@@ -10,11 +10,13 @@ AWS.config.update({
   secretAccessKey: VITE_AWS_SECRET_ACCESS_KEY,
 });
 
-export const uploadFileToS3 = async (file: File) => {
+type keyType = 'logo' | 'profile';
+
+export const uploadFileToS3 = async (file: File, keyType: keyType) => {
   const upload = new AWS.S3.ManagedUpload({
     params: {
       Bucket: bucket,
-      Key: file.name,
+      Key: `${keyType}/${file.name}`,
       Body: file,
     },
   });

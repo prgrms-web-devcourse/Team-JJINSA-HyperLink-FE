@@ -8,6 +8,7 @@ export const CardWrapper = recipe({
     utils.overflowHidden,
     utils.fullWidth,
     {
+      minWidth: '25rem',
       backgroundColor: variants.color.white,
     },
   ],

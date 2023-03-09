@@ -9,12 +9,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import * as style from './style.css';
 import { selectedTabState } from '@/stores/tab';
 
-type tabType =
-  | 'RECENT_CONTENT'
-  | 'POPULAR_CONTENT'
-  | 'SUBSCRIPTIONS'
-  | 'CREATORS';
-
 const TAB_LIST = {
   RECENT_CONTENT: '실시간 최신 트렌드',
   POPULAR_CONTENT: '실시간 인기 트렌드',
@@ -26,10 +20,19 @@ const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
 
+  // dev pull 하면서 utils에서 가져다 사용하기
+  const getKeyByValue = (obj: { [x: string]: string }, value: string) => {
+    return Object.keys(obj).find((key) => obj[key] === value);
+  };
+
+  const handleLogoClick = () => {
+    setTabState('RECENT_CONTENT');
+  };
+
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
       <div className={style.top}>
-        <Link to="/" className={style.logo}>
+        <Link to="/" className={style.logo} onClick={handleLogoClick}>
           <img src={logo} alt="hyperlink logo" />
         </Link>
         {isHomeScrolled ? <SearchBar /> : <span></span>}
@@ -42,12 +45,17 @@ const Header = () => {
         <div className={style.bottom}>
           <Tab
             items={Object.values(TAB_LIST)}
+            originalItems={TAB_LIST}
             onClick={(tab) => {
-              const tabName = TAB_LIST[tab as tabType];
-              setTabState(tabName);
+              const tabName = getKeyByValue(TAB_LIST, tab);
+              setTabState(tabName as string);
             }}
           />
-          <Link to="/daily-briefing" className={style.dailyBriefing}>
+          <Link
+            to="/daily-briefing"
+            className={style.dailyBriefing}
+            onClick={() => setTabState('none')}
+          >
             <Text size="small" weight={500}>
               오늘의 hypelink
             </Text>

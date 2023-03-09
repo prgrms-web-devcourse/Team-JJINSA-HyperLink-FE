@@ -7,7 +7,7 @@ export const getSpecificCreator = async (
   sortType: string
 ) => {
   const response: contents = await axiosInstance.get(
-    `/contents?category&creator=${creatorId}&page=${pageParam}&size=10&sort=${sortType}`
+    `/contents?creatorId=${creatorId}&page=${pageParam}&size=10&sort=${sortType}`
   );
 
   return {
