@@ -42,11 +42,7 @@ const MainContents = () => {
       setSelectedCategory('all');
       refetch();
     }
-  }, [tabState]);
-
-  useEffect(() => {
-    setTabState('RECENT_CONTENT');
-  }, [isAuthorized]);
+  }, [tabState, isAuthorized]);
 
   if (status === 'loading') {
     return <Spinner size="huge" />;

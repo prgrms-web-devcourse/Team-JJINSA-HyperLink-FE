@@ -3,7 +3,7 @@ import { creators } from '@/types/contents';
 
 export const getCreatorList = async (pageParam: number, category: string) => {
   const response: creators = await axiosInstance.get(
-    `/creators?category=${category}&page=${pageParam}&size=12`
+    `/creators?category=${category}&page=${pageParam}&size=25`
   );
 
   return {

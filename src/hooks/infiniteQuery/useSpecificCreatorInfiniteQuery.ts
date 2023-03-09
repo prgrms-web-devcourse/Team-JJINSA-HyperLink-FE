@@ -14,7 +14,7 @@ export const useSpecificCreatorInfiniteQuery = (
     refetch,
     isFetching,
   } = useInfiniteQuery(
-    ['specific_creator', creatorId, sortType],
+    ['specificCreator', creatorId, sortType],
     ({ pageParam = 0 }) => getSpecificCreator(pageParam, creatorId, sortType),
     {
       refetchOnWindowFocus: false,

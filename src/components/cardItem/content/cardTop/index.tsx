@@ -5,7 +5,7 @@ import * as style from './style.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postBookmarkResponse } from '@/api/bookmark';
 import { postLikeResponse } from '@/api/like';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
@@ -29,12 +29,11 @@ const CardTop = ({
 }: CardTopProps) => {
   const [userBookmarked, setUserBookmarked] = useState<boolean>(isBookmarked);
   const [userLiked, setUserLiked] = useState<boolean>(isLiked);
+  const [views, setViews] = useState(viewCount);
 
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const selectedCategory = useRecoilValue(selectedCategoryState);
-  const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
-    isLoginModalVisibleState
-  );
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
 
   const queryClient = useQueryClient();
   const bookmarkMutation = useMutation({
@@ -71,9 +70,15 @@ const CardTop = ({
     setUserLiked(!userLiked);
     likeMutation.mutate();
   };
+
   useEffect(() => {
     setUserBookmarked(isBookmarked);
   }, [isBookmarked]);
+
+  useEffect(() => {
+    setViews(viewCount);
+  }, [viewCount]);
+
   return (
     <section className={style.cardTop}>
       <ImageComponent
@@ -129,7 +134,7 @@ const CardTop = ({
         )}
         <div className={style.iconWrapper({ eyes: true })}>
           <Icon name="eye" type="regular" size="medium" />
-          <div>{viewCount}</div>
+          <div>{views}</div>
         </div>
       </div>
     </section>

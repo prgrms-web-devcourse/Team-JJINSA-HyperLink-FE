@@ -1,10 +1,15 @@
-import { Avatar, Card } from '@/components/common';
+import { Avatar, Button, Card } from '@/components/common';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
 import { isHomeScrolledState } from '@/stores/scroll';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { recommendedCreator } from '@/types/contents';
 import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
+import { postSubscribeResponse } from '@/api/subscribe';
+import { selectedTabState } from '@/stores/tab';
 
 const CreatorCard = ({
   creatorId,
@@ -14,32 +19,49 @@ const CreatorCard = ({
   isSubscribed,
   creatorDescription,
 }: recommendedCreator & { isSubscribed?: boolean }) => {
-  /*
-    TODO
-    1. 크리에이터 클릭 시 특정 크리에이터로 이동하는 route 설정 
-    2. 구독 버튼 클릭 시, 구독 여부에 따라 구독 or 구독 취소
-    3. CreatorCard API가 오면 props가 card data 1개로 변하니 나중에 수정할 것
-   */
   const [isSubscribe, setIsSubscribe] = useState(
-    typeof isSubscribed !== 'undefined' ? false : isSubscribed
+    typeof isSubscribed === 'undefined' ? false : isSubscribed
   );
-  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
-  const handleSubscribeClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
+  const setTabState = useSetRecoilState(selectedTabState);
+
+  const queryClient = useQueryClient();
+  const subScribeMutation = useMutation({
+    mutationFn: async () => await postSubscribeResponse(creatorId),
+
+    onSuccess: () => queryClient.invalidateQueries(['creatorList']),
+  });
+
+  const handleCreatorCardClick = () => {
+    setTabState('none');
+  };
+
+  const handleSubscribeClick = (event: MouseEvent) => {
     event.preventDefault();
-    isSubscribe
-      ? console.log(creatorId, '구독 취소')
-      : console.log(creatorId, '구독');
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return;
+    }
     setIsSubscribe(!isSubscribe);
+    subScribeMutation.mutate();
   };
 
   useEffect(() => {
     setIsHomeScrolled(true);
   });
 
+  useEffect(() => {
+    if (typeof isSubscribed !== 'undefined') {
+      setIsSubscribe(isSubscribed);
+    }
+  }, [isSubscribed]);
+
   return (
     <Card type="creator">
-      <Link to={`/creator/${creatorId}`}>
+      <Link to={`/creator/${creatorId}`} onClick={handleCreatorCardClick}>
         <div className={style.creatorCardContainer}>
           <div className={style.creatorCardTop}>
             <Avatar
@@ -54,13 +76,14 @@ const CreatorCard = ({
                 className={style.infoSubscriber}
               >{`구독자 ${subscriberAmount}명`}</div>
             </div>
-            <button
-              type="button"
-              onClick={handleSubscribeClick}
-              className={style.topButton({ type: isSubscribe })}
-            >
-              {isSubscribe ? '구독중' : '구독'}
-            </button>
+            <div onClick={(e) => handleSubscribeClick(e)}>
+              <Button
+                version={isSubscribe ? 'blue' : 'blueInverted'}
+                paddingSize="small"
+                isBold={true}
+                text={isSubscribe ? '구독중' : '구독'}
+              />
+            </div>
           </div>
           <div className={style.creatorCardBottom}>{creatorDescription}</div>
         </div>

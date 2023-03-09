@@ -3,10 +3,11 @@ import CreatorCard from '@/components/cardItem/creator';
 import CardList from '@/components/cardList';
 import { Spinner } from '@/components/common';
 import { useCreatorListInfiniteQuery } from '@/hooks/infiniteQuery/useCreatorListInfiniteQuery';
+import { isAuthorizedState } from '@/stores/auth';
 import { selectedTabState } from '@/stores/tab';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import * as style from './style.css';
 
 const CREATOR_CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
@@ -15,8 +16,8 @@ const CreatorListPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     CREATOR_CATEGORIES[0]
   );
+  const isAuthorized = useRecoilValue(isAuthorizedState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
-
   const { ref, inView } = useInView({ threshold: 0.9 });
 
   const {
@@ -40,7 +41,8 @@ const CreatorListPage = () => {
 
   useEffect(() => {
     setTabState('CREATORS');
-  }, []);
+    refetch();
+  }, [isAuthorized, tabState]);
 
   return (
     <div className={style.wrapper}>
@@ -73,8 +75,8 @@ const CreatorListPage = () => {
                     );
                   } else {
                     return (
-                      <div key={idx} style={{ width: '100%' }}>
-                        <CreatorCard {...item} />;
+                      <div key={item.creatorId} style={{ width: '100%' }}>
+                        <CreatorCard {...item} />
                       </div>
                     );
                   }

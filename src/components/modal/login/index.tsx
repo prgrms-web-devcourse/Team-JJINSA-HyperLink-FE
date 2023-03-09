@@ -33,7 +33,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
         setIsAdmin(loginResponse.admin);
         setIsAuthorized(true);
-        navigate('/');
+        // navigate('/');
         return;
       }
 

@@ -23,11 +23,11 @@ const ContentCard = ({
   title,
   recommendations,
 }: content) => {
-  const [selectedCategory] = useRecoilValue(selectedCategoryState);
+  const selectedCategory = useRecoilValue(selectedCategoryState);
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: async () => await patchViewResponse(contentId),
+    mutationFn: () => patchViewResponse(contentId),
 
     onSuccess: () =>
       queryClient.invalidateQueries(['mainContents', selectedCategory]),
