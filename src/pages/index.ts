@@ -7,3 +7,4 @@ export { default as MyPage } from '@/pages/myPage';
 export { default as NotFoundPage } from '@/pages/notFound';
 export { default as CreatorListPage } from '@/pages/creatorList';
 export { default as AdminPage } from '@/pages/admin';
+export { default as HistoryPage } from '@/pages/history';

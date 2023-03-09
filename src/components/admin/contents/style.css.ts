@@ -13,3 +13,7 @@ export const ellipsis = style([
   utils.textOverflowEllipsis,
   { maxWidth: '14rem' },
 ]);
+
+export const link = style({
+  textDecoration: 'underline',
+});

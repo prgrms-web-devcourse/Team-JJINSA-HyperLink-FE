@@ -14,7 +14,14 @@ const Table = ({ columns, children }: TableProps) => {
         <thead>
           <tr>
             {columns.map((column, index) => (
-              <th key={index}>
+              <th
+                key={index}
+                className={style.th({
+                  version: ['-', '프로필'].includes(column)
+                    ? 'small'
+                    : undefined,
+                })}
+              >
                 <Text weight={700} size="large">
                   {column}
                 </Text>

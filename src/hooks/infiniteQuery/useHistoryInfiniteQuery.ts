@@ -1,23 +1,26 @@
-import { getMainContents } from '@/api/mainContents';
-import { selectedTabState } from '@/stores/tab';
+import { getHistoryContents, getBookmarkContents } from '@/api/history';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
 
-export const useMainContentsInfiniteQuery = (category: string) => {
-  const tabState = useRecoilValue(selectedTabState);
+const QUERY_KEY = {
+  bookmark: 'bookmarkContents',
+  history: 'historyContents',
+};
 
+export const useHistoryInfiniteQuery = (key: keyof typeof QUERY_KEY) => {
   const {
     data: getContents,
     fetchNextPage: getNextPage,
     isSuccess: getContentsIsSuccess,
     hasNextPage: getNextPageIsPossible,
-    isFetchingNextPage,
-    refetch,
     status,
+    isFetching,
+    isFetchingNextPage,
   } = useInfiniteQuery(
-    ['mainContents', category],
-    async ({ pageParam = 0 }) =>
-      await getMainContents(pageParam, category, tabState),
+    [QUERY_KEY[key]],
+    ({ pageParam = 0 }) =>
+      key === 'bookmark'
+        ? getBookmarkContents(pageParam)
+        : getHistoryContents(pageParam),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
@@ -35,8 +38,8 @@ export const useMainContentsInfiniteQuery = (category: string) => {
     getNextPage,
     getContentsIsSuccess,
     getNextPageIsPossible,
-    isFetchingNextPage,
-    refetch,
     status,
+    isFetching,
+    isFetchingNextPage,
   };
 };

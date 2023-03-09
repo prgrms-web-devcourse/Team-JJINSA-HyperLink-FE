@@ -44,37 +44,38 @@ const WeeklyViews = () => {
   return (
     <div className={style.container}>
       <Heading level={2}>카테고리별 일주일 조회수</Heading>
-      {Object.values(CATEGORIES)
-        .map((_, i) =>
-          weeklyViews
-            .map((dailyViews) => dailyViews.oneDayView)
-            .map((v) => v[i])
-        )
-        .map((v) => {
-          const borderColor = generateRandomHex();
-          const backgroundColor = hexToRGB(borderColor, 0.7);
+      {weeklyViews.length &&
+        Object.values(CATEGORIES)
+          .map((_, i) =>
+            weeklyViews
+              .map((dailyViews) => dailyViews.oneDayView)
+              .map((v) => v[i])
+          )
+          .map((v) => {
+            const borderColor = generateRandomHex();
+            const backgroundColor = hexToRGB(borderColor, 0.7);
 
-          return (
-            <Line
-              key={v[0].categoryName}
-              options={options}
-              data={{
-                labels: weeklyViews.map(
-                  (currentCategoryView) =>
-                    currentCategoryView.createdDate.split('T')[0]
-                ),
-                datasets: [
-                  {
-                    label: getKeyByValue(CATEGORIES, v[0].categoryName),
-                    data: v.map((e) => e.views),
-                    borderColor,
-                    backgroundColor,
-                  },
-                ],
-              }}
-            />
-          );
-        })}
+            return (
+              <Line
+                key={v[0].categoryName}
+                options={options}
+                data={{
+                  labels: weeklyViews.map(
+                    (currentCategoryView) =>
+                      currentCategoryView.createdDate.split('T')[0]
+                  ),
+                  datasets: [
+                    {
+                      label: getKeyByValue(CATEGORIES, v[0].categoryName),
+                      data: v.map((e) => e.views),
+                      borderColor,
+                      backgroundColor,
+                    },
+                  ],
+                }}
+              />
+            );
+          })}
     </div>
   );
 };

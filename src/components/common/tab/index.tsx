@@ -1,19 +1,47 @@
-import { CSSProperties, useState } from 'react';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { selectedTabState } from '@/stores/tab';
+import { CSSProperties } from 'react';
+import { useNavigate } from 'react-router';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import * as style from './style.css';
 
 export type TabProps = {
   items: string[];
+  originalItems: { [key: string]: string };
   type?: 'header' | 'modal';
   onClick: (item: string) => void;
   style?: CSSProperties;
 };
 
-const Tab = ({ items, type = 'header', onClick, ...props }: TabProps) => {
-  const [clickedItem, setClickedItem] = useState(items[0]);
+const Tab = ({
+  items,
+  originalItems,
+  type = 'header',
+  onClick,
+  ...props
+}: TabProps) => {
+  const [tabState, setTabState] = useRecoilState(selectedTabState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
+    isLoginModalVisibleState
+  );
+  const navigate = useNavigate();
 
   const handleClick = (item: string) => {
-    setClickedItem(item);
+    if (item === '구독 피드' && !isAuthorized) {
+      setIsLoginModalVisible(true);
+      return false;
+    }
+    if (item === '크리에이터') {
+      navigate('/creatorList');
+      setTabState(item);
+      onClick(item);
+      return;
+    }
+    setTabState(item);
     onClick(item);
+    navigate('/');
   };
 
   return (
@@ -27,7 +55,7 @@ const Tab = ({ items, type = 'header', onClick, ...props }: TabProps) => {
           <li
             className={style.tabItem({
               type,
-              isClicked: clickedItem === item,
+              isClicked: originalItems[tabState] === item,
             })}
             key={item}
             onClick={() => handleClick(item)}

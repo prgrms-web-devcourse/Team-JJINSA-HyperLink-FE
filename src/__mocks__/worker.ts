@@ -10,13 +10,19 @@ import {
   notRecommendHandlers,
   searchContentsHandlers,
   specificCreatorHandler,
+  subscriptionContentsHandlers,
   viewHandlers,
   companiesHandler,
+  creatorInfoHandler,
+  attentionCategoryHandler,
+  historyHandler,
+  recommendedCreatorsHandler,
 } from './handlers';
 
 export const worker = setupWorker(
   ...adminHandlers,
   ...authHandlers,
+  ...recommendedCreatorsHandler,
   ...bookmarkHandlers,
   ...creatorListHandler,
   ...likeHandlers,
@@ -27,4 +33,9 @@ export const worker = setupWorker(
   ...specificCreatorHandler,
   ...viewHandlers,
   ...companiesHandler
+  ...subscriptionContentsHandlers,
+  ...viewHandlers,
+  ...creatorInfoHandler,
+  ...attentionCategoryHandler,
+  ...historyHandler
 );

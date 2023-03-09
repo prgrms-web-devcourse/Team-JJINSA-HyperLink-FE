@@ -5,7 +5,7 @@ import * as style from './style.css';
 import { content } from '@/types/contents';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { patchViewResponse } from '@/api/view';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 
 // props: 링크, 이미지, 북마크, 하트, 조회수, 크리에이터 이름, 날짜, 제목, 회사, 회사 아바타
@@ -23,9 +23,7 @@ const ContentCard = ({
   title,
   recommendations,
 }: content) => {
-  const [selectedCategory, setSelectedCategory] = useRecoilState(
-    selectedCategoryState
-  );
+  const [selectedCategory] = useRecoilValue(selectedCategoryState);
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
