@@ -13,7 +13,7 @@ import {
   CreatorListPage,
   DailyBriefingPage,
   MyPage,
-  NotFoundPage,
+  ErrorPage,
   AdminPage,
   HistoryPage,
 } from '@/pages';
@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       <Route path="/search/:keyword" element={<SearchResultPage />} />
       <Route path="/creator/:creatorId" element={<CreatorDetailPage />} />
       <Route path="/daily-briefing" element={<DailyBriefingPage />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 );
