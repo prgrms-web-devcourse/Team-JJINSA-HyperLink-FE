@@ -15,4 +15,4 @@ export { viewHandlers } from './view';
 export { creatorInfoHandler } from './creator';
 export { attentionCategoryHandler } from './attentionCategory';
 export { historyHandler } from './history';
-
+export { dailyBriefingDataHandler } from './dailyBriefing';

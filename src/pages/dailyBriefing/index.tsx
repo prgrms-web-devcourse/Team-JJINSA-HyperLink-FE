@@ -1,12 +1,33 @@
-import { Heading, Avatar } from '@/components/common';
-import CategoryChart from '@/components/dailyBriefing/CategoryChart';
-import ContentsCountChart from '@/components/dailyBriefing/ContentsCountChart';
-import Ranking from '@/components/dailyBriefing/Ranking';
-import Summary from '@/components/dailyBriefing/Summary';
+import { useQuery } from '@tanstack/react-query';
+import { Heading, Avatar, Spinner } from '@/components/common';
+import {
+  Ranking,
+  Summary,
+  CategoryChart,
+  ContentsCountChart,
+} from '@/components/dailyBriefing';
+import { getDailyBriefingData } from '@/api/dailyBriefing';
+import { dailyBriefing } from '@/types/dailyBriefing';
 import * as style from './style.css';
 import logo from '/favicon.ico';
 
 const DailyBriefingPage = () => {
+  const { data, isLoading } = useQuery<dailyBriefing>(
+    ['dailyBriefing'],
+    getDailyBriefingData
+  );
+
+  if (isLoading) return <Spinner size="huge" />;
+
+  const { standardTime, dailyBriefing } = data as dailyBriefing;
+  const {
+    viewIncrease,
+    memberIncrease,
+    contentIncrease,
+    viewByCategories,
+    memberCountByAttentionCategories,
+  } = dailyBriefing;
+
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
@@ -20,15 +41,36 @@ const DailyBriefingPage = () => {
       </div>
       <div className={style.cardContainer}>
         <div className={style.wrapColumn({ direction: 'left' })}>
-          <Ranking />
-          <CategoryChart />
+          <Ranking
+            standardTime={standardTime}
+            data={viewByCategories.sort((a, b) => a.ranking - b.ranking)}
+          />
+          <CategoryChart
+            standardTime={standardTime}
+            data={memberCountByAttentionCategories.sort(
+              (a, b) => a.ranking - b.ranking
+            )}
+          />
         </div>
         <div className={style.wrapColumn({ direction: 'right' })}>
           <div className={style.summaryGroup}>
-            <Summary color="#E3F5FF" />
-            <Summary color="#E5ECF6" />
+            <Summary
+              title="views"
+              increase={viewIncrease}
+              standardTime={standardTime}
+              color="#E3F5FF"
+            />
+            <Summary
+              title="members"
+              increase={memberIncrease}
+              standardTime={standardTime}
+              color="#E5ECF6"
+            />
           </div>
-          <ContentsCountChart />
+          <ContentsCountChart
+            standardDate={standardTime.split(' ')[0]}
+            count={contentIncrease}
+          />
         </div>
       </div>
     </div>

@@ -16,7 +16,8 @@ import {
   creatorInfoHandler,
   attentionCategoryHandler,
   historyHandler,
-  recommendedCreatorsHandler,
+  dailyBriefingDataHandler,
+  recommendedCreatorsHandler
 } from './handlers';
 
 export const worker = setupWorker(
@@ -34,8 +35,8 @@ export const worker = setupWorker(
   ...viewHandlers,
   ...companiesHandler,
   ...subscriptionContentsHandlers,
-  ...viewHandlers,
   ...creatorInfoHandler,
   ...attentionCategoryHandler,
-  ...historyHandler
+  ...historyHandler,
+  ...dailyBriefingDataHandler
 );

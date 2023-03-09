@@ -1,30 +1,14 @@
-import { Card, Heading, Text } from '../common';
+import { Card, Heading, Text } from '@/components/common';
+import { dataByCategorys } from '@/types/dailyBriefing';
+import { CATEGORIES } from '@/utils/constants/categories';
 import * as style from './style.css';
 
-const RANK_DATA = {
-  rankingList: [
-    {
-      ranking: 1,
-      categoryName: '개발',
-      count: 223,
-    },
-    {
-      ranking: 2,
-      categoryName: '경제 / 금융',
-      count: 103,
-    },
-    {
-      ranking: 3,
-      categoryName: '패션 / 뷰티',
-      count: 42,
-    },
-  ],
-  standardTime: '2023.03.04 15PM',
+type rankingProps = {
+  standardTime: string;
+  data: dataByCategorys[];
 };
 
-const Ranking = () => {
-  const { rankingList, standardTime } = RANK_DATA;
-
+const Ranking = ({ standardTime, data }: rankingProps) => {
   return (
     <Card
       type="default"
@@ -33,15 +17,15 @@ const Ranking = () => {
     >
       <div className={style.title}>
         <Heading level={6}>카테고리별 조회수 랭킹</Heading>
-        <span className={style.standardTime}>{standardTime}</span>
+        <span className={style.standardTime}>{standardTime}시 기준</span>
       </div>
       <ul className={style.rankList}>
-        {rankingList.map(({ ranking, categoryName, count }) => (
+        {data.map(({ ranking, categoryName, count }) => (
           <li key={ranking} className={style.rankItem}>
             <div className={style.ranking}>{ranking}</div>
             <div className={style.rankDesc}>
-              <Text>{categoryName}</Text>
-              <span className={style.count}>{count}</span>
+              <Text>{CATEGORIES[categoryName]}</Text>
+              <span className={style.count}>{count.toLocaleString()}</span>
             </div>
           </li>
         ))}

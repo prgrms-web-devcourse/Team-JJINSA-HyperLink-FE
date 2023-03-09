@@ -5,7 +5,6 @@ import * as utils from '@/styles/utils.css';
 
 export const wrapper = style([
   utils.flexColumn,
-  large({ padding: '5rem' }),
   {
     padding: '5rem 10rem',
   },
@@ -13,7 +12,7 @@ export const wrapper = style([
 
 export const cardContainer = style([
   utils.flexJustifyCenter,
-  large({ flexDirection: 'column' }),
+  large({ flexDirection: 'column', padding: '0' }),
   medium({ padding: '0' }),
   {
     padding: '0 6rem',
@@ -37,6 +36,7 @@ export const logo = style([
 export const summaryGroup = style([
   utils.flex,
   utils.fullWidth,
+  medium({ flexDirection: 'column', minWidth: '30rem' }),
   {
     gap: '3rem',
   },
