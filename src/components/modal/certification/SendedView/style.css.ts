@@ -23,3 +23,16 @@ export const avatar = style([
     },
   },
 ]);
+
+export const textWrapper = style({
+  textAlign: 'right',
+  marginTop: '-1rem',
+});
+
+export const input = style({
+  display: 'none',
+});
+
+export const text = style({
+  paddingLeft: '0.5rem',
+});

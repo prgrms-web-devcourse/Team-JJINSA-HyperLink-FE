@@ -85,19 +85,19 @@ const SendedView = ({ email }: { email: string }) => {
               readOnly={attemptCount >= 5}
             />
             {isError && (
-              <div style={{ textAlign: 'right', marginTop: '-1rem' }}>
-                <Text size="xSmall" style={{ color: 'red' }}>
+              <div className={style.textWrapper}>
+                <Text size="xSmall" color="red">
                   인증 번호가 유효하지 않습니다 (인증 가능 횟수 {attemptCount}
                   /5)
                 </Text>
               </div>
             )}
             <div>
-              <Text block style={{ paddingLeft: '0.5rem' }}>
+              <Text block className={style.text}>
                 회사 로고
               </Text>
               <input
-                style={{ display: 'none' }}
+                className={style.input}
                 type="file"
                 accept="image/*"
                 ref={imgRef}
