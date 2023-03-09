@@ -31,7 +31,7 @@ const MainContents = () => {
     if (inView && getNextPageIsPossible) {
       getNextPage();
     }
-  }, [inView]);
+  }, [inView, getNextPageIsPossible]);
 
   useEffect(() => {
     if (
@@ -76,7 +76,7 @@ const MainContents = () => {
                 } else {
                   return (
                     <div key={item.contentId} style={{ width: '100%' }}>
-                      <ContentCard {...item} />;
+                      <ContentCard {...item} />
                     </div>
                   );
                 }

@@ -1,7 +1,7 @@
 import ButtonGroup from '@/components/buttonGroup';
 import CreatorCard from '@/components/cardItem/creator';
 import CardList from '@/components/cardList';
-import { Spinner } from '@/components/common';
+import { Button, Spinner } from '@/components/common';
 import { useCreatorListInfiniteQuery } from '@/hooks/infiniteQuery/useCreatorListInfiniteQuery';
 import { isAuthorizedState } from '@/stores/auth';
 import { selectedTabState } from '@/stores/tab';
@@ -20,6 +20,8 @@ const CreatorListPage = () => {
   const [tabState, setTabState] = useRecoilState(selectedTabState);
   const { ref, inView } = useInView({ threshold: 0.9 });
 
+  const [subscribeState, setSubscribeState] = useState(false);
+
   const {
     getContents,
     getNextPage,
@@ -29,6 +31,13 @@ const CreatorListPage = () => {
     refetch,
   } = useCreatorListInfiniteQuery(selectedCategory);
 
+  const HandlesubscribeButtonClick = () => {
+    setSubscribeState(!subscribeState);
+    getContents?.pages.map((page_data) => {
+      const board_page = page_data.content_page;
+      return board_page.filter((item) => item.isSubscribed === true);
+    });
+  };
   useEffect(() => {
     if (inView && getNextPageIsPossible) {
       getNextPage();
@@ -46,17 +55,32 @@ const CreatorListPage = () => {
 
   return (
     <div className={style.wrapper}>
-      <ButtonGroup
-        buttonData={CREATOR_CATEGORIES}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <div className={style.buttonWrapper}>
+        <ButtonGroup
+          buttonData={CREATOR_CATEGORIES}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+        {isAuthorized ? (
+          <Button
+            version={subscribeState ? 'gray' : 'white'}
+            isBold={subscribeState ? true : false}
+            shape="circle"
+            text={subscribeState ? '구독중' : '구독'}
+            onClick={HandlesubscribeButtonClick}
+          />
+        ) : null}
+      </div>
       <CardList type="creator">
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
           getContentsIsSuccess && getContents?.pages
             ? getContents.pages.map((page_data, page_num) => {
-                const board_page = page_data.content_page;
+                const board_page = subscribeState
+                  ? page_data.content_page.filter(
+                      (item) => item.isSubscribed === true
+                    )
+                  : page_data.content_page;
                 return board_page.map((item, idx) => {
                   if (
                     // 마지막 요소에 ref 달아주기
