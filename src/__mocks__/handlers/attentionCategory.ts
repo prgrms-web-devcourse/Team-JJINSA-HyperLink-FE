@@ -7,7 +7,7 @@ export const myAttentionCategory = {
 export const attentionCategoryHandler = [
   rest.get('/attention-category', (req, res, ctx) => {
     if (!req.headers.all().authorization) {
-      return res(ctx.status(400));
+      return res(ctx.status(401));
     }
 
     return res(
@@ -18,7 +18,7 @@ export const attentionCategoryHandler = [
 
   rest.put('/attention-category/update', async (req, res, ctx) => {
     if (!req.headers.all().authorization) {
-      return res(ctx.status(400));
+      return res(ctx.status(401));
     }
 
     const { attentionCategory } = await req.json();
