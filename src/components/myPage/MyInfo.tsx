@@ -23,7 +23,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
 
-  const { status, refetch } = useQuery(
+  const { refetch } = useQuery(
     ['updateMyInfo'],
     () => {
       updateMyInfo({
@@ -71,10 +71,10 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     if (isUpdating) return;
 
     setIsUpdating(true);
-    await refetch();
+    const response = await refetch();
     setIsUpdating(false);
 
-    if (status === 'success') alert('프로필이 변경되었습니다');
+    if (response.status === 'success') alert('프로필이 변경되었습니다');
     else alert('잠시 후 시도해주세요');
   };
 
