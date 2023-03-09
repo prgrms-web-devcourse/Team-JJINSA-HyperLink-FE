@@ -122,9 +122,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
       />
       <div
         className={style.companyText}
-        onClick={() => {
-          setIsVisibleModal(true);
-        }}
+        onClick={() => setIsVisibleModal(true)}
       >
         <Text>소속 회사 인증하기</Text>
         {isVisibleModal && (
@@ -153,9 +151,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
           placeholder="선택해주세요"
           value={newCareerYear}
           items={Object.keys(CAREERS)}
-          onItemClick={(item: string) => {
-            handleItemClick(item, 'careerYear');
-          }}
+          onItemClick={(item: string) => handleItemClick(item, 'careerYear')}
         />
       </div>
       <Button
