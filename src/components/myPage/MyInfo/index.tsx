@@ -18,8 +18,10 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const [imageFile, setImageFile] = useState<File | null>();
   const { value: newNickname, onChange: onChangeNewNickname } =
     useInput(nickname);
-  const [newCareer, setNewCareer] = useState(career);
-  const [newCareerYear, setNewCareerYear] = useState(careerYear);
+  const [newCareer, setNewCareer] = useState(CATEGORY[career]);
+  const [newCareerYear, setNewCareerYear] = useState(
+    REVERSE_CAREERS[careerYear]
+  );
   const [isUpdating, setIsUpdating] = useState(false);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
 
@@ -141,7 +143,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         <Dropdown
           placeholder="선택해주세요"
           label="직군/경력"
-          value={CATEGORY[newCareer]}
+          value={newCareer}
           items={Object.keys(CATEGORIES)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'career');
@@ -149,7 +151,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         />
         <Dropdown
           placeholder="선택해주세요"
-          value={REVERSE_CAREERS[newCareerYear]}
+          value={newCareerYear}
           items={Object.keys(CAREERS)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'careerYear');
