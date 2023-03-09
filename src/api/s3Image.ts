@@ -16,7 +16,7 @@ export const uploadFileToS3 = async (file: File, keyType: keyType) => {
   const upload = new AWS.S3.ManagedUpload({
     params: {
       Bucket: bucket,
-      Key: `${keyType}/${file.name}`,
+      Key: `${keyType}/${file.name}/${Date.now() + Math.random()}`,
       Body: file,
     },
   });
