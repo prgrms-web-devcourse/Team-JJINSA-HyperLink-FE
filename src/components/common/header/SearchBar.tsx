@@ -1,6 +1,9 @@
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
 
 export type SearchBarProps = {
   version?: 'header' | 'banner';
@@ -8,6 +11,8 @@ export type SearchBarProps = {
 };
 
 const SearchBar = ({ version = 'header', onEnterPress }: SearchBarProps) => {
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
   const navigate = useNavigate();
   const { value: keyword, onChange: handleKeywordChange } = useInput('');
   const inputStyle = {
@@ -17,6 +22,10 @@ const SearchBar = ({ version = 'header', onEnterPress }: SearchBarProps) => {
   const handleEnterPress = async () => {
     if (!keyword.trim().length) {
       alert('한 글자 이상 검색해주세요!');
+      return;
+    }
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
       return;
     }
 
