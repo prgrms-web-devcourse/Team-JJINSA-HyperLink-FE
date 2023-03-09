@@ -76,6 +76,10 @@ const CardTop = ({
   }, [isBookmarked]);
 
   useEffect(() => {
+    setUserLiked(isLiked);
+  }, [isLiked]);
+
+  useEffect(() => {
     setViews(viewCount);
   }, [viewCount]);
 
@@ -110,7 +114,7 @@ const CardTop = ({
         )}
       </div>
       <div className={style.numberIconWrapper}>
-        {userLiked ? (
+        {isLiked ? (
           <div
             className={style.iconWrapper({ heart: true })}
             onClick={handleLikeClick}
