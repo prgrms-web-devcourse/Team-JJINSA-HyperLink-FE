@@ -19,6 +19,7 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
       const selectedList = new Set([...(data || [])]);
       setNewSelectedList(selectedList);
     },
+    refetchOnWindowFocus: false,
   });
 
   const [newSelectedList, setNewSelectedList] = useState(
