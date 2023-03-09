@@ -4,4 +4,5 @@ export type myInfo = {
   career: string;
   careerYear: string;
   profileUrl: string;
+  companyName?: string;
 };

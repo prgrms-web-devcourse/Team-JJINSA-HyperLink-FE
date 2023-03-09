@@ -9,8 +9,10 @@ export { searchContentsHandlers } from './searchContents';
 export { specificCreatorHandler } from './specificCreator';
 export { recommendedCreatorsHandler } from './recommendedCreators';
 export { creatorListHandler } from './creatorList';
+export { companiesHandler } from './companies';
 export { subscriptionContentsHandlers } from './subscriptions';
 export { viewHandlers } from './view';
 export { creatorInfoHandler } from './creator';
 export { attentionCategoryHandler } from './attentionCategory';
 export { historyHandler } from './history';
+

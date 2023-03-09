@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, Input } from '@/components/common';
+import { Avatar, Button, Dropdown, Input, Text } from '@/components/common';
 import * as style from './style.css';
 import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
@@ -6,10 +6,13 @@ import { myInfo } from '@/types/myInfo';
 import { uploadFileToS3 } from '@/api/s3Image';
 import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
-import { CAREERS, CATEGORIES } from '@/utils/constants/signup';
+import { CAREERS, CATEGORIES, REVERSE_CAREERS } from '@/utils/constants/signup';
+import CertificationModal from '../modal/certification';
+import { CATEGORY } from '@/utils/constants/category';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
-  const { email, nickname, profileUrl, career, careerYear } = myInfo;
+  const { email, nickname, profileUrl, career, careerYear, companyName } =
+    myInfo;
 
   const [newProfileImage, setNewProfileImage] = useState(profileUrl);
   const [imageFile, setImageFile] = useState<File | null>();
@@ -18,8 +21,9 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const [newCareer, setNewCareer] = useState(career);
   const [newCareerYear, setNewCareerYear] = useState(careerYear);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
-  const { isLoading, status, refetch } = useQuery(
+  const { status, refetch } = useQuery(
     ['updateMyInfo'],
     () => {
       updateMyInfo({
@@ -27,7 +31,6 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         career: newCareer,
         careerYear: newCareerYear,
       });
-      return null;
     },
     { enabled: false }
   );
@@ -54,10 +57,13 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
 
   const saveImgFile = async () => {
     const file = imgRef.current?.files && imgRef.current?.files[0];
-    setImageFile(file);
-    const src = await uploadFileToS3(file);
-    if (typeof src === 'string') {
-      setNewProfileImage(src);
+
+    if (file) {
+      setImageFile(file);
+      const src = await uploadFileToS3(file, 'profile');
+      if (typeof src === 'string') {
+        setNewProfileImage(src);
+      }
     }
   };
 
@@ -107,6 +113,26 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
       </div>
       <Input type="email" label="이메일" value={email} readOnly />
       <Input
+        label="소속 회사"
+        placeholder="아직 인증된 회사가 없습니다."
+        value={companyName}
+        readOnly
+      />
+      <div
+        className={style.companyText}
+        onClick={() => {
+          setIsVisibleModal(true);
+        }}
+      >
+        <Text>소속 회사 인증하기</Text>
+        {isVisibleModal && (
+          <CertificationModal
+            isOpen={isVisibleModal}
+            onClose={() => setIsVisibleModal(false)}
+          />
+        )}
+      </div>
+      <Input
         label="닉네임"
         value={newNickname}
         onChange={onChangeNewNickname}
@@ -115,7 +141,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         <Dropdown
           placeholder="선택해주세요"
           label="직군/경력"
-          value={newCareer}
+          value={CATEGORY[newCareer]}
           items={Object.keys(CATEGORIES)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'career');
@@ -123,7 +149,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         />
         <Dropdown
           placeholder="선택해주세요"
-          value={newCareerYear}
+          value={REVERSE_CAREERS[newCareerYear]}
           items={Object.keys(CAREERS)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'careerYear');

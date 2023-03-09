@@ -12,6 +12,7 @@ import {
   specificCreatorHandler,
   subscriptionContentsHandlers,
   viewHandlers,
+  companiesHandler,
   creatorInfoHandler,
   attentionCategoryHandler,
   historyHandler,
@@ -30,6 +31,8 @@ export const worker = setupWorker(
   ...notRecommendHandlers,
   ...searchContentsHandlers,
   ...specificCreatorHandler,
+  ...viewHandlers,
+  ...companiesHandler
   ...subscriptionContentsHandlers,
   ...viewHandlers,
   ...creatorInfoHandler,
