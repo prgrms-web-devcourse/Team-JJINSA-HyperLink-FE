@@ -1,6 +1,8 @@
 import { axiosInstance } from './core';
 
-export type attentionCategory = string[];
+export type attentionCategory = {
+  attentionCategory: string[];
+};
 
 export const getAttentionCategory = async () => {
   try {
@@ -8,7 +10,7 @@ export const getAttentionCategory = async () => {
       '/attention-category'
     );
 
-    return response;
+    return response.attentionCategory;
   } catch (error) {
     console.error(error);
   }
