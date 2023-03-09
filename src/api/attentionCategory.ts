@@ -1,6 +1,8 @@
 import { axiosInstance } from './core';
 
-export type attentionCategory = string[];
+export type attentionCategory = {
+  attentionCategory: string[];
+};
 
 export const getAttentionCategory = async () => {
   try {
@@ -8,7 +10,7 @@ export const getAttentionCategory = async () => {
       '/attention-category'
     );
 
-    return response;
+    return response.attentionCategory;
   } catch (error) {
     console.error(error);
   }
@@ -18,9 +20,10 @@ export const putAttentionCategory = async (
   newAttentionCategory: attentionCategory
 ) => {
   try {
-    const response = await axiosInstance.put('/attention-category/update', {
-      attentionCategory: newAttentionCategory,
-    });
+    const response = await axiosInstance.put(
+      '/attention-category/update',
+      newAttentionCategory
+    );
 
     return response;
   } catch (error) {

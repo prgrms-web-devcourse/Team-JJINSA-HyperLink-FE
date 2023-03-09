@@ -5,7 +5,7 @@ import {
 import { Button, Icon, Modal, Spinner, Text } from '@/components/common';
 import { CATEGORIES } from '@/utils/constants/signup';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as style from './style.css';
 
 export type CategryModalProps = {
@@ -14,23 +14,21 @@ export type CategryModalProps = {
 };
 
 const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
-  const { data, isLoading } = useQuery(
-    ['attentionCategory'],
-    getAttentionCategory
-  );
-  const selectedList = data || [];
-
-  const { refetch, status } = useQuery(
-    ['updateAttentionCategory'],
-    () => {
-      putAttentionCategory([...newSelectedList]);
-      return null;
+  const { isLoading } = useQuery(['attentionCategory'], getAttentionCategory, {
+    onSuccess: (data) => {
+      const selectedList = new Set([...(data || [])]);
+      setNewSelectedList(selectedList);
     },
-    { enabled: false }
-  );
+  });
 
   const [newSelectedList, setNewSelectedList] = useState(
-    new Set([...selectedList])
+    new Set([] as string[])
+  );
+
+  const { refetch } = useQuery(
+    ['updateAttentionCategory'],
+    () => putAttentionCategory({ attentionCategory: [...newSelectedList] }),
+    { enabled: false }
   );
 
   const handleSelect = (category: string) => {
@@ -45,14 +43,12 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
   };
 
   const handleSubmit = async () => {
-    await refetch();
+    const response = await refetch();
 
-    if (status === 'success') {
+    if (response.status === 'success') {
       alert('변경되었습니다!');
-      onClose();
     } else {
       alert('잠시후 다시 시도해주세요');
-      setNewSelectedList(new Set([...selectedList]));
     }
   };
 

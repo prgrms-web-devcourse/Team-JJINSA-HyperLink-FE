@@ -50,9 +50,10 @@ const Authorized = () => {
             <>
               <div
                 className={style.userIcon}
-                onClick={() =>
-                  setIsMyInfoModalVisible((isVisible) => !isVisible)
-                }
+                onClick={() => {
+                  setIsMyInfoModalVisible((isVisible) => !isVisible);
+                  setIsCategoryModalVisible(false);
+                }}
               >
                 <Avatar
                   src={myInfo.profileUrl.toString()}

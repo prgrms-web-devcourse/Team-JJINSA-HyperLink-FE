@@ -93,9 +93,9 @@ const SendedView = ({ email }: { email: string }) => {
               </div>
             )}
             <div>
-              <Text block className={style.text}>
-                회사 로고
-              </Text>
+              <div className={style.companyTextWrapper}>
+                <Text block>회사 로고</Text>
+              </div>
               <input
                 className={style.input}
                 type="file"

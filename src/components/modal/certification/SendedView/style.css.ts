@@ -33,6 +33,6 @@ export const input = style({
   display: 'none',
 });
 
-export const text = style({
+export const companyTextWrapper = style({
   paddingLeft: '0.5rem',
 });
