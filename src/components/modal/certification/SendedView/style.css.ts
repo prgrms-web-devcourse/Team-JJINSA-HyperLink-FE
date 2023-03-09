@@ -32,3 +32,7 @@ export const textWrapper = style({
 export const input = style({
   display: 'none',
 });
+
+export const companyTextWrapper = style({
+  paddingLeft: '0.5rem',
+});
