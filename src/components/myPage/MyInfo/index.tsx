@@ -7,7 +7,7 @@ import { uploadFileToS3 } from '@/api/s3Image';
 import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES, REVERSE_CAREERS } from '@/utils/constants/signup';
-import CertificationModal from '../modal/certification';
+import CertificationModal from '@/components/modal/certification';
 import { CATEGORY } from '@/utils/constants/category';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
