@@ -5,7 +5,7 @@ import {
 import { Button, Icon, Modal, Spinner, Text } from '@/components/common';
 import { CATEGORIES } from '@/utils/constants/signup';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as style from './style.css';
 
 export type CategryModalProps = {
@@ -24,10 +24,6 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
   const [newSelectedList, setNewSelectedList] = useState(
     new Set([] as string[])
   );
-
-  useEffect(() => {
-    console.log(newSelectedList);
-  }, [newSelectedList]);
 
   const { refetch } = useQuery(
     ['updateAttentionCategory'],
