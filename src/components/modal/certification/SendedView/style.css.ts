@@ -32,7 +32,3 @@ export const textWrapper = style({
 export const input = style({
   display: 'none',
 });
-
-export const text = style({
-  paddingLeft: '0.5rem',
-});

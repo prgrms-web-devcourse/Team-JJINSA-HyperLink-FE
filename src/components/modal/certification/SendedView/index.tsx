@@ -93,7 +93,13 @@ const SendedView = ({ email }: { email: string }) => {
               </div>
             )}
             <div>
-              <Text block className={style.text}>
+              <Text
+                block
+                size="large"
+                style={{
+                  paddingLeft: '0.5rem',
+                }}
+              >
                 회사 로고
               </Text>
               <input
