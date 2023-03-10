@@ -7,7 +7,7 @@ import { uploadFileToS3 } from '@/api/s3Image';
 import { updateMyInfo } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES, REVERSE_CAREERS } from '@/utils/constants/signup';
-import CertificationModal from '../modal/certification';
+import CertificationModal from '@/components/modal/certification';
 import { CATEGORY } from '@/utils/constants/category';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
@@ -18,12 +18,14 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   const [imageFile, setImageFile] = useState<File | null>();
   const { value: newNickname, onChange: onChangeNewNickname } =
     useInput(nickname);
-  const [newCareer, setNewCareer] = useState(career);
-  const [newCareerYear, setNewCareerYear] = useState(careerYear);
+  const [newCareer, setNewCareer] = useState(CATEGORY[career]);
+  const [newCareerYear, setNewCareerYear] = useState(
+    REVERSE_CAREERS[careerYear]
+  );
   const [isUpdating, setIsUpdating] = useState(false);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
 
-  const { status, refetch } = useQuery(
+  const { refetch } = useQuery(
     ['updateMyInfo'],
     () => {
       updateMyInfo({
@@ -71,10 +73,10 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     if (isUpdating) return;
 
     setIsUpdating(true);
-    await refetch();
+    const response = await refetch();
     setIsUpdating(false);
 
-    if (status === 'success') alert('프로필이 변경되었습니다');
+    if (response.status === 'success') alert('프로필이 변경되었습니다');
     else alert('잠시 후 시도해주세요');
   };
 
@@ -120,9 +122,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
       />
       <div
         className={style.companyText}
-        onClick={() => {
-          setIsVisibleModal(true);
-        }}
+        onClick={() => setIsVisibleModal(true)}
       >
         <Text>소속 회사 인증하기</Text>
         {isVisibleModal && (
@@ -141,7 +141,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         <Dropdown
           placeholder="선택해주세요"
           label="직군/경력"
-          value={CATEGORY[newCareer]}
+          value={newCareer}
           items={Object.keys(CATEGORIES)}
           onItemClick={(item: string) => {
             handleItemClick(item, 'career');
@@ -149,11 +149,9 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         />
         <Dropdown
           placeholder="선택해주세요"
-          value={REVERSE_CAREERS[newCareerYear]}
+          value={newCareerYear}
           items={Object.keys(CAREERS)}
-          onItemClick={(item: string) => {
-            handleItemClick(item, 'careerYear');
-          }}
+          onItemClick={(item: string) => handleItemClick(item, 'careerYear')}
         />
       </div>
       <Button

@@ -1,25 +1,28 @@
 import { rest } from 'msw';
 
 export const myAttentionCategory = {
-  category: ['develop', 'beauty', 'finance'],
+  attentionCategory: ['develop', 'beauty', 'finance'],
 };
 
 export const attentionCategoryHandler = [
   rest.get('/attention-category', (req, res, ctx) => {
     if (!req.headers.all().authorization) {
-      return res(ctx.status(400));
+      return res(ctx.status(401));
     }
 
-    return res(ctx.status(200), ctx.json(myAttentionCategory.category));
+    return res(
+      ctx.status(200),
+      ctx.json(myAttentionCategory.attentionCategory)
+    );
   }),
 
   rest.put('/attention-category/update', async (req, res, ctx) => {
     if (!req.headers.all().authorization) {
-      return res(ctx.status(400));
+      return res(ctx.status(401));
     }
 
     const { attentionCategory } = await req.json();
-    myAttentionCategory.category = attentionCategory;
+    myAttentionCategory.attentionCategory = attentionCategory;
 
     return res(ctx.status(200), ctx.json(myAttentionCategory));
   }),
