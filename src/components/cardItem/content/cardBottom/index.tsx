@@ -8,10 +8,11 @@ import BannerText from '../banner/bannerText';
 import { banner } from '@/types/contents';
 import { useQuery } from '@tanstack/react-query';
 import { postNotRecommendResponse } from '@/api/notRecommend';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { isAuthorizedState } from '@/stores/auth';
 import NotRecommend from '../notRecommend';
+import { selectedTabState } from '@/stores/tab';
 
 type CardBottomProps = {
   creatorId: number;
@@ -33,9 +34,9 @@ const CardBottom = ({
     useState(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const isAuthorized = useRecoilValue(isAuthorizedState);
-  const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
-    isLoginModalVisibleState
-  );
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
+  const setTabState = useSetRecoilState(selectedTabState);
+
   const notRecommendResponse = useQuery(
     ['creators', creatorId],
     () => postNotRecommendResponse(creatorId),
@@ -46,6 +47,7 @@ const CardBottom = ({
   const handleCreatorClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setTabState('none');
     navigate(`/creator/${creatorId}`);
   };
 
@@ -53,7 +55,6 @@ const CardBottom = ({
     e.preventDefault();
     e.stopPropagation();
     setIsModalVisible(true);
-    console.log('dot click');
   };
 
   const handleNotRecommendClick = (e: MouseEvent) => {
@@ -62,7 +63,7 @@ const CardBottom = ({
     setIsModalVisible(false);
     if (!isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      return;
     }
     notRecommendResponse.refetch();
     setIsNotRecommendComponentVisible(true);

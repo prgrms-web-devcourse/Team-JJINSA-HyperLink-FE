@@ -1,9 +1,10 @@
 import { isAuthorizedState } from '@/stores/auth';
+import { lastTabState } from '@/stores/lastTab';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
 import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 export type TabProps = {
@@ -21,25 +22,23 @@ const Tab = ({
   onClick,
   ...props
 }: TabProps) => {
-  const [tabState, setTabState] = useRecoilState(selectedTabState);
+  const tabState = useRecoilValue(selectedTabState);
   const isAuthorized = useRecoilValue(isAuthorizedState);
-  const [isLoginModalVisible, setIsLoginModalVisible] = useRecoilState(
-    isLoginModalVisibleState
-  );
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
   const navigate = useNavigate();
+  const setLastTabState = useSetRecoilState(lastTabState);
 
   const handleClick = (item: string) => {
     if (item === '구독 피드' && !isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      setLastTabState('SUBSCRIPTIONS');
+      return;
     }
     if (item === '크리에이터') {
       navigate('/creatorList');
-      setTabState(item);
       onClick(item);
       return;
     }
-    setTabState(item);
     onClick(item);
     navigate('/');
   };

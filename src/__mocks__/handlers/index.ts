@@ -15,4 +15,5 @@ export { viewHandlers } from './view';
 export { creatorInfoHandler } from './creator';
 export { attentionCategoryHandler } from './attentionCategory';
 export { historyHandler } from './history';
+export { subscribeHandlers } from './subscribe';
 export { dailyBriefingDataHandler } from './dailyBriefing';
