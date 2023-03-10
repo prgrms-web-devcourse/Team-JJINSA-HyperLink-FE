@@ -14,6 +14,7 @@ export type CategryModalProps = {
 };
 
 const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
+  const [isDisabled, setIsDisabled] = useState(false);
   const { isLoading } = useQuery(['attentionCategory'], getAttentionCategory, {
     onSuccess: (data) => {
       const selectedList = new Set([...(data || [])]);
@@ -44,7 +45,14 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
   };
 
   const handleSubmit = async () => {
+    if ([...newSelectedList].length === 0) {
+      alert('한 개 이상 선택해주세요!');
+      return;
+    }
+
+    setIsDisabled(true);
     const response = await refetch();
+    setIsDisabled(false);
 
     if (response.status === 'success') {
       alert('변경되었습니다!');
@@ -92,6 +100,7 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
             onClick={() => {
               handleSubmit();
             }}
+            disabled={isDisabled}
           />
         </div>
       </div>
