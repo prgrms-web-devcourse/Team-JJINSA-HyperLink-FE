@@ -88,6 +88,23 @@ let contents = [
 
 let currentPageContents = [];
 
+let companies = [
+  {
+    companyId: 11,
+    companyName: 'kakao',
+  },
+  {
+    companyId: 13,
+    companyName: 'naver',
+  },
+  {
+    companyId: 15,
+    companyName: 'daum',
+  },
+];
+
+let currentPageCompanies = [];
+
 const today = new Date();
 
 const views = {
@@ -163,7 +180,7 @@ export const adminHandlers = [
     return res(ctx.status(200), ctx.delay(1000), ctx.json(creators));
   }),
 
-  rest.delete('admin/creators/:creatorId', (req, res, ctx) => {
+  rest.delete('/admin/creators/:creatorId', (req, res, ctx) => {
     const { creatorId } = req.params;
 
     if (!req.headers.all().authorization) {
@@ -247,6 +264,54 @@ export const adminHandlers = [
     );
 
     return res(ctx.status(200), ctx.delay(1000), ctx.json(contents));
+  }),
+
+  rest.get('/admin/companies', (req, res, ctx) => {
+    const page = req.url.searchParams.get('page'),
+      size = req.url.searchParams.get('size');
+
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(401));
+    } else if (!page || !size) {
+      return res(ctx.status(400));
+    }
+
+    currentPageCompanies = companies.slice(
+      parseInt(page, 10) * parseInt(size, 10),
+      (parseInt(page, 10) + 1) * parseInt(size, 10)
+    );
+
+    console.log(currentPageCompanies);
+
+    return res(
+      ctx.status(200),
+      ctx.delay(1000),
+      ctx.json({
+        companies: currentPageCompanies,
+        currentPage: parseInt(page, 10) + 1,
+        totalPage: Math.ceil(companies.length / parseInt(size, 10)),
+      })
+    );
+  }),
+
+  rest.put('/admin/companies/:companyId', (req, res, ctx) => {
+    const { companyId } = req.params;
+
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(401));
+    } else if (
+      !companies.some(
+        (company) => company.companyId === parseInt(companyId as string, 10)
+      )
+    ) {
+      return res(ctx.status(404));
+    }
+
+    companies = companies.filter(
+      (company) => company.companyId !== parseInt(companyId as string, 10)
+    );
+
+    return res(ctx.status(200), ctx.delay(1000), ctx.json(companies));
   }),
 
   rest.get('/admin/dashboard/all-category/view', (req, res, ctx) => {

@@ -1,4 +1,4 @@
-import { contents, creators, views } from '@/types/admin';
+import { companies, contents, creators, views } from '@/types/admin';
 import { isSameDate } from '@/utils/date';
 import { getItem } from '@/utils/storage';
 import { axiosInstance } from './core';
@@ -61,6 +61,27 @@ export const activateContent = async (contentId: number) => {
 export const deleteContent = async (contentId: number) => {
   try {
     const response = await axiosInstance.delete(`/admin/contents/${contentId}`);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getNotUsingRecommendCompanies = async (
+  page: number,
+  size: number
+) => {
+  const response: companies = await axiosInstance.get(
+    `/admin/companies?page=${page}&size=${size}`
+  );
+
+  return response;
+};
+
+export const modifyUsingRecommendCompany = async (companyId: number) => {
+  try {
+    const response = await axiosInstance.put(`/admin/companies/${companyId}`);
 
     return response;
   } catch (error) {

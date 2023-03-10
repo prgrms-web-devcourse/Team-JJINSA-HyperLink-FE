@@ -1,4 +1,4 @@
-import { Contents, Creators, WeeklyViews } from '@/components/admin';
+import { Contents, Creators, Companies, WeeklyViews } from '@/components/admin';
 import { Divider, Spinner } from '@/components/common';
 import { isAdminState, isAuthorizedState } from '@/stores/auth';
 import { useEffect } from 'react';
@@ -26,6 +26,8 @@ const Admin = () => {
           <Contents />
           <Divider />
           <Creators />
+          <Divider />
+          <Companies />
           <Divider />
           <WeeklyViews />
         </div>

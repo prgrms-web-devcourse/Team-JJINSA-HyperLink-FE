@@ -25,6 +25,15 @@ export type contents = {
   contents: content[];
 } & pagination;
 
+export type company = {
+  companyId: number;
+  companyName: string;
+};
+
+export type companies = {
+  companies: company[];
+} & pagination;
+
 type view = {
   categoryName: 'develop' | 'beauty' | 'finance';
   views: number;
