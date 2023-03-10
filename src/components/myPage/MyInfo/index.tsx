@@ -5,17 +5,17 @@ import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
 import { deleteFileFromS3, uploadFileToS3 } from '@/api/s3Image';
 import { updateMyInfo, updateProfileImage } from '@/api/member';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES, REVERSE_CAREERS } from '@/utils/constants/signup';
 import CertificationModal from '@/components/modal/certification';
 import { CATEGORY } from '@/utils/constants/category';
 
 const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
+  const queryClient = useQueryClient();
   const { email, nickname, profileUrl, career, careerYear, companyName } =
     myInfo;
 
   const [newProfileImage, setNewProfileImage] = useState(profileUrl);
-  const [imageFile, setImageFile] = useState<File | null>();
   const { value: newNickname, onChange: onChangeNewNickname } =
     useInput(nickname);
   const [newCareer, setNewCareer] = useState(CATEGORY[career]);
@@ -24,17 +24,6 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
   );
   const [isUpdating, setIsUpdating] = useState(false);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-
-  const { refetch } = useQuery(
-    ['updateMyInfo'],
-    () =>
-      updateMyInfo({
-        nickname: newNickname,
-        career: CATEGORIES[newCareer],
-        careerYear: CAREERS[newCareerYear],
-      }),
-    { enabled: false }
-  );
 
   const handleItemClick = (item: string, type: string) => {
     switch (type) {
@@ -56,11 +45,26 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     imgRef.current.click();
   };
 
+  const mutation = useMutation({
+    mutationFn: async () => {
+      await updateMyInfo({
+        nickname: newNickname,
+        career: CATEGORIES[newCareer],
+        careerYear: CAREERS[newCareerYear],
+      });
+      await updateProfileImage(newProfileImage);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['myInfo']);
+      deleteFileFromS3(profileUrl);
+      alert('프로필이 변경되었습니다');
+    },
+  });
+
   const saveImgFile = async () => {
     const file = imgRef.current?.files && imgRef.current?.files[0];
 
     if (file) {
-      setImageFile(file);
       const src = await uploadFileToS3(file, 'profile');
       if (typeof src === 'string') {
         setNewProfileImage(src);
@@ -72,16 +76,8 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     if (isUpdating) return;
 
     setIsUpdating(true);
-    const response = await refetch();
+    mutation.mutate();
     setIsUpdating(false);
-
-    console.log(response.status);
-
-    if (response.status === 'success') {
-      await updateProfileImage(newProfileImage);
-      await deleteFileFromS3(profileUrl);
-      alert('프로필이 변경되었습니다');
-    } else alert('잠시 후 시도해주세요');
   };
 
   const [isHovering, setIsHovering] = useState(false);
@@ -121,7 +117,7 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
       <Input
         label="소속 회사"
         placeholder="아직 인증된 회사가 없습니다."
-        value={companyName}
+        value={companyName || ''}
         readOnly
       />
       <div

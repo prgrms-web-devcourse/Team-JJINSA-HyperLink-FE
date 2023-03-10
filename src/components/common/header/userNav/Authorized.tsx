@@ -1,6 +1,6 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { isAuthorizedState } from '@/stores/auth';
 import {
   isCategoryModalVisibleState,
@@ -12,8 +12,10 @@ import { myInfo } from '@/types/myInfo';
 import { getMyInfo } from '@/api/member';
 import { logout } from '@/api/auth';
 import * as style from '../style.css';
+import { useEffect, useState } from 'react';
 
 const Authorized = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const setIsAuthorized = useSetRecoilState(isAuthorizedState);
   const [isMyInfoModalVisible, setIsMyInfoModalVisible] = useRecoilState(
@@ -24,9 +26,15 @@ const Authorized = () => {
   );
 
   const { data: myInfo } = useQuery<myInfo>(['myInfo'], getMyInfo, {
-    refetchOnWindowFocus: false,
     suspense: true,
   });
+
+  //const [dd, setdd] = useState(myInfo);
+
+  useEffect(() => {
+    //queryClient.setQueryData(['myInfo'], myInfo);
+    console.log('authorized', myInfo);
+  }, [myInfo]);
 
   const handleLogout = async () => {
     await logout();
@@ -56,7 +64,11 @@ const Authorized = () => {
                 }}
               >
                 <Avatar
-                  src={myInfo.profileUrl.toString()}
+                  src={
+                    myInfo.profileUrl +
+                    '?r=' +
+                    Math.floor(Math.random() * 100000)
+                  }
                   shape="circle"
                   size="small"
                 />

@@ -70,7 +70,13 @@ const MyInfoModal = ({
       style={{ padding: '1.2rem', textAlign: 'start' }}
     >
       <div className={style.myInfo}>
-        <Avatar src={profileUrl.toString()} shape="circle" size="medium" />
+        <Avatar
+          src={
+            profileUrl.toString() + '?r=' + Math.floor(Math.random() * 100000)
+          }
+          shape="circle"
+          size="medium"
+        />
         <div className={style.myInfoDetail}>
           <div className={style.nickname}>{nickname}</div>
           <div className={style.career}>
