@@ -36,10 +36,15 @@ export type companies = {
 
 type view = {
   categoryName: 'develop' | 'beauty' | 'finance';
-  views: number;
+  viewCount: number;
 };
 
-export type views = {
-  oneDayView: view[];
+type onedayViews = {
+  results: view[];
+  date: string;
+};
+
+export type weeklyViews = {
+  weeklyViewCounts: onedayViews[];
   createdDate: string;
 };

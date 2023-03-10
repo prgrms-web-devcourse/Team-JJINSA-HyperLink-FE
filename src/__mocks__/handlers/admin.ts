@@ -108,23 +108,142 @@ let currentPageCompanies = [];
 const today = new Date();
 
 const views = {
-  oneDayView: [
+  weeklyViewCounts: [
     {
-      categoryName: 'develop',
-      views: 25632,
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 7) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
     },
     {
-      categoryName: 'beauty',
-      views: 22333,
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 6) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
     },
     {
-      categoryName: 'finance',
-      views: 20323,
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 5) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
+    },
+    {
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 3,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 4) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
+    },
+    {
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 37,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 5,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 3) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
+    },
+    {
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 1,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 0,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 2) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
+    },
+    {
+      results: [
+        {
+          categoryName: 'develop',
+          viewCount: 5,
+        },
+        {
+          categoryName: 'beauty',
+          viewCount: 1,
+        },
+        {
+          categoryName: 'finance',
+          viewCount: 0,
+        },
+      ],
+      date: new Date(new Date().setDate(today.getDate() - 1) + TIME_ZONE)
+        .toISOString()
+        .split('T')[0],
     },
   ],
-  createdDate: new Date(today.setDate(today.getDate() - 1) + TIME_ZONE)
-    .toISOString()
-    .slice(0, -5),
+  createdDate: '2023-03-10',
 };
 
 const categories = ['develop', 'beauty', 'finance'];
@@ -280,8 +399,6 @@ export const adminHandlers = [
       parseInt(page, 10) * parseInt(size, 10),
       (parseInt(page, 10) + 1) * parseInt(size, 10)
     );
-
-    console.log(currentPageCompanies);
 
     return res(
       ctx.status(200),

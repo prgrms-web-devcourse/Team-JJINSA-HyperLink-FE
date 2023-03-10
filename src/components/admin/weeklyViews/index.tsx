@@ -1,15 +1,12 @@
-import { getYesterdayViews } from '@/api/admin';
+import { getWeeklyViews } from '@/api/admin';
 import { Heading, Spinner } from '@/components/common';
-import { views } from '@/types/admin';
+import { weeklyViews } from '@/types/admin';
 import { generateRandomHex, hexToRGB } from '@/utils/color';
 import { CATEGORIES } from '@/utils/constants/signup';
-import { WEEKLY_VIEWS } from '@/utils/constants/storage';
 import { getKeyByValue } from '@/utils/object';
-import { getItem } from '@/utils/storage';
 import { useQuery } from '@tanstack/react-query';
 import * as style from './style.css';
 
-import { updateWeeklyViews } from '@/utils/weeklyViews';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -20,7 +17,6 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
-import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -43,37 +39,26 @@ const options = {
 };
 
 const WeeklyViews = () => {
-  const [weeklyViews, setWeeklyViews] = useState<views[]>(
-    getItem(WEEKLY_VIEWS, [])
-  );
-
-  const { data: yesterdayViews } = useQuery<views>(
-    ['yesterdayViews'],
-    getYesterdayViews,
+  const { data: weeklyViews } = useQuery<weeklyViews>(
+    ['weeklyViews'],
+    getWeeklyViews,
     {
       refetchOnWindowFocus: false,
     }
   );
 
-  useEffect(() => {
-    if (yesterdayViews) {
-      updateWeeklyViews(yesterdayViews);
-      setWeeklyViews(getItem(WEEKLY_VIEWS, []));
-    }
-  }, [yesterdayViews]);
-
   return (
     <div className={style.container}>
       <Heading level={2}>카테고리별 일주일 조회수</Heading>
-      {!yesterdayViews || !weeklyViews ? (
+      {!weeklyViews ? (
         <div className={style.spinnerWrapper}>
           <Spinner size="huge" />
         </div>
       ) : (
         Object.values(CATEGORIES)
           .map((_, i) =>
-            weeklyViews
-              .map((dailyViews) => dailyViews.oneDayView)
+            weeklyViews.weeklyViewCounts
+              .map(({ results }) => results)
               .map((v) => v[i])
           )
           .map((v) => {
@@ -85,14 +70,11 @@ const WeeklyViews = () => {
                 key={v[0].categoryName}
                 options={options}
                 data={{
-                  labels: weeklyViews.map(
-                    (currentCategoryView) =>
-                      currentCategoryView.createdDate.split('T')[0]
-                  ),
+                  labels: weeklyViews.weeklyViewCounts.map(({ date }) => date),
                   datasets: [
                     {
                       label: getKeyByValue(CATEGORIES, v[0].categoryName),
-                      data: v.map((e) => e.views),
+                      data: v.map((e) => e.viewCount),
                       borderColor,
                       backgroundColor,
                     },
