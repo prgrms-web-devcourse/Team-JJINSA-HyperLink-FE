@@ -3,8 +3,8 @@ import * as style from './style.css';
 import { useRef, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { myInfo } from '@/types/myInfo';
-import { uploadFileToS3 } from '@/api/s3Image';
-import { updateMyInfo } from '@/api/member';
+import { deleteFileFromS3, uploadFileToS3 } from '@/api/s3Image';
+import { updateMyInfo, updateProfileImage } from '@/api/member';
 import { useQuery } from '@tanstack/react-query';
 import { CAREERS, CATEGORIES, REVERSE_CAREERS } from '@/utils/constants/signup';
 import CertificationModal from '@/components/modal/certification';
@@ -27,13 +27,12 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
 
   const { refetch } = useQuery(
     ['updateMyInfo'],
-    () => {
+    () =>
       updateMyInfo({
         nickname: newNickname,
-        career: newCareer,
-        careerYear: newCareerYear,
-      });
-    },
+        career: CATEGORIES[newCareer],
+        careerYear: CAREERS[newCareerYear],
+      }),
     { enabled: false }
   );
 
@@ -76,8 +75,13 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
     const response = await refetch();
     setIsUpdating(false);
 
-    if (response.status === 'success') alert('프로필이 변경되었습니다');
-    else alert('잠시 후 시도해주세요');
+    console.log(response.status);
+
+    if (response.status === 'success') {
+      await updateProfileImage(newProfileImage);
+      await deleteFileFromS3(profileUrl);
+      alert('프로필이 변경되었습니다');
+    } else alert('잠시 후 시도해주세요');
   };
 
   const [isHovering, setIsHovering] = useState(false);
