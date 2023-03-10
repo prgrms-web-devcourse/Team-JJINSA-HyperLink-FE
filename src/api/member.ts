@@ -14,7 +14,7 @@ export const getMyInfo = async () => {
 
 export const updateProfileImage = async (profileImgUrl: string) => {
   try {
-    const response = await axiosInstance.post('/members/profile-image', {
+    const response = await axiosInstance.put('/members/profile-image', {
       profileImgUrl,
     });
 

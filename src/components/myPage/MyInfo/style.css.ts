@@ -39,3 +39,9 @@ export const hoverText = style({
   opacity: '1',
 });
 export const dropdownWrapper = style([utils.flexColumn, { gap: '1rem' }]);
+
+export const companyText = style({
+  textAlign: 'right',
+  marginTop: '-2rem',
+  textDecoration: 'underline',
+});

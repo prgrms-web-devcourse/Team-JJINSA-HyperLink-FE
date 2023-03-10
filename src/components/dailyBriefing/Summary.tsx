@@ -1,33 +1,56 @@
-import { Card, Heading, Icon } from '../common';
+import { Card, Heading, Icon } from '@/components/common';
+import { getItem, setItem } from '@/utils/storage';
+import { SUMMARY_BY_CATEGORIES } from '@/utils/constants/storage';
 import * as style from './style.css';
 
-const MEMBER = {
-  title: '방문자 수',
-  standardTime: '2023.03.04 15PM',
-  increase: 243,
-  total: 1156,
+const TYPE: { [key: string]: string } = {
+  members: '가입자 수',
+  views: '방문자 수',
 };
 
-const Summary = ({ color }: { color: string }) => {
+type SummaryProps = {
+  title: string;
+  increase: number;
+  standardTime: string;
+  color: string;
+};
+
+const Summary = ({ title, increase, standardTime, color }: SummaryProps) => {
+  const totalData = getItem(SUMMARY_BY_CATEGORIES, {
+    [title]: {
+      standardTime: '',
+      total: 0,
+    },
+  });
+
+  if (totalData[title]?.standardTime !== standardTime) {
+    setItem(SUMMARY_BY_CATEGORIES, {
+      ...totalData,
+      [title]: {
+        standardTime,
+        total: totalData[title]?.total
+          ? totalData[title].total + increase
+          : increase,
+      },
+    });
+  }
+
   return (
     <Card type="default" color={color}>
       <div className={style.title}>
-        <Heading level={6}>{MEMBER.title}</Heading>
-        <span className={style.standardTime}>{MEMBER.standardTime}</span>
+        <Heading level={6}>{TYPE[title]}</Heading>
+        <span className={style.standardTime}>{standardTime}시 기준</span>
       </div>
       <div className={style.detail}>
-        <Heading level={2}>{MEMBER.total.toLocaleString()}</Heading>
+        <Heading level={2}>{totalData[title].total.toLocaleString()}</Heading>
         <div>
-          <span className={style.count}>
-            {MEMBER.increase.toLocaleString()}
-          </span>
+          <span className={style.count}>{increase.toLocaleString()}</span>
           <Icon
             name="arrow-trend-up"
             size="small"
             isPointer={false}
             style={{ marginLeft: '1rem' }}
           />
-          {/* <Icon name="arrow-trend-down" size="small" /> */}
         </div>
       </div>
     </Card>

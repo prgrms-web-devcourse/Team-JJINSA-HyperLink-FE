@@ -7,6 +7,7 @@ import * as style from './style.css';
 import MainContents from '@/components/mainContents';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import ButtonGroup from '@/components/buttonGroup';
+import RecommenedCreators from '@/components/recommendedCreators';
 import { selectedTabState } from '@/stores/tab';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
@@ -74,6 +75,7 @@ const Home = () => {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
+        <RecommenedCreators />
         <MainContents />
       </div>
     </div>

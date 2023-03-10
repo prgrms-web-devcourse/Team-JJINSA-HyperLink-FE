@@ -5,6 +5,7 @@ import { style } from '@vanilla-extract/css';
 export const modalContent = style([
   utils.flexColumn,
   utils.flexJustifySpaceBetween,
+  utils.borderRadius,
   {
     gap: '5rem',
     padding: '3rem',
@@ -18,12 +19,5 @@ export const modalHeader = style([
   utils.flexJustifySpaceBetween,
   {
     alignItems: 'flex-start',
-  },
-]);
-
-export const modalInputWrapper = style([
-  utils.flexColumn,
-  {
-    gap: '1.2rem',
   },
 ]);

@@ -1,10 +1,12 @@
-import { content, creator, views } from '@/types/admin';
+import { companies, contents, creators, views } from '@/types/admin';
 import { isSameDate } from '@/utils/date';
 import { getItem } from '@/utils/storage';
 import { axiosInstance } from './core';
 
-export const getAllCreators = async () => {
-  const response: creator[] = await axiosInstance.get('/admin/creators');
+export const getAllCreators = async (page: number, size: number) => {
+  const response: creators = await axiosInstance.get(
+    `/admin/creators?page=${page}&size=${size}`
+  );
 
   return response;
 };
@@ -36,8 +38,10 @@ export const deleteCreator = async (creatorId: number) => {
   }
 };
 
-export const getDeactivatedContents = async () => {
-  const response: content[] = await axiosInstance.get('/admin/contents');
+export const getDeactivatedContents = async (page: number, size: number) => {
+  const response: contents = await axiosInstance.get(
+    `/admin/contents?page=${page}&size=${size}`
+  );
 
   return response;
 };
@@ -57,6 +61,27 @@ export const activateContent = async (contentId: number) => {
 export const deleteContent = async (contentId: number) => {
   try {
     const response = await axiosInstance.delete(`/admin/contents/${contentId}`);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getNotUsingRecommendCompanies = async (
+  page: number,
+  size: number
+) => {
+  const response: companies = await axiosInstance.get(
+    `/admin/companies?page=${page}&size=${size}`
+  );
+
+  return response;
+};
+
+export const modifyUsingRecommendCompany = async (companyId: number) => {
+  try {
+    const response = await axiosInstance.put(`/admin/companies/${companyId}`);
 
     return response;
   } catch (error) {
