@@ -7,9 +7,11 @@ import { isAdminState, isAuthorizedState } from '@/stores/auth';
 import * as variants from '@/styles/variants.css';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 import { Banner } from '@/components/common';
+import { selectedTabState } from '@/stores/tab';
+import { lastTabState } from '@/stores/lastTab';
 
 export type LoginModalProps = {
   isOpen: boolean;
@@ -20,6 +22,8 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const navigate = useNavigate();
   const setIsAuthorized = useSetRecoilState(isAuthorizedState);
   const setIsAdmin = useSetRecoilState(isAdminState);
+  const setTabState = useSetRecoilState(selectedTabState);
+  const lastTab = useRecoilValue(lastTabState);
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (res) => {
@@ -33,7 +37,9 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
         setIsAdmin(loginResponse.admin);
         setIsAuthorized(true);
-        // navigate('/');
+        if (lastTab === 'SUBSCRIPTIONS') {
+          setTabState('SUBSCRIPTIONS');
+        }
         return;
       }
 

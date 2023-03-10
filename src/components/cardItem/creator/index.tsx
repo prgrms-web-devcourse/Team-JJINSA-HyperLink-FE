@@ -30,7 +30,7 @@ const CreatorCard = ({
 
   const queryClient = useQueryClient();
   const subScribeMutation = useMutation({
-    mutationFn: async () => await postSubscribeResponse(creatorId),
+    mutationFn: () => postSubscribeResponse(creatorId),
 
     onSuccess: () => queryClient.invalidateQueries(['creatorList']),
   });

@@ -1,4 +1,5 @@
 import { isAuthorizedState } from '@/stores/auth';
+import { lastTabState } from '@/stores/lastTab';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
 import { CSSProperties } from 'react';
@@ -25,11 +26,13 @@ const Tab = ({
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
   const navigate = useNavigate();
+  const setLastTabState = useSetRecoilState(lastTabState);
 
   const handleClick = (item: string) => {
     if (item === '구독 피드' && !isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      setLastTabState('SUBSCRIPTIONS');
+      return;
     }
     if (item === '크리에이터') {
       navigate('/creatorList');

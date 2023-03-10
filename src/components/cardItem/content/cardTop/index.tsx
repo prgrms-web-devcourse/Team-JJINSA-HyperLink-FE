@@ -37,13 +37,13 @@ const CardTop = ({
 
   const queryClient = useQueryClient();
   const bookmarkMutation = useMutation({
-    mutationFn: async () => await postBookmarkResponse(contentId, isBookmarked),
+    mutationFn: () => postBookmarkResponse(contentId, isBookmarked),
 
     onSuccess: () =>
       queryClient.invalidateQueries(['mainContents', selectedCategory]),
   });
   const likeMutation = useMutation({
-    mutationFn: async () => await postLikeResponse(contentId, userLiked),
+    mutationFn: () => postLikeResponse(contentId, userLiked),
 
     onSuccess: () =>
       queryClient.invalidateQueries(['mainContents', selectedCategory]),
@@ -54,7 +54,7 @@ const CardTop = ({
     e.stopPropagation();
     if (!isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      return;
     }
     setUserBookmarked(!userBookmarked);
     bookmarkMutation.mutate();
@@ -65,7 +65,7 @@ const CardTop = ({
     e.stopPropagation();
     if (!isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      return;
     }
     setUserLiked(!userLiked);
     likeMutation.mutate();

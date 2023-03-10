@@ -22,7 +22,7 @@ const CreatorInfo = ({
 
   const queryClient = useQueryClient();
   const subScribeMutation = useMutation({
-    mutationFn: async () => await postSubscribeResponse(creatorId),
+    mutationFn: () => postSubscribeResponse(creatorId),
 
     onSuccess: () => queryClient.invalidateQueries(['creatorInfo', creatorId]),
   });
@@ -30,7 +30,7 @@ const CreatorInfo = ({
   const handleSubscribeClick = () => {
     if (!isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      return;
     }
     setUserSubscribe(!userSubscribe);
     subScribeMutation.mutate();

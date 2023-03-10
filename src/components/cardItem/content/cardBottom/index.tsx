@@ -63,7 +63,7 @@ const CardBottom = ({
     setIsModalVisible(false);
     if (!isAuthorized) {
       setIsLoginModalVisible(true);
-      return false;
+      return;
     }
     notRecommendResponse.refetch();
     setIsNotRecommendComponentVisible(true);

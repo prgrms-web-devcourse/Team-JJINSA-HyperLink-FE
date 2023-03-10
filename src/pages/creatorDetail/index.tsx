@@ -28,7 +28,7 @@ const CreatorDetailPage = () => {
     refetch,
   } = useQuery<creator>(
     ['creatorInfo', +creatorId],
-    async () => await getCreatorInfo(+creatorId),
+    () => getCreatorInfo(+creatorId),
     {
       refetchOnWindowFocus: false,
       onSuccess: () => {
