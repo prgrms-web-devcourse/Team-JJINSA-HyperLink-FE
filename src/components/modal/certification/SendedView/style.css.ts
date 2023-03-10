@@ -36,3 +36,10 @@ export const input = style({
 export const companyTextWrapper = style({
   paddingLeft: '0.5rem',
 });
+
+export const underlineText = style([
+  utils.cursorPointer,
+  {
+    textDecoration: 'underline',
+  },
+]);
