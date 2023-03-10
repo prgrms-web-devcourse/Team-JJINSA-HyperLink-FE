@@ -5,34 +5,43 @@ import * as style from './style.css';
 type PaginationProps = {
   currentPage: number;
   totalPage: number;
-  onPrevClick: () => void;
-  onNextClick: () => void;
+  page: number;
+  setPage: (page: number) => void;
 };
 
 const Pagination = ({
   currentPage,
   totalPage,
-  onPrevClick,
-  onNextClick,
+  page,
+  setPage,
 }: PaginationProps) => {
   return (
     <div className={style.container}>
+      <button className={style.iconButton} onClick={() => setPage(0)}>
+        <Icon name="angles-left" color={variants.color.font.primary} />
+      </button>
       <button
         className={style.iconButton}
-        onClick={onPrevClick}
+        onClick={() => setPage(page - 1)}
         disabled={currentPage === 1}
       >
-        <Icon name="chevron-left" color={variants.color.font.primary} />
+        <Icon name="angle-left" color={variants.color.font.primary} />
       </button>
       <Text size="small">
         {currentPage} / {totalPage}
       </Text>
       <button
         className={style.iconButton}
-        onClick={onNextClick}
+        onClick={() => setPage(page + 1)}
         disabled={currentPage === totalPage}
       >
-        <Icon name="chevron-right" color={variants.color.font.primary} />
+        <Icon name="angle-right" color={variants.color.font.primary} />
+      </button>
+      <button
+        className={style.iconButton}
+        onClick={() => setPage(totalPage - 1)}
+      >
+        <Icon name="angles-right" color={variants.color.font.primary} />
       </button>
     </div>
   );
