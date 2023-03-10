@@ -1,6 +1,7 @@
-import { companies, contents, creators, views } from '@/types/admin';
+import { companies, contents, creators, weeklyViews } from '@/types/admin';
+import { WEEKLY_VIEWS } from '@/utils/constants/storage';
 import { isSameDate } from '@/utils/date';
-import { getItem } from '@/utils/storage';
+import { getItem, removeItem, setItem } from '@/utils/storage';
 import { axiosInstance } from './core';
 
 export const getAllCreators = async (page: number, size: number) => {
@@ -89,24 +90,26 @@ export const modifyUsingRecommendCompany = async (companyId: number) => {
   }
 };
 
-export const getYesterdayViews = async () => {
-  const storedWeeklyViews: views[] = getItem('WEEKLY_VIEWS', []);
+export const getWeeklyViews = async () => {
+  const storedWeeklyViews: weeklyViews = getItem(WEEKLY_VIEWS, {});
   const today = new Date();
-  const yesterday = new Date(today.setDate(today.getDate() - 1));
 
-  if (storedWeeklyViews.length) {
-    const storedYesterdayViews = storedWeeklyViews.find((storedDailyViews) =>
-      isSameDate(new Date(storedDailyViews.createdDate), yesterday)
+  if (storedWeeklyViews.createdDate) {
+    const isAlreadyStored = isSameDate(
+      new Date(storedWeeklyViews.createdDate),
+      today
     );
 
-    if (storedYesterdayViews) {
-      return storedYesterdayViews;
+    if (isAlreadyStored) {
+      return storedWeeklyViews;
     }
   }
 
-  const response: views = await axiosInstance.get(
+  const response: weeklyViews = await axiosInstance.get(
     '/admin/dashboard/all-category/view'
   );
+
+  setItem(WEEKLY_VIEWS, response);
 
   return response;
 };
