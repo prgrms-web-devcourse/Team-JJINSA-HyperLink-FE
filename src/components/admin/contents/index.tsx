@@ -109,8 +109,8 @@ const Contents = () => {
           <Pagination
             currentPage={data.currentPage}
             totalPage={data.totalPage}
-            onPrevClick={() => setPage(page - 1)}
-            onNextClick={() => setPage(page + 1)}
+            page={page}
+            setPage={setPage}
           />
         </>
       )}
