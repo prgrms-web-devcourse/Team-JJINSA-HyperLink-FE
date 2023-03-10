@@ -1,7 +1,7 @@
 import { companies, contents, creators, weeklyViews } from '@/types/admin';
 import { WEEKLY_VIEWS } from '@/utils/constants/storage';
 import { isSameDate } from '@/utils/date';
-import { getItem, removeItem, setItem } from '@/utils/storage';
+import { getItem, setItem } from '@/utils/storage';
 import { axiosInstance } from './core';
 
 export const getAllCreators = async (page: number, size: number) => {
@@ -78,6 +78,22 @@ export const getNotUsingRecommendCompanies = async (
   );
 
   return response;
+};
+
+type addCompanyProps = {
+  companyName: string;
+  emailAddress: string;
+  logoImgUrl: string;
+};
+
+export const addCompany = async (data: addCompanyProps) => {
+  try {
+    const response = await axiosInstance.post('/admin/companies', data);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const modifyUsingRecommendCompany = async (companyId: number) => {

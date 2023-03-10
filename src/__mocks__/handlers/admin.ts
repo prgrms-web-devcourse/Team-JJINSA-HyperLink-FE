@@ -287,7 +287,7 @@ export const adminHandlers = [
     }
 
     const createdCreator = {
-      creatorId: Math.random(),
+      creatorId: Math.random() * 10 ** 17,
       name,
       profileImgUrl,
       description,
@@ -409,6 +409,25 @@ export const adminHandlers = [
         totalPage: Math.ceil(companies.length / parseInt(size, 10)),
       })
     );
+  }),
+
+  rest.post('/admin/companies', async (req, res, ctx) => {
+    const { companyName, logoImgUrl, emailAddress } = await req.json();
+
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(401));
+    } else if (!companyName || !logoImgUrl || !emailAddress) {
+      return res(ctx.status(400));
+    }
+
+    const createdCompany = {
+      companyId: Math.random() * 10 ** 17,
+      companyName,
+    };
+
+    companies.push(createdCompany);
+
+    return res(ctx.status(200), ctx.delay(1000), ctx.json(companies));
   }),
 
   rest.put('/admin/companies/:companyId', (req, res, ctx) => {

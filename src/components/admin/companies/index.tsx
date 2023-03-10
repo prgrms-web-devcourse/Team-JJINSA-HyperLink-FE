@@ -7,6 +7,7 @@ import { Button, Heading, Spinner, Table, Text } from '@/components/common';
 import { companies } from '@/types/admin';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import AddCompany from '@/components/admin/addCompany';
 import * as style from './style.css';
 
 const COLUMNS = ['회사명', '-'];
@@ -51,6 +52,7 @@ const Companies = () => {
   return (
     <div className={style.container}>
       <Heading level={2}>회사</Heading>
+      <AddCompany />
       {!data ? (
         <div className={style.spinnerWrapper}>
           <Spinner size="huge" />
@@ -77,8 +79,8 @@ const Companies = () => {
           <Pagination
             currentPage={data.currentPage}
             totalPage={data.totalPage}
-            onPrevClick={() => setPage(page - 1)}
-            onNextClick={() => setPage(page + 1)}
+            page={page}
+            setPage={setPage}
           />
         </>
       )}
