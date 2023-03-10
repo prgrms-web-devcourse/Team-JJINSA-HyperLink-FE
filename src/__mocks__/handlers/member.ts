@@ -18,4 +18,15 @@ export const memberHandlers = [
 
     return res(ctx.status(200), ctx.json(myInfo));
   }),
+
+  rest.put('/members/profile-image', async (req, res, ctx) => {
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(400));
+    }
+
+    const { profileUrl } = await req.json();
+    myInfo.profileUrl = profileUrl;
+
+    return res(ctx.status(200), ctx.json(myInfo));
+  }),
 ];
