@@ -17,10 +17,12 @@ const CompanyName = ({ page, companyId, companyName }: CompanyNameProps) => {
 
   const modifyCompanyNameMutation = useMutation({
     mutationFn: modifyCompanyName,
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['notUsingRecommendCompanies', page, TABLE_SIZE],
-      }),
+      });
+      alert('회사 이름이 변경되었습니다.');
+    },
   });
 
   const handleEnterPress = (companyId: number, companyName: string) => {
