@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { patchViewResponse } from '@/api/view';
 import { useRecoilValue } from 'recoil';
 import { selectedCategoryState } from '@/stores/selectedCategory';
+import { useLocation } from 'react-router-dom';
 
 // props: 링크, 이미지, 북마크, 하트, 조회수, 크리에이터 이름, 날짜, 제목, 회사, 회사 아바타
 const ContentCard = ({
@@ -26,14 +27,19 @@ const ContentCard = ({
   const selectedCategory = useRecoilValue(selectedCategoryState);
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationFn: () => patchViewResponse(contentId),
+  const { pathname } = useLocation();
+
+  const viewMutation = useMutation({
+    mutationFn: patchViewResponse,
 
     onSuccess: () =>
       queryClient.invalidateQueries(['mainContents', selectedCategory]),
   });
   const handleClick = () => {
-    mutate();
+    viewMutation.mutate({
+      contentId: contentId,
+      pageType: pathname.includes('search') ? 1 : 0,
+    });
   };
 
   return (

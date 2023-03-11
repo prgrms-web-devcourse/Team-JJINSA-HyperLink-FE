@@ -5,7 +5,7 @@ import * as style from './style.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postBookmarkResponse } from '@/api/bookmark';
 import { postLikeResponse } from '@/api/like';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
