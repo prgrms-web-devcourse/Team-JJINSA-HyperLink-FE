@@ -20,7 +20,7 @@ const AddCreator = () => {
   const description = useInput('');
   const categoryName = useInput('');
 
-  const handleResetInputs = () => {
+  const handleResetInputs = async () => {
     name.onChange('');
     description.onChange('');
     categoryName.onChange('');
@@ -29,7 +29,6 @@ const AddCreator = () => {
       imgRef.current.files = new DataTransfer().files;
     }
 
-    deleteFileFromS3(profileUrl);
     setProfileUrl('');
   };
 
@@ -70,9 +69,11 @@ const AddCreator = () => {
 
   useEffect(() => {
     setAbleSubmit(
-      name.value && description.value && categoryName.value ? true : false
+      name.value && description.value && categoryName.value && profileUrl
+        ? true
+        : false
     );
-  }, [name.value, description.value, categoryName.value]);
+  }, [name.value, description.value, categoryName.value, profileUrl]);
 
   return (
     <div className={style.container}>
@@ -118,7 +119,10 @@ const AddCreator = () => {
           fontSize="medium"
           text="초기화"
           version="blueInverted"
-          onClick={handleResetInputs}
+          onClick={async () => {
+            handleResetInputs();
+            await deleteFileFromS3(profileUrl);
+          }}
         />
       </div>
     </div>

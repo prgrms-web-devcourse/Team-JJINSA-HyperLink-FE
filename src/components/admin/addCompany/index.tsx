@@ -26,7 +26,6 @@ const AddCompany = () => {
       imgRef.current.files = new DataTransfer().files;
     }
 
-    deleteFileFromS3(logoImgUrl);
     setLogoImgUrl('');
   };
 
@@ -109,7 +108,10 @@ const AddCompany = () => {
           fontSize="medium"
           text="초기화"
           version="blueInverted"
-          onClick={handleResetInputs}
+          onClick={async () => {
+            handleResetInputs();
+            await deleteFileFromS3(logoImgUrl);
+          }}
         />
       </div>
     </div>

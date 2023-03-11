@@ -8,66 +8,88 @@ let creators = [
     name: '크리에이터 1',
     description: '크리에이터 1에 대한 설명입니다.',
     categoryName: 'develop',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 2,
     name: '크리에이터 2',
     description: '크리에이터 2에 대한 설명입니다.',
     categoryName: 'beauty',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 3,
     name: '크리에이터 3',
     description: '크리에이터 3에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 4,
     name: '크리에이터 4',
     description: '크리에이터 4에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 5,
     name: '크리에이터 5',
     description: '크리에이터 5에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 6,
     name: '크리에이터 6',
     description: '크리에이터 6에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 7,
     name: '크리에이터 7',
     description: '크리에이터 7에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 8,
     name: '크리에이터 8',
     description: '크리에이터 8에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 9,
     name: '크리에이터 9',
     description: '크리에이터 9에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 10,
     name: '크리에이터 10',
     description: '크리에이터 10에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
   {
     creatorId: 11,
     name: '크리에이터 11',
     description: '크리에이터 11에 대한 설명입니다.',
     categoryName: 'finance',
+    profileImgUrl:
+      'https://hyperlink-data.s3.ap-northeast-2.amazonaws.com/company_logo_image/logo_google.png',
   },
 ];
 
