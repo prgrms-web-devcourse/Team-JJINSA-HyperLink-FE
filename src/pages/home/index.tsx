@@ -9,6 +9,7 @@ import { selectedCategoryState } from '@/stores/selectedCategory';
 import ButtonGroup from '@/components/buttonGroup';
 import RecommenedCreators from '@/components/recommendedCreators';
 import { selectedTabState } from '@/stores/tab';
+import { isAuthorizedState } from '@/stores/auth';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
@@ -19,6 +20,7 @@ const Home = () => {
     selectedCategoryState
   );
   const tabState = useRecoilValue(selectedTabState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {
@@ -75,7 +77,7 @@ const Home = () => {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        <RecommenedCreators />
+        {isAuthorized ? <RecommenedCreators /> : null}
         <MainContents />
       </div>
     </div>
