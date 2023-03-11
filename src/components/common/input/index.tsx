@@ -12,6 +12,7 @@ export type InputProps = {
   max?: number;
   onChange?: (value: string) => void;
   onEnterPress?: () => void;
+  needResetWhenEnter?: boolean;
   style?: CSSProperties;
 };
 
@@ -25,6 +26,7 @@ const Input = ({
   max,
   onChange,
   onEnterPress,
+  needResetWhenEnter = true,
   ...props
 }: InputProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +43,9 @@ const Input = ({
     }
 
     onEnterPress();
-    onChange?.('');
+    if (needResetWhenEnter) {
+      onChange?.('');
+    }
   };
 
   return (
