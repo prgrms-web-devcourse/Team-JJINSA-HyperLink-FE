@@ -28,14 +28,20 @@ const BannerAvatar = ({ companies }: { companies?: banner[] }) => {
 
   return (
     <div className={style.flipAnimationContainer}>
-      {companies?.map((company, index) => (
-        <div
-          key={index}
-          className={`${style.flipImage} ${companyClasses[index]}`}
-        >
-          <Avatar src={company.bannerLogoImgUrl} size="small" shape="circle" />
-        </div>
-      ))}
+      {companies?.map((company, index) => {
+        return (
+          <div
+            key={company.bannerName}
+            className={`${style.flipImage} ${companyClasses[index]}`}
+          >
+            <Avatar
+              src={company.bannerLogoImgUrl || favicon}
+              size="small"
+              shape="circle"
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
