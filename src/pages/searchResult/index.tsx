@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as style from './style.css';
+import { useInView } from 'react-intersection-observer';
+import { Spinner } from '@/components/common';
 import CardList from '@/components/cardList';
 import ContentCard from '@/components/cardItem/content';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+import SearchInfo from '@/components/searchResult/searchInfo';
 import { useSearchContentsInfiniteQuery } from '@/hooks/infiniteQuery/useSearchContentsInfiniteQuery';
-import { Heading, Spinner } from '@/components/common';
+import * as style from './style.css';
 
 const searchResultPage = () => {
   const { keyword } = useParams() as { keyword: string };
@@ -20,7 +21,7 @@ const searchResultPage = () => {
     isFetching,
     isFetchingNextPage,
   } = useSearchContentsInfiniteQuery(keyword);
-  const searchResultCount = getContents?.pages[0].totalCount;
+  const searchResultCount = getContents?.pages[0].totalCount || 0;
 
   useEffect(() => {
     if (inView && getNextPageIsPossible) {
@@ -28,24 +29,13 @@ const searchResultPage = () => {
     }
   }, [inView]);
 
-  if (status === 'loading') {
-    <Spinner size="huge" />;
-  }
-
   return status === 'loading' ? (
     <Spinner size="huge" />
   ) : status === 'error' ? (
     <div>검색 결과 api 에러!!!</div>
   ) : (
     <div className={style.wrapper}>
-      <div className={style.searchInfo}>
-        <p className={style.resultStats}>
-          총 {searchResultCount}개의 검색 결과
-        </p>
-        <Heading level={5}>
-          &apos;<strong>{keyword}</strong>&apos;에 대한 검색 결과
-        </Heading>
-      </div>
+      <SearchInfo keyword={keyword} searchResultCount={searchResultCount} />
       <CardList type="content">
         {
           // 불러오는데 성공하고 데이터가 0개가 아닐 때 렌더링
@@ -75,7 +65,7 @@ const searchResultPage = () => {
         }
         <div className={style.fetching}>
           {isFetching && isFetchingNextPage && (
-            <Spinner size="huge" color="" style={{ zIndex: 9000 }} />
+            <Spinner size="huge" style={{ zIndex: 9000 }} />
           )}
         </div>
       </CardList>
