@@ -9,7 +9,7 @@ import { useSearchContentsInfiniteQuery } from '@/hooks/infiniteQuery/useSearchC
 import * as style from './style.css';
 
 const searchResultPage = () => {
-  const { keyword } = useParams() as { keyword: string };
+  const { keyword = '' } = useParams<{ keyword: string }>();
 
   const { ref, inView } = useInView({ threshold: 0.8 });
   const {
