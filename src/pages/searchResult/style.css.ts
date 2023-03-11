@@ -6,7 +6,6 @@ export const wrapper = style([
   utils.positionRelative,
   {
     margin: '5rem 10rem',
-    padding: '5rem 0',
     minHeight: 'calc(100vh - 7.1rem)',
   },
 ]);
