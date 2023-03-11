@@ -50,33 +50,6 @@ const MainContents = () => {
     setTabState(lastTab);
   }, []);
 
-  // const queryClient = useQueryClient();
-  // useEffect(() => {
-  //   const handler = () => {
-  //     console.log('hello');
-
-  //     const previousQueryData = queryClient.getQueryData(
-  //       ['mainContents', selectedCategory],
-  //       {
-  //         exact: true,
-  //       }
-  //     );
-
-  //     if (previousQueryData) {
-  //       // 데이터가 이미 캐시된 경우, 새로 불러오지 않도록 처리
-  //       queryClient.setQueryData(
-  //         ['mainContents', selectedCategory],
-  //         previousQueryData
-  //       );
-  //     }
-  //   };
-  //   window.addEventListener('popstate', handler);
-
-  //   return () => {
-  //     window.removeEventListener('popstate', handler);
-  //   };
-  // }, [queryClient]);
-
   if (status === 'loading') {
     return <Spinner size="huge" />;
   } else if (status === 'error') {
