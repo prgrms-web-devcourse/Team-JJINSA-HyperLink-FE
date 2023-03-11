@@ -43,7 +43,13 @@ const AddCreator = () => {
       return;
     }
 
+    const prevProfileUrl = profileUrl;
+
     setProfileUrl((await uploadFileToS3(file, 'profile')) || '');
+
+    if (prevProfileUrl) {
+      await deleteFileFromS3(prevProfileUrl);
+    }
   };
 
   const addCreatorMutation = useMutation({

@@ -40,7 +40,13 @@ const AddCompany = () => {
       return;
     }
 
+    const prevLogoImgUrl = logoImgUrl;
+
     setLogoImgUrl((await uploadFileToS3(file, 'logo')) || '');
+
+    if (prevLogoImgUrl) {
+      await deleteFileFromS3(prevLogoImgUrl);
+    }
   };
 
   const addCompanyMutation = useMutation({
