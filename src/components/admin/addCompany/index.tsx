@@ -1,5 +1,5 @@
 import { addCompany } from '@/api/admin';
-import { uploadFileToS3 } from '@/api/s3Image';
+import { deleteFileFromS3, uploadFileToS3 } from '@/api/s3Image';
 import { Avatar, Button, Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -26,6 +26,7 @@ const AddCompany = () => {
       imgRef.current.files = new DataTransfer().files;
     }
 
+    deleteFileFromS3(logoImgUrl);
     setLogoImgUrl('');
   };
 

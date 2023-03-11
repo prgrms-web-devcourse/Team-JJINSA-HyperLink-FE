@@ -1,5 +1,5 @@
 import { addCreator } from '@/api/admin';
-import { uploadFileToS3 } from '@/api/s3Image';
+import { deleteFileFromS3, uploadFileToS3 } from '@/api/s3Image';
 import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { CATEGORIES } from '@/utils/constants/signup';
@@ -13,7 +13,7 @@ const AddCreator = () => {
 
   const [ableSubmit, setAbleSubmit] = useState(false);
 
-  const [profileUrl, setProfileUrl] = useState<string | undefined>('');
+  const [profileUrl, setProfileUrl] = useState<string>('');
   const imgRef = useRef<HTMLInputElement>(null);
 
   const name = useInput('');
@@ -29,6 +29,7 @@ const AddCreator = () => {
       imgRef.current.files = new DataTransfer().files;
     }
 
+    deleteFileFromS3(profileUrl);
     setProfileUrl('');
   };
 
@@ -39,11 +40,11 @@ const AddCreator = () => {
   const handleChangeImage = async () => {
     const file = imgRef.current?.files?.[0];
 
-    if (!file) {
+    if (!file || typeof file === undefined) {
       return;
     }
 
-    setProfileUrl(await uploadFileToS3(file, 'profile'));
+    setProfileUrl((await uploadFileToS3(file, 'profile')) || '');
   };
 
   const addCreatorMutation = useMutation({
