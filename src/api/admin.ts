@@ -96,6 +96,26 @@ export const addCompany = async (data: addCompanyProps) => {
   }
 };
 
+type modifyCompanyNameProps = {
+  companyId: number;
+  companyName: string;
+};
+
+export const modifyCompanyName = async ({
+  companyId,
+  companyName,
+}: modifyCompanyNameProps) => {
+  try {
+    const response = await axiosInstance.post(`/admin/companies/${companyId}`, {
+      companyName,
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const modifyUsingRecommendCompany = async (companyId: number) => {
   try {
     const response = await axiosInstance.put(`/admin/companies/${companyId}`);

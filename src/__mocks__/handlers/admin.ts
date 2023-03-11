@@ -411,6 +411,31 @@ export const adminHandlers = [
     );
   }),
 
+  rest.post('/admin/companies/:companyId', async (req, res, ctx) => {
+    const { companyId } = req.params;
+    const { companyName } = await req.json();
+
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(401));
+    } else if (!companyName || !companyId) {
+      return res(ctx.status(400));
+    } else if (
+      !companies.some(
+        (company) => company.companyId === parseInt(companyId as string, 10)
+      )
+    ) {
+      return res(ctx.status(404));
+    }
+
+    companies = companies.map((company) =>
+      company.companyId !== parseInt(companyId as string, 10)
+        ? company
+        : { companyId: company.companyId, companyName }
+    );
+
+    return res(ctx.status(200), ctx.delay(1000), ctx.json(companies));
+  }),
+
   rest.post('/admin/companies', async (req, res, ctx) => {
     const { companyName, logoImgUrl, emailAddress } = await req.json();
 
