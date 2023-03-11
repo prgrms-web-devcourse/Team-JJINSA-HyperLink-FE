@@ -31,15 +31,11 @@ const BannerAvatar = ({ companies }: { companies?: banner[] }) => {
       {companies?.map((company, index) => {
         return (
           <div
-            key={index}
+            key={company.bannerName}
             className={`${style.flipImage} ${companyClasses[index]}`}
           >
             <Avatar
-              src={
-                company.bannerLogoImgUrl !== ''
-                  ? company.bannerLogoImgUrl
-                  : favicon
-              }
+              src={company.bannerLogoImgUrl || favicon}
               size="small"
               shape="circle"
             />
