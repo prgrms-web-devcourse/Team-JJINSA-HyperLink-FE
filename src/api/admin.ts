@@ -106,9 +106,12 @@ export const modifyCompanyName = async ({
   companyName,
 }: modifyCompanyNameProps) => {
   try {
-    const response = await axiosInstance.post(`/admin/companies/${companyId}`, {
-      companyName,
-    });
+    const response = await axiosInstance.patch(
+      `/admin/companies/${companyId}`,
+      {
+        companyName,
+      }
+    );
 
     return response;
   } catch (error) {

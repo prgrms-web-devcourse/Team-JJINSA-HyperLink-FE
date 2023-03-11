@@ -411,7 +411,7 @@ export const adminHandlers = [
     );
   }),
 
-  rest.post('/admin/companies/:companyId', async (req, res, ctx) => {
+  rest.patch('/admin/companies/:companyId', async (req, res, ctx) => {
     const { companyId } = req.params;
     const { companyName } = await req.json();
 
