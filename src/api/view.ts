@@ -9,7 +9,6 @@ export const patchViewResponse = async (viewData: viewProps) => {
   try {
     const response = await axiosInstance.patch(
       `/contents/${viewData.contentId}/view?search=${viewData.pageType}`
-      // `/contents?id=${contentId}/view` // msw 전용
     );
 
     return response;
