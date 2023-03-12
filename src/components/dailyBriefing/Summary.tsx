@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { Card, Heading, Icon } from '@/components/common';
 import { getItem, setItem } from '@/utils/storage';
 import { SUMMARY_BY_CATEGORIES } from '@/utils/constants/storage';
+import { isHomeScrolledState } from '@/stores/scroll';
 import * as style from './style.css';
 
 const TYPE: { [key: string]: string } = {
@@ -16,6 +19,12 @@ type SummaryProps = {
 };
 
 const Summary = ({ title, increase, standardTime, color }: SummaryProps) => {
+  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
+
+  useEffect(() => {
+    setIsHomeScrolled(true);
+  }, []);
+
   const totalData = getItem(SUMMARY_BY_CATEGORIES, {
     [title]: {
       standardTime: '',

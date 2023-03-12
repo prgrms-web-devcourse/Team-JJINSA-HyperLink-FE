@@ -2,12 +2,13 @@ import {
   getNotUsingRecommendCompanies,
   modifyUsingRecommendCompany,
 } from '@/api/admin';
+import AddCompany from '@/components/admin/addCompany';
 import Pagination from '@/components/admin/pagination';
-import { Button, Heading, Spinner, Table, Text } from '@/components/common';
+import { Button, Heading, Spinner, Table } from '@/components/common';
 import { companies } from '@/types/admin';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import AddCompany from '@/components/admin/addCompany';
+import CompanyName from './companyName';
 import * as style from './style.css';
 
 const COLUMNS = ['회사명', '-'];
@@ -64,9 +65,11 @@ const Companies = () => {
           <Table columns={COLUMNS}>
             {data.companies.map(({ companyId, companyName }) => (
               <tr key={companyId}>
-                <td className={style.ellipsis}>
-                  <Text>{companyName}</Text>
-                </td>
+                <CompanyName
+                  page={page}
+                  companyId={companyId}
+                  companyName={companyName}
+                />
                 <td>
                   <Button
                     text="추천"

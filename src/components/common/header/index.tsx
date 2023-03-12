@@ -1,14 +1,17 @@
-import { Tab, Text } from '@/components/common';
 import { lastTabState } from '@/stores/lastTab';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { selectedTabState } from '@/stores/tab';
 import { Suspense } from 'react';
-import { Link } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Link } from 'react-router-dom';
+import { Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
-import * as style from './style.css';
 import UserNav from './userNav/index';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { selectedTabState } from '@/stores/tab';
+import * as variants from '@/styles/variants.css';
 import logo from '/assets/logo.svg';
+import * as style from './style.css';
 
 const TAB_LIST = {
   RECENT_CONTENT: '실시간 최신 트렌드',
@@ -59,7 +62,11 @@ const Header = () => {
             className={style.dailyBriefing}
             onClick={() => setTabState('none')}
           >
-            <Text size="small" weight={500}>
+            <Text
+              size="small"
+              weight={tabState === 'none' ? 600 : undefined}
+              color={tabState === 'none' ? variants.color.primary : undefined}
+            >
               오늘의 hypelink
             </Text>
           </Link>

@@ -1,4 +1,5 @@
 import { deleteCreator, getAllCreators } from '@/api/admin';
+import { deleteFileFromS3 } from '@/api/s3Image';
 import AddCreator from '@/components/admin/addCreator';
 import Pagination from '@/components/admin/pagination';
 import {
@@ -42,9 +43,16 @@ const Creators = () => {
       }),
   });
 
-  const handleDeleteCreatorClick = (creatorId: number) => {
+  const handleDeleteCreatorClick = async (
+    creatorId: number,
+    profileImgUrl: string
+  ) => {
     if (!confirm('삭제 하시겠습니까?')) {
       return;
+    }
+
+    if (profileImgUrl) {
+      await deleteFileFromS3(profileImgUrl);
     }
     deleteCreatorMutation.mutate(creatorId);
   };
@@ -85,7 +93,9 @@ const Creators = () => {
                     <Button
                       text="삭제"
                       version="blueInverted"
-                      onClick={() => handleDeleteCreatorClick(creatorId)}
+                      onClick={() =>
+                        handleDeleteCreatorClick(creatorId, profileImgUrl)
+                      }
                     />
                   </td>
                 </tr>

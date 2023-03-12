@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Avatar, Modal } from '@/components/common';
 import { isAdminState } from '@/stores/auth';
 import { isMyInfoModalVisibleState } from '@/stores/modal';
+import { isHomeScrolledState } from '@/stores/scroll';
 import { myInfo } from '@/types/myInfo';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 const CAREER: { [key: string]: string } = {
@@ -50,6 +51,7 @@ const MyInfoModal = ({
   const navigate = useNavigate();
   const isAdmin = useRecoilState(isAdminState);
   const setIsMyInfoModalVisible = useSetRecoilState(isMyInfoModalVisibleState);
+  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
   const { email, nickname, career, careerYear, profileUrl } = myInfoData;
 
@@ -93,7 +95,14 @@ const MyInfoModal = ({
           );
         })}
         {isAdmin && (
-          <li className={style.menuItem} onClick={() => navigate('/admin')}>
+          <li
+            className={style.menuItem}
+            onClick={() => {
+              setIsMyInfoModalVisible(false);
+              setIsHomeScrolled(false);
+              navigate('/admin');
+            }}
+          >
             관리자 페이지
           </li>
         )}
