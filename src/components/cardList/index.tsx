@@ -1,15 +1,14 @@
-import ContentCard from '@/components/cardItem/content';
-import { content } from '@/types/contents';
+import { ReactNode } from 'react';
 import * as style from './style.css';
 
-const CardList = ({ cards }: { cards: content[] }) => {
-  return (
-    <div className={style.listContainer}>
-      {cards.map((card) => {
-        return <ContentCard key={card.contentId} {...card} />;
-      })}
-    </div>
-  );
+const CardList = ({
+  type,
+  children,
+}: {
+  type: 'creator' | 'content';
+  children: ReactNode;
+}) => {
+  return <div className={style.listContainer({ type: type })}>{children}</div>;
 };
 
 export default CardList;

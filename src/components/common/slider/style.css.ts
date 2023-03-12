@@ -7,7 +7,9 @@ export const slider = style([
   utils.positionRelative,
   utils.fullWidth,
   {
+    minWidth: '53.2rem',
     padding: '2.6rem 2.4rem 1.6rem',
+    marginBottom: '2rem',
     background:
       'linear-gradient(116.5deg, rgba(75, 128, 255, 0.95) 14.56%, rgba(13, 153, 255, 0.5) 88.34%)',
     borderRadius: '1.2rem',

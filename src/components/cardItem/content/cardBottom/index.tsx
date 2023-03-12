@@ -5,16 +5,21 @@ import { Divider, Icon } from '@/components/common';
 import CardModal from '@/components/cardItem/content/CardModal';
 import BannerAvatar from '../banner/bannerAvatar';
 import BannerText from '../banner/bannerText';
-import { company } from '@/types/contents';
+import { banner } from '@/types/contents';
 import { useQuery } from '@tanstack/react-query';
-import { getNotRecommendResponse } from '@/api/notRecommend';
+import { postNotRecommendResponse } from '@/api/notRecommend';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { isAuthorizedState } from '@/stores/auth';
+import NotRecommend from '../notRecommend';
+import { selectedTabState } from '@/stores/tab';
 
 type CardBottomProps = {
   creatorId: number;
   creatorName: string;
   createdAt: string;
   title: string;
-  recommendationCompanies?: company[];
+  recommendations?: banner[];
 };
 
 const CardBottom = ({
@@ -22,15 +27,19 @@ const CardBottom = ({
   creatorName,
   createdAt,
   title,
-  recommendationCompanies,
+  recommendations,
 }: CardBottomProps) => {
   const navigate = useNavigate();
-
+  const [isNotRecommendComponentVisible, setIsNotRecommendComponentVisible] =
+    useState(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
+  const setTabState = useSetRecoilState(selectedTabState);
 
   const notRecommendResponse = useQuery(
-    ['creators'],
-    () => getNotRecommendResponse(creatorId),
+    ['creators', creatorId],
+    () => postNotRecommendResponse(creatorId),
     {
       enabled: false,
     }
@@ -38,75 +47,94 @@ const CardBottom = ({
   const handleCreatorClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/creator/${creatorName}`);
+    setTabState('none');
+    navigate(`/creator/${creatorId}`);
   };
 
   const handleDotIconClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsModalVisible(true);
-    console.log('dot click');
   };
 
   const handleNotRecommendClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsModalVisible(false);
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return;
+    }
     notRecommendResponse.refetch();
+    setIsNotRecommendComponentVisible(true);
+  };
+
+  const dateFormat = (date: string) => {
+    return date?.slice(0, 10);
   };
 
   return (
     <div className={style.cardBottom}>
       {isModalVisible && <div className={style.cardBackgroundDim} />}
-      <div className={style.bottomContent}>
-        <div className={style.bottomInfo}>
-          <div style={{ display: 'flex' }}>
-            <span
-              className={style.bottomInfoCreator}
-              onClick={handleCreatorClick}
-            >
-              {creatorName}
-            </span>
-            <Divider type="vertical" />
-            <span>{createdAt}</span>
-          </div>
-          <CardModal
-            isOpen={isModalVisible}
-            onClose={() => setIsModalVisible(false)}
-            style={{ top: '2.2rem', right: '1rem', zIndex: 2000 }}
-          >
-            <div
-              className={style.notRecommended}
-              onClick={handleNotRecommendClick}
-            >
-              <Icon
-                type="regular"
-                name="face-tired"
-                size="large"
-                color="lightgray"
-                style={{ marginRight: '0.5rem' }}
-              />
-              해당 크리에이터 추천 안함
+      {isNotRecommendComponentVisible ? (
+        <NotRecommend />
+      ) : (
+        <>
+          <div className={style.bottomContent}>
+            <div className={style.bottomInfo}>
+              <div style={{ display: 'flex' }}>
+                <span
+                  className={style.bottomInfoCreator}
+                  onClick={handleCreatorClick}
+                >
+                  {creatorName}
+                </span>
+                <Divider type="vertical" />
+                <span>{dateFormat(createdAt)}</span>
+              </div>
+              <CardModal
+                isOpen={isModalVisible}
+                onClose={() => setIsModalVisible(false)}
+                style={{ top: '2.2rem', right: '1rem', zIndex: 2000 }}
+              >
+                <div
+                  className={style.notRecommended}
+                  onClick={handleNotRecommendClick}
+                >
+                  <Icon
+                    type="regular"
+                    name="face-tired"
+                    size="large"
+                    color="lightgray"
+                    style={{ marginRight: '0.5rem' }}
+                  />
+                  해당 크리에이터 추천 안함
+                </div>
+              </CardModal>
+              <div
+                onClick={handleDotIconClick}
+                className={style.bottomEllipsis}
+              >
+                <Icon type="solid" name="ellipsis-vertical" />
+              </div>
             </div>
-          </CardModal>
-          <div onClick={handleDotIconClick} className={style.bottomEllipsis}>
-            <Icon type="solid" name="ellipsis-vertical" />
+            <div className={style.bottomTitle}>{title}</div>
           </div>
-        </div>
-        <div className={style.bottomTitle}>{title}</div>
-      </div>
-      <footer className={style.companyBanner}>
-        <BannerAvatar companies={recommendationCompanies} />
-        <div style={{ flexGrow: 1 }}>
-          <BannerText companies={recommendationCompanies} />
-          {!recommendationCompanies ? (
-            <div className={`${style.companyText}`}>관심을 가지지 않았어요</div>
-          ) : (
-            <div className={`${style.companyText}`}>
-              사람들도 관심있게 보고있어요
+          <footer className={style.companyBanner}>
+            <BannerAvatar companies={recommendations} />
+            <div style={{ flexGrow: 1 }}>
+              <BannerText companies={recommendations} />
+              {recommendations?.length === 0 ? (
+                <div className={style.companyText}>관심을 가지지 않았어요</div>
+              ) : (
+                <div className={style.companyText}>
+                  사람들도 관심있게 보고있어요
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </footer>
+          </footer>
+        </>
+      )}
     </div>
   );
 };

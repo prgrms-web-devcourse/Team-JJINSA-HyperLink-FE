@@ -1,10 +1,14 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { Icon } from '@/components/common';
 import ImageComponent from '@/components/common/Image';
 import * as style from './style.css';
-import { useQuery } from '@tanstack/react-query';
-import { getBookmarkResponse } from '@/api/bookmark';
-import { getLikeResponse } from '@/api/like';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { postBookmarkResponse } from '@/api/bookmark';
+import { postLikeResponse } from '@/api/like';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
 
 type CardTopProps = {
   contentId: number;
@@ -25,36 +29,59 @@ const CardTop = ({
 }: CardTopProps) => {
   const [userBookmarked, setUserBookmarked] = useState<boolean>(isBookmarked);
   const [userLiked, setUserLiked] = useState<boolean>(isLiked);
+  const [views, setViews] = useState(viewCount);
 
-  const bookmarkResponse = useQuery(
-    ['bookmark'],
-    () => getBookmarkResponse(contentId, userBookmarked),
-    {
-      enabled: false,
-    }
-  );
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const selectedCategory = useRecoilValue(selectedCategoryState);
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
 
-  const likeResponse = useQuery(
-    ['like'],
-    () => getLikeResponse(contentId, userLiked),
-    {
-      enabled: false,
-    }
-  );
+  const queryClient = useQueryClient();
+  const bookmarkMutation = useMutation({
+    mutationFn: () => postBookmarkResponse(contentId, isBookmarked),
+
+    onSuccess: () =>
+      queryClient.invalidateQueries(['mainContents', selectedCategory]),
+  });
+  const likeMutation = useMutation({
+    mutationFn: () => postLikeResponse(contentId, userLiked),
+
+    onSuccess: () =>
+      queryClient.invalidateQueries(['mainContents', selectedCategory]),
+  });
 
   const handleBookmarkClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return;
+    }
     setUserBookmarked(!userBookmarked);
-    bookmarkResponse.refetch();
+    bookmarkMutation.mutate();
   };
 
   const handleLikeClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return;
+    }
     setUserLiked(!userLiked);
-    likeResponse.refetch();
+    likeMutation.mutate();
   };
+
+  useEffect(() => {
+    setUserBookmarked(isBookmarked);
+  }, [isBookmarked]);
+
+  useEffect(() => {
+    setUserLiked(isLiked);
+  }, [isLiked]);
+
+  useEffect(() => {
+    setViews(viewCount);
+  }, [viewCount]);
 
   return (
     <section className={style.cardTop}>
@@ -67,8 +94,11 @@ const CardTop = ({
         height="21rem"
         objectFit="cover"
       />
-      <div className={style.bookmarkWrapper} onClick={handleBookmarkClick}>
-        {userBookmarked ? (
+      <div
+        className={style.bookmarkWrapper({ bookmark: isBookmarked })}
+        onClick={handleBookmarkClick}
+      >
+        {isBookmarked ? (
           <div className={style.iconWrapper({ bookmark: true })}>
             <Icon
               name="bookmark"
@@ -84,7 +114,7 @@ const CardTop = ({
         )}
       </div>
       <div className={style.numberIconWrapper}>
-        {userLiked ? (
+        {isLiked ? (
           <div
             className={style.iconWrapper({ heart: true })}
             onClick={handleLikeClick}
@@ -93,7 +123,7 @@ const CardTop = ({
               name="heart"
               type="solid"
               size="medium"
-              style={{ color: 'white' }}
+              style={{ color: 'red' }}
             />
             <div style={{ color: 'white' }}>{likeCount}</div>
           </div>
@@ -108,7 +138,7 @@ const CardTop = ({
         )}
         <div className={style.iconWrapper({ eyes: true })}>
           <Icon name="eye" type="regular" size="medium" />
-          <div>{viewCount}</div>
+          <div>{views}</div>
         </div>
       </div>
     </section>

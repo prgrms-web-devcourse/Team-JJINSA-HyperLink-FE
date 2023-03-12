@@ -4,9 +4,10 @@ export const myInfo = {
   email: 'rldnd5555@gmail.com',
   nickname: '초보자',
   career: 'develop',
-  careerYear: '10',
-  profileImage:
+  careerYear: 'ten',
+  profileUrl:
     'https://lh3.googleusercontent.com/a/AEdFTp6KQBBQ-S4iulsmKXKrkDCYJlMQATyZKXT-zg1Z',
+  companyName: 'kakao',
 };
 
 export const memberHandlers = [
@@ -14,6 +15,17 @@ export const memberHandlers = [
     if (!req.headers.all().authorization) {
       return res(ctx.status(400));
     }
+
+    return res(ctx.status(200), ctx.json(myInfo));
+  }),
+
+  rest.put('/members/profile-image', async (req, res, ctx) => {
+    if (!req.headers.all().authorization) {
+      return res(ctx.status(400));
+    }
+
+    const { profileUrl } = await req.json();
+    myInfo.profileUrl = profileUrl;
 
     return res(ctx.status(200), ctx.json(myInfo));
   }),

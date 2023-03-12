@@ -2,10 +2,11 @@ import { ReactNode, useRef, WheelEvent, MouseEvent } from 'react';
 import * as style from './style.css';
 
 export type SliderProps = {
+  headerText: string;
   children: ReactNode[];
 };
 
-const Slider = ({ children, ...props }: SliderProps) => {
+const Slider = ({ headerText, children, ...props }: SliderProps) => {
   const sliderTargetRef = useRef<HTMLDivElement>(null);
 
   let isMouseDown = false;
@@ -13,6 +14,8 @@ const Slider = ({ children, ...props }: SliderProps) => {
   let scrollLeft = 0;
 
   const handleWheel = (e: WheelEvent) => {
+    if (e.deltaY !== 0) return;
+
     if (!sliderTargetRef.current) return;
     sliderTargetRef.current.scrollLeft += e.deltaY;
   };
@@ -46,7 +49,7 @@ const Slider = ({ children, ...props }: SliderProps) => {
 
   return (
     <div className={style.slider} {...props}>
-      <div className={style.title}>📌 꼭 봐야할 추천 크리에이터</div>
+      <div className={style.title}>{headerText}</div>
       <div
         className={style.sliderTarget}
         ref={sliderTargetRef}

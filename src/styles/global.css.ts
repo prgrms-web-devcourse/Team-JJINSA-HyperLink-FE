@@ -21,7 +21,7 @@ globalStyle('body', {
 });
 
 globalStyle(
-  'html, body, div, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, em, img, ins, kbd, q, s, samp, small, span, strike, strong, article, footer, header, main, nav, section, input',
+  'html, body, div, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, em, img, ins, kbd, q, s, samp, small, span, strike, strong, article, footer, header, main, nav, section, input, canvas',
   {
     margin: 0,
     padding: 0,
@@ -76,4 +76,8 @@ globalStyle('a, button', {
 
 globalStyle('button', {
   padding: 0,
+});
+
+globalStyle('table', {
+  borderCollapse: 'collapse',
 });

@@ -1,10 +1,14 @@
 import { axiosInstance } from '@/api/core';
 
-export const getViewResponse = async (contentId: number) => {
+type viewProps = {
+  contentId: number;
+  pageType: number;
+};
+
+export const patchViewResponse = async (viewData: viewProps) => {
   try {
     const response = await axiosInstance.patch(
-      // `/contents/${contentId}/view`
-      `/contents?id=${contentId}/view` // msw 전용
+      `/contents/${viewData.contentId}/view?search=${viewData.pageType}`
     );
 
     return response;

@@ -28,6 +28,7 @@ export const top = style([
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '4.7rem',
+    minWidth: '61.5rem',
   },
 ]);
 
@@ -72,15 +73,3 @@ export const dailyBriefing = style([
     },
   },
 ]);
-
-export const title = style([
-  utils.positionRelative,
-  {
-    marginRight: '2rem',
-  },
-]);
-
-export const countDown = style({
-  minWidth: '6.5rem',
-  fontWeight: '700',
-});

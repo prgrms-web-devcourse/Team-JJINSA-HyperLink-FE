@@ -1,68 +1,91 @@
-import { Avatar, Card } from '@/components/common';
-import { MouseEvent, useState } from 'react';
+import { Avatar, Button, Card } from '@/components/common';
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { recommendedCreator } from '@/types/contents';
+import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
-
-export type CreatorCardProps = {
-  src: string;
-  creator: string;
-  subscriber: number;
-  isSubscribe: boolean;
-  description: string;
-};
+import { postSubscribeResponse } from '@/api/subscribe';
+import { selectedTabState } from '@/stores/tab';
 
 const CreatorCard = ({
-  src,
-  creator,
-  subscriber,
-  isSubscribe,
-  description,
-}: CreatorCardProps) => {
-  /*
-    TODO
-    1. 크리에이터 클릭 시 특정 크리에이터로 이동하는 route 설정 
-    2. 구독 버튼 클릭 시, 구독 여부에 따라 구독 or 구독 취소
-    3. CreatorCard API가 오면 props가 card data 1개로 변하니 나중에 수정할 것
-   */
-  const [isSubscribed, setIsSubscribed] = useState(isSubscribe);
-  const handleSubscribeClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    isSubscribed ? console.log('구독 취소') : console.log('구독');
-    setIsSubscribed(!isSubscribed);
+  creatorId,
+  profileImgUrl,
+  creatorName,
+  subscriberAmount,
+  isSubscribed,
+  creatorDescription,
+}: recommendedCreator & { isSubscribed?: boolean }) => {
+  const [isSubscribe, setIsSubscribe] = useState(
+    typeof isSubscribed === 'undefined' ? false : isSubscribed
+  );
+
+  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+  const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
+  const setTabState = useSetRecoilState(selectedTabState);
+
+  const queryClient = useQueryClient();
+  const subScribeMutation = useMutation({
+    mutationFn: () => postSubscribeResponse(creatorId),
+
+    onSuccess: () => queryClient.invalidateQueries(['creatorList']),
+  });
+
+  const handleCreatorCardClick = () => {
+    setTabState('none');
   };
+
+  const handleSubscribeClick = (event: MouseEvent) => {
+    event.preventDefault();
+    if (!isAuthorized) {
+      setIsLoginModalVisible(true);
+      return;
+    }
+    setIsSubscribe(!isSubscribe);
+    subScribeMutation.mutate();
+  };
+
+  useEffect(() => {
+    setIsHomeScrolled(true);
+  });
+
+  useEffect(() => {
+    if (typeof isSubscribed !== 'undefined') {
+      setIsSubscribe(isSubscribed);
+    }
+  }, [isSubscribed]);
 
   return (
     <Card type="creator">
-      {/* useNavigate로 변경 */}
-      <Link to="/creator">
+      <Link to={`/creator/${creatorId}`} onClick={handleCreatorCardClick}>
         <div className={style.creatorCardContainer}>
           <div className={style.creatorCardTop}>
-            <Avatar src={src} shape="circle" size="medium" />
+            <Avatar
+              src={profileImgUrl}
+              shape="circle"
+              size="medium"
+              style={{ flexShrink: 0 }}
+            />
             <div className={style.topInfo}>
-              <div className={style.infoCreator}>{creator}</div>
+              <div className={style.infoCreator}>{creatorName}</div>
               <div
                 className={style.infoSubscriber}
-              >{`구독자 ${subscriber}명`}</div>
+              >{`구독자 ${subscriberAmount}명`}</div>
             </div>
-            {isSubscribed ? (
-              <button
-                type="button"
-                onClick={handleSubscribeClick}
-                className={style.topButton({ type: isSubscribed })}
-              >
-                구독중
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleSubscribeClick}
-                className={style.topButton({})}
-              >
-                구독
-              </button>
-            )}
+            <div onClick={(e) => handleSubscribeClick(e)}>
+              <Button
+                version={isSubscribe ? 'blue' : 'blueInverted'}
+                paddingSize="small"
+                isBold={true}
+                text={isSubscribe ? '구독중' : '구독'}
+              />
+            </div>
           </div>
-          <div className={style.creatorCardBottom}>{description}</div>
+          <div className={style.creatorCardBottom}>{creatorDescription}</div>
         </div>
       </Link>
     </Card>

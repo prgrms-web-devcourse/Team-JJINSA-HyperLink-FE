@@ -1,32 +1,26 @@
-import { getCardList } from '@/api/cardlist';
-import CardList from '@/components/cardList';
-import { Spinner } from '@/components/common';
-import Main from '@/components/main';
+import { useEffect, useRef } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isHomeScrolledState } from '@/stores/scroll';
-import { content } from '@/types/contents';
+import Main from '@/components/main';
 import { throttleWheel } from '@/utils/optimization/throttle';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import * as style from './style.css';
+import MainContents from '@/components/mainContents';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+import ButtonGroup from '@/components/buttonGroup';
+import RecommenedCreators from '@/components/recommendedCreators';
+import { selectedTabState } from '@/stores/tab';
+import { isAuthorizedState } from '@/stores/auth';
+
+const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
 const Home = () => {
   const [isHomeScrolled, setIsHomeScrolled] =
     useRecoilState(isHomeScrolledState);
-  // const [cards, setCards] = useState<content[]>([]);
-  // const category = 'all';
-  // const { isLoading, isError } = useQuery(
-  //   ['cardlist', category],
-  //   async () => await getCardList(category),
-  //   {
-  //     refetchOnWindowFocus: false,
-  //     retry: 0,
-  //     onSuccess: (data: content[]) => {
-  //       console.log(data);
-  //       setCards(data);
-  //     },
-  //   }
-  // );
+  const [selectedCategory, setSelectedCategory] = useRecoilState<string>(
+    selectedCategoryState
+  );
+  const tabState = useRecoilValue(selectedTabState);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {
@@ -56,11 +50,17 @@ const Home = () => {
   };
 
   useEffect(() => {
+    ref.current.scrollTop = 0;
     setIsHomeScrolled(false);
   }, []);
 
-  // if (isError) return <div>Error!!!</div>;
-  // if (isLoading) return <Spinner size="huge" />;
+  useEffect(() => {
+    if (isHomeScrolled) {
+      const pageHeight = window.innerHeight - 78;
+      setIsHomeScrolled(true);
+      ref.current.scrollTop = pageHeight;
+    }
+  }, [tabState]);
 
   return (
     <div
@@ -71,7 +71,15 @@ const Home = () => {
       <div className={style.banner}>
         <Main />
       </div>
-      <div className={style.content}>{/* <CardList cards={cards} /> */}</div>
+      <div className={style.content}>
+        <ButtonGroup
+          buttonData={CATEGORIES}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+        {isAuthorized ? <RecommenedCreators /> : null}
+        <MainContents />
+      </div>
     </div>
   );
 };

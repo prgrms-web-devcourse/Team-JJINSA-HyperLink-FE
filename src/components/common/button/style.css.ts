@@ -9,6 +9,7 @@ export const button = recipe({
     {
       display: 'inline-block',
       transition: 'all 130ms ease-in-out',
+      height: 'fit-content',
       ':disabled': { cursor: 'not-allowed' },
     },
   ],

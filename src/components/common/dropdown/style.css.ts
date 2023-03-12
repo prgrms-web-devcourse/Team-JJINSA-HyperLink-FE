@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const dropdownContainer = recipe({
-  base: [utils.positionRelative],
+  base: [utils.positionRelative, utils.fullWidth],
   variants: {
     hasLabel: {
       true: {
@@ -58,7 +58,7 @@ export const dropdownWrapper = recipe({
 
       visibility: 'hidden',
       maxHeight: '40rem',
-      overflow: 'scroll',
+      overflowY: 'auto',
       zIndex: '10',
     },
   ],

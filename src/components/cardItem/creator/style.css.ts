@@ -15,7 +15,13 @@ export const topInfo = style({
 });
 
 export const infoCreator = style([
+  utils.textOverflowEllipsis,
+  utils.overflowHidden,
   {
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    whiteSpace: 'normal',
+    WebkitLineClamp: 1,
     fontSize: variants.fontSize.medium,
     fontWeight: 600,
     lineHeight: '1.9rem',
@@ -32,11 +38,17 @@ export const topButton = recipe({
   base: [
     utils.borderRadius,
     {
+      width: '7.3rem',
       border: '0.2rem solid #625F68',
-      padding: '1rem 1.6rem',
+      padding: '1rem 1.4rem',
       fontSize: variants.fontSize.small,
       fontWeight: 600,
       cursor: 'pointer',
+      ':hover': {
+        border: '0.2rem solid white',
+        color: variants.color.white,
+        backgroundColor: variants.color.primary,
+      },
     },
   ],
   variants: {
@@ -44,7 +56,7 @@ export const topButton = recipe({
       true: {
         backgroundColor: variants.color.primary,
         color: variants.color.white,
-        border: 'none',
+        border: '0.2rem solid white',
       },
     },
   },
@@ -54,4 +66,9 @@ export const creatorCardBottom = style({
   fontWeight: 400,
   fontSize: variants.fontSize.small,
   color: '#625F68',
+  display: '-webkit-box',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical',
+  whiteSpace: 'normal',
+  overflow: 'hidden',
 });

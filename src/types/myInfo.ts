@@ -3,5 +3,6 @@ export type myInfo = {
   nickname: string;
   career: string;
   careerYear: string;
-  profileImage: string;
+  profileUrl: string;
+  companyName?: string;
 };
