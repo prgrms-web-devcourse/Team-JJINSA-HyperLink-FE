@@ -20,7 +20,7 @@ const AddCreator = () => {
   const description = useInput('');
   const categoryName = useInput('');
 
-  const handleResetInputs = async () => {
+  const handleResetInputs = () => {
     name.onChange('');
     description.onChange('');
     categoryName.onChange('');
