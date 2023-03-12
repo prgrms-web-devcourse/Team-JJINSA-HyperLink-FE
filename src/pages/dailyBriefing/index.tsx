@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import { Heading, Avatar, Spinner } from '@/components/common';
 import {
@@ -8,10 +10,17 @@ import {
 } from '@/components/dailyBriefing';
 import { getDailyBriefingData } from '@/api/dailyBriefing';
 import { dailyBriefing } from '@/types/dailyBriefing';
-import * as style from './style.css';
+import { selectedTabState } from '@/stores/tab';
 import logo from '/favicon.ico';
+import * as style from './style.css';
 
 const DailyBriefingPage = () => {
+  const setTabState = useSetRecoilState(selectedTabState);
+
+  useEffect(() => {
+    setTabState('none');
+  }, []);
+
   const { data, isLoading } = useQuery<dailyBriefing>(
     ['dailyBriefing'],
     getDailyBriefingData
