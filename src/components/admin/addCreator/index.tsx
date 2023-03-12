@@ -39,7 +39,7 @@ const AddCreator = () => {
   const handleChangeImage = async () => {
     const file = imgRef.current?.files?.[0];
 
-    if (!file || typeof file === undefined) {
+    if (!file) {
       return;
     }
 
