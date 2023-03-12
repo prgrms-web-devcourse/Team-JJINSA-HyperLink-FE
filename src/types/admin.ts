@@ -6,7 +6,7 @@ export type pagination = {
 export type creator = {
   creatorId: number;
   name: string;
-  profileImgUrl?: string;
+  profileImgUrl: string;
   description: string;
   categoryName: 'develop' | 'beauty' | 'finance';
 };

@@ -1,5 +1,5 @@
 import { addCreator } from '@/api/admin';
-import { uploadFileToS3 } from '@/api/s3Image';
+import { deleteFileFromS3, uploadFileToS3 } from '@/api/s3Image';
 import { Avatar, Button, Dropdown, Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { CATEGORIES } from '@/utils/constants/signup';
@@ -13,7 +13,7 @@ const AddCreator = () => {
 
   const [ableSubmit, setAbleSubmit] = useState(false);
 
-  const [profileUrl, setProfileUrl] = useState<string | undefined>('');
+  const [profileUrl, setProfileUrl] = useState<string>('');
   const imgRef = useRef<HTMLInputElement>(null);
 
   const name = useInput('');
@@ -43,7 +43,13 @@ const AddCreator = () => {
       return;
     }
 
-    setProfileUrl(await uploadFileToS3(file, 'profile'));
+    const prevProfileUrl = profileUrl;
+
+    setProfileUrl((await uploadFileToS3(file, 'profile')) || '');
+
+    if (prevProfileUrl) {
+      await deleteFileFromS3(prevProfileUrl);
+    }
   };
 
   const addCreatorMutation = useMutation({
@@ -69,9 +75,11 @@ const AddCreator = () => {
 
   useEffect(() => {
     setAbleSubmit(
-      name.value && description.value && categoryName.value ? true : false
+      name.value && description.value && categoryName.value && profileUrl
+        ? true
+        : false
     );
-  }, [name.value, description.value, categoryName.value]);
+  }, [name.value, description.value, categoryName.value, profileUrl]);
 
   return (
     <div className={style.container}>
@@ -117,7 +125,10 @@ const AddCreator = () => {
           fontSize="medium"
           text="초기화"
           version="blueInverted"
-          onClick={handleResetInputs}
+          onClick={async () => {
+            handleResetInputs();
+            await deleteFileFromS3(profileUrl);
+          }}
         />
       </div>
     </div>

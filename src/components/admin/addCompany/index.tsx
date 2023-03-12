@@ -1,5 +1,5 @@
 import { addCompany } from '@/api/admin';
-import { uploadFileToS3 } from '@/api/s3Image';
+import { deleteFileFromS3, uploadFileToS3 } from '@/api/s3Image';
 import { Avatar, Button, Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -36,11 +36,17 @@ const AddCompany = () => {
   const handleChangeImage = async () => {
     const file = imgRef.current?.files?.[0];
 
-    if (!file || typeof file === undefined) {
+    if (!file) {
       return;
     }
 
+    const prevLogoImgUrl = logoImgUrl;
+
     setLogoImgUrl((await uploadFileToS3(file, 'logo')) || '');
+
+    if (prevLogoImgUrl) {
+      await deleteFileFromS3(prevLogoImgUrl);
+    }
   };
 
   const addCompanyMutation = useMutation({
@@ -108,7 +114,10 @@ const AddCompany = () => {
           fontSize="medium"
           text="초기화"
           version="blueInverted"
-          onClick={handleResetInputs}
+          onClick={async () => {
+            handleResetInputs();
+            await deleteFileFromS3(logoImgUrl);
+          }}
         />
       </div>
     </div>
