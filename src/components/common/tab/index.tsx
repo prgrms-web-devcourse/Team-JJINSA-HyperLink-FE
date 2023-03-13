@@ -5,6 +5,7 @@ import { selectedTabState } from '@/stores/tab';
 import { CSSProperties } from 'react';
 import { useNavigate } from 'react-router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Authorized from '../header/userNav/Authorized';
 import * as style from './style.css';
 
 export type TabProps = {
@@ -29,10 +30,13 @@ const Tab = ({
   const setLastTabState = useSetRecoilState(lastTabState);
 
   const handleClick = (item: string) => {
-    if (item === '구독 피드' && !isAuthorized) {
-      setIsLoginModalVisible(true);
+    if (item === '구독 피드') {
+      if (!isAuthorized) {
+        setIsLoginModalVisible(true);
+        setLastTabState('SUBSCRIPTIONS');
+        return;
+      }
       setLastTabState('SUBSCRIPTIONS');
-      return;
     }
     if (item === '크리에이터') {
       navigate('/creatorList');
