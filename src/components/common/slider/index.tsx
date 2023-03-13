@@ -1,5 +1,7 @@
 import { ReactNode, useRef, WheelEvent, MouseEvent } from 'react';
 import * as style from './style.css';
+import { isAuthorizedState } from '@/stores/auth';
+import { useRecoilValue } from 'recoil';
 
 export type SliderProps = {
   headerText: string;
@@ -8,6 +10,7 @@ export type SliderProps = {
 
 const Slider = ({ headerText, children, ...props }: SliderProps) => {
   const sliderTargetRef = useRef<HTMLDivElement>(null);
+  const isAuthorized = useRecoilValue(isAuthorizedState);
 
   let isMouseDown = false;
   let startX = 0;
@@ -51,7 +54,7 @@ const Slider = ({ headerText, children, ...props }: SliderProps) => {
     <div className={style.slider} {...props}>
       <div className={style.title}>{headerText}</div>
       <div
-        className={style.sliderTarget}
+        className={style.sliderTarget({ authorized: isAuthorized as boolean })}
         ref={sliderTargetRef}
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}
