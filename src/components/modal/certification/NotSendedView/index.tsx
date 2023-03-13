@@ -13,6 +13,7 @@ type NotSendedViewProps = {
 const NotSendedView = ({ setIsSendTrue, setEmail }: NotSendedViewProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { value: email, onChange: handleEmailChange } = useInput('');
+  const [isError, setIsError] = useState(false);
   const { refetch } = useQuery(
     ['companiesAuth'],
     () => sendCompanyEmail(email),
@@ -30,7 +31,11 @@ const NotSendedView = ({ setIsSendTrue, setEmail }: NotSendedViewProps) => {
       setIsDisabled(false);
       setIsSendTrue();
       setEmail(email);
+      setIsError(false);
+      return;
     }
+
+    setIsError(true);
   };
   return (
     <>
@@ -42,6 +47,13 @@ const NotSendedView = ({ setIsSendTrue, setEmail }: NotSendedViewProps) => {
           value={email}
           onChange={handleEmailChange}
         />
+        {isError && (
+          <div className={style.textWrapper}>
+            <Text size="xSmall" color="red">
+              이메일이 유효하지 않습니다
+            </Text>
+          </div>
+        )}
         <Text block size="small" color="#484848">
           * 해당 정보는 게시글 추천 용도로 사용됩니다.
           <br />* 인증된 메일은 모두 비공개로 관리됩니다.

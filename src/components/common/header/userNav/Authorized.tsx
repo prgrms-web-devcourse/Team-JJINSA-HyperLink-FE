@@ -29,13 +29,6 @@ const Authorized = () => {
     suspense: true,
   });
 
-  //const [dd, setdd] = useState(myInfo);
-
-  useEffect(() => {
-    //queryClient.setQueryData(['myInfo'], myInfo);
-    console.log('authorized', myInfo);
-  }, [myInfo]);
-
   const handleLogout = async () => {
     await logout();
     setIsAuthorized(false);

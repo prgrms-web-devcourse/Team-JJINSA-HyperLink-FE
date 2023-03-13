@@ -52,11 +52,13 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         career: CATEGORIES[newCareer],
         careerYear: CAREERS[newCareerYear],
       });
-      await updateProfileImage(newProfileImage);
+      if (profileUrl !== newProfileImage) {
+        await updateProfileImage(newProfileImage);
+        deleteFileFromS3(profileUrl);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['myInfo']);
-      deleteFileFromS3(profileUrl);
       alert('프로필이 변경되었습니다');
     },
   });
