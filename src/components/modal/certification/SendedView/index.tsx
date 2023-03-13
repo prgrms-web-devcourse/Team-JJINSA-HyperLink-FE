@@ -1,10 +1,9 @@
 import { verificationCompany } from '@/api/companies';
-import { uploadFileToS3 } from '@/api/s3Image';
-import { Avatar, Button, Input, Text } from '@/components/common';
+import { Button, Input, Text } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { color } from '@/styles/variants.css';
 import { useQuery } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import * as style from './style.css';
 
 type SendedViewProps = {
@@ -14,7 +13,6 @@ type SendedViewProps = {
 
 const SendedView = ({ email, setIsSendFalse }: SendedViewProps) => {
   const [isVerified, setIsVerified] = useState(false);
-  const [companyLogoUrl, setCompanyLogoUrl] = useState('');
   const [isError, setIsError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const { value, onChange } = useInput('');
@@ -25,34 +23,13 @@ const SendedView = ({ email, setIsSendFalse }: SendedViewProps) => {
       verificationCompany({
         companyEmail: email,
         authNumber: parseInt(value),
-        logoImgUrl: companyLogoUrl,
       }),
     { enabled: false }
   );
 
-  const imgRef = useRef<HTMLInputElement>(null);
-
-  const handleAvatarClick = () => {
-    if (!imgRef.current) {
-      return;
-    }
-    imgRef.current.click();
-  };
-
-  const saveImgFile = async () => {
-    const file = imgRef.current?.files && imgRef.current?.files[0];
-
-    if (file) {
-      const src = await uploadFileToS3(file, 'logo');
-      if (typeof src === 'string') {
-        setCompanyLogoUrl(src);
-      }
-    }
-  };
-
   const handleSubmit = async () => {
-    if (!value || !companyLogoUrl) {
-      alert('인증번호/로고를 등록해주세요');
+    if (!value) {
+      alert('인증번호를 입력해주세요');
       return;
     }
 
@@ -101,31 +78,15 @@ const SendedView = ({ email, setIsSendFalse }: SendedViewProps) => {
                 </Text>
               </div>
             )}
-            <div>
-              <div className={style.companyTextWrapper}>
-                <Text block>회사 로고</Text>
-              </div>
-              <input
-                className={style.input}
-                type="file"
-                accept="image/*"
-                ref={imgRef}
-                onChange={saveImgFile}
+            <div className={style.button}>
+              <Button
+                text="소속 회사 인증하기"
+                isBold
+                onClick={handleSubmit}
+                disabled={isDisabled}
+                paddingSize="full"
               />
-              <div onClick={handleAvatarClick} className={style.avatarWrapper}>
-                <Avatar
-                  src={companyLogoUrl}
-                  className={style.avatar}
-                  size="large"
-                />
-              </div>
             </div>
-            <Button
-              text="소속 회사 인증하기"
-              isBold
-              onClick={handleSubmit}
-              disabled={isDisabled}
-            />
           </div>
         </>
       ) : (
