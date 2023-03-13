@@ -1,6 +1,9 @@
+import { lastTabState } from '@/stores/lastTab';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { selectedTabState } from '@/stores/tab';
 import { Suspense } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
@@ -19,7 +22,8 @@ const TAB_LIST = {
 
 const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
-  const [tabState, setTabState] = useRecoilState(selectedTabState);
+  const setTabState = useSetRecoilState(selectedTabState);
+  const setLastTabState = useSetRecoilState(lastTabState);
 
   // dev pull 하면서 utils에서 가져다 사용하기
   const getKeyByValue = (obj: { [x: string]: string }, value: string) => {
@@ -27,6 +31,7 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
+    setLastTabState('RECENT_CONTENT');
     setTabState('RECENT_CONTENT');
   };
 
