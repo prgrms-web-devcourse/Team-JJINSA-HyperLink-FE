@@ -1,7 +1,6 @@
 import { useRecoilState } from 'recoil';
 import ButtonGroup from '@/components/buttonGroup';
-import Bookmark from '@/components/history/Bookmark';
-import History from '@/components/history/History';
+import { BookmarkContent, HistoryContent } from '@/components/history';
 import { selectedFilterHistoryPageState } from '@/stores/selectedCategory';
 import * as style from './style.css';
 
@@ -19,7 +18,7 @@ const HistoryPage = () => {
         selectedCategory={selectedFilter}
         setSelectedCategory={setSelectedFilter}
       />
-      {selectedFilter === 'bookmark' ? <Bookmark /> : <History />}
+      {selectedFilter === 'bookmark' ? <BookmarkContent /> : <HistoryContent />}
     </div>
   );
 };
