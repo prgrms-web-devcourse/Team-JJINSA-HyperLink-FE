@@ -61,8 +61,8 @@ const ContentsCountChart = ({ data }: contentsCountChartProps) => {
     },
     scales: {
       y: {
-        min,
-        max,
+        min: min === 0 ? 0 : min,
+        max: max === 0 ? undefined : max,
         ticks: {
           stepSize: max - min < 10 ? 1 : undefined,
         },
