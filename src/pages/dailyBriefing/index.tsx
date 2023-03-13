@@ -14,7 +14,10 @@ import { selectedTabState } from '@/stores/tab';
 import logo from '/favicon.ico';
 import * as style from './style.css';
 
+const DAY = ['일', '월', '화', '수', '목', '금', '토'];
+
 const DailyBriefingPage = () => {
+  const date = new Date();
   const setTabState = useSetRecoilState(selectedTabState);
 
   useEffect(() => {
@@ -26,16 +29,9 @@ const DailyBriefingPage = () => {
     getDailyBriefingData
   );
 
-  if (isLoading) return <Spinner size="huge" />;
+  if (isLoading || !data) return <Spinner size="huge" />;
 
-  const { standardTime, dailyBriefing } = data as dailyBriefing;
-  const {
-    viewIncrease,
-    memberIncrease,
-    contentIncrease,
-    viewByCategories,
-    memberCountByAttentionCategories,
-  } = dailyBriefing;
+  const { standardTime, dailyBriefing } = data;
 
   return (
     <div className={style.wrapper}>
@@ -46,17 +42,22 @@ const DailyBriefingPage = () => {
           </div>
           <Heading level={3}>오늘의 hyperlink</Heading>
         </div>
-        <Heading level={3}>2월 22일 수요일의 소식</Heading>
+        <Heading level={3}>
+          {date.getMonth() + 1}월 {date.getDate()}일 {DAY[date.getDay()]}요일의
+          소식
+        </Heading>
       </div>
       <div className={style.cardContainer}>
         <div className={style.wrapColumn({ direction: 'left' })}>
           <Ranking
             standardTime={standardTime}
-            data={viewByCategories.sort((a, b) => a.ranking - b.ranking)}
+            data={dailyBriefing.viewByCategories.sort(
+              (a, b) => a.ranking - b.ranking
+            )}
           />
           <CategoryChart
             standardTime={standardTime}
-            data={memberCountByAttentionCategories.sort(
+            data={dailyBriefing.memberCountByAttentionCategories.sort(
               (a, b) => a.ranking - b.ranking
             )}
           />
@@ -65,21 +66,18 @@ const DailyBriefingPage = () => {
           <div className={style.summaryGroup}>
             <Summary
               title="views"
-              increase={viewIncrease}
+              data={dailyBriefing.viewStatistics}
               standardTime={standardTime}
               color="#E3F5FF"
             />
             <Summary
               title="members"
-              increase={memberIncrease}
+              data={dailyBriefing.memberStatistics}
               standardTime={standardTime}
               color="#E5ECF6"
             />
           </div>
-          <ContentsCountChart
-            standardDate={standardTime.split(' ')[0]}
-            count={contentIncrease}
-          />
+          <ContentsCountChart data={dailyBriefing.contentIncreaseForWeek} />
         </div>
       </div>
     </div>

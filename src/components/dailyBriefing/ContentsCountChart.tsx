@@ -11,9 +11,8 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { Card, Heading } from '@/components/common';
-import { CONTENTS_COUNT } from '@/utils/constants/storage';
-import { getItem, setItem } from '@/utils/storage';
 import * as style from './style.css';
+import { contentIncreaseData } from '@/types/dailyBriefing';
 
 ChartJS.register(
   CategoryScale,
@@ -36,44 +35,17 @@ export const options = {
 };
 
 type contentsCountChartProps = {
-  standardDate: string;
-  count: number;
+  data: contentIncreaseData[];
 };
 
-const ContentsCountChart = ({
-  standardDate,
-  count,
-}: contentsCountChartProps) => {
-  const countData: contentsCountChartProps[] = getItem(CONTENTS_COUNT, []);
-
-  const lastData = countData[countData.length - 1];
-
-  if (!lastData || lastData.standardDate !== standardDate) {
-    setItem(CONTENTS_COUNT, [
-      ...countData,
-      {
-        standardDate,
-        count,
-      },
-    ]);
-  } else if (lastData.count !== count) {
-    countData.pop();
-    setItem(CONTENTS_COUNT, [
-      ...countData,
-      {
-        standardDate,
-        count,
-      },
-    ]);
-  }
-
+const ContentsCountChart = ({ data }: contentsCountChartProps) => {
   const chartData = {
-    labels: countData.slice(-7).map(({ standardDate }) => standardDate),
+    labels: data.map(({ date }) => date),
     datasets: [
       {
         fill: true,
         label: '누적 콘텐츠 수',
-        data: countData.slice(-7).map(({ count }) => count),
+        data: data.map(({ contentIncrease }) => contentIncrease),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
         tension: 0.5,
