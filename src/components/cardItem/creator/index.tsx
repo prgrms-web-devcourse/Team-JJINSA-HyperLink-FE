@@ -1,7 +1,6 @@
 import { Avatar, Button, Card } from '@/components/common';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
-import { isHomeScrolledState } from '@/stores/scroll';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { recommendedCreator } from '@/types/contents';
 import { MouseEvent, useEffect, useState } from 'react';

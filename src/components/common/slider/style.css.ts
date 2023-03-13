@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 import * as variants from '@/styles/variants.css';
 import * as utils from '@/styles/utils.css';
 
@@ -24,27 +25,37 @@ export const title = style({
   color: variants.color.white,
 });
 
-export const sliderTarget = style([
-  utils.flex,
-  {
-    transition: 'all 100ms ease-in-out',
-    paddingTop: '1.2rem',
-    paddingBottom: '1rem',
-    gap: '1.4rem',
-    overflowX: 'auto',
-    cursor: 'grab',
+export const sliderTarget = recipe({
+  base: [
+    utils.flex,
+    {
+      transition: 'all 100ms ease-in-out',
+      paddingTop: '1.2rem',
+      paddingBottom: '1rem',
+      gap: '1.4rem',
+      overflowX: 'auto',
+      cursor: 'grab',
 
-    '::-webkit-scrollbar': {
-      height: '0.8rem',
-      backgroundColor: 'transparent',
+      '::-webkit-scrollbar': {
+        height: '0.8rem',
+        backgroundColor: 'transparent',
+      },
+      '::-webkit-scrollbar-thumb': {
+        padding: '10px 0',
+        backgroundColor: '#3F435040',
+        borderRadius: '0.3rem',
+      },
+      '::-webkit-scrollbar-track': {
+        backgroundColor: '#3F435025',
+      },
     },
-    '::-webkit-scrollbar-thumb': {
-      padding: '10px 0',
-      backgroundColor: '#3F435040',
-      borderRadius: '0.3rem',
-    },
-    '::-webkit-scrollbar-track': {
-      backgroundColor: '#3F435025',
+  ],
+  variants: {
+    authorized: {
+      false: {
+        filter: 'blur(1rem)',
+        cursor: 'none',
+      },
     },
   },
-]);
+});

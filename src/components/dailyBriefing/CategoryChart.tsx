@@ -37,6 +37,7 @@ const CategoryChart = ({ standardTime, data }: categoryChartProps) => {
         backgroundColor,
         borderColor,
         borderWidth: 1,
+        pointStyle: 'Rounded',
       },
     ],
   };
@@ -52,7 +53,11 @@ const CategoryChart = ({ standardTime, data }: categoryChartProps) => {
         <span className={style.standardTime}>{standardTime}시 기준</span>
       </div>
       <div className={style.chart}>
-        <Doughnut options={options} data={chartData} />
+        <Doughnut
+          options={options}
+          data={chartData}
+          style={{ maxWidth: '40rem' }}
+        />
       </div>
     </Card>
   );
