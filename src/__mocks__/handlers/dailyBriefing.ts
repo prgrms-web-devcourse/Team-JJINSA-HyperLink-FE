@@ -1,10 +1,16 @@
 import { rest } from 'msw';
 
 const DAILY_BRIEFING = {
-  standardTime: '2023-02-26 19',
+  standardTime: '2023-02-17 18',
   dailyBriefing: {
-    memberIncrease: 255,
-    viewIncrease: 34,
+    memberStatistics: {
+      increase: 300,
+      totalCount: 12400,
+    },
+    viewStatistics: {
+      increase: 1540,
+      totalCount: 54920,
+    },
     viewByCategories: [
       {
         categoryName: 'develop',
@@ -13,7 +19,7 @@ const DAILY_BRIEFING = {
       },
       {
         categoryName: 'beauty',
-        count: 1832,
+        count: 832,
         ranking: 1,
       },
       {
@@ -22,7 +28,36 @@ const DAILY_BRIEFING = {
         ranking: 2,
       },
     ],
-    contentIncrease: 160,
+    contentIncreaseForWeek: [
+      {
+        date: '2023-03-01',
+        contentIncrease: 44,
+      },
+      {
+        date: '2023-03-02',
+        contentIncrease: 23,
+      },
+      {
+        date: '2023-03-03',
+        contentIncrease: 63,
+      },
+      {
+        date: '2023-03-04',
+        contentIncrease: 29,
+      },
+      {
+        date: '2023-03-05',
+        contentIncrease: 16,
+      },
+      {
+        date: '2023-03-06',
+        contentIncrease: 45,
+      },
+      {
+        date: '2023-03-07',
+        contentIncrease: 55,
+      },
+    ],
     memberCountByAttentionCategories: [
       {
         categoryName: 'develop',
