@@ -39,7 +39,6 @@ const RECOMMENDED_CREATORS = {
 
 export const recommendedCreatorsHandler = [
   rest.get('/creators/recommend', (req, res, ctx) => {
-    console.log(RECOMMENDED_CREATORS);
     if (!req.headers.all().authorization) {
       return res(ctx.status(401));
     }
