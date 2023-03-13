@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import { Tab, Text } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
-import { isHomeScrolledState } from '@/stores/scroll';
-import { selectedTabState } from '@/stores/tab';
 import * as variants from '@/styles/variants.css';
 import logo from '/assets/logo.svg';
 import * as style from './style.css';
