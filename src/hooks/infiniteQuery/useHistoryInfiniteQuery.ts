@@ -1,5 +1,7 @@
 import { getHistoryContents, getBookmarkContents } from '@/api/history';
+import { selectedCategoryState } from '@/stores/selectedCategory';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
 
 const QUERY_KEY = {
   bookmark: 'bookmarkContents',
@@ -7,6 +9,8 @@ const QUERY_KEY = {
 };
 
 export const useHistoryInfiniteQuery = (key: keyof typeof QUERY_KEY) => {
+  const selectedCategory = useRecoilValue(selectedCategoryState);
+
   const {
     data: getContents,
     fetchNextPage: getNextPage,
@@ -16,7 +20,7 @@ export const useHistoryInfiniteQuery = (key: keyof typeof QUERY_KEY) => {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery(
-    [QUERY_KEY[key]],
+    ['mainContents', selectedCategory],
     ({ pageParam = 0 }) =>
       key === 'bookmark'
         ? getBookmarkContents(pageParam)

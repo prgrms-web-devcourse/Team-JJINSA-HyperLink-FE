@@ -4,7 +4,6 @@ import { creators } from '@/types/contents';
 type verificationCompany = {
   companyEmail: string;
   authNumber: number;
-  logoImgUrl: string;
 };
 
 export const sendCompanyEmail = async (companyEmail: string) => {

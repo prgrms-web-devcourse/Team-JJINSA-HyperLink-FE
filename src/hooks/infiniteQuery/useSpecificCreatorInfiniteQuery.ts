@@ -1,10 +1,14 @@
 import { getSpecificCreator } from '@/api/specificCreator';
+import { selectedCategoryState } from '@/stores/selectedCategory';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
 
 export const useSpecificCreatorInfiniteQuery = (
   creatorId: string,
   sortType: string
 ) => {
+  const selectedCategory = useRecoilValue(selectedCategoryState);
+
   const {
     data: getContents,
     fetchNextPage: getNextPage,
@@ -14,7 +18,7 @@ export const useSpecificCreatorInfiniteQuery = (
     refetch,
     isFetching,
   } = useInfiniteQuery(
-    ['specificCreator', creatorId, sortType],
+    ['mainContents', selectedCategory],
     ({ pageParam = 0 }) => getSpecificCreator(pageParam, creatorId, sortType),
     {
       refetchOnWindowFocus: false,

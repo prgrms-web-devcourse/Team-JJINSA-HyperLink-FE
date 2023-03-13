@@ -3,7 +3,6 @@ import { rest } from 'msw';
 const CAMPANIES = {
   companyEmail: 'rldnd2637@kakao.co.kr',
   authNumber: '123456',
-  logoImgUrl: 'www.s3.com',
 };
 
 export const companiesHandler = [
@@ -25,9 +24,9 @@ export const companiesHandler = [
   }),
 
   rest.post('/companies/verification', async (req, res, ctx) => {
-    const { companyEmail, authNumber, logoImgUrl } = await req.json();
+    const { companyEmail, authNumber } = await req.json();
 
-    if (!companyEmail || !authNumber || !logoImgUrl) {
+    if (!companyEmail || !authNumber) {
       return res(ctx.status(400));
     }
 
