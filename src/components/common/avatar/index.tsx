@@ -31,7 +31,7 @@ const Avatar = ({
         block={true}
         width="100%"
         height="auto"
-        objectFit="cover"
+        objectFit="contain"
       />
     </div>
   );

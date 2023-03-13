@@ -3,7 +3,7 @@ import { recipe } from '@vanilla-extract/recipes';
 
 export const avatar = recipe({
   base: [
-    { display: 'inline-block' },
+    utils.flex,
     utils.positionRelative,
     utils.overflowHidden,
     utils.borderRadiusRound,
