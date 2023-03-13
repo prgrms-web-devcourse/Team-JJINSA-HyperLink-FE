@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Text } from '@/components/common';
@@ -17,6 +17,7 @@ import {
 } from '@/utils/constants/signup';
 import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
+import { isHomeScrolledState } from '@/stores/scroll';
 
 const SignupPage = () => {
   const {
@@ -24,6 +25,7 @@ const SignupPage = () => {
   } = useLocation();
   const navigagte = useNavigate();
   const setIsAuthorized = useSetRecoilState(isAuthorizedState);
+  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
   const [step, setStep] = useState(1);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>(
@@ -77,6 +79,10 @@ const SignupPage = () => {
     setIsAuthorized(true);
     navigagte('/');
   };
+
+  useEffect(() => {
+    setIsHomeScrolled(false);
+  }, []);
 
   return (
     <div className={style.wrapper}>
