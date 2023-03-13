@@ -32,6 +32,11 @@ export const options = {
       position: 'top' as const,
     },
   },
+  scales: {
+    y: {
+      min: 0,
+    },
+  },
 };
 
 type contentsCountChartProps = {
