@@ -39,6 +39,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         setIsAuthorized(true);
         if (lastTab === 'SUBSCRIPTIONS') {
           setTabState('SUBSCRIPTIONS');
+          navigate('/');
         }
         return;
       }
