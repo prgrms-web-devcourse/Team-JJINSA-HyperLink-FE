@@ -15,32 +15,21 @@ const s3 = new AWS.S3({
 
 type keyType = 'logo' | 'profile';
 
-// export async function getSignedFileUrl(data) {
-//   const params = {
-//     Bucket: bucket,
-//     Key: data.name,
-//   };
-//   const command = new PutObjectCommand(params);
-//   s3.url
-//   const url = await s3.getSignedUrl(s3, command, {
-//     expiresIn: 3600,
-//   });
-//   return url;
-// }
-
 export const uploadFileToS3 = async (file: File, keyType: keyType) => {
   const fileType = file.type.split('/').pop();
+  const key = `${keyType}/${self.crypto.randomUUID()}.${fileType}`;
   const uploadImage = s3.send(
     new PutObjectCommand({
       Bucket: bucket,
-      Key: `${keyType}/${self.crypto.randomUUID()}.${fileType}`,
+      Key: key,
       Body: file,
     })
   );
 
   try {
     await uploadImage;
-    return '';
+    const url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
+    return url;
   } catch (error) {
     console.error(error);
   }
