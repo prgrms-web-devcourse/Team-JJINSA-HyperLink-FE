@@ -3,7 +3,7 @@ import { creators } from '@/types/contents';
 
 type verificationCompany = {
   companyEmail: string;
-  verification: string;
+  authNumber: number;
   logoImgUrl: string;
 };
 

@@ -25,7 +25,7 @@ const CertificationModal = ({ isOpen, onClose }: CertificationModalProps) => {
           </div>
         </div>
         {isSend ? (
-          <SendedView email={email} />
+          <SendedView email={email} setIsSendFalse={() => setIsSend(false)} />
         ) : (
           <NotSendedView
             setIsSendTrue={() => setIsSend(true)}
