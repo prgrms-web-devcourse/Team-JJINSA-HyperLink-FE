@@ -7,3 +7,8 @@ export const modalInputWrapper = style([
     gap: '1.2rem',
   },
 ]);
+
+export const textWrapper = style({
+  textAlign: 'right',
+  marginTop: '-1rem',
+});
