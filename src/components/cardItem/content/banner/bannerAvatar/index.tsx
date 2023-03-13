@@ -4,7 +4,7 @@ import * as style from './style.css';
 import favicon from '/favicon.ico';
 import { banner } from '@/types/contents';
 
-const BannerAvatar = ({ companies }: { companies: banner[] }) => {
+const BannerAvatar = ({ companies }: { companies?: banner[] }) => {
   if (companies?.length === 0) {
     companies = [{ bannerName: '아직 사람들이', bannerLogoImgUrl: favicon }];
   }
@@ -28,7 +28,7 @@ const BannerAvatar = ({ companies }: { companies: banner[] }) => {
 
   return (
     <div className={style.flipAnimationContainer}>
-      {companies[0].bannerName !== '아직 사람들이' ? (
+      {companies && companies[0].bannerName !== '아직 사람들이' ? (
         companies?.map((company, index) => (
           <div
             key={company.bannerName}
