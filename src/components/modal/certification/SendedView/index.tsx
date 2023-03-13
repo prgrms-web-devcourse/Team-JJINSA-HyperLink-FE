@@ -7,11 +7,16 @@ import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import * as style from './style.css';
 
-const SendedView = ({ email }: { email: string }) => {
+type SendedViewProps = {
+  setIsSendFalse: () => void;
+  email: string;
+};
+
+const SendedView = ({ email, setIsSendFalse }: SendedViewProps) => {
   const [isVerified, setIsVerified] = useState(false);
   const [companyLogoUrl, setCompanyLogoUrl] = useState('');
-  const [attemptCount, setAttemptCount] = useState(0);
   const [isError, setIsError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const { value, onChange } = useInput('');
 
   const { refetch } = useQuery(
@@ -19,7 +24,7 @@ const SendedView = ({ email }: { email: string }) => {
     () =>
       verificationCompany({
         companyEmail: email,
-        verification: value,
+        authNumber: parseInt(value),
         logoImgUrl: companyLogoUrl,
       }),
     { enabled: false }
@@ -51,18 +56,17 @@ const SendedView = ({ email }: { email: string }) => {
       return;
     }
 
-    if (attemptCount < 5) {
-      setAttemptCount(attemptCount + 1);
-      const response = await refetch();
+    setIsDisabled(true);
+    const response = await refetch();
+    setIsDisabled(false);
 
-      if (response.status === 'success') {
-        setIsVerified(true);
-        setIsError(false);
-        return;
-      }
-
-      setIsError(true);
+    if (response.status === 'success') {
+      setIsVerified(true);
+      setIsError(false);
+      return;
     }
+
+    setIsError(true);
   };
   return (
     <>
@@ -82,13 +86,18 @@ const SendedView = ({ email }: { email: string }) => {
               placeholder="인증 번호를 입력해주세요"
               value={value}
               onChange={onChange}
-              readOnly={attemptCount >= 5}
             />
             {isError && (
               <div className={style.textWrapper}>
                 <Text size="xSmall" color="red">
-                  인증 번호가 유효하지 않습니다 (인증 가능 횟수 {attemptCount}
-                  /5)
+                  인증 번호가 유효하지 않습니다&nbsp; (
+                  <span
+                    className={style.underlineText}
+                    onClick={setIsSendFalse}
+                  >
+                    인증 메일 재전송
+                  </span>
+                  )
                 </Text>
               </div>
             )}
@@ -111,7 +120,12 @@ const SendedView = ({ email }: { email: string }) => {
                 />
               </div>
             </div>
-            <Button text="소속 회사 인증하기" isBold onClick={handleSubmit} />
+            <Button
+              text="소속 회사 인증하기"
+              isBold
+              onClick={handleSubmit}
+              disabled={isDisabled}
+            />
           </div>
         </>
       ) : (

@@ -2,6 +2,7 @@ import { sendCompanyEmail } from '@/api/companies';
 import { Input, Text, Button } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import * as style from './style.css';
 
 type NotSendedViewProps = {
@@ -10,6 +11,7 @@ type NotSendedViewProps = {
 };
 
 const NotSendedView = ({ setIsSendTrue, setEmail }: NotSendedViewProps) => {
+  const [isDisabled, setIsDisabled] = useState(false);
   const { value: email, onChange: handleEmailChange } = useInput('');
   const { refetch } = useQuery(
     ['companiesAuth'],
@@ -23,7 +25,9 @@ const NotSendedView = ({ setIsSendTrue, setEmail }: NotSendedViewProps) => {
     const isValid = emailValidationRegex.test(email.trim());
 
     if (isValid) {
+      setIsDisabled(true);
       refetch();
+      setIsDisabled(false);
       setIsSendTrue();
       setEmail(email);
     }
@@ -43,7 +47,12 @@ const NotSendedView = ({ setIsSendTrue, setEmail }: NotSendedViewProps) => {
           <br />* 인증된 메일은 모두 비공개로 관리됩니다.
         </Text>
       </div>
-      <Button text="인증 메일 전송하기" isBold onClick={handleSubmit} />
+      <Button
+        text="인증 메일 전송하기"
+        isBold
+        onClick={handleSubmit}
+        disabled={isDisabled}
+      />
     </>
   );
 };
