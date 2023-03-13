@@ -4,13 +4,23 @@ export type dataByCategorys = {
   ranking: number;
 };
 
+export type contentIncreaseData = {
+  date: string;
+  contentIncrease: number;
+};
+
+export type statistic = {
+  increase: number;
+  totalCount: number;
+};
+
 export type dailyBriefing = {
   standardTime: string;
   dailyBriefing: {
-    memberIncrease: number;
-    viewIncrease: number;
-    contentIncrease: number;
-    viewByCategories: dataByCategorys[];
+    contentIncreaseForWeek: contentIncreaseData[];
     memberCountByAttentionCategories: dataByCategorys[];
+    viewByCategories: dataByCategorys[];
+    viewStatistics: statistic;
+    memberStatistics: statistic;
   };
 };

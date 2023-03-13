@@ -4,6 +4,7 @@ import { Input } from '@/components/common';
 import useInput from '@/hooks/useInput';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
+import { selectedTabState } from '@/stores/tab';
 
 export type SearchBarProps = {
   version?: 'header' | 'banner';
@@ -11,9 +12,10 @@ export type SearchBarProps = {
 };
 
 const SearchBar = ({ version = 'header', onEnterPress }: SearchBarProps) => {
+  const navigate = useNavigate();
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
-  const navigate = useNavigate();
+  const setTabState = useSetRecoilState(selectedTabState);
   const { value: keyword, onChange: handleKeywordChange } = useInput('');
   const inputStyle = {
     margin: version === 'header' ? '0 1rem' : '0',
@@ -30,6 +32,7 @@ const SearchBar = ({ version = 'header', onEnterPress }: SearchBarProps) => {
     }
 
     onEnterPress?.();
+    setTabState('none');
     navigate(`/search/${keyword}`);
   };
 

@@ -39,6 +39,12 @@ const Tab = ({
       onClick(item);
       return;
     }
+    if (item === '실시간 최신 트렌드') {
+      setLastTabState('RECENT_CONTENT');
+    }
+    if (item === '실시간 인기 트렌드') {
+      setLastTabState('POPULAR_CONTENT');
+    }
     onClick(item);
     navigate('/');
   };

@@ -23,7 +23,6 @@ const CreatorCard = ({
     typeof isSubscribed === 'undefined' ? false : isSubscribed
   );
 
-  const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
   const setTabState = useSetRecoilState(selectedTabState);
@@ -48,10 +47,6 @@ const CreatorCard = ({
     setIsSubscribe(!isSubscribe);
     subScribeMutation.mutate();
   };
-
-  useEffect(() => {
-    setIsHomeScrolled(true);
-  });
 
   useEffect(() => {
     if (typeof isSubscribed !== 'undefined') {

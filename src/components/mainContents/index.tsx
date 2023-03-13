@@ -1,5 +1,6 @@
 import { useMainContentsInfiniteQuery } from '@/hooks/infiniteQuery/useMainContentsInfinitelQuery';
 import { isAuthorizedState } from '@/stores/auth';
+import { lastTabState } from '@/stores/lastTab';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { selectedTabState } from '@/stores/tab';
 import { useEffect } from 'react';
@@ -15,6 +16,7 @@ const MainContents = () => {
     selectedCategoryState
   );
   const [tabState, setTabState] = useRecoilState(selectedTabState);
+  const lastTab = useRecoilValue(lastTabState);
 
   const { ref, inView } = useInView({ threshold: 0.9 });
   const {
@@ -43,6 +45,10 @@ const MainContents = () => {
       refetch();
     }
   }, [tabState, isAuthorized]);
+
+  useEffect(() => {
+    setTabState(lastTab);
+  }, []);
 
   if (status === 'loading') {
     return <Spinner size="huge" />;
