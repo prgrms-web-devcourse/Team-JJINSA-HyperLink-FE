@@ -56,6 +56,7 @@ const CategryModal = ({ isOpen, onClose }: CategryModalProps) => {
 
     if (response.status === 'success') {
       alert('변경되었습니다!');
+      onClose();
     } else {
       alert('잠시후 다시 시도해주세요');
     }
