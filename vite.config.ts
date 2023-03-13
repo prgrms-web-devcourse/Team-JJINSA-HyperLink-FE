@@ -5,7 +5,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
   define: {
-    global: 'window',
+    global: 'global',
   },
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
