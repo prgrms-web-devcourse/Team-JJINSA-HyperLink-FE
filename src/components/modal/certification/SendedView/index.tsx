@@ -24,7 +24,7 @@ const SendedView = ({ email, setIsSendFalse }: SendedViewProps) => {
     () =>
       verificationCompany({
         companyEmail: email,
-        verification: value,
+        authNumber: parseInt(value),
         logoImgUrl: companyLogoUrl,
       }),
     { enabled: false }

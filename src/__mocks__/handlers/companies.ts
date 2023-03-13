@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 const CAMPANIES = {
   companyEmail: 'rldnd2637@kakao.co.kr',
-  verification: '123456',
+  authNumber: '123456',
   logoImgUrl: 'www.s3.com',
 };
 
@@ -19,19 +19,19 @@ export const companiesHandler = [
     return res(
       ctx.status(200),
       ctx.json({
-        verification: CAMPANIES.verification,
+        authNumber: CAMPANIES.authNumber,
       })
     );
   }),
 
   rest.post('/companies/verification', async (req, res, ctx) => {
-    const { companyEmail, verification, logoImgUrl } = await req.json();
+    const { companyEmail, authNumber, logoImgUrl } = await req.json();
 
-    if (!companyEmail || !verification || !logoImgUrl) {
+    if (!companyEmail || !authNumber || !logoImgUrl) {
       return res(ctx.status(400));
     }
 
-    if (verification !== CAMPANIES.verification) {
+    if (authNumber !== CAMPANIES.authNumber) {
       return res(
         ctx.status(403),
         ctx.json({
