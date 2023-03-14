@@ -4,7 +4,7 @@ import { isMyInfoModalVisibleState } from '@/stores/modal';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { myInfo } from '@/types/myInfo';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 const CAREER: { [key: string]: string } = {
@@ -49,7 +49,7 @@ const MyInfoModal = ({
   onLogout,
 }: MyInfoModalProps) => {
   const navigate = useNavigate();
-  const isAdmin = useRecoilState(isAdminState);
+  const isAdmin = useRecoilValue(isAdminState);
   const setIsMyInfoModalVisible = useSetRecoilState(isMyInfoModalVisibleState);
   const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
