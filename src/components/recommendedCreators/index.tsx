@@ -3,9 +3,15 @@ import CreatorCard from '../cardItem/creator';
 import { useQuery } from '@tanstack/react-query';
 import { recommendedCreators } from '@/types/contents';
 import { getRecommendedCreators } from '@/api/creator';
+import { RECOMMENDED_CREATORS } from '@/__mocks__/handlers/recommendedCreators';
+import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isAuthorizedState } from '@/stores/auth';
 
 const RecommenedCreators = () => {
-  const { data: recommendedCreators } = useQuery<recommendedCreators>(
+  const isAuthorized = useRecoilValue(isAuthorizedState);
+
+  const { data: recommendedCreators, refetch } = useQuery<recommendedCreators>(
     ['recommendedCreators'],
     getRecommendedCreators,
     {
@@ -13,11 +19,17 @@ const RecommenedCreators = () => {
     }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [isAuthorized]);
+
   if (!recommendedCreators) {
     return (
-      <div style={{ position: 'relative', height: '24.6rem' }}>
-        <Spinner size="huge" />
-      </div>
+      <Slider headerText="📌 꼭 봐야할 추천 크리에이터">
+        {RECOMMENDED_CREATORS.creators.map((creator) => (
+          <CreatorCard key={creator.creatorId} {...creator} />
+        ))}
+      </Slider>
     );
   }
 
