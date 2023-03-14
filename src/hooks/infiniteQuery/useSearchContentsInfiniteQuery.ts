@@ -1,11 +1,7 @@
 import { getSearchContents } from '@/api/searchContents';
-import { selectedCategoryState } from '@/stores/selectedCategory';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
 
 export const useSearchContentsInfiniteQuery = (keyword: string) => {
-  const selectedCategory = useRecoilValue(selectedCategoryState);
-
   const {
     data: getContents,
     fetchNextPage: getNextPage,
@@ -15,7 +11,7 @@ export const useSearchContentsInfiniteQuery = (keyword: string) => {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery(
-    ['mainContents', selectedCategory],
+    ['searchContents', keyword],
     ({ pageParam = 0 }) => getSearchContents(pageParam, keyword),
     {
       refetchOnWindowFocus: false,
