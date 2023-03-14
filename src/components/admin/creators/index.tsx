@@ -81,7 +81,10 @@ const Creators = () => {
               ({ creatorId, profileImgUrl, name, categoryName }) => (
                 <tr key={creatorId}>
                   <td>
-                    <Avatar src={profileImgUrl || user} />
+                    <Avatar
+                      src={profileImgUrl || user}
+                      style={{ margin: '0 auto' }}
+                    />
                   </td>
                   <td className={style.ellipsis}>
                     <Text>{name}</Text>
