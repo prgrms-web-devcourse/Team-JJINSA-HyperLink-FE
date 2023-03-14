@@ -1,4 +1,6 @@
-![hyperlink](https://user-images.githubusercontent.com/86194303/224925937-b4b8f140-680e-43be-85f5-0515a9ba0230.svg)
+<p align="center"><img width="484" alt="image" src="https://user-images.githubusercontent.com/86194303/224925937-b4b8f140-680e-43be-85f5-0515a9ba0230.svg">
+
+<br/>
 
 # hyperlink
 > 세상의 모든 정보를 한눈에! 하이퍼링크.
@@ -22,7 +24,7 @@
 
 ### BE
 
-https://github.com/prgrms-web-devcourse/Team-JJINSA-HyperLink-BE
+[백엔드 ](https://github.com/prgrms-web-devcourse/Team-JJINSA-HyperLink-BE)
 
 <br/>
 
@@ -53,7 +55,7 @@ https://github.com/prgrms-web-devcourse/Team-JJINSA-HyperLink-BE
 <img src="https://user-images.githubusercontent.com/34560965/225104138-af95b8d3-be40-48bb-8261-da8991952cdc.gif" width="100%" />
 
 <div align="right">
- <b><a href="#하이퍼링크">⬆️ Back to Top</a></b>
+ <b><a href="#hyperlink">⬆️ Back to Top</a></b>
 </div>
 
 <br/>
@@ -72,7 +74,7 @@ https://github.com/prgrms-web-devcourse/Team-JJINSA-HyperLink-BE
 
 
 <div align="right">
- <b><a href="#하이퍼링크">⬆️ Back to Top</a></b>
+ <b><a href="#hyperlink">⬆️ Back to Top</a></b>
 </div>
 
 <br/>
@@ -150,7 +152,7 @@ https://github.com/prgrms-web-devcourse/Team-JJINSA-HyperLink-BE
 </table>
 
 <div align="right">
- <b><a href="#하이퍼링크">⬆️ Back to Top</a></b>
+ <b><a href="#hyperlink">⬆️ Back to Top</a></b>
 </div>
 
 ## How to run in local
@@ -160,5 +162,5 @@ https://github.com/prgrms-web-devcourse/Team-JJINSA-HyperLink-BE
 > 3. yarn dev
 
 <div align="right">
- <b><a href="#하이퍼링크">⬆️ Back to Top</a></b>
+ <b><a href="#hyperlink">⬆️ Back to Top</a></b>
 </div>
