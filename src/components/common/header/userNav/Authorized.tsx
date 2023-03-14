@@ -1,6 +1,6 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { isAuthorizedState } from '@/stores/auth';
 import {
   isCategoryModalVisibleState,
@@ -12,10 +12,8 @@ import { myInfo } from '@/types/myInfo';
 import { getMyInfo } from '@/api/member';
 import { logout } from '@/api/auth';
 import * as style from '../style.css';
-import { useEffect, useState } from 'react';
 
 const Authorized = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const setIsAuthorized = useSetRecoilState(isAuthorizedState);
   const [isMyInfoModalVisible, setIsMyInfoModalVisible] = useRecoilState(
@@ -27,6 +25,7 @@ const Authorized = () => {
 
   const { data: myInfo } = useQuery<myInfo>(['myInfo'], getMyInfo, {
     suspense: true,
+    refetchOnWindowFocus: false,
   });
 
   const handleLogout = async () => {
