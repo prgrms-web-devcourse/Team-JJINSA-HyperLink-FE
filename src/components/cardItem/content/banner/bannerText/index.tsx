@@ -17,7 +17,7 @@ const BannerText = ({ companies }: { companies?: banner[] }) => {
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [currentCompany]);
+  });
 
   const companyClasses = Array.from(
     { length: companies?.length as number },
@@ -27,18 +27,28 @@ const BannerText = ({ companies }: { companies?: banner[] }) => {
 
   return (
     <div className={style.flipAnimationContainer}>
-      {companies?.map((company, index) => (
-        <div
-          key={index}
-          className={`${style.flipText} ${companyClasses[index]}`}
-        >
+      {companies?.length !== 1 ? (
+        companies?.map((company, index) => (
+          <div
+            key={index}
+            className={`${style.flipText} ${companyClasses[index]}`}
+          >
+            <div>
+              <div className={`${style.companyName} ${companyClasses[index]}`}>
+                {company.bannerName}
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className={`${style.flipText} ${style.activeFlipText}`}>
           <div>
-            <div className={`${style.companyName} ${companyClasses[index]}`}>
-              {company.bannerName}
+            <div className={`${style.companyName} ${style.activeFlipText}`}>
+              아직 사람들이
             </div>
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };

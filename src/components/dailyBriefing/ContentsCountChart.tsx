@@ -25,15 +25,6 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-  },
-};
-
 type contentsCountChartProps = {
   data: contentIncreaseData[];
 };
@@ -44,13 +35,39 @@ const ContentsCountChart = ({ data }: contentsCountChartProps) => {
     datasets: [
       {
         fill: true,
-        label: '누적 콘텐츠 수',
+        label: '추가된 콘텐츠 수',
         data: data.map(({ contentIncrease }) => contentIncrease),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
         tension: 0.5,
       },
     ],
+  };
+
+  const sortedData = data
+    .slice()
+    .sort((a, b) => b.contentIncrease - a.contentIncrease)
+    .map(({ contentIncrease }) => contentIncrease);
+
+  const max = sortedData[0];
+  const min = sortedData[data.length - 1];
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+    },
+    scales: {
+      y: {
+        min: min === 0 ? 0 : min,
+        max: max === 0 ? undefined : max,
+        ticks: {
+          stepSize: max - min < 10 ? 1 : undefined,
+        },
+      },
+    },
   };
 
   return (

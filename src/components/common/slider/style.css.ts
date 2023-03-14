@@ -55,6 +55,7 @@ export const sliderTarget = recipe({
       false: {
         filter: 'blur(1rem)',
         cursor: 'none',
+        pointerEvents: 'none',
       },
     },
   },

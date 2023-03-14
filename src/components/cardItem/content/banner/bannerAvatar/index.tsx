@@ -18,7 +18,7 @@ const BannerAvatar = ({ companies }: { companies?: banner[] }) => {
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [currentCompany]);
+  });
 
   const companyClasses = Array.from(
     { length: companies?.length as number },
@@ -28,7 +28,7 @@ const BannerAvatar = ({ companies }: { companies?: banner[] }) => {
 
   return (
     <div className={style.flipAnimationContainer}>
-      {companies && companies[0].bannerName !== '아직 사람들이' ? (
+      {companies?.length !== 1 ? (
         companies?.map((company, index) => (
           <div
             key={company.bannerName}

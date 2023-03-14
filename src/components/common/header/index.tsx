@@ -58,12 +58,16 @@ const Header = () => {
           <Link
             to="/daily-briefing"
             className={style.dailyBriefing}
-            onClick={() => setTabState('none')}
+            onClick={() => setTabState('DAILY_BRIEFING')}
           >
             <Text
               size="small"
-              weight={tabState === 'none' ? 600 : undefined}
-              color={tabState === 'none' ? variants.color.primary : undefined}
+              weight={tabState === 'DAILY_BRIEFING' ? 600 : undefined}
+              color={
+                tabState === 'DAILY_BRIEFING'
+                  ? variants.color.primary
+                  : undefined
+              }
             >
               오늘의 hypelink
             </Text>

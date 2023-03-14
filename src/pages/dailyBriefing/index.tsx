@@ -21,7 +21,7 @@ const DailyBriefingPage = () => {
   const setTabState = useSetRecoilState(selectedTabState);
 
   useEffect(() => {
-    setTabState('none');
+    setTabState('DAILY_BRIEFING');
   }, []);
 
   const { data, isLoading } = useQuery<dailyBriefing>(

@@ -4,6 +4,8 @@ import CardList from '@/components/cardList';
 import ContentCard from '@/components/cardItem/content';
 import { useSpecificCreatorInfiniteQuery } from '@/hooks/infiniteQuery/useSpecificCreatorInfiniteQuery';
 import { Spinner } from '../common';
+import { useRecoilValue } from 'recoil';
+import { isAuthorizedState } from '@/stores/auth';
 
 const DetailContents = ({
   creatorId,
@@ -12,6 +14,7 @@ const DetailContents = ({
   creatorId: string;
   category: string;
 }) => {
+  const isAuthorized = useRecoilValue(isAuthorizedState);
   const { ref, inView } = useInView({ threshold: 0.9 });
   const {
     getContents,
@@ -31,7 +34,7 @@ const DetailContents = ({
 
   useEffect(() => {
     refetch();
-  }, [category]);
+  }, [category, isAuthorized]);
 
   return (
     <CardList type="content">

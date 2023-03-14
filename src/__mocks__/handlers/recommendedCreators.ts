@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-const RECOMMENDED_CREATORS = {
+export const RECOMMENDED_CREATORS = {
   creators: [
     {
       creatorId: 1,
