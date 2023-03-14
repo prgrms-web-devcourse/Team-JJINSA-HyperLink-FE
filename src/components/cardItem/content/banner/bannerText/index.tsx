@@ -27,7 +27,7 @@ const BannerText = ({ companies }: { companies?: banner[] }) => {
 
   return (
     <div className={style.flipAnimationContainer}>
-      {companies?.length !== 1 ? (
+      {companies && companies[0].bannerName !== '아직 사람들이' ? (
         companies?.map((company, index) => (
           <div
             key={index}
