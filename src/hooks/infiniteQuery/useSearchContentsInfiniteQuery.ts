@@ -1,7 +1,10 @@
-import { getSearchContents } from '@/api/searchContents';
+import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { getSearchContents } from '@/api/searchContents';
+import { searchKeywordState } from '@/stores/searchKeyword';
 
 export const useSearchContentsInfiniteQuery = (keyword: string) => {
+  const setSearchKeyword = useSetRecoilState(searchKeywordState);
   const {
     data: getContents,
     fetchNextPage: getNextPage,
@@ -24,6 +27,8 @@ export const useSearchContentsInfiniteQuery = (keyword: string) => {
       },
     }
   );
+
+  setSearchKeyword(keyword);
 
   return {
     getContents,

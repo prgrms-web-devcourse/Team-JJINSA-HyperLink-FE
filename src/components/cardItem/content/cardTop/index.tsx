@@ -9,6 +9,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
+import { searchKeywordState } from '@/stores/searchKeyword';
 
 type CardTopProps = {
   contentId: number;
@@ -34,19 +35,24 @@ const CardTop = ({
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const selectedCategory = useRecoilValue(selectedCategoryState);
   const setIsLoginModalVisible = useSetRecoilState(isLoginModalVisibleState);
+  const searchKeyword = useRecoilValue(searchKeywordState);
 
   const queryClient = useQueryClient();
   const bookmarkMutation = useMutation({
     mutationFn: () => postBookmarkResponse(contentId, isBookmarked),
 
-    onSuccess: () =>
-      queryClient.invalidateQueries(['mainContents', selectedCategory]),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['mainContents', selectedCategory]);
+      queryClient.invalidateQueries(['searchContents', searchKeyword]);
+    },
   });
   const likeMutation = useMutation({
     mutationFn: () => postLikeResponse(contentId, userLiked),
 
-    onSuccess: () =>
-      queryClient.invalidateQueries(['mainContents', selectedCategory]),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['mainContents', selectedCategory]);
+      queryClient.invalidateQueries(['searchContents', searchKeyword]);
+    },
   });
 
   const handleBookmarkClick = (e: MouseEvent) => {
