@@ -127,13 +127,13 @@ const MyInfo = ({ myInfo }: { myInfo: myInfo }) => {
         onClick={() => setIsVisibleModal(true)}
       >
         <Text>소속 회사 인증하기</Text>
-        {isVisibleModal && (
-          <CertificationModal
-            isOpen={isVisibleModal}
-            onClose={() => setIsVisibleModal(false)}
-          />
-        )}
       </div>
+      {isVisibleModal && (
+        <CertificationModal
+          isOpen={isVisibleModal}
+          onClose={() => setIsVisibleModal(false)}
+        />
+      )}
       <Input
         label="닉네임"
         value={newNickname}
