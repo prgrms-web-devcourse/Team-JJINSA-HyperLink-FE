@@ -7,10 +7,10 @@ import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
 type mainProps = {
-  onClick: () => void;
+  onScrollDown: () => void;
 };
 
-const Main = ({ onClick }: mainProps) => {
+const Main = ({ onScrollDown }: mainProps) => {
   const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
   const getBannerSizeByInnerWidth = () => {
@@ -50,7 +50,7 @@ const Main = ({ onClick }: mainProps) => {
         version="banner"
         onEnterPress={() => setIsHomeScrolled(true)}
       />
-      <div className={style.toolTip} onClick={onClick}>
+      <div className={style.toolTip} onClick={onScrollDown}>
         <Icon name="down-long" color={variants.color.primary} size="medium" />
         <Text>아래로 스크롤하여 컨텐츠 확인하기</Text>
       </div>

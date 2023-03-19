@@ -70,7 +70,7 @@ const Home = () => {
     >
       <div className={style.banner}>
         <Main
-          onClick={() => {
+          onScrollDown={() => {
             setIsHomeScrolled(true);
             ref.current.scrollTo({
               top: window.innerHeight - 78,
