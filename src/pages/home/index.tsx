@@ -1,15 +1,15 @@
+import ButtonGroup from '@/components/buttonGroup';
+import Main from '@/components/main';
+import MainContents from '@/components/mainContents';
+import RecommenedCreators from '@/components/recommendedCreators';
+import { isAuthorizedState } from '@/stores/auth';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+import { selectedTabState } from '@/stores/tab';
+import { throttleWheel } from '@/utils/optimization/throttle';
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { isHomeScrolledState } from '@/stores/scroll';
-import Main from '@/components/main';
-import { throttleWheel } from '@/utils/optimization/throttle';
 import * as style from './style.css';
-import MainContents from '@/components/mainContents';
-import { selectedCategoryState } from '@/stores/selectedCategory';
-import ButtonGroup from '@/components/buttonGroup';
-import RecommenedCreators from '@/components/recommendedCreators';
-import { selectedTabState } from '@/stores/tab';
-import { isAuthorizedState } from '@/stores/auth';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
@@ -69,7 +69,16 @@ const Home = () => {
       onWheel={throttleWheel(handleWheel, 500)}
     >
       <div className={style.banner}>
-        <Main />
+        <Main
+          onClick={() => {
+            setIsHomeScrolled(true);
+            ref.current.scrollTo({
+              top: window.innerHeight - 78,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }}
+        />
       </div>
       <div className={style.content}>
         <ButtonGroup

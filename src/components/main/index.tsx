@@ -1,11 +1,16 @@
-import { Banner } from '@/components/common';
+import { Banner, Icon, Text } from '@/components/common';
 import SearchBar from '@/components/common/header/SearchBar';
 import { isHomeScrolledState } from '@/stores/scroll';
+import * as variants from '@/styles/variants.css';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import * as style from './style.css';
 
-const Main = () => {
+type mainProps = {
+  onClick: () => void;
+};
+
+const Main = ({ onClick }: mainProps) => {
   const setIsHomeScrolled = useSetRecoilState(isHomeScrolledState);
 
   const getBannerSizeByInnerWidth = () => {
@@ -45,6 +50,10 @@ const Main = () => {
         version="banner"
         onEnterPress={() => setIsHomeScrolled(true)}
       />
+      <div className={style.toolTip} onClick={onClick}>
+        <Icon name="down-long" color={variants.color.primary} size="medium" />
+        <Text>아래로 스크롤하여 컨텐츠 확인하기</Text>
+      </div>
     </div>
   );
 };
