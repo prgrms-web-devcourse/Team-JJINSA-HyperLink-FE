@@ -1,17 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Spinner } from '@/components/common';
-import * as style from './style.css';
-import ButtonGroup from '@/components/buttonGroup';
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { creator } from '@/types/contents';
 import { getCreatorInfo } from '@/api/creator';
+
+import ButtonGroup from '@/components/buttonGroup';
+import { FAB, Icon, Spinner } from '@/components/common';
 import DetailContents from '@/components/detailContents';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isHomeScrolledState } from '@/stores/scroll';
 import CreatorInfo from '@/components/detailContents/creatorInfo';
-import { selectedTabState } from '@/stores/tab';
+
 import { isAuthorizedState } from '@/stores/auth';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { selectedTabState } from '@/stores/tab';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import { creator } from '@/types/contents';
+
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import * as variants from '@/styles/variants.css';
+import * as style from './style.css';
 
 const FILTER = ['recent', 'popular'];
 
@@ -57,6 +63,17 @@ const CreatorDetailPage = () => {
         setSelectedCategory={setSelectedFilter}
       />
       <DetailContents creatorId={creatorId} category={selectedFilter} />
+      <FAB
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          })
+        }
+      >
+        <Icon name="angles-up" color={variants.color.primary} />
+      </FAB>
     </div>
   );
 };
