@@ -12,7 +12,7 @@ export const tooltip = recipe({
       padding: '0.8rem 1rem',
       borderRadius: '0.4rem',
 
-      maxWidth: '20rem',
+      maxWidth: '30rem',
       width: 'max-content',
       fontSize: '1.4rem',
 

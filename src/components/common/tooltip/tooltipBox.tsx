@@ -12,10 +12,9 @@ const TooltipBox = ({
   coords,
   position = 'bottom-end',
 }: TooltipBoxProps) => {
-  console.log(coords);
   return (
     <div
-      style={{ left: coords.left, top: coords.top }}
+      style={{ left: coords.left, top: coords.top + window.scrollY }}
       className={style.tooltip({ position })}
     >
       {message}

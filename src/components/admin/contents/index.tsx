@@ -4,7 +4,14 @@ import {
   getDeactivatedContents,
 } from '@/api/admin';
 import Pagination from '@/components/admin/pagination';
-import { Button, Heading, Spinner, Table, Text } from '@/components/common';
+import {
+  Button,
+  Heading,
+  Spinner,
+  Table,
+  Text,
+  Tooltip,
+} from '@/components/common';
 import { contents } from '@/types/admin';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -78,7 +85,11 @@ const Contents = () => {
             {data.contents.map(({ contentId, title, link }) => (
               <tr key={contentId}>
                 <td className={style.ellipsis}>
-                  <Text>{title}</Text>
+                  <Text>
+                    <Tooltip message={title} position="left">
+                      {title}
+                    </Tooltip>
+                  </Text>
                 </td>
                 <td className={style.ellipsis}>
                   <a
@@ -87,7 +98,11 @@ const Contents = () => {
                     rel="noreferrer"
                     className={style.link}
                   >
-                    <Text>{link}</Text>
+                    <Text>
+                      <Tooltip message={link} position="left">
+                        {link}
+                      </Tooltip>
+                    </Text>
                   </a>
                 </td>
                 <td>
