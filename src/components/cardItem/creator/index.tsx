@@ -1,6 +1,6 @@
 import { postSubscribeResponse } from '@/api/subscribe';
 
-import { Avatar, Button, Card, ToolTip } from '@/components/common';
+import { Avatar, Button, Card, Tooltip } from '@/components/common';
 
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
@@ -70,9 +70,9 @@ const CreatorCard = ({
               style={{ flexShrink: 0 }}
             />
             <div className={style.topInfo}>
-              <ToolTip message={creatorName} position="top-start">
+              <Tooltip message={creatorName} position="top-start">
                 <div className={style.infoCreator}>{creatorName}</div>
-              </ToolTip>
+              </Tooltip>
               <div
                 className={style.infoSubscriber}
               >{`구독자 ${subscriberAmount}명`}</div>
@@ -86,9 +86,9 @@ const CreatorCard = ({
               />
             </div>
           </div>
-          <ToolTip message={creatorDescription} position="bottom-start">
+          <Tooltip message={creatorDescription} position="bottom-start">
             <div className={style.creatorCardBottom}>{creatorDescription}</div>
-          </ToolTip>
+          </Tooltip>
         </div>
       </Link>
     </Card>

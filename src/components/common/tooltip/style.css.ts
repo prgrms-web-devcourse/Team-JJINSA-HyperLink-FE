@@ -1,16 +1,7 @@
 import * as keyframes from '@/styles/keyframes.css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
-import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-
-export const container = style([
-  utils.positionRelative,
-  {
-    width: 'fit-content',
-    height: 'fit-content',
-  },
-]);
 
 export const tooltip = recipe({
   base: [
@@ -28,15 +19,10 @@ export const tooltip = recipe({
       overflowWrap: 'break-word',
       lineHeight: '150%',
 
-      display: 'none',
       zIndex: '9999',
       animation: `500ms ${keyframes.fadeIn}`,
 
       selectors: {
-        [`${container}:hover > &, ${container}:active > &`]: {
-          display: 'block',
-        },
-
         '&:after': {
           content: '',
           height: '0',
@@ -50,9 +36,7 @@ export const tooltip = recipe({
   variants: {
     position: {
       'top-start': {
-        marginBottom: '1rem',
-        bottom: '100%',
-        left: '0',
+        transform: 'translate(0, calc(-100% - 2rem))',
 
         selectors: {
           '&:after': {
@@ -64,10 +48,7 @@ export const tooltip = recipe({
         },
       },
       top: {
-        marginBottom: '1rem',
-        bottom: '100%',
-        left: '50%',
-        transform: 'translate(-50%, 0)',
+        transform: 'translate(-50%, calc(-100% - 2rem))',
 
         selectors: {
           '&:after': {
@@ -80,10 +61,7 @@ export const tooltip = recipe({
         },
       },
       'top-end': {
-        marginBottom: '1rem',
-        bottom: '100%',
-        left: '100%',
-        transform: 'translate(-100%, 0)',
+        transform: 'translate(-100%, calc(-100% - 2rem))',
 
         selectors: {
           '&:after': {
@@ -95,9 +73,7 @@ export const tooltip = recipe({
         },
       },
       'right-start': {
-        marginLeft: '1rem',
-        top: '0',
-        left: '100%',
+        transform: 'translate(2rem, 0)',
 
         selectors: {
           '&:after': {
@@ -109,10 +85,7 @@ export const tooltip = recipe({
         },
       },
       right: {
-        marginLeft: '1rem',
-        top: '50%',
-        left: '100%',
-        transform: 'translate(0, -50%)',
+        transform: 'translate(2rem, -50%)',
 
         selectors: {
           '&:after': {
@@ -125,10 +98,7 @@ export const tooltip = recipe({
         },
       },
       'right-end': {
-        marginLeft: '1rem',
-        top: '100%',
-        left: '100%',
-        transform: 'translate(0, -100%)',
+        transform: 'translate(2rem, -100%)',
 
         selectors: {
           '&:after': {
@@ -140,9 +110,7 @@ export const tooltip = recipe({
         },
       },
       'bottom-start': {
-        marginTop: '1rem',
-        top: '100%',
-        left: '0',
+        transform: 'translate(0, 2rem)',
 
         selectors: {
           '&:after': {
@@ -154,10 +122,7 @@ export const tooltip = recipe({
         },
       },
       bottom: {
-        marginTop: '1rem',
-        top: '100%',
-        left: '50%',
-        transform: 'translate(-50%, 0)',
+        transform: 'translate(-50%, 2rem)',
 
         selectors: {
           '&:after': {
@@ -170,10 +135,7 @@ export const tooltip = recipe({
         },
       },
       'bottom-end': {
-        marginTop: '1rem',
-        top: '100%',
-        left: '100%',
-        transform: 'translate(-100%, 0)',
+        transform: 'translate(-100%, 2rem)',
 
         selectors: {
           '&:after': {
@@ -185,9 +147,7 @@ export const tooltip = recipe({
         },
       },
       'left-start': {
-        marginRight: '1rem',
-        top: '0',
-        right: '100%',
+        transform: 'translate(calc(-100% - 2rem), 0)',
 
         selectors: {
           '&:after': {
@@ -199,10 +159,7 @@ export const tooltip = recipe({
         },
       },
       left: {
-        marginRight: '1rem',
-        top: '50%',
-        right: '100%',
-        transform: 'translate(0, -50%)',
+        transform: 'translate(calc(-100% - 2rem), -50%)',
 
         selectors: {
           '&:after': {
@@ -215,10 +172,7 @@ export const tooltip = recipe({
         },
       },
       'left-end': {
-        marginRight: '1rem',
-        top: '100%',
-        right: '100%',
-        transform: 'translate(0, -100%)',
+        transform: 'translate(calc(-100% - 2rem), -100%)',
 
         selectors: {
           '&:after': {

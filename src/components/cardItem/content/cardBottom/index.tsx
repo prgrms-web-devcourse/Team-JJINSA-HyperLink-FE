@@ -1,7 +1,7 @@
 import { postNotRecommendResponse } from '@/api/notRecommend';
 
 import CardModal from '@/components/cardItem/content/CardModal';
-import { Divider, Icon, ToolTip } from '@/components/common';
+import { Divider, Icon, Tooltip } from '@/components/common';
 import BannerAvatar from '../banner/bannerAvatar';
 import BannerText from '../banner/bannerText';
 
@@ -109,18 +109,18 @@ const CardBottom = ({
                 해당 크리에이터 추천 안함
               </div>
             </CardModal>
-            <ToolTip message="더 보기" position="left">
+            <Tooltip message="더 보기" position="left">
               <div
                 onClick={handleDotIconClick}
                 className={style.bottomEllipsis}
               >
                 <Icon type="solid" name="ellipsis-vertical" />
               </div>
-            </ToolTip>
+            </Tooltip>
           </div>
-          <ToolTip message={title} position="bottom-end">
+          <Tooltip message={title} position="bottom-end">
             <div className={style.bottomTitle}>{title}</div>
-          </ToolTip>
+          </Tooltip>
         </div>
         <footer className={style.companyBanner}>
           <BannerAvatar companies={recommendations} />

@@ -1,35 +1,47 @@
-import { ReactNode } from 'react';
-import * as style from './style.css';
+import TooltipBox from './tooltipBox';
+import TooltipPortal from './tooltipPortal';
 
-type ToolTipProps = {
+import { coordinates, positions } from '@/types/positions';
+
+import { getCoordinates } from '@/utils/coordinates';
+
+import { MouseEvent, ReactNode, useState } from 'react';
+
+type TooltipProps = {
   children: ReactNode;
   message: string;
-  position?:
-    | 'top-start'
-    | 'top'
-    | 'top-end'
-    | 'right-start'
-    | 'right'
-    | 'right-end'
-    | 'bottom-start'
-    | 'bottom'
-    | 'bottom-end'
-    | 'left-start'
-    | 'left'
-    | 'left-end';
+  position?: positions;
 };
 
-const ToolTip = ({
+const Tooltip = ({
   children,
   message,
   position = 'bottom-end',
-}: ToolTipProps) => {
+}: TooltipProps) => {
+  const [coords, setCoords] = useState<coordinates>({ left: 0, top: 0 });
+  const [isTooltipVisible, setIsTooltipVisible] = useState<boolean>(false);
+
+  const handleMouseEnter = (e: MouseEvent) => {
+    const rect = (e.target as HTMLElement).getBoundingClientRect();
+
+    setCoords(getCoordinates(rect, position));
+    setIsTooltipVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsTooltipVisible(false);
+  };
+
   return (
-    <div className={style.container}>
+    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {children}
-      <div className={style.tooltip({ position })}>{message}</div>
+      {isTooltipVisible && (
+        <TooltipPortal>
+          <TooltipBox message={message} coords={coords} position={position} />
+        </TooltipPortal>
+      )}
     </div>
   );
 };
 
-export default ToolTip;
+export default Tooltip;

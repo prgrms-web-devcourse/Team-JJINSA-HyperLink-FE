@@ -15,4 +15,4 @@ export { default as Spinner } from '@/components/common/spinner';
 export { default as Tab } from '@/components/common/tab';
 export { default as Table } from '@/components/common/table';
 export { default as Text } from '@/components/common/text';
-export { default as ToolTip } from '@/components/common/tooltip';
+export { default as Tooltip } from '@/components/common/tooltip';

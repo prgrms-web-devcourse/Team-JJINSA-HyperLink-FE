@@ -1,7 +1,7 @@
 import { logout } from '@/api/auth';
 import { getMyInfo } from '@/api/member';
 
-import { Avatar, Icon, Spinner, ToolTip } from '@/components/common';
+import { Avatar, Icon, Spinner, Tooltip } from '@/components/common';
 import { CategoryModal, MyInfoModal } from '@/components/modal';
 
 import { isAuthorizedState } from '@/stores/auth';
@@ -44,18 +44,18 @@ const Authorized = () => {
   return (
     <>
       <div className={style.iconGroup}>
-        <ToolTip message="관심 카테고리 편집">
+        <Tooltip message="관심 카테고리 편집">
           <div
             onClick={() => setIsCategoryModalVisible((isVisible) => !isVisible)}
           >
             <Icon type="regular" name="pen-to-square" size="xLarge" />
           </div>
-        </ToolTip>
+        </Tooltip>
         <button className={style.userIconButton} type="button">
           {!myInfo && <Spinner />}
           {myInfo && (
             <>
-              <ToolTip message="내 정보">
+              <Tooltip message="내 정보">
                 <div
                   className={style.userIcon}
                   onClick={() => {
@@ -73,13 +73,13 @@ const Authorized = () => {
                     size="small"
                   />
                 </div>
-                <MyInfoModal
-                  myInfoData={myInfo}
-                  isOpen={isMyInfoModalVisible}
-                  onClose={() => setIsMyInfoModalVisible(false)}
-                  onLogout={handleLogout}
-                />
-              </ToolTip>
+              </Tooltip>
+              <MyInfoModal
+                myInfoData={myInfo}
+                isOpen={isMyInfoModalVisible}
+                onClose={() => setIsMyInfoModalVisible(false)}
+                onLogout={handleLogout}
+              />
             </>
           )}
         </button>
