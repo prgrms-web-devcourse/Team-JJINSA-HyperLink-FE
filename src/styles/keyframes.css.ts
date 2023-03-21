@@ -9,3 +9,9 @@ export const slideFromRightToLeft = keyframes({
   '0%': { opacity: 0, transform: 'translateX(20rem)' },
   '100%': { opacity: 1, transform: 'translateY(0)' },
 });
+
+export const slideFromUpToDown = keyframes({
+  '0%': { transform: 'translateY(-3rem)' },
+  '50%': { transform: 'translateY(0)' },
+  '100%': { transform: 'translateY(-3rem)' },
+});
