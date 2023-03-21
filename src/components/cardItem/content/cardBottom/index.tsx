@@ -1,17 +1,22 @@
-import * as style from './style.css';
-import { MouseEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Divider, Icon } from '@/components/common';
+import { postNotRecommendResponse } from '@/api/notRecommend';
+
 import CardModal from '@/components/cardItem/content/CardModal';
+import { Divider, Icon, ToolTip } from '@/components/common';
 import BannerAvatar from '../banner/bannerAvatar';
 import BannerText from '../banner/bannerText';
-import { banner } from '@/types/contents';
-import { useQuery } from '@tanstack/react-query';
-import { postNotRecommendResponse } from '@/api/notRecommend';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoginModalVisibleState } from '@/stores/modal';
+
 import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
+
+import { banner } from '@/types/contents';
+
+import { useQuery } from '@tanstack/react-query';
+import { MouseEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import * as style from './style.css';
 
 type CardBottomProps = {
   creatorId: number;
@@ -104,11 +109,18 @@ const CardBottom = ({
                 해당 크리에이터 추천 안함
               </div>
             </CardModal>
-            <div onClick={handleDotIconClick} className={style.bottomEllipsis}>
-              <Icon type="solid" name="ellipsis-vertical" />
-            </div>
+            <ToolTip message="더 보기" position="left">
+              <div
+                onClick={handleDotIconClick}
+                className={style.bottomEllipsis}
+              >
+                <Icon type="solid" name="ellipsis-vertical" />
+              </div>
+            </ToolTip>
           </div>
-          <div className={style.bottomTitle}>{title}</div>
+          <ToolTip message={title} position="bottom-end">
+            <div className={style.bottomTitle}>{title}</div>
+          </ToolTip>
         </div>
         <footer className={style.companyBanner}>
           <BannerAvatar companies={recommendations} />

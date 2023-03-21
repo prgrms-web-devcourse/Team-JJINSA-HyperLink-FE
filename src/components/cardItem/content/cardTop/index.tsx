@@ -1,15 +1,19 @@
-import { MouseEvent, useEffect, useState } from 'react';
-import { Icon } from '@/components/common';
-import ImageComponent from '@/components/common/Image';
-import * as style from './style.css';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postBookmarkResponse } from '@/api/bookmark';
 import { postLikeResponse } from '@/api/like';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { selectedCategoryState } from '@/stores/selectedCategory';
+
+import { Icon, ToolTip } from '@/components/common';
+import ImageComponent from '@/components/common/Image';
+
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { searchKeywordState } from '@/stores/searchKeyword';
+import { selectedCategoryState } from '@/stores/selectedCategory';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { MouseEvent, useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import * as style from './style.css';
 
 type CardTopProps = {
   contentId: number;
@@ -104,48 +108,54 @@ const CardTop = ({
         className={style.bookmarkWrapper({ bookmark: isBookmarked })}
         onClick={handleBookmarkClick}
       >
-        {isBookmarked ? (
-          <div className={style.iconWrapper({ bookmark: true })}>
-            <Icon
-              name="bookmark"
-              type="solid"
-              size="large"
-              style={{ color: 'white' }}
-            />
-          </div>
-        ) : (
-          <div className={style.iconWrapper({ bookmark: true })}>
-            <Icon name="bookmark" type="regular" size="large" color="white" />
-          </div>
-        )}
+        <ToolTip message="북마크">
+          {isBookmarked ? (
+            <div className={style.iconWrapper({ bookmark: true })}>
+              <Icon
+                name="bookmark"
+                type="solid"
+                size="large"
+                style={{ color: 'white' }}
+              />
+            </div>
+          ) : (
+            <div className={style.iconWrapper({ bookmark: true })}>
+              <Icon name="bookmark" type="regular" size="large" color="white" />
+            </div>
+          )}
+        </ToolTip>
       </div>
       <div className={style.numberIconWrapper}>
-        {isLiked ? (
-          <div
-            className={style.iconWrapper({ heart: true })}
-            onClick={handleLikeClick}
-          >
-            <Icon
-              name="heart"
-              type="solid"
-              size="medium"
-              style={{ color: 'red' }}
-            />
-            <div style={{ color: 'white' }}>{likeCount}</div>
+        <ToolTip message="공감수" position="top-end">
+          {isLiked ? (
+            <div
+              className={style.iconWrapper({ heart: true })}
+              onClick={handleLikeClick}
+            >
+              <Icon
+                name="heart"
+                type="solid"
+                size="medium"
+                style={{ color: 'red' }}
+              />
+              <div style={{ color: 'white' }}>{likeCount}</div>
+            </div>
+          ) : (
+            <div
+              className={style.iconWrapper({ heart: true })}
+              onClick={handleLikeClick}
+            >
+              <Icon name="heart" type="regular" size="medium" />
+              <div>{likeCount}</div>
+            </div>
+          )}
+        </ToolTip>
+        <ToolTip message="조회수" position="top-end">
+          <div className={style.iconWrapper({ eyes: true })}>
+            <Icon name="eye" type="regular" size="medium" />
+            <div>{views}</div>
           </div>
-        ) : (
-          <div
-            className={style.iconWrapper({ heart: true })}
-            onClick={handleLikeClick}
-          >
-            <Icon name="heart" type="regular" size="medium" />
-            <div>{likeCount}</div>
-          </div>
-        )}
-        <div className={style.iconWrapper({ eyes: true })}>
-          <Icon name="eye" type="regular" size="medium" />
-          <div>{views}</div>
-        </div>
+        </ToolTip>
       </div>
     </section>
   );

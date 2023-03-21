@@ -1,8 +1,8 @@
+import * as keyframes from '@/styles/keyframes.css';
+import * as utils from '@/styles/utils.css';
+import * as variants from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import * as utils from '@/styles/utils.css';
-import * as keyframes from '@/styles/keyframes.css';
-import * as variants from '@/styles/variants.css';
 
 export const container = style([
   utils.positionRelative,
@@ -15,15 +15,18 @@ export const container = style([
 export const tooltip = recipe({
   base: [
     utils.positionAbsolute,
-    utils.keepAll,
     {
-      backgroundColor: 'rgba(97, 97, 97, 0.4)',
+      backgroundColor: 'rgba(97, 97, 97, 0.6)',
       color: variants.color.white,
-      padding: '0.4rem 0.8rem',
+      padding: '0.8rem 1rem',
       borderRadius: '0.4rem',
+
       maxWidth: '20rem',
+      width: 'max-content',
+      fontSize: '1.4rem',
 
       overflowWrap: 'break-word',
+      lineHeight: '150%',
 
       display: 'none',
       zIndex: '9999',
@@ -56,7 +59,7 @@ export const tooltip = recipe({
             top: '100%',
             left: '1rem',
             borderBottomWidth: '0',
-            borderTopColor: 'rgba(97, 97, 97, 0.4)',
+            borderTopColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -72,7 +75,7 @@ export const tooltip = recipe({
             left: '50%',
             transform: 'translate(-50%, 0)',
             borderBottomWidth: '0',
-            borderTopColor: 'rgba(97, 97, 97, 0.4)',
+            borderTopColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -87,7 +90,7 @@ export const tooltip = recipe({
             top: '100%',
             right: '1rem',
             borderBottomWidth: '0',
-            borderTopColor: 'rgba(97, 97, 97, 0.4)',
+            borderTopColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -101,7 +104,7 @@ export const tooltip = recipe({
             top: '0.4rem',
             right: '100%',
             borderLeftWidth: '0',
-            borderRightColor: 'rgba(97, 97, 97, 0.4)',
+            borderRightColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -117,7 +120,7 @@ export const tooltip = recipe({
             right: '100%',
             transform: 'translate(0, -50%)',
             borderLeftWidth: '0',
-            borderRightColor: 'rgba(97, 97, 97, 0.4)',
+            borderRightColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -132,7 +135,7 @@ export const tooltip = recipe({
             bottom: '0.4rem',
             right: '100%',
             borderLeftWidth: '0',
-            borderRightColor: 'rgba(97, 97, 97, 0.4)',
+            borderRightColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -146,7 +149,7 @@ export const tooltip = recipe({
             bottom: '100%',
             left: '1rem',
             borderTopWidth: '0',
-            borderBottomColor: 'rgba(97, 97, 97, 0.4)',
+            borderBottomColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -162,7 +165,7 @@ export const tooltip = recipe({
             left: '50%',
             transform: 'translate(-50%, 0)',
             borderTopWidth: '0',
-            borderBottomColor: 'rgba(97, 97, 97, 0.4)',
+            borderBottomColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -177,7 +180,7 @@ export const tooltip = recipe({
             bottom: '100%',
             right: '1rem',
             borderTopWidth: '0',
-            borderBottomColor: 'rgba(97, 97, 97, 0.4)',
+            borderBottomColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -191,7 +194,7 @@ export const tooltip = recipe({
             top: '0.4rem',
             left: '100%',
             borderRightWidth: '0',
-            borderLeftColor: 'rgba(97, 97, 97, 0.4)',
+            borderLeftColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -207,7 +210,7 @@ export const tooltip = recipe({
             left: '100%',
             transform: 'translate(0, -50%)',
             borderRightWidth: '0',
-            borderLeftColor: 'rgba(97, 97, 97, 0.4)',
+            borderLeftColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
@@ -222,7 +225,7 @@ export const tooltip = recipe({
             bottom: '0.4rem',
             left: '100%',
             borderRightWidth: '0',
-            borderLeftColor: 'rgba(97, 97, 97, 0.4)',
+            borderLeftColor: 'rgba(97, 97, 97, 0.6)',
           },
         },
       },
