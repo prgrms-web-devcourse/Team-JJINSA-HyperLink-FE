@@ -1,17 +1,16 @@
-import * as style from './style.css';
-import { MouseEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Divider, Icon } from '@/components/common';
-import CardModal from '@/components/cardItem/content/CardModal';
-import BannerAvatar from '../banner/bannerAvatar';
-import BannerText from '../banner/bannerText';
 import { banner } from '@/types/contents';
-import { useQuery } from '@tanstack/react-query';
-import { postNotRecommendResponse } from '@/api/notRecommend';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoginModalVisibleState } from '@/stores/modal';
+import { Divider, Icon } from '@/components/common';
 import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { MouseEvent, useState } from 'react';
+import { postNotRecommendResponse } from '@/api/notRecommend';
 import { selectedTabState } from '@/stores/tab';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import * as style from './style.css';
+import CardModal from '@/components/cardItem/content/CardModal';
+import RecommendationBanner from '../recommendationBanner';
 
 type CardBottomProps = {
   creatorId: number;
@@ -111,9 +110,15 @@ const CardBottom = ({
           <div className={style.bottomTitle}>{title}</div>
         </div>
         <footer className={style.companyBanner}>
-          <BannerAvatar companies={recommendations} />
+          <RecommendationBanner
+            type="avatar"
+            recommendations={recommendations}
+          />
           <div style={{ flexGrow: 1 }}>
-            <BannerText companies={recommendations} />
+            <RecommendationBanner
+              type="text"
+              recommendations={recommendations}
+            />
             {recommendations?.length === 0 ? (
               <div className={style.companyText}>관심을 가지지 않았어요</div>
             ) : (
