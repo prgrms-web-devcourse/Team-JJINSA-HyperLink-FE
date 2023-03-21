@@ -1,7 +1,8 @@
 import { getCreatorInfo } from '@/api/creator';
 
+import BackToTop from '@/components/backToTop';
 import ButtonGroup from '@/components/buttonGroup';
-import { FAB, Icon, Spinner } from '@/components/common';
+import { Spinner } from '@/components/common';
 import DetailContents from '@/components/detailContents';
 import CreatorInfo from '@/components/detailContents/creatorInfo';
 
@@ -16,7 +17,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import * as variants from '@/styles/variants.css';
 import * as style from './style.css';
 
 const FILTER = ['recent', 'popular'];
@@ -63,17 +63,7 @@ const CreatorDetailPage = () => {
         setSelectedCategory={setSelectedFilter}
       />
       <DetailContents creatorId={creatorId} category={selectedFilter} />
-      <FAB
-        onClick={() =>
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-          })
-        }
-      >
-        <Icon name="angles-up" color={variants.color.primary} />
-      </FAB>
+      <BackToTop />
     </div>
   );
 };

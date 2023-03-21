@@ -1,5 +1,5 @@
+import BackToTop from '@/components/backToTop';
 import ButtonGroup from '@/components/buttonGroup';
-import { FAB, Icon } from '@/components/common';
 import Main from '@/components/main';
 import MainContents from '@/components/mainContents';
 import RecommenedCreators from '@/components/recommendedCreators';
@@ -14,7 +14,6 @@ import { throttleWheel } from '@/utils/optimization/throttle';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import * as variants from '@/styles/variants.css';
 import * as style from './style.css';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
@@ -106,7 +105,7 @@ const Home = () => {
         </div>
         <MainContents />
       </div>
-      <FAB
+      <BackToTop
         onClick={() =>
           ref.current.scrollTo({
             top: window.innerHeight - 78,
@@ -115,9 +114,7 @@ const Home = () => {
           })
         }
         visible={fabVisible}
-      >
-        <Icon name="angles-up" color={variants.color.primary} />
-      </FAB>
+      />
     </div>
   );
 };
