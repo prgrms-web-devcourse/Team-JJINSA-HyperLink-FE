@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
-import { Spinner } from '@/components/common';
-import CardList from '@/components/cardList';
 import ContentCard from '@/components/cardItem/content';
+import CardList from '@/components/cardList';
+import { FAB, Icon, Spinner } from '@/components/common';
 import SearchInfo from '@/components/searchResult/searchInfo';
+
 import { useSearchContentsInfiniteQuery } from '@/hooks/infiniteQuery/useSearchContentsInfiniteQuery';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useParams } from 'react-router-dom';
+
+import * as variants from '@/styles/variants.css';
 import * as style from './style.css';
 
 const searchResultPage = () => {
@@ -69,6 +72,17 @@ const searchResultPage = () => {
           )}
         </div>
       </CardList>
+      <FAB
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          })
+        }
+      >
+        <Icon name="angles-up" color={variants.color.primary} />
+      </FAB>
     </div>
   );
 };

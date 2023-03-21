@@ -4,13 +4,13 @@ import * as style from './style.css';
 type FloatingActionButtonProps = {
   children: ReactNode;
   onClick: () => void;
-  visible: boolean;
+  visible?: boolean;
 };
 
 const FloatingActionButton = ({
   children,
   onClick,
-  visible,
+  visible = true,
 }: FloatingActionButtonProps) => {
   return (
     <div className={style.wrapper({ visible })} onClick={onClick}>
