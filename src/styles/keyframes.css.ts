@@ -15,3 +15,8 @@ export const slideFromUpToDown = keyframes({
   '50%': { transform: 'translateY(0)' },
   '100%': { transform: 'translateY(-3rem)' },
 });
+
+export const fadeIn = keyframes({
+  '0%': { opacity: 0 },
+  '100%': { opacity: 1 },
+});
