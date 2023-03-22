@@ -73,9 +73,9 @@ const CreatorCard = ({
               <Tooltip message={creatorName} position="top-start">
                 <div className={style.infoCreator}>{creatorName}</div>
               </Tooltip>
-              <div
-                className={style.infoSubscriber}
-              >{`구독자 ${subscriberAmount}명`}</div>
+              <div className={style.infoSubscriber}>
+                구독자 {subscriberAmount}명
+              </div>
             </div>
             <div onClick={(e) => handleSubscribeClick(e)}>
               <Button
