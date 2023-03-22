@@ -10,6 +10,7 @@ import { selectedCategoryState } from '@/stores/selectedCategory';
 import { selectedTabState } from '@/stores/tab';
 
 import { throttleWheel } from '@/utils/optimization/throttle';
+import { scrollTo } from '@/utils/scroll';
 
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -39,20 +40,12 @@ const Home = () => {
     if (deltaY > 0) {
       if (scrollTop >= 0 && scrollTop < pageHeight) {
         setIsHomeScrolled(true);
-        ref.current.scrollTo({
-          top: pageHeight,
-          left: 0,
-          behavior: 'smooth',
-        });
+        scrollTo(ref.current, pageHeight);
       }
     } else {
       if (scrollTop <= pageHeight) {
         setIsHomeScrolled(false);
-        ref.current.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'smooth',
-        });
+        scrollTo(ref.current, 0);
       }
     }
   };
@@ -80,11 +73,7 @@ const Home = () => {
         <Main
           onScrollDown={() => {
             setIsHomeScrolled(true);
-            ref.current.scrollTo({
-              top: window.innerHeight - 78,
-              left: 0,
-              behavior: 'smooth',
-            });
+            scrollTo(ref.current, window.innerHeight - 78);
           }}
         />
       </div>
@@ -106,13 +95,7 @@ const Home = () => {
         <MainContents />
       </div>
       <BackToTop
-        onClick={() =>
-          ref.current.scrollTo({
-            top: window.innerHeight - 78,
-            left: 0,
-            behavior: 'smooth',
-          })
-        }
+        onClick={() => scrollTo(ref.current, window.innerHeight - 78)}
         visible={fabVisible}
       />
     </div>
