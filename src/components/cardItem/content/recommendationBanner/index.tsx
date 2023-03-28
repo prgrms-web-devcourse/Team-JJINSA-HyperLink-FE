@@ -33,8 +33,8 @@ const RecommendationBanner = ({
     { length: recommendations?.length as number },
     (_, index) =>
       index === currentRecommendation
-        ? style.activeFlipBanner({ type: type })
-        : style.previousFlipBanner({ type: type })
+        ? style.activeFlipBanner({ type })
+        : style.previousFlipBanner({ type })
   );
 
   return (
@@ -45,33 +45,31 @@ const RecommendationBanner = ({
             key={recommendation.bannerName}
             className={`${style.flipBanner} ${recommendationClasses[index]}`}
           >
-            <div>
-              <div
-                className={`${style.recommendationName} ${recommendationClasses[index]}`}
-              >
-                {type === 'avatar' ? (
-                  <Avatar
-                    src={recommendation.bannerLogoImgUrl || favicon}
-                    size="small"
-                    shape="circle"
-                  />
-                ) : (
-                  recommendation.bannerName
-                )}
-              </div>
+            <div
+              className={`${style.recommendationName} ${recommendationClasses[index]}`}
+            >
+              {type === 'avatar' ? (
+                <Avatar
+                  src={recommendation.bannerLogoImgUrl || favicon}
+                  size="small"
+                  shape="circle"
+                />
+              ) : (
+                recommendation.bannerName
+              )}
             </div>
           </div>
         ))
       ) : (
         <div
           className={`${style.flipBanner} ${style.activeFlipBanner({
-            type: type,
+            type,
           })}`}
         >
           <div>
             <div
               className={`${style.recommendationName} ${style.activeFlipBanner({
-                type: type,
+                type,
               })}`}
             >
               {type === 'avatar' ? (
