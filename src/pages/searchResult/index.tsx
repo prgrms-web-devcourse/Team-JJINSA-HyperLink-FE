@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
-import { Spinner } from '@/components/common';
-import CardList from '@/components/cardList';
+import BackToTop from '@/components/backToTop';
 import ContentCard from '@/components/cardItem/content';
+import CardList from '@/components/cardList';
+import { Spinner } from '@/components/common';
 import SearchInfo from '@/components/searchResult/searchInfo';
+
 import { useSearchContentsInfiniteQuery } from '@/hooks/infiniteQuery/useSearchContentsInfiniteQuery';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useParams } from 'react-router-dom';
+
 import * as style from './style.css';
 
 const searchResultPage = () => {
@@ -69,6 +72,7 @@ const searchResultPage = () => {
           )}
         </div>
       </CardList>
+      <BackToTop />
     </div>
   );
 };

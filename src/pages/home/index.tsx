@@ -1,14 +1,20 @@
+import BackToTop from '@/components/backToTop';
 import ButtonGroup from '@/components/buttonGroup';
 import Main from '@/components/main';
 import MainContents from '@/components/mainContents';
 import RecommenedCreators from '@/components/recommendedCreators';
+
 import { isAuthorizedState } from '@/stores/auth';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { selectedTabState } from '@/stores/tab';
+
 import { throttleWheel } from '@/utils/optimization/throttle';
-import { useEffect, useRef } from 'react';
+import { scrollTo } from '@/utils/scroll';
+
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+
 import * as style from './style.css';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
@@ -21,6 +27,7 @@ const Home = () => {
   );
   const tabState = useRecoilValue(selectedTabState);
   const isAuthorized = useRecoilValue(isAuthorizedState);
+  const [fabVisible, setFabVisible] = useState(false);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   const handleWheel = (e: { deltaY: number }) => {
@@ -28,23 +35,17 @@ const Home = () => {
     const { scrollTop } = ref.current;
     const pageHeight = window.innerHeight - 78;
 
+    setFabVisible(scrollTop > pageHeight);
+
     if (deltaY > 0) {
       if (scrollTop >= 0 && scrollTop < pageHeight) {
         setIsHomeScrolled(true);
-        ref.current.scrollTo({
-          top: pageHeight,
-          left: 0,
-          behavior: 'smooth',
-        });
+        scrollTo(ref.current, pageHeight);
       }
     } else {
       if (scrollTop <= pageHeight) {
         setIsHomeScrolled(false);
-        ref.current.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'smooth',
-        });
+        scrollTo(ref.current, 0);
       }
     }
   };
@@ -72,11 +73,7 @@ const Home = () => {
         <Main
           onScrollDown={() => {
             setIsHomeScrolled(true);
-            ref.current.scrollTo({
-              top: window.innerHeight - 78,
-              left: 0,
-              behavior: 'smooth',
-            });
+            scrollTo(ref.current, window.innerHeight - 78);
           }}
         />
       </div>
@@ -97,6 +94,10 @@ const Home = () => {
         </div>
         <MainContents />
       </div>
+      <BackToTop
+        onClick={() => scrollTo(ref.current, window.innerHeight - 78)}
+        visible={fabVisible}
+      />
     </div>
   );
 };

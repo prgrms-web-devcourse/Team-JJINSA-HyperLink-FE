@@ -9,6 +9,7 @@ import {
   Spinner,
   Table,
   Text,
+  Tooltip,
 } from '@/components/common';
 import { creators } from '@/types/admin';
 import { CATEGORIES } from '@/utils/constants/signup';
@@ -87,7 +88,11 @@ const Creators = () => {
                     />
                   </td>
                   <td className={style.ellipsis}>
-                    <Text>{name}</Text>
+                    <Text>
+                      <Tooltip message={name} position="left">
+                        {name}
+                      </Tooltip>
+                    </Text>
                   </td>
                   <td>
                     <Text>{getKeyByValue(CATEGORIES, categoryName)}</Text>

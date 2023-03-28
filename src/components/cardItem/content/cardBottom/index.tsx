@@ -1,16 +1,22 @@
-import { banner } from '@/types/contents';
-import { Divider, Icon } from '@/components/common';
+import { postNotRecommendResponse } from '@/api/notRecommend';
+
+import CardModal from '@/components/cardItem/content/CardModal';
+import { Divider, Icon, Tooltip } from '@/components/common';
+import RecommendationBanner from '@/components/cardItem/content/recommendationBanner';
+
+
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
-import { MouseEvent, useState } from 'react';
-import { postNotRecommendResponse } from '@/api/notRecommend';
 import { selectedTabState } from '@/stores/tab';
-import { useNavigate } from 'react-router-dom';
+
+import { banner } from '@/types/contents';
+
 import { useQuery } from '@tanstack/react-query';
+import { MouseEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import * as style from './style.css';
-import CardModal from '@/components/cardItem/content/CardModal';
-import RecommendationBanner from '../recommendationBanner';
 
 type CardBottomProps = {
   creatorId: number;
@@ -103,11 +109,18 @@ const CardBottom = ({
                 해당 크리에이터 추천 안함
               </div>
             </CardModal>
-            <div onClick={handleDotIconClick} className={style.bottomEllipsis}>
-              <Icon type="solid" name="ellipsis-vertical" />
-            </div>
+            <Tooltip message="더 보기" position="left">
+              <div
+                onClick={handleDotIconClick}
+                className={style.bottomEllipsis}
+              >
+                <Icon type="solid" name="ellipsis-vertical" />
+              </div>
+            </Tooltip>
           </div>
-          <div className={style.bottomTitle}>{title}</div>
+          <Tooltip message={title} position="bottom-end">
+            <div className={style.bottomTitle}>{title}</div>
+          </Tooltip>
         </div>
         <footer className={style.companyBanner}>
           <RecommendationBanner

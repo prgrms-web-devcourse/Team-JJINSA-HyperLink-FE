@@ -52,6 +52,12 @@ const creatorListData = {
 
 export const creatorListHandler = [
   rest.get('/creators', (req, res, ctx) => {
+    const page = req.url.searchParams.get('page'),
+      category = req.url.searchParams.get('category');
+
+    if (!page || !category) {
+      return res(ctx.status(400));
+    }
     return res(ctx.status(200), ctx.delay(500), ctx.json(creatorListData));
   }),
 ];
