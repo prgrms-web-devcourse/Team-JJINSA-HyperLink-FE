@@ -2,8 +2,8 @@ import { postNotRecommendResponse } from '@/api/notRecommend';
 
 import CardModal from '@/components/cardItem/content/CardModal';
 import { Divider, Icon, Tooltip } from '@/components/common';
-import BannerAvatar from '../banner/bannerAvatar';
-import BannerText from '../banner/bannerText';
+import RecommendationBanner from '@/components/cardItem/content/recommendationBanner';
+
 
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
@@ -123,9 +123,15 @@ const CardBottom = ({
           </Tooltip>
         </div>
         <footer className={style.companyBanner}>
-          <BannerAvatar companies={recommendations} />
+          <RecommendationBanner
+            type="avatar"
+            recommendations={recommendations}
+          />
           <div style={{ flexGrow: 1 }}>
-            <BannerText companies={recommendations} />
+            <RecommendationBanner
+              type="text"
+              recommendations={recommendations}
+            />
             {recommendations?.length === 0 ? (
               <div className={style.companyText}>관심을 가지지 않았어요</div>
             ) : (
