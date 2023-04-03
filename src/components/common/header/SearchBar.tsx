@@ -5,6 +5,7 @@ import useInput from '@/hooks/useInput';
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
+import * as style from './style.css';
 
 export type SearchBarProps = {
   version?: 'header' | 'banner';
@@ -37,15 +38,17 @@ const SearchBar = ({ version = 'header', onEnterPress }: SearchBarProps) => {
   };
 
   return (
-    <Input
-      style={inputStyle}
-      version={version}
-      type="text"
-      placeholder="키워드를 검색하세요."
-      value={keyword}
-      onChange={handleKeywordChange}
-      onEnterPress={handleEnterPress}
-    />
+    <div className={style.searchBar({ version })}>
+      <Input
+        style={inputStyle}
+        version={version}
+        type="text"
+        placeholder="키워드를 검색하세요."
+        value={keyword}
+        onChange={handleKeywordChange}
+        onEnterPress={handleEnterPress}
+      />
+    </div>
   );
 };
 
