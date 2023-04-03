@@ -4,7 +4,6 @@ import CardModal from '@/components/cardItem/content/CardModal';
 import { Divider, Icon, Tooltip } from '@/components/common';
 import RecommendationBanner from '@/components/cardItem/content/recommendationBanner';
 
-
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
@@ -80,7 +79,7 @@ const CardBottom = ({
       <>
         <div className={style.bottomContent}>
           <div className={style.bottomInfo}>
-            <div style={{ display: 'flex' }}>
+            <div className={style.bottomInfoWrapper}>
               <span
                 className={style.bottomInfoCreator}
                 onClick={handleCreatorClick}

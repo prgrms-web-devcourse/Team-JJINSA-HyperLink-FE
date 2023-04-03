@@ -87,7 +87,9 @@ const Home = () => {
           <RecommenedCreators />
           {isAuthorized ? null : (
             <div className={style.disabledCreatorText}>
-              사용자님이 로그인을 하지 않아서 저희가 추천해줄 수 없네요 😥
+              <p className={style.toggleDisabledText}>
+                로그인을 하지 않아서 저희가 추천해줄 수 없네요😥
+              </p>
               <p>로그인 후 저희의 추천 서비스를 이용해보세요!</p>
             </div>
           )}

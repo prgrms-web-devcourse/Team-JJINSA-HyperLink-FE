@@ -41,7 +41,19 @@ export const bottomInfo = style([
     fontWeight: 700,
   },
 ]);
+
+export const bottomInfoWrapper = style([
+  utils.flex,
+  {
+    width: '90%',
+  },
+]);
+
 export const bottomInfoCreator = style({
+  maxWidth: '60%',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
   ':hover': {
     cursor: 'pointer',
     color: 'black',
