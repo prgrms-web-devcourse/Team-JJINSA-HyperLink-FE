@@ -10,6 +10,7 @@ import {
   isMyInfoModalVisibleState,
 } from '@/stores/modal';
 import { isHomeScrolledState } from '@/stores/scroll';
+import { isSearchBarVisibleState } from '@/stores/searchBar';
 
 import { myInfo } from '@/types/myInfo';
 
@@ -29,6 +30,7 @@ const Authorized = () => {
   const [isCategoryModalVisible, setIsCategoryModalVisible] = useRecoilState(
     isCategoryModalVisibleState
   );
+  const setIsSearchBarVisible = useSetRecoilState(isSearchBarVisibleState);
 
   const { data: myInfo } = useQuery<myInfo>(['myInfo'], getMyInfo, {
     suspense: true,
@@ -51,6 +53,7 @@ const Authorized = () => {
             name="magnifying-glass"
             size="xLarge"
             className={style.searchIcon({ isScrolled: isHomeScrolled })}
+            onClick={() => setIsSearchBarVisible(true)}
           />
         </Tooltip>
         <Tooltip message="관심 카테고리 편집">

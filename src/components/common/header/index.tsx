@@ -1,14 +1,15 @@
-import { Tab, Text } from '@/components/common';
+import { Icon, Tab, Text, Tooltip } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
 
 import { lastTabState } from '@/stores/lastTab';
 import { isHomeScrolledState } from '@/stores/scroll';
+import { isSearchBarVisibleState } from '@/stores/searchBar';
 import { selectedTabState } from '@/stores/tab';
 
 import { getKeyByValue } from '@/utils/object';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -28,24 +29,57 @@ const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
   const setLastTabState = useSetRecoilState(lastTabState);
+  const [isSearchBarVisible, setIsSearchBarVisible] = useRecoilState(
+    isSearchBarVisibleState
+  );
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
 
   const handleLogoClick = () => {
     setLastTabState('RECENT_CONTENT');
     setTabState('RECENT_CONTENT');
   };
 
+  const handleScreenResize = () => {
+    if (window.innerWidth >= 576) {
+      setIsMobile(false);
+      setIsSearchBarVisible(false);
+      return;
+    }
+
+    setIsMobile(true);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleScreenResize);
+
+    return () => window.removeEventListener('reisze', handleScreenResize);
+  }, []);
+
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
-      <div className={style.top}>
-        <Link to="/" className={style.logo} onClick={handleLogoClick}>
-          <img src={logo} alt="hyperlink logo" />
-        </Link>
-        <span>{isHomeScrolled && <SearchBar />}</span>
-        {/* Suspense 다른 걸로 교체, 메인 페이지 배너 가운데에 생기는 버그 */}
-        <Suspense fallback={<></>}>
-          <UserNav />
-        </Suspense>
-      </div>
+      {isSearchBarVisible && isMobile && isHomeScrolled ? (
+        <div className={style.searchBarContainer}>
+          <Tooltip message="뒤로가기">
+            <Icon
+              name="arrow-left"
+              size="xLarge"
+              onClick={() => setIsSearchBarVisible(false)}
+            />
+          </Tooltip>
+          <SearchBar />
+        </div>
+      ) : (
+        <div className={style.top}>
+          <Link to="/" className={style.logo} onClick={handleLogoClick}>
+            <img src={logo} alt="hyperlink logo" />
+          </Link>
+          <span>{isHomeScrolled && <SearchBar />}</span>
+          {/* Suspense 다른 걸로 교체, 메인 페이지 배너 가운데에 생기는 버그 */}
+          <Suspense fallback={<></>}>
+            <UserNav />
+          </Suspense>
+        </div>
+      )}
       {isHomeScrolled && (
         <div className={style.bottom}>
           <Tab

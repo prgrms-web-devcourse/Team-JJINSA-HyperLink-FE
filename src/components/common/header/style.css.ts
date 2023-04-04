@@ -90,7 +90,19 @@ export const searchBar = recipe({
       header: [medias.small({ display: 'none' })],
       banner: {},
     },
+    isSearchBarVisible: {
+      true: {},
+    },
   },
+  compoundVariants: [
+    {
+      variants: {
+        version: 'header',
+        isSearchBarVisible: true,
+      },
+      style: [medias.small({ display: 'block' })],
+    },
+  ],
 });
 
 export const navWrapper = style([utils.positionRelative]);
@@ -103,3 +115,8 @@ export const searchIcon = recipe({
     },
   },
 });
+
+export const searchBarContainer = style([
+  utils.flexCenter,
+  { height: '4.7rem', gap: '1rem' },
+]);
