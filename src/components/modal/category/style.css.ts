@@ -1,3 +1,4 @@
+import * as medias from '@/styles/medias.css';
 import * as utils from '@/styles/utils.css';
 import { color } from '@/styles/variants.css';
 import { style } from '@vanilla-extract/css';
@@ -7,6 +8,11 @@ export const modalContent = style([
   utils.flexJustifySpaceBetween,
   utils.positionAbsolute,
   utils.borderRadius,
+  medias.small({
+    width: '100vw',
+    minWidth: '100vw',
+    right: '-2rem',
+  }),
   {
     right: '5rem',
     gap: '4rem',
