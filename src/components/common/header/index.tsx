@@ -9,7 +9,7 @@ import { selectedTabState } from '@/stores/tab';
 
 import { getKeyByValue } from '@/utils/object';
 
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -33,6 +33,9 @@ const Header = () => {
     isSearchBarVisibleState
   );
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+  const [visibility, setVisibility] = useState(
+    isSearchBarVisible && isMobile && isHomeScrolled
+  );
 
   const handleLogoClick = () => {
     setLastTabState('RECENT_CONTENT');
@@ -49,21 +52,33 @@ const Header = () => {
     setIsMobile(true);
   };
 
+  const handleSearchBarVisibility = useCallback(() => {
+    setVisibility((prevVisibility) => !prevVisibility);
+
+    const timeout = setTimeout(() => {
+      setIsSearchBarVisible((prevVisibility) => !prevVisibility);
+      clearTimeout(timeout);
+      setVisibility((prevVisibility) => !prevVisibility);
+    }, 200);
+  }, [setIsSearchBarVisible, isMobile]);
+
   useEffect(() => {
     window.addEventListener('resize', handleScreenResize);
 
-    return () => window.removeEventListener('reisze', handleScreenResize);
+    return () => {
+      window.removeEventListener('resize', handleScreenResize);
+    };
   }, []);
 
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
       {isSearchBarVisible && isMobile && isHomeScrolled ? (
-        <div className={style.searchBarContainer}>
-          <Tooltip message="뒤로가기">
+        <div className={style.mobileSearchBar({ visibility })}>
+          <Tooltip message="뒤로가기" position="bottom-start">
             <Icon
               name="arrow-left"
               size="xLarge"
-              onClick={() => setIsSearchBarVisible(false)}
+              onClick={handleSearchBarVisibility}
             />
           </Tooltip>
           <SearchBar />

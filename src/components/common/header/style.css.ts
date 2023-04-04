@@ -1,6 +1,7 @@
 import * as medias from '@/styles/medias.css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
+import * as keyframes from '@/styles/keyframes.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
@@ -116,7 +117,20 @@ export const searchIcon = recipe({
   },
 });
 
-export const searchBarContainer = style([
-  utils.flexCenter,
-  { height: '4.7rem', gap: '1rem' },
-]);
+export const mobileSearchBar = recipe({
+  base: [
+    utils.flexCenter,
+    {
+      height: '4.7rem',
+      gap: '1rem',
+      animation: `300ms ${keyframes.slideFromRightToLeft}`,
+    },
+  ],
+  variants: {
+    visibility: {
+      true: {
+        animation: `200ms ${keyframes.slideToRight}`,
+      },
+    },
+  },
+});
