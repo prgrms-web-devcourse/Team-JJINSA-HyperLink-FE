@@ -9,7 +9,6 @@ import { isHomeScrolledState } from '@/stores/scroll';
 import { selectedCategoryState } from '@/stores/selectedCategory';
 import { selectedTabState } from '@/stores/tab';
 
-import { throttleWheel } from '@/utils/optimization/throttle';
 import { scrollTo } from '@/utils/scroll';
 
 import { useEffect, useRef, useState } from 'react';
@@ -29,55 +28,66 @@ const Home = () => {
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const [fabVisible, setFabVisible] = useState(false);
 
-  const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const handleWheel = (e: { deltaY: number }) => {
-    const { deltaY } = e;
-    const { scrollTop } = ref.current;
-    const pageHeight = window.innerHeight - 78;
-
-    setFabVisible(scrollTop > pageHeight);
-
-    if (deltaY > 0) {
-      if (scrollTop >= 0 && scrollTop < pageHeight) {
-        setIsHomeScrolled(true);
-        scrollTo(ref.current, pageHeight);
-      }
-    } else {
-      if (scrollTop <= pageHeight) {
-        setIsHomeScrolled(false);
-        scrollTo(ref.current, 0);
-      }
-    }
-  };
+  const containerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const bannerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    ref.current.scrollTop = 0;
+    containerRef.current.scrollTop = 0;
     setIsHomeScrolled(false);
+
+    if (!containerRef.current || !bannerRef.current || !contentRef.current)
+      return;
+
+    const bannerIO = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        if (!isHomeScrolled) {
+          setIsHomeScrolled(false);
+          scrollTo(containerRef.current, 0);
+          setFabVisible(false);
+        }
+      }
+    });
+    const contentIO = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        if (!isHomeScrolled) {
+          setIsHomeScrolled(true);
+          scrollTo(containerRef.current, window.innerHeight - 68);
+          setFabVisible(true);
+        }
+      }
+    });
+
+    bannerIO.observe(bannerRef.current);
+    contentIO.observe(contentRef.current);
+
+    return () => {
+      bannerIO.disconnect();
+      contentIO.disconnect();
+    };
   }, []);
 
   useEffect(() => {
     if (isHomeScrolled) {
-      const pageHeight = window.innerHeight - 78;
       setIsHomeScrolled(true);
-      ref.current.scrollTop = pageHeight;
+      containerRef.current.scrollTop = window.innerHeight - 68;
     }
   }, [tabState]);
 
   return (
     <div
       className={style.container({ isScrolled: isHomeScrolled })}
-      ref={ref}
-      onWheel={throttleWheel(handleWheel, 500)}
+      ref={containerRef}
     >
-      <div className={style.banner}>
+      <div className={style.banner} ref={bannerRef}>
         <Main
           onScrollDown={() => {
             setIsHomeScrolled(true);
-            scrollTo(ref.current, window.innerHeight - 78);
+            scrollTo(containerRef.current, window.innerHeight - 68);
           }}
         />
       </div>
-      <div className={style.content}>
+      <div className={style.content} ref={contentRef}>
         <ButtonGroup
           buttonData={CATEGORIES}
           selectedCategory={selectedCategory}
@@ -95,7 +105,7 @@ const Home = () => {
         <MainContents />
       </div>
       <BackToTop
-        onClick={() => scrollTo(ref.current, window.innerHeight - 78)}
+        onClick={() => scrollTo(containerRef.current, window.innerHeight - 68)}
         visible={fabVisible}
       />
     </div>
