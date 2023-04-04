@@ -1,5 +1,6 @@
 import { deleteCreator, getAllCreators } from '@/api/admin';
 import { deleteFileFromS3 } from '@/api/s3Image';
+
 import AddCreator from '@/components/admin/addCreator';
 import Pagination from '@/components/admin/pagination';
 import {
@@ -11,12 +12,17 @@ import {
   Text,
   Tooltip,
 } from '@/components/common';
+
 import { creators } from '@/types/admin';
+
 import { CATEGORIES } from '@/utils/constants/signup';
 import { getKeyByValue } from '@/utils/object';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+
 import * as style from './style.css';
+
 import user from '/assets/user.svg';
 
 const COLUMNS = ['프로필', '이름', '카테고리명', '-'];
@@ -89,7 +95,7 @@ const Creators = () => {
                   </td>
                   <td className={style.ellipsis}>
                     <Text>
-                      <Tooltip message={name} position="left">
+                      <Tooltip message={name} position="left" type="text">
                         {name}
                       </Tooltip>
                     </Text>

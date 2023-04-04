@@ -4,7 +4,6 @@ import CardModal from '@/components/cardItem/content/CardModal';
 import { Divider, Icon, Tooltip } from '@/components/common';
 import RecommendationBanner from '@/components/cardItem/content/recommendationBanner';
 
-
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
 import { selectedTabState } from '@/stores/tab';
@@ -118,7 +117,7 @@ const CardBottom = ({
               </div>
             </Tooltip>
           </div>
-          <Tooltip message={title} position="bottom-end">
+          <Tooltip message={title} position="bottom-end" type="text">
             <div className={style.bottomTitle}>{title}</div>
           </Tooltip>
         </div>

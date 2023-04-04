@@ -3,6 +3,7 @@ import {
   deleteContent,
   getDeactivatedContents,
 } from '@/api/admin';
+
 import Pagination from '@/components/admin/pagination';
 import {
   Button,
@@ -12,9 +13,12 @@ import {
   Text,
   Tooltip,
 } from '@/components/common';
+
 import { contents } from '@/types/admin';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+
 import * as style from './style.css';
 
 const COLUMNS = ['제목', '주소', '-', '-'];
@@ -86,7 +90,7 @@ const Contents = () => {
               <tr key={contentId}>
                 <td className={style.ellipsis}>
                   <Text>
-                    <Tooltip message={title} position="left">
+                    <Tooltip message={title} position="left" type="text">
                       {title}
                     </Tooltip>
                   </Text>
@@ -99,7 +103,7 @@ const Contents = () => {
                     className={style.link}
                   >
                     <Text>
-                      <Tooltip message={link} position="left">
+                      <Tooltip message={link} position="left" type="text">
                         {link}
                       </Tooltip>
                     </Text>

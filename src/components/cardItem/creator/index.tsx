@@ -70,7 +70,7 @@ const CreatorCard = ({
               style={{ flexShrink: 0 }}
             />
             <div className={style.topInfo}>
-              <Tooltip message={creatorName} position="top-start">
+              <Tooltip message={creatorName} position="top-start" type="text">
                 <div className={style.infoCreator}>{creatorName}</div>
               </Tooltip>
               <div className={style.infoSubscriber}>
@@ -86,7 +86,11 @@ const CreatorCard = ({
               />
             </div>
           </div>
-          <Tooltip message={creatorDescription} position="bottom-start">
+          <Tooltip
+            message={creatorDescription}
+            position="bottom-start"
+            type="text"
+          >
             <div className={style.creatorCardBottom}>{creatorDescription}</div>
           </Tooltip>
         </div>
