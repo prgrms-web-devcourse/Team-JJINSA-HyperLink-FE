@@ -123,13 +123,13 @@ export const mobileSearchBar = recipe({
     {
       height: '4.7rem',
       gap: '1rem',
-      animation: `300ms ${keyframes.slideFromRightToLeft}`,
+      animation: `300ms ${keyframes.rightSlideIn}`,
     },
   ],
   variants: {
     visibility: {
       true: {
-        animation: `200ms ${keyframes.slideToRight}`,
+        animation: `200ms ${keyframes.rightSlideOut}`,
       },
     },
   },

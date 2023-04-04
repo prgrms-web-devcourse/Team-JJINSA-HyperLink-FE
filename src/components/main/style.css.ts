@@ -17,6 +17,6 @@ export const toolTip = style([
   {
     bottom: '5%',
     gap: '1rem',
-    animation: `2000ms ${keyframes.slideFromUpToDown} infinite`,
+    animation: `2000ms ${keyframes.bouncing} infinite`,
   },
 ]);
