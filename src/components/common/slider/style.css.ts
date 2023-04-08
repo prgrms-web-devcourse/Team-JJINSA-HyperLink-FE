@@ -8,7 +8,7 @@ export const slider = style([
   utils.positionRelative,
   utils.fullWidth,
   {
-    minWidth: '53.2rem',
+    // minWidth: '53.2rem',
     padding: '2.6rem 2.4rem 1.6rem',
     marginBottom: '2rem',
     background:
@@ -23,6 +23,11 @@ export const title = style({
   fontWeight: '700',
   marginBottom: '1rem',
   color: variants.color.white,
+  '@media': {
+    'screen and (max-width: 500px)': {
+      fontSize: '2rem',
+    },
+  },
 });
 
 export const sliderTarget = recipe({
