@@ -38,10 +38,17 @@ const Creators = () => {
 
   const deleteCreatorMutation = useMutation({
     mutationFn: deleteCreator,
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['allCreators'],
-      }),
+        queryKey: ['allCreators', page, TABLE_SIZE],
+      });
+
+      setPage(
+        data && data?.creators.length <= 1 && data?.currentPage !== 1
+          ? page - 1
+          : page
+      );
+    },
   });
 
   const handleDeleteCreatorClick = async (
