@@ -13,9 +13,10 @@ import { throttleWheel } from '@/utils/optimization/throttle';
 import { scrollTo } from '@/utils/scroll';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import * as style from './style.css';
+import { isSearchBarVisibleState } from '@/stores/searchBar';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
@@ -25,6 +26,8 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState<string>(
     selectedCategoryState
   );
+  const setIsSearchBarVisible = useSetRecoilState(isSearchBarVisibleState);
+
   const tabState = useRecoilValue(selectedTabState);
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const [fabVisible, setFabVisible] = useState(false);
@@ -45,6 +48,7 @@ const Home = () => {
     } else {
       if (scrollTop <= pageHeight) {
         setIsHomeScrolled(false);
+        setIsSearchBarVisible(false);
         scrollTo(ref.current, 0);
       }
     }

@@ -1,12 +1,16 @@
-import { style } from '@vanilla-extract/css';
+import * as medias from '@/styles/medias.css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
+import * as keyframes from '@/styles/keyframes.css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const header = recipe({
   base: [
     utils.fullWidth,
     utils.flexColumn,
+    medias.large({ padding: '1.2rem 6rem' }),
+    medias.medium({ padding: '1.2rem 2rem' }),
     {
       padding: '1.2rem 10rem',
     },
@@ -28,7 +32,6 @@ export const top = style([
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '4.7rem',
-    minWidth: '61.5rem',
   },
 ]);
 
@@ -44,6 +47,7 @@ export const userNav = style({
 
 export const iconGroup = style([
   utils.flexAlignCenter,
+  medias.small({ gap: '1.5rem' }),
   {
     gap: '2rem',
   },
@@ -59,7 +63,7 @@ export const bottom = style([
   utils.positionRelative,
   {
     bottom: '-1.3rem',
-    paddingTop: '1rem',
+    overflowX: 'auto',
   },
 ]);
 
@@ -68,8 +72,65 @@ export const dailyBriefing = style([
   utils.spaceNoWrap,
   {
     fontSize: variants.fontSize.small,
+    selectors: {
+      [`${bottom} &`]: {
+        marginLeft: '1.5rem',
+      },
+    },
+
     ':hover': {
       color: variants.color.primary,
     },
   },
 ]);
+
+export const searchBar = recipe({
+  base: [utils.flexCenter, utils.fullWidth],
+  variants: {
+    version: {
+      header: [medias.small({ display: 'none' })],
+      banner: {},
+    },
+    isSearchBarVisible: {
+      true: {},
+    },
+  },
+  compoundVariants: [
+    {
+      variants: {
+        version: 'header',
+        isSearchBarVisible: true,
+      },
+      style: [medias.small({ display: 'block' })],
+    },
+  ],
+});
+
+export const navWrapper = style([utils.positionRelative]);
+
+export const searchIcon = recipe({
+  base: { display: 'none', margin: '0.1rem 0.6rem 0 0' },
+  variants: {
+    isScrolled: {
+      true: [medias.small({ display: 'block' })],
+    },
+  },
+});
+
+export const mobileSearchBar = recipe({
+  base: [
+    utils.flexCenter,
+    {
+      height: '4.7rem',
+      gap: '1rem',
+      animation: `300ms ${keyframes.rightSlideIn}`,
+    },
+  ],
+  variants: {
+    visibility: {
+      true: {
+        animation: `200ms ${keyframes.rightSlideOut}`,
+      },
+    },
+  },
+});
