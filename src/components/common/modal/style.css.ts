@@ -1,7 +1,8 @@
-import { style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
+import * as keyframes from '@/styles/keyframes.css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
+import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 export const backgroundDimmed = style([
   utils.positionFixed,
@@ -19,6 +20,8 @@ export const modalContainer = recipe({
   base: [
     utils.borderRadius,
     {
+      animation: `300ms ${keyframes.fadeIn}`,
+      display: 'block',
       backgroundColor: variants.color.white,
       boxShadow: '0 0.3rem 0.6rem rgba(0, 0, 0, 0.2)',
     },

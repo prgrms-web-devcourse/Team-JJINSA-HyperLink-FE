@@ -9,6 +9,7 @@ export type IconProps = {
   color?: string;
   isPointer?: boolean;
   className?: string;
+  onClick?: () => void;
   style?: CSSProperties;
 };
 
@@ -19,6 +20,7 @@ export type IconProps = {
  * @param {string} size - Icon size(default: medium(1.4rem)) expected to be one of ['xSmall', 'small', 'medium', 'large', 'xLarge', 'huge']
  * @param {string} color - Icon color(default: #9a9a9a)
  * @param {string} className - Icon className
+ * @param {func} onClick - Icon onClick event handler
  * @returns {Icon} Font-awesome icon
  */
 
@@ -29,20 +31,18 @@ const Icon = ({
   color = variants.color.icon,
   isPointer = true,
   className = '',
+  onClick,
   ...props
 }: IconProps) => {
-  const IconStyle = {
-    cursor: isPointer ? 'pointer' : 'auto',
-  };
-
   return (
     <i
       className={`${className} fa-${type} fa-${name} ${name} ${style.icon({
         size,
+        isPointer,
       })}`}
-      style={{ color, ...IconStyle, ...props.style }}
-      {...props}
-    ></i>
+      style={{ color, ...props.style }}
+      onClick={onClick}
+    />
   );
 };
 

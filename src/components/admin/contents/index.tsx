@@ -33,10 +33,16 @@ const Contents = () => {
     }
   );
 
-  const invalidateContents = () => {
+  const invalidateContents = async () => {
     queryClient.invalidateQueries({
-      queryKey: ['deactivatedContents'],
+      queryKey: ['deactivatedContents', page, TABLE_SIZE],
     });
+
+    setPage(
+      data && data?.contents.length <= 1 && data?.currentPage !== 1
+        ? page - 1
+        : page
+    );
   };
 
   const activateContentMutation = useMutation({

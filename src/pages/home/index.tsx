@@ -12,9 +12,10 @@ import { selectedTabState } from '@/stores/tab';
 import { scrollTo } from '@/utils/scroll';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import * as style from './style.css';
+import { isSearchBarVisibleState } from '@/stores/searchBar';
 
 const CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
 
@@ -24,6 +25,8 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState<string>(
     selectedCategoryState
   );
+  const setIsSearchBarVisible = useSetRecoilState(isSearchBarVisibleState);
+
   const tabState = useRecoilValue(selectedTabState);
   const isAuthorized = useRecoilValue(isAuthorizedState);
   const [fabVisible, setFabVisible] = useState(false);
@@ -97,7 +100,9 @@ const Home = () => {
           <RecommenedCreators />
           {isAuthorized ? null : (
             <div className={style.disabledCreatorText}>
-              사용자님이 로그인을 하지 않아서 저희가 추천해줄 수 없네요 😥
+              <p className={style.toggleDisabledText}>
+                로그인을 하지 않아서 저희가 추천해줄 수 없네요😥
+              </p>
               <p>로그인 후 저희의 추천 서비스를 이용해보세요!</p>
             </div>
           )}

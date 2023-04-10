@@ -9,13 +9,15 @@ export const listContainer = recipe({
       gridGap: '20px',
       justifyItems: 'center',
       height: 'fit-content',
-      minWidth: '61.5rem',
     },
   ],
   variants: {
     type: {
       content: {
         '@media': {
+          'screen and (max-width: 675px)': {
+            gridTemplateColumns: 'repeat(auto-fill, minmax(26.8rem, 1fr))',
+          },
           'screen and (min-width: 807px)': {
             gridTemplateColumns: 'repeat(auto-fill, minmax(28.8rem, 1fr))',
           },
@@ -32,9 +34,9 @@ export const listContainer = recipe({
       },
       creator: {
         '@media': {
-          // 'screen and (min-width: 1000px)': {
-          //   gridTemplateColumns: 'repeat(auto-fill, minmax(28.8rem, 1fr))',
-          // },
+          'screen and (max-width: 400px)': {
+            gridTemplateColumns: '34rem',
+          },
           'screen and (min-width: 1050px) and (max-width: 1120px)': {
             gridTemplateColumns: 'repeat(3, minmax(30%))',
           },
