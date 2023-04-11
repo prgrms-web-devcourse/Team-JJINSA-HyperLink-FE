@@ -1,10 +1,12 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { medium, large } from '@/styles/medias.css';
+import * as medias from '@/styles/medias.css';
 import * as utils from '@/styles/utils.css';
 
 export const wrapper = style([
   utils.flexColumn,
+  medias.large({ padding: '5rem 6rem' }),
+  medias.medium({ padding: '5rem 2rem' }),
   {
     padding: '5rem 10rem',
   },
@@ -12,8 +14,8 @@ export const wrapper = style([
 
 export const cardContainer = style([
   utils.flexJustifyCenter,
-  large({ flexDirection: 'column', padding: '0' }),
-  medium({ padding: '0' }),
+  medias.large({ flexDirection: 'column', padding: '0' }),
+  medias.medium({ padding: '0' }),
   {
     padding: '0 6rem',
     gap: '5rem',
@@ -36,7 +38,7 @@ export const logo = style([
 export const summaryGroup = style([
   utils.flex,
   utils.fullWidth,
-  medium({ flexDirection: 'column', minWidth: '30rem' }),
+  medias.medium({ flexDirection: 'column', minWidth: '30rem' }),
   {
     gap: '3rem',
   },
@@ -45,7 +47,7 @@ export const summaryGroup = style([
 export const wrapColumn = recipe({
   base: [
     utils.flexColumn,
-    large({ width: '100%' }),
+    medias.large({ width: '100%' }),
     {
       gap: '4rem',
     },
@@ -53,7 +55,7 @@ export const wrapColumn = recipe({
   variants: {
     direction: {
       left: [
-        large({ flexDirection: 'row' }),
+        medias.large({ flexDirection: 'row' }),
         {
           width: '40%',
           '@media': {
