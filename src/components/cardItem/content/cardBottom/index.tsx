@@ -117,7 +117,7 @@ const CardBottom = ({
               </div>
             </Tooltip>
           </div>
-          <Tooltip message={title} position="bottom-end">
+          <Tooltip message={title} position="bottom-end" type="text">
             <div className={style.bottomTitle}>{title}</div>
           </Tooltip>
         </div>
