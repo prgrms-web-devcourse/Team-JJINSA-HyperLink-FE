@@ -35,7 +35,10 @@ export const listContainer = recipe({
       creator: {
         '@media': {
           'screen and (max-width: 400px)': {
-            gridTemplateColumns: '34rem',
+            gridTemplateColumns: 'auto-fill',
+          },
+          'screen and (max-width: 675px)': {
+            gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))',
           },
           'screen and (min-width: 1050px) and (max-width: 1120px)': {
             gridTemplateColumns: 'repeat(3, minmax(30%))',
