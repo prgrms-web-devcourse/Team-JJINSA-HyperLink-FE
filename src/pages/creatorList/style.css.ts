@@ -10,5 +10,3 @@ export const buttonWrapper = style([
   utils.flexAlignCenter,
   utils.flexJustifySpaceBetween,
 ]);
-
-export const errorMessage = style([utils.flexCenter]);
