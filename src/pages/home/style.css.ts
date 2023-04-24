@@ -1,18 +1,22 @@
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
+import * as medias from '@/styles/medias.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const container = recipe({
-  base: {
-    height: 'calc(100vh - 7.1rem)',
-    overflowY: 'auto',
-    padding: '0 10rem',
-
-    '::-webkit-scrollbar': {
-      display: 'none',
+  base: [
+    {
+      height: 'calc(100vh - 7.1rem)',
+      overflowY: 'auto',
+      padding: '0 10rem',
+      '::-webkit-scrollbar': {
+        display: 'none',
+      },
     },
-  },
+    medias.large({ padding: '0 6rem' }),
+    medias.medium({ padding: '0 4rem' }),
+  ],
   variants: {
     isScrolled: {
       true: {
@@ -42,12 +46,7 @@ export const filterButtonGroup = style([
   },
 ]);
 
-export const recommendCreatorWrapper = style([
-  utils.positionRelative,
-  {
-    minWidth: '53.2rem',
-  },
-]);
+export const recommendCreatorWrapper = style([utils.positionRelative]);
 
 export const disabledCreatorText = style([
   utils.positionAbsolute,
@@ -65,5 +64,19 @@ export const disabledCreatorText = style([
     boxShadow:
       '0px 0px 2px rgba(0, 0, 0, 0.12), 0px 20px 20px rgba(0, 0, 0, 0.08)',
     borderRadius: '8px',
+    wordBreak: 'keep-all',
+    '@media': {
+      'screen and (max-width: 500px)': {
+        width: '70%',
+      },
+    },
   },
 ]);
+
+export const toggleDisabledText = style({
+  '@media': {
+    'screen and (max-width: 425px)': {
+      display: 'none',
+    },
+  },
+});

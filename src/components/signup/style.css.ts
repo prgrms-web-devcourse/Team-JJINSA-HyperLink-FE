@@ -6,8 +6,8 @@ import { recipe } from '@vanilla-extract/recipes';
 export const wrapper = recipe({
   variants: {
     slideDirection: {
-      left: { animation: `500ms ${keyframes.slideFromLeftToRight}` },
-      right: { animation: `500ms ${keyframes.slideFromRightToLeft}` },
+      left: { animation: `500ms ${keyframes.leftSlideIn}` },
+      right: { animation: `500ms ${keyframes.rightSlideIn}` },
     },
   },
 });

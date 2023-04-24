@@ -1,14 +1,18 @@
+import BackToTop from '@/components/backToTop';
 import ButtonGroup from '@/components/buttonGroup';
 import CreatorCard from '@/components/cardItem/creator';
 import CardList from '@/components/cardList';
 import { Button, Spinner } from '@/components/common';
-import { useCreatorListInfiniteQuery } from '@/hooks/infiniteQuery/useCreatorListInfiniteQuery';
+
 import { isAuthorizedState } from '@/stores/auth';
 import { isHomeScrolledState } from '@/stores/scroll';
 import { selectedTabState } from '@/stores/tab';
+
+import { useCreatorListInfiniteQuery } from '@/hooks/infiniteQuery/useCreatorListInfiniteQuery';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
 import * as style from './style.css';
 
 const CREATOR_CATEGORIES = ['all', 'develop', 'beauty', 'finance'];
@@ -116,6 +120,7 @@ const CreatorListPage = () => {
           )}
         </div>
       </CardList>
+      <BackToTop />
     </div>
   );
 };

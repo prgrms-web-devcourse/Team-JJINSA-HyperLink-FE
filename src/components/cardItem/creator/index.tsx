@@ -1,14 +1,19 @@
-import { Avatar, Button, Card } from '@/components/common';
+import { postSubscribeResponse } from '@/api/subscribe';
+
+import { Avatar, Button, Card, Tooltip } from '@/components/common';
+
 import { isAuthorizedState } from '@/stores/auth';
 import { isLoginModalVisibleState } from '@/stores/modal';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { selectedTabState } from '@/stores/tab';
+
 import { recommendedCreator } from '@/types/contents';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import * as style from './style.css';
-import { postSubscribeResponse } from '@/api/subscribe';
-import { selectedTabState } from '@/stores/tab';
 
 const CreatorCard = ({
   creatorId,
@@ -65,10 +70,12 @@ const CreatorCard = ({
               style={{ flexShrink: 0 }}
             />
             <div className={style.topInfo}>
-              <div className={style.infoCreator}>{creatorName}</div>
-              <div
-                className={style.infoSubscriber}
-              >{`구독자 ${subscriberAmount}명`}</div>
+              <Tooltip message={creatorName} position="top-start" type="text">
+                <div className={style.infoCreator}>{creatorName}</div>
+              </Tooltip>
+              <div className={style.infoSubscriber}>
+                구독자 {subscriberAmount}명
+              </div>
             </div>
             <div onClick={(e) => handleSubscribeClick(e)}>
               <Button
@@ -79,7 +86,13 @@ const CreatorCard = ({
               />
             </div>
           </div>
-          <div className={style.creatorCardBottom}>{creatorDescription}</div>
+          <Tooltip
+            message={creatorDescription}
+            position="bottom-start"
+            type="text"
+          >
+            <div className={style.creatorCardBottom}>{creatorDescription}</div>
+          </Tooltip>
         </div>
       </Link>
     </Card>

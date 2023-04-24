@@ -1,12 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { large } from '@/styles/medias.css';
+import * as medias from '@/styles/medias.css';
 import * as utils from '@/styles/utils.css';
 import * as variants from '@/styles/variants.css';
 
 export const title = style([
   utils.flexJustifySpaceBetween,
   utils.flexAlignCenter,
-  large({
+  medias.large({
     flexDirection: 'column',
     alignItems: 'flex-start',
     marginBottom: '2rem',
@@ -30,7 +30,7 @@ export const standardTime = style({
 
 export const rankList = style([
   utils.flexColumn,
-  large({
+  medias.large({
     marginTop: '3rem',
   }),
 ]);
@@ -69,7 +69,8 @@ export const count = style({
 export const chart = style([
   utils.fullHeight,
   utils.flexJustifyCenter,
-  large({ margin: '3rem 2rem', minHeight: '40rem' }),
+  medias.large({ margin: '3rem 2rem', minHeight: '40rem' }),
+  medias.small({ minHeight: '20rem' }),
   {
     margin: '4rem',
   },

@@ -11,5 +11,10 @@ export const icon = recipe({
       xLarge: { fontSize: variants.fontSize.xLarge },
       huge: { fontSize: variants.fontSize.huge },
     },
+    isPointer: {
+      true: {
+        cursor: 'pointer',
+      },
+    },
   },
 });

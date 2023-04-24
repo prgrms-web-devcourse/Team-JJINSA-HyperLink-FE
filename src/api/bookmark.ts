@@ -9,7 +9,6 @@ export const postBookmarkResponse = async (
   try {
     const response = await axiosInstance.post(
       `/bookmark/${contentId}?type=${isBookmarked}`
-      // `/contents?id=${contentId}&type=${isBookmarked}` // msw 전용
     );
 
     return response;

@@ -1,14 +1,21 @@
-import { lastTabState } from '@/stores/lastTab';
-import { isHomeScrolledState } from '@/stores/scroll';
-import { selectedTabState } from '@/stores/tab';
-import { Suspense } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Link } from 'react-router-dom';
-import { Tab, Text } from '@/components/common';
+import { Icon, Tab, Text, Tooltip } from '@/components/common';
 import SearchBar from './SearchBar';
 import UserNav from './userNav/index';
-import * as variants from '@/styles/variants.css';
+
+import { lastTabState } from '@/stores/lastTab';
+import { isHomeScrolledState } from '@/stores/scroll';
+import { isSearchBarVisibleState } from '@/stores/searchBar';
+import { selectedTabState } from '@/stores/tab';
+
+import { getKeyByValue } from '@/utils/object';
+
+import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
 import logo from '/assets/logo.svg';
+
+import * as variants from '@/styles/variants.css';
 import * as style from './style.css';
 
 const TAB_LIST = {
@@ -22,29 +29,72 @@ const Header = () => {
   const isHomeScrolled = useRecoilValue(isHomeScrolledState);
   const [tabState, setTabState] = useRecoilState(selectedTabState);
   const setLastTabState = useSetRecoilState(lastTabState);
-
-  // dev pull 하면서 utils에서 가져다 사용하기
-  const getKeyByValue = (obj: { [x: string]: string }, value: string) => {
-    return Object.keys(obj).find((key) => obj[key] === value);
-  };
+  const [isSearchBarVisible, setIsSearchBarVisible] = useRecoilState(
+    isSearchBarVisibleState
+  );
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+  const [visibility, setVisibility] = useState(
+    isSearchBarVisible && isMobile && isHomeScrolled
+  );
 
   const handleLogoClick = () => {
     setLastTabState('RECENT_CONTENT');
     setTabState('RECENT_CONTENT');
   };
 
+  const handleScreenResize = () => {
+    if (window.innerWidth >= 576) {
+      setIsMobile(false);
+      setIsSearchBarVisible(false);
+      return;
+    }
+
+    setIsMobile(true);
+  };
+
+  const handleSearchBarVisibility = useCallback(() => {
+    setVisibility((prevVisibility) => !prevVisibility);
+
+    const timeout = setTimeout(() => {
+      setIsSearchBarVisible((prevVisibility) => !prevVisibility);
+      clearTimeout(timeout);
+      setVisibility((prevVisibility) => !prevVisibility);
+    }, 200);
+  }, [setIsSearchBarVisible, isMobile]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleScreenResize);
+
+    return () => {
+      window.removeEventListener('resize', handleScreenResize);
+    };
+  }, []);
+
   return (
     <header className={style.header({ isScrolled: isHomeScrolled })}>
-      <div className={style.top}>
-        <Link to="/" className={style.logo} onClick={handleLogoClick}>
-          <img src={logo} alt="hyperlink logo" />
-        </Link>
-        {isHomeScrolled ? <SearchBar /> : <span></span>}
-        {/* Suspense 다른 걸로 교체, 메인 페이지 배너 가운데에 생기는 버그 */}
-        <Suspense fallback={<></>}>
-          <UserNav />
-        </Suspense>
-      </div>
+      {isSearchBarVisible && isMobile && isHomeScrolled ? (
+        <div className={style.mobileSearchBar({ visibility })}>
+          <Tooltip message="뒤로가기" position="bottom-start">
+            <Icon
+              name="arrow-left"
+              size="xLarge"
+              onClick={handleSearchBarVisibility}
+            />
+          </Tooltip>
+          <SearchBar />
+        </div>
+      ) : (
+        <div className={style.top}>
+          <Link to="/" className={style.logo} onClick={handleLogoClick}>
+            <img src={logo} alt="hyperlink logo" />
+          </Link>
+          <span>{isHomeScrolled && <SearchBar />}</span>
+          {/* Suspense 다른 걸로 교체, 메인 페이지 배너 가운데에 생기는 버그 */}
+          <Suspense fallback={<></>}>
+            <UserNav />
+          </Suspense>
+        </div>
+      )}
       {isHomeScrolled && (
         <div className={style.bottom}>
           <Tab

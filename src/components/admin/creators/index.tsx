@@ -1,5 +1,6 @@
 import { deleteCreator, getAllCreators } from '@/api/admin';
 import { deleteFileFromS3 } from '@/api/s3Image';
+
 import AddCreator from '@/components/admin/addCreator';
 import Pagination from '@/components/admin/pagination';
 import {
@@ -9,13 +10,19 @@ import {
   Spinner,
   Table,
   Text,
+  Tooltip,
 } from '@/components/common';
+
 import { creators } from '@/types/admin';
+
 import { CATEGORIES } from '@/utils/constants/signup';
 import { getKeyByValue } from '@/utils/object';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+
 import * as style from './style.css';
+
 import user from '/assets/user.svg';
 
 const COLUMNS = ['프로필', '이름', '카테고리명', '-'];
@@ -37,10 +44,17 @@ const Creators = () => {
 
   const deleteCreatorMutation = useMutation({
     mutationFn: deleteCreator,
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['allCreators'],
-      }),
+        queryKey: ['allCreators', page, TABLE_SIZE],
+      });
+
+      setPage(
+        data && data?.creators.length <= 1 && data?.currentPage !== 1
+          ? page - 1
+          : page
+      );
+    },
   });
 
   const handleDeleteCreatorClick = async (
@@ -87,7 +101,11 @@ const Creators = () => {
                     />
                   </td>
                   <td className={style.ellipsis}>
-                    <Text>{name}</Text>
+                    <Text>
+                      <Tooltip message={name} position="left" type="text">
+                        {name}
+                      </Tooltip>
+                    </Text>
                   </td>
                   <td>
                     <Text>{getKeyByValue(CATEGORIES, categoryName)}</Text>

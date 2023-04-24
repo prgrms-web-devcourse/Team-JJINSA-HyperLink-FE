@@ -29,10 +29,17 @@ const Companies = () => {
 
   const modifyUsingRecommendCompanyMutation = useMutation({
     mutationFn: modifyUsingRecommendCompany,
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['notUsingRecommendCompanies', page, TABLE_SIZE],
-      }),
+      });
+
+      setPage(
+        data && data?.companies.length <= 1 && data?.currentPage !== 1
+          ? page - 1
+          : page
+      );
+    },
   });
 
   const handleRecommendCompanyClick = (companyId: number) => {

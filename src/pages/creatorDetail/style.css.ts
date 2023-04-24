@@ -39,7 +39,7 @@ export const description = style({
 export const filterButtonGroup = style([
   utils.flexAlignCenter,
   {
-    margin: '4rem 0',
+    margin: '2rem 0',
     gap: '1rem',
   },
 ]);

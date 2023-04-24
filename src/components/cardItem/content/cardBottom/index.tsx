@@ -1,17 +1,21 @@
-import * as style from './style.css';
+import { postNotRecommendResponse } from '@/api/notRecommend';
+
+import CardModal from '@/components/cardItem/content/CardModal';
+import { Divider, Icon, Tooltip } from '@/components/common';
+import RecommendationBanner from '@/components/cardItem/content/recommendationBanner';
+
+import { isAuthorizedState } from '@/stores/auth';
+import { isLoginModalVisibleState } from '@/stores/modal';
+import { selectedTabState } from '@/stores/tab';
+
+import { banner } from '@/types/contents';
+
+import { useQuery } from '@tanstack/react-query';
 import { MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Divider, Icon } from '@/components/common';
-import CardModal from '@/components/cardItem/content/CardModal';
-import BannerAvatar from '../banner/bannerAvatar';
-import BannerText from '../banner/bannerText';
-import { banner } from '@/types/contents';
-import { useQuery } from '@tanstack/react-query';
-import { postNotRecommendResponse } from '@/api/notRecommend';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoginModalVisibleState } from '@/stores/modal';
-import { isAuthorizedState } from '@/stores/auth';
-import { selectedTabState } from '@/stores/tab';
+
+import * as style from './style.css';
 
 type CardBottomProps = {
   creatorId: number;
@@ -75,7 +79,7 @@ const CardBottom = ({
       <>
         <div className={style.bottomContent}>
           <div className={style.bottomInfo}>
-            <div style={{ display: 'flex' }}>
+            <div className={style.bottomInfoWrapper}>
               <span
                 className={style.bottomInfoCreator}
                 onClick={handleCreatorClick}
@@ -104,16 +108,29 @@ const CardBottom = ({
                 해당 크리에이터 추천 안함
               </div>
             </CardModal>
-            <div onClick={handleDotIconClick} className={style.bottomEllipsis}>
-              <Icon type="solid" name="ellipsis-vertical" />
-            </div>
+            <Tooltip message="더 보기" position="left">
+              <div
+                onClick={handleDotIconClick}
+                className={style.bottomEllipsis}
+              >
+                <Icon type="solid" name="ellipsis-vertical" />
+              </div>
+            </Tooltip>
           </div>
-          <div className={style.bottomTitle}>{title}</div>
+          <Tooltip message={title} position="bottom-end" type="text">
+            <div className={style.bottomTitle}>{title}</div>
+          </Tooltip>
         </div>
         <footer className={style.companyBanner}>
-          <BannerAvatar companies={recommendations} />
+          <RecommendationBanner
+            type="avatar"
+            recommendations={recommendations}
+          />
           <div style={{ flexGrow: 1 }}>
-            <BannerText companies={recommendations} />
+            <RecommendationBanner
+              type="text"
+              recommendations={recommendations}
+            />
             {recommendations?.length === 0 ? (
               <div className={style.companyText}>관심을 가지지 않았어요</div>
             ) : (
