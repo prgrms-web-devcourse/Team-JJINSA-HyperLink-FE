@@ -42,6 +42,14 @@ export const dropdownWrapper = style([utils.flexColumn, { gap: '1rem' }]);
 
 export const companyText = style({
   textAlign: 'right',
-  marginTop: '-2rem',
+
   textDecoration: 'underline',
+  '@media': {
+    'screen and (max-width: 943px)': {
+      marginTop: '-1rem',
+    },
+    'screen and (min-width: 943px)': {
+      marginTop: '-2rem',
+    },
+  },
 });
