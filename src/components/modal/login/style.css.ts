@@ -23,6 +23,7 @@ export const logo = style([
 
 export const content = style([
   utils.flexColumn,
+  utils.fullWidth,
   {
     gap: '1rem',
   },
@@ -44,4 +45,8 @@ export const icon = style([utils.cursorPointer]);
 
 export const googleLogo = style({ width: '2.4rem' });
 
-export const bannerWrapper = style([utils.flexCenter]);
+export const bannerWrapper = style([
+  utils.flexCenter,
+  utils.fullWidth,
+  { marginTop: '3rem' },
+]);

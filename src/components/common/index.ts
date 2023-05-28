@@ -1,6 +1,5 @@
 export { default as Avatar } from '@/components/common/avatar';
 export { default as Badge } from '@/components/common/badge';
-export { default as Banner } from '@/components/common/banner';
 export { default as Button } from '@/components/common/button';
 export { default as Card } from '@/components/common/card';
 export { default as Divider } from '@/components/common/divider';
