@@ -29,7 +29,6 @@
     "react-intersection-observer": "^9.4.3",
     "react-router-dom": "^6.8.1",
     "react-scatter-graphy": "^0.4.3",
-    "recoil": "^0.7.6"
     "recoil": "^0.7.6",
     "vercel": "^28.16.12"
   },
