@@ -11025,10 +11025,10 @@ react-router@6.8.1:
   dependencies:
     "@remix-run/router" "1.3.2"
 
-react-scatter-graphy@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.npmjs.org/react-scatter-graphy/-/react-scatter-graphy-0.4.1.tgz#4061dad39173ed84b7d9a959a0ab6af8caed268a"
-  integrity sha512-sbPeqb0rmbJ/p2Mm3lAXh4jTiwUyJx5C6RvtjyQc+81jkYBz2AC92y7e7ZmwUlBsTL1BSHhLDXWbMtBizfBX9g==
+react-scatter-graphy@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.npmjs.org/react-scatter-graphy/-/react-scatter-graphy-0.4.3.tgz#51c10c9a45a235ca6ba55cc6ae51dd52f881abf6"
+  integrity sha512-DFOsP+kOrbct9lGdHL9axzaaQQoqF/poK4RHRPj9CQf5WhAaeQKq9WZPexf3YlHkwZ4lER77shJxMbfgFa6VzA==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
