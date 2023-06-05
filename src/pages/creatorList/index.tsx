@@ -59,6 +59,10 @@ const CreatorListPage = () => {
     setIsHomeScrolled(true);
   });
 
+  if (!getContents) {
+    return <Spinner size="huge" />;
+  }
+
   return (
     <div className={style.wrapper}>
       <div className={style.buttonWrapper}>

@@ -1,4 +1,6 @@
 import * as utils from '@/styles/utils.css';
+import * as variants from '@/styles/variants.css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const listContainer = recipe({
@@ -51,3 +53,10 @@ export const listContainer = recipe({
     },
   },
 });
+
+export const noContents = style([
+  utils.flexCenter,
+  {
+    fontSize: variants.fontSize.large,
+  },
+]);
