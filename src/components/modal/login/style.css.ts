@@ -43,3 +43,5 @@ export const button = style([
 export const icon = style([utils.cursorPointer]);
 
 export const googleLogo = style({ width: '2.4rem' });
+
+export const bannerWrapper = style({ marginTop: '3rem' });

@@ -1,5 +1,6 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
+import { ScatterGraphy } from 'react-scatter-graphy';
 
 import { googleOAuth, login } from '@/api/auth';
 
@@ -14,6 +15,7 @@ import * as variants from '@/styles/variants.css';
 import * as style from './style.css';
 
 import googleLogo from '/assets/googleLogo.png';
+import hyperlink from '/assets/hyperlink.png';
 import logo from '/favicon.ico';
 
 export type LoginModalProps = {
@@ -71,6 +73,11 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           <Text color={variants.color.font.secondary}>
             세상의 모든 정보를 한눈에!
           </Text>
+          {isOpen && (
+            <div className={style.bannerWrapper}>
+              <ScatterGraphy src={hyperlink} shape="circle" />
+            </div>
+          )}
         </div>
         <button className={style.button} onClick={googleLogin}>
           <img
