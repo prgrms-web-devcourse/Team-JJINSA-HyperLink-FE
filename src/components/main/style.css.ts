@@ -10,6 +10,8 @@ export const container = style([
   { gap: '6rem' },
 ]);
 
+export const logo = style([utils.fullWidth, { maxWidth: '80rem' }]);
+
 export const toolTip = style([
   utils.cursorPointer,
   utils.flexCenter,
