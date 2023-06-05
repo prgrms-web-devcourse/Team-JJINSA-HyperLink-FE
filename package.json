@@ -30,6 +30,8 @@
     "react-router-dom": "^6.8.1",
     "react-scatter-graphy": "^0.4.3",
     "recoil": "^0.7.6"
+    "recoil": "^0.7.6",
+    "vercel": "^28.16.12"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -56,6 +58,7 @@
     "prettier": "^2.8.4",
     "storybook": "^6.5.16",
     "typescript": "^4.9.3",
+    "vercel": "^28.16.15",
     "vite": "^4.1.0"
   },
   "msw": {
